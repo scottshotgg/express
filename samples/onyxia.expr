@@ -1,0 +1,31 @@
+     onyxia_recipe: { 
+         oddGroups: { 
+             formula: "2n-1", 
+             side: "left", 
+             groups: [ 1, 3, 5 ,7 ], 
+         }, 
+
+         evenGroups: { 
+             formula: "2n", 
+             side: "right", 
+             groups: [ 2, 4, 6, 8 ], 
+         }, 
+
+         whelpGroups: [ 7, 8 ], 
+
+         howToWin: { 
+             steps: [ 
+                 "throw more dots", 
+                 "more dots", 
+                 "MORE DOTS", 
+                 "ok stop dots", 
+             ], 
+             moreDps: [ 
+                 "have dots up on every time", 
+                 "two rows", 
+                 "shadow word pain", 
+                 "warlock curses", 
+                 "renge", 
+             ] 
+         }, 
+     }

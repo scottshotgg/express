@@ -69,25 +69,25 @@ In the underlying parser architecture, they serve a semantic purpose by marking 
 In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very relaxing.
 <br>
 This allowed flexibility is known as *`optional verbosity`* in Express and is one of the key motivators in the development.
-
+ 
 <br>
 
 > Below shows a type inferred `object` where most properties are also type inferred:
 
 <code>
-testerinoObject := { 
-  <br>
+  testerinoObject := {
+<br>
 &nbsp;&nbsp;&nbsp;&nbsp;
-id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a" 
-  <br>
-  </code> 
+  id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a" 
+<br>
+</code> 
 <br>
   
 > Reference one of the above variables
 
 <code>
 &nbsp;&nbsp;&nbsp;&nbsp;
-time: timestamp
+  time: timestamp
 </code>
   <br>
   <br>
@@ -96,30 +96,30 @@ time: timestamp
 
 <code>
 &nbsp;&nbsp;&nbsp;&nbsp;
-float price = 55.3592,
+  float price = 55.3592,
 </code>
 
-  <br>
-  <br>
+<br>
+<br>
 
 > Also the `inference` operator can also be used
 
 <code>
 &nbsp;&nbsp;&nbsp;&nbsp;
-dank_meme := true
+  dank_meme := true
 </code>
 <br>
 <br>
 
 > **Any** unicode character is supported
 
-  <code>
+<code>
 &nbsp;&nbsp;&nbsp;&nbsp;
-🔥420🔥: "blaze it" 
-  <br>
+  🔥420🔥: "blaze it" 
+<br>
 &nbsp;&nbsp;&nbsp;&nbsp;
-deeJayKhalid: anotherOne
-  </code>
+  deeJayKhalid: anotherOne
+</code>
 
 <br>
 <br>
@@ -128,22 +128,56 @@ deeJayKhalid: anotherOne
 
 <code>
 &nbsp;&nbsp;&nbsp;&nbsp;
-ten: [ one, zero, one, zero ]
-<br>
-<br>
+  ten: [ one, zero, one, zero ]
 </code>
+
+<br>
+<br>
+
+> A few nested objects
+
+<code>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  throw_more_dots: {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    throw_more_dots: {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      more_dots: {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        more_dots: {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          ok: "stop dots",
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        },
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      },
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    },
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  }
+</code>
+
+<br>
+<br>
 
 > End of `testerinoObject`
 
 <code>
-
 }
 </code>
 
 <br>
 <br>
 
-> Below shows a `static` `string` type `array` with a length inference and composition using a previously declared variable.
+> Arrays can be declared as well; this is a `string` type `array` using composition to infer a `static` length.
 
 <code>
 string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
@@ -152,9 +186,9 @@ string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
 <br>
 <br>
 
-> Building on the above example:
+> Expanding on the above example:
 <br>
-Commas to delineate elements from one another aren't required but should be used at your own descretion of verbosity.
+Delineatiation of elements from one another using commas isn't required but should be used at your own descretion of verbosity.
 <br>
 The spacing also doesn't matter, but *readable* code does. 
 <br>
@@ -165,7 +199,7 @@ string ay = "ayy"
 <br>
 string waddup = "waddup" 
 <br>
-string[] freedom = 
+string[] hereHeComes = 
 <br>
 [
 <br>
@@ -235,7 +269,7 @@ waddup
 <br>
 <br>
 
-> A powerlevel check
+> Quick power level check
 
 <code>
 if powerlevel < 9001 {
