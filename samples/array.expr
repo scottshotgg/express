@@ -1,0 +1,6 @@
+string[] thing = [ "hey", "its", "me" ]
+
+bool1 := false
+bool2 := true
+
+thing2 := [ bool1, bool2 ]

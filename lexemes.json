@@ -1,0 +1,124 @@
+{
+  "end": {
+    "type": "end"
+  },
+
+  "lit": {
+    "type": "lit"
+  },
+
+  "int": {
+    "type": "type",
+    "value": "int"
+  },
+
+  "float": {
+    "type": "type",
+    "value": "float"
+  },
+
+  "bool": {
+    "type": "type",
+    "value": "bool"
+  },
+
+  "string": {
+    "type": "type",
+    "value": "string"
+  },
+
+  "var": {
+    "type": "type",
+    "value": "var"
+  },
+
+  ";": {
+    "type": "semi",
+    "value": ";"
+  },
+
+  ",": {
+    "type": "comma",
+    "value": ","
+  },
+
+  "=": {
+    "type": "assign",
+    "value": "="
+  },
+
+  ":": {
+    "type": "set",
+    "value": ":"
+  },
+
+  "+": {
+    "type": "add",
+    "value": "+"
+  },
+
+  "-": {
+    "type": "sub",
+    "value": "="
+  },
+
+  "*": {
+    "type": "mult",
+    "value": "="
+  },
+
+  "/": {
+    "type": "div",
+    "value": "="
+  },
+
+  "(": {
+    "type": "l_paren",
+    "value": "("
+  },
+
+  ")": {
+    "type": "r_paren",
+    "value": ")"
+  },
+
+  "{": {
+    "type": "l_brace",
+    "value": "{"
+  },
+
+  "}": {
+    "type": "r_brace",
+    "value": "}"
+  },
+
+  "[": {
+    "type": "l_bracket",
+    "value": "["
+  },
+
+  "]": {
+    "type": "r_bracket",
+    "value": "]"
+  },
+
+  "\"": {
+    "type": "d_quote",
+    "value": "\""
+  },
+
+  "'": {
+    "type": "s_quote",
+    "value": "'"
+  },
+
+  "\\": {
+    "type": "esc",
+    "value": "\\"
+  },
+
+  " ": {
+    "type": "space",
+    "value": " "
+  }
+}

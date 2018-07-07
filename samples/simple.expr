@@ -1,0 +1,91 @@
+// simple assignment program
+
+
+float cmake = 5.5 / 0.1
+
+// declaring a few strings with concatenation
+string b = "hey its you"
+b = "gee"
+string a = b + " and i"
+
+// adding hex, binary, octal, and decimal ints
+int c = 0xA + 0b1010 + 0o12 + 10
+
+// Declaring and changing the var to a different ActingType
+var me = true + false
+me = 5.5 + 5.0
+me = "this" + " is " + "dynamic!"
+me = 5
+me = me + me
+
+// TODO: implement operations for 'var' types
+//me = me + 9
+
+// adding floats
+float d = 7.77 + 2.39
+
+// TODO: might look into doing "truthy" and "falsy"
+// bool declaration
+bool notFun = false
+bool fun = true + false
+
+// bool addition (OR operation)
+bool maybeFun = notFun + fun
+
+// TODO: not sure if I'm gonna do this
+// bytes are just single byte of data
+// byte a = 'a'
+
+// char is also a single byte of data but it has an implied encoding, which if not specified is unicode
+char z = '1'
+z = z + z
+
+//char b = u'b'
+//char c = unicode'b'
+//char d = iso8559'd'
+//char e = utf8'e'
+
+object ProductA = {
+  int c = 6
+  string name = "something"
+  float Price = 3.51
+  var thing = "thing"
+  object amount = {
+    instock: 6
+    backorder: 10
+  }
+}
+
+object productB = {
+  string name = "else"
+  float Price = 6.50
+  var thing = "string"
+  object amount = {
+    /* 
+    TODO: need to make comma or semicolon 
+    end the current statement parsing immediately
+    and auto start parsing a new statement
+    */
+    instock: 60
+    backorder: 100
+  }
+}
+
+// FIXME: there is a bug in objects or sets where you don't need to have the same types
+waddup := {
+  ayy: 665.0
+} / {
+  ayy: .1
+}
+
+ProductTotal := ProductA + productB
+
+//bbb := 3
+
+// TODO: fix object nested in array
+//int[] someArray = [ "3", 4, [ 7, 8 ] ]
+//someOtherArray := [ 3, 4, 5 ]
+
+/*{
+  five: 5
+}*/

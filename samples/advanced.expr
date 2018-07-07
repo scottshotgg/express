@@ -1,0 +1,36 @@
+int powerlevel = 9000
+bool over9k = false
+float pi = 3.14159265359
+string arizona = "iced out boys"
+
+zero := 0
+int one = 1
+
+anotherOne: "anotherOne"
+
+structTest := {
+  id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"
+  time: 1527799745
+  float price = 55.3592,
+  dank_meme := true
+  🔥420🔥: "blaze it"
+  deeJayKhalid: anotherOne
+  ten: [ one, zero, one, zero ]
+},
+
+string name = "dat boi"
+string[] stringArray = 
+[          "hey" 
+"its" "me",
+        name 
+      ]
+
+if powerlevel < 9001 {
+  powerlevel = 9001
+  over9k = true
+}
+
+//int f = 9
+//for j := 1, j < 10, j++ {
+//  f := 8
+//}
