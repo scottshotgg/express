@@ -29,35 +29,29 @@ ____
 
 > Start off by declaring some variables
 
-<code>
+```c
 int powerlevel = 9000;
-<br>
 bool over9k = false;
-<br>
 float pi = 3.14159265359;
-<br>
 string arizona = "iced out boys";
-</code>
-
-<br>
+```
 <br>
 
 > Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression
 
 
-<code>
+```c
 int zero = 0
-<br>
 one := 1
-</code>
-
-<br>
+```
 <br>
 
 > You may also use the `set` operator even outside of `object`s
 
-`anotherOne: "anotherOne"`
-<br>
+
+```c
+anotherOne: "anotherOne"
+```
 <br>
 
 > `Optional Verbosity`: <br>
@@ -70,115 +64,78 @@ This allowed flexibility is known as *`optional verbosity`* in Express and is on
 
 > Below shows a type inferred `object` where most properties are also type inferred:
 
-<code>
-  testerinoObject := {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a" 
+```c
+testerinoObject := {
+    id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"`
+```
 <br>
-</code> 
-<br>
-  
+
 > Reference one of the above variables
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  time: timestamp
-</code>
-  <br>
-  <br>
+```c
+    time: timestamp
+```
+<br>
 
 > The `assignment` operator with a type can also be used within objects
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  float price = 55.3592,
-</code>
-
-<br>
+```c
+    float price = 55.3592,
+```
 <br>
 
 > Also the `inference` operator can also be used
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  dank_meme := true
-</code>
-<br>
+```c
+    dank_meme := true
+```
 <br>
 
 > **Any** unicode character is supported
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  🔥420🔥: "blaze it" 
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  deeJayKhalid: anotherOne
-</code>
-
-<br>
+```c
+    🔥420🔥: "blaze it" 
+    deeJayKhalid: anotherOne
+```
 <br>
 
 > Array composition (`type` and `length` inference) using the above definitions of `zero` and `one`.
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  ten: [ one, zero, one, zero ]
-</code>
-
-<br>
+```c
+    ten: [ one, zero, one, zero ]
+```
 <br>
 
 > A few nested objects
 
-<code>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  throw_more_dots: {
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    throw_more_dots: {
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      more_dots: {
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        more_dots: {
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          ok: "stop dots",
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        },
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      },
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    },
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;
-  }
-</code>
+```c
+     throw_more_dots: { 
+         throw_more_dots: { 
+             more_dots: { 
+                 more_dots: { 
 
-<br>
+                     ok: "stop dots", 
+                     
+                 }, 
+             }, 
+         }, 
+     }
+```
 <br>
 
-> End of `testerinoObject`
+> Ending of `testerinoObject`
 
-<code>
+```c
 }
-</code>
+```
 
-<br>
 <br>
 
 > Arrays can be declared as well; this is a `string` type `array` using composition to infer a `static` length.
 
-<code>
+```c
 string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
-</code>
-
-<br>
+```
 <br>
 
 > Expanding on the above example:
@@ -189,105 +146,35 @@ The spacing also doesn't matter, but *readable* code does.
 <br>
 Again - its all *semantics* `¯\_(ツ)_/¯`
 
-<code> 
-string ay = "ayy"
-<br>
-string waddup = "waddup" 
-<br>
-string[] hereHeComes = 
-<br>
-[
-<br>
-&nbsp;&nbsp;
-ayy
-<br>
-&nbsp;
-&nbsp;
-&nbsp;&nbsp;
-waddup
-<br>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-"its" 
-<br>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-"dat"
-<br>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-"boi" 
-<br>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;&nbsp;
-]
-</code>
 
-<br>
+```c
+string ay = "ayy" 
+string waddup = "waddup" 
+string[] here_comes = 
+[
+  ayy 
+      waddup 
+             "its", 
+                    "dat" 
+                          "boi" 
+                                ]
+```
 <br>
 
 > Quick power level check
 
-<code>
-if powerlevel < 9001 {
-<br>
-&nbsp;&nbsp;
-powerlevel = 9001
-<br>
-&nbsp;&nbsp;
-over9k = true
-<br>
+```c
+if powerlevel < 9001 { 
+   powerlevel = 9001 
+   over9k = true 
 }
-</code>
-
-<br>
+```
 <br>
 
 > A simple for loop
 
-<code>
-for j := one, j < 10, j++ {
-<br>
-&nbsp;&nbsp;
-zero = 1
-<br>
+```c
+for j := one, j < 10, j++ { 
+   zero = 1 
 }
-</code>
+```
