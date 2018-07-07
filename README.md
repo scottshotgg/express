@@ -29,7 +29,7 @@ ____
 
 > Start off by declaring some variables
 
-```c
+```csharp
 int powerlevel = 9000;
 bool over9k = false;
 float pi = 3.14159265359;
@@ -40,7 +40,7 @@ string arizona = "iced out boys";
 > Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression
 
 
-```c
+```csharp
 int zero = 0
 one := 1
 ```
@@ -49,7 +49,7 @@ one := 1
 > You may also use the `set` operator even outside of `object`s
 
 
-```c
+```csharp
 anotherOne: "anotherOne"
 ```
 <br>
@@ -64,7 +64,7 @@ This allowed flexibility is known as *`optional verbosity`* in Express and is on
 
 > Below shows a type inferred `object` where most properties are also type inferred:
 
-```c
+```csharp
 testerinoObject := {
     id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"`
 ```
@@ -72,28 +72,28 @@ testerinoObject := {
 
 > Reference one of the above variables
 
-```c
+```csharp
     time: timestamp
 ```
 <br>
 
 > The `assignment` operator with a type can also be used within objects
 
-```c
+```csharp
     float price = 55.3592,
 ```
 <br>
 
 > Also the `inference` operator can also be used
 
-```c
+```csharp
     dank_meme := true
 ```
 <br>
 
 > **Any** unicode character is supported
 
-```c
+```csharp
     🔥420🔥: "blaze it" 
     deeJayKhalid: anotherOne
 ```
@@ -101,14 +101,14 @@ testerinoObject := {
 
 > Array composition (`type` and `length` inference) using the above definitions of `zero` and `one`.
 
-```c
+```csharp
     ten: [ one, zero, one, zero ]
 ```
 <br>
 
 > A few nested objects
 
-```c
+```csharp
      throw_more_dots: { 
          throw_more_dots: { 
              more_dots: { 
@@ -125,7 +125,7 @@ testerinoObject := {
 
 > Ending of `testerinoObject`
 
-```c
+```csharp
 }
 ```
 
@@ -133,7 +133,7 @@ testerinoObject := {
 
 > Arrays can be declared as well; this is a `string` type `array` using composition to infer a `static` length.
 
-```c
+```csharp
 string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
 ```
 <br>
@@ -147,7 +147,7 @@ The spacing also doesn't matter, but *readable* code does.
 Again - its all *semantics* `¯\_(ツ)_/¯`
 
 
-```c
+```csharp
 string ay = "ayy" 
 string waddup = "waddup" 
 string[] here_comes = 
@@ -163,7 +163,7 @@ string[] here_comes =
 
 > Quick power level check
 
-```c
+```vb
 if powerlevel < 9001 { 
    powerlevel = 9001 
    over9k = true 
@@ -173,7 +173,7 @@ if powerlevel < 9001 {
 
 > A simple for loop
 
-```c
+```csharp
 for j := one, j < 10, j++ { 
    zero = 1 
 }
