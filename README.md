@@ -60,8 +60,7 @@ one := 1
 <br>
 <br>
 
-> `Optional Verbosity`: 
-<br>
+> `Optional Verbosity`: <br>
 You will observe that the usage of commas and semicolons as statement delimiters is acceptable if you prefer, but are in no way required if you'd rather not deal with that. 
 <br>
 In the underlying parser architecture, they serve a semantic purpose by marking the end of a statement parse. By default, the ending of the statement will be semantically inferred if not *expressly* specified, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action as granularly (or entirely) as you prefer to enforce strict punctuation.
