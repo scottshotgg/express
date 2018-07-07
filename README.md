@@ -44,6 +44,7 @@ string arizona = "iced out boys";
   Comment
 */
 ```
+<br>
 
 > Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression
 
