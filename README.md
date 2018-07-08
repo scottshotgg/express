@@ -25,7 +25,7 @@ ____
 <br>
 <br>
 
-> Start off by declaring some variables
+> Start off by declaring some variables:
 
 ```csharp
 int powerlevel = 9000;
@@ -35,7 +35,7 @@ string arizona = "iced out boys";
 ```
 <br>
 
-> Comments take on a familiar syntax
+> Comments also take on a familiar syntax:
 ```csharp
 // Inline comment
 
@@ -46,22 +46,23 @@ string arizona = "iced out boys";
 ```
 <br>
 
-> Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression
-
+> Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression:
 
 ```csharp
 int zero = 0
-one := 1
+    one := 1    // tabbed for visibility
 ```
 <br>
 
-> You can even write statements on the same line as each other
+> Now, I wouldn't do this, but as a testament towards the semantic reasoning within the parser; you can even write statements on the same line as each other:
 ```csharp
-string ay = "ayy" int timestamp = 1527799745 string waddup = "waddup" 
+string ay = "ayy" int timestamp = 1527799745 string waddup = "waddup"
 ```
 <br>
 
-> You may also use the `set` operator even outside of `object` declarations. The difference from a standard declaration or assignment is that the `set` operator will enforce a *`non-destructive`* local declaration of a variable.
+> Usage of the `set` operator is permitted even outside of `object` declarations. 
+<!--The difference from a standard declaration or assignment is that the `set` operator will enforce a *`non-destructive`* local declaration of a variable; meaning it will not crawl the scope tree to perform reassignment and will enforce that it is the  
+crawl _down_ the scope tree instead of _up_? -->
 
 ```csharp
 anotherOne: "anotherOne"
@@ -109,8 +110,8 @@ testerino := {
 > **Any** unicode character is supported
 
 ```csharp
-    🔥420🔥: "🅱️laze it" 
-    ⒹⒿKhalid: anotherOne
+    🔥420🔥    : "🅱️laze it" 
+    ⒹⒿKhalid : anotherOne
 ```
 <br>
 
