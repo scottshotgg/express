@@ -1,0 +1,203 @@
+[
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "int",
+			"String": "int"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 8
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"ID": 9,
+		"Type": "KEYWORD",
+		"Value": {
+			"Type": "keyword",
+			"String": "if"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_THAN",
+		"Value": {
+			"Type": "lthan",
+			"String": "\u003c"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 10
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 7
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	}
+]

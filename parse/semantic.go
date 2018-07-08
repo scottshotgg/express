@@ -132,7 +132,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		variable, ok := p.meta.GetVariable(p.CurrentToken.Value.String)
 		fmt.Println(variable, ok)
 		if !ok {
-			return token.Value{}, errors.New("Undefined variable reference")
+			return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
 		}
 
 		// return p.GetExpression()
@@ -806,6 +806,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		block, err := p.CheckBlock()
 		if err != nil {
 			fmt.Println("waddup blockboi", err)
+			os.Exit(9)
 		}
 		p.Shift()
 		return block, err
@@ -813,15 +814,10 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	default:
 		// TODO: this causes infinite loops when you cant parse
 		fmt.Println("hey its me the default", p.NextToken)
-		os.Exit(9)
 	}
 
 	return token.Value{}, nil
 }
-
-// func copyMap() map[string] {
-
-// }
 
 // CheckBlock ...
 func (p *Parser) CheckBlock() (token.Value, error) {
@@ -854,9 +850,14 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 		// This is by-passing the blank "{}" token that is
 		// produced from the comma somtimes; need to solve
 		// it more elegantly
-		if !reflect.DeepEqual(stmt, token.Value{}) {
-			blockTokens = append(blockTokens, stmt)
+		if reflect.DeepEqual(stmt, token.Value{}) {
+			return token.Value{
+				Type: token.Block,
+				True: blockTokens,
+			}, nil
 		}
+
+		blockTokens = append(blockTokens, stmt)
 
 		// p.meta.NewVariable()
 		fmt.Println("CheckBlock currentScope: ", pNew.meta.currentScope)

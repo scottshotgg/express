@@ -1,0 +1,73 @@
+[
+	{
+		"Type": "BLOCK",
+		"True": [
+			{
+				"Type": "for",
+				"True": [
+					{
+						"Name": "f",
+						"Type": "int",
+						"True": 8,
+						"AccessType": "private"
+					}
+				],
+				"String": "i\u003c10",
+				"Metadata": {
+					"end": {
+						"Type": "int",
+						"True": 10,
+						"String": "i\u003c10",
+						"Metadata": {
+							"eval": true,
+							"left": {
+								"Name": "i",
+								"Type": "int",
+								"True": 1,
+								"AccessType": "private"
+							},
+							"op": {
+								"Type": "lthan",
+								"String": "\u003c"
+							},
+							"right": {
+								"Type": "int",
+								"True": 10,
+								"String": "10"
+							},
+							"type": "bool"
+						}
+					},
+					"eval": true,
+					"left": {
+						"Name": "i",
+						"Type": "int",
+						"True": 1,
+						"AccessType": "private"
+					},
+					"op": {
+						"Type": "lthan",
+						"String": "\u003c"
+					},
+					"right": {
+						"Type": "int",
+						"True": 10,
+						"String": "10"
+					},
+					"start": {
+						"Name": "i",
+						"Type": "int",
+						"True": 1,
+						"AccessType": "private"
+					},
+					"step": {
+						"Type": "int",
+						"True": 1,
+						"String": "1"
+					},
+					"type": "bool"
+				}
+			}
+		]
+	}
+]

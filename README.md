@@ -57,7 +57,7 @@ one := 1
 
 > You can even write statements on the same line as each other
 ```csharp
-string ay = "ayy" string waddup = "waddup" 
+string ay = "ayy" int timestamp = 1527799745 string waddup = "waddup" 
 ```
 <br>
 
@@ -77,10 +77,10 @@ This allowed flexibility is known as *`optional verbosity`* in Express and is on
 <br>
 
 > Below shows a type inferred `object` where most of its properties are also type inferred.<br>
-*Note:* The following statements until the ending brace are all within the `testerinoObject` variable
+*Note:* The following statements until the ending brace are all within the `testerino` variable
 
 ```csharp
-testerinoObject := {
+testerino := {
     id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"`
 ```
 <br>
@@ -124,21 +124,21 @@ testerinoObject := {
 > A few nested objects
 
 ```csharp
-     throw_more_dots: { 
-         throw_more_dots: { 
-             more_dots: { 
-                 more_dots: { 
+    throw_more_dots: {
+        throw_more_dots: {
+            more_dots: {
+                more_dots: {
 
-                     ok: "stop dots", 
-                     
-                 }, 
-             }, 
-         }, 
-     }
+                    ok: "stop dots",
+                  
+                },
+            },
+        },
+    }
 ```
 <br>
 
-> Ending of `testerinoObject`
+> Ending of `testerino`
 
 ```csharp
 }
@@ -184,7 +184,6 @@ if powerlevel < 9001 {
 
 ```csharp
 percent: 0
-
 for progress := 0, progress < 100, progress++ { 
    percent = progress
 }

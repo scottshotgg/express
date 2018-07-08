@@ -1,160 +1,37 @@
 package parse_test
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/scottshotgg/ExpressRedo/lex"
 	"github.com/scottshotgg/ExpressRedo/parse"
 	"github.com/scottshotgg/ExpressRedo/token"
 )
 
-// // // GetKeyword ...
-// func (p *Parser) GetKeyword() (token.Value, error) {
-// 	fmt.Println("GetKeyword")
+const (
+	testRoot   = "../test/"
+	testOutput = testRoot + "output/"
 
-// 	switch p.NextToken.Value.String {
-// 	// TODO: this needs to be reworked
-// 	case token.For:
-// 		fmt.Println("formap", p.DeclarationMap)
-// 		fmt.Println("found a for loop22")
-// 		temp := *m
-// 		meta := &temp
-// 		meta.LastMeta = m
-// 		meta.DeclarationMap = map[string]token.Value{}
-// 		meta.Shift()
+	testLex       = testOutput + "lex/"
+	testSemantic  = testOutput + "semantic/"
+	testSyntactic = testOutput + "syntactic/"
+	testCpp       = testOutput + "cpp/"
+	testBin       = testOutput + "bin/"
 
-// 		value, err := meta.GetStatement()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("value11", value)
-// 		fmt.Println("last", meta.LastToken)
-// 		fmt.Println("current", meta.CurrentToken)
-// 		fmt.Println("next", meta.NextToken)
+	testPrograms = testRoot + "programs/"
 
-// 		value2, err := meta.GetExpression()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("value22", value2)
-// 		fmt.Println("last", meta.LastToken)
-// 		fmt.Println("current", meta.CurrentToken)
-// 		fmt.Println("next", meta.NextToken)
-// 		// p.Shift()
-
-// 		value3, err := meta.GetExpression()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("value3", value3)
-
-// 		stepAmount, err := p.SubOperands(value3, value)
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("step", stepAmount)
-
-// 		// Need to open up the block
-// 		// we might try doing something
-// 		// where the new meta stuff is in the function
-// 		// block, err := meta.CheckBlock()
-// 		// if err != nil {
-// 		// 	return token.Value{}, err
-// 		// }
-// 		// fmt.Println("block", block)
-// 		// os.Exit(9)
-// 		meta.Shift()
-// 		fmt.Println(meta.NextToken)
-// 		// block, err := Semantic([]token.Token{
-// 		// 	meta.NextToken,
-// 		// })
-// 		block, err := meta.CheckBlock()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("body", block)
-
-// 		// Swap the scopes back when the for loop is out of execution
-// 		meta.DeclarationMap = p.DeclarationMap
-// 		meta.InheritedMap = p.InheritedMap
-// 		*m = *meta
-
-// 		// fmt.Println("value2againboi", value2)
-// 		mapThing := value2.OpMap.(map[string]interface{})
-// 		fmt.Println("mapThing", mapThing)
-
-// 		return token.Value{
-// 			Type: token.For,
-// 			True: map[string]token.Value{
-// 				"start": value,
-// 				"end":   value2,
-// 				"step":  stepAmount,
-// 				"body":  block.True.([]token.Value)[0],
-// 				"check": token.Value{
-// 					String: value2.String,
-// 				},
-// 			},
-// 		}, nil
-
-// 	case "if":
-// 		fmt.Println("m", m)
-// 		temp := *m
-// 		meta := &temp
-// 		meta.LastMeta = m
-// 		meta.InheritedMap = temp.DeclarationMap
-// 		meta.DeclarationMap = map[string]token.Value{}
-// 		fmt.Println("m2", m)
-// 		meta.Shift()
-// 		fmt.Println("declaredMap", p.DeclarationMap)
-// 		fmt.Println("inheritedMap", p.InheritedMap)
-
-// 		value2, err := meta.GetExpression()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("value22", value2)
-// 		fmt.Println("last", meta.LastToken)
-// 		fmt.Println("current", meta.CurrentToken)
-// 		fmt.Printf("next %+v\n", meta.NextToken)
-
-// 		fmt.Println(meta.NextToken.Value.True)
-// 		// block, err := Semantic([]token.Token{
-// 		// 	meta.NextToken,
-// 		// })
-// 		meta.DeclarationMap = p.DeclarationMap
-// 		block, err := meta.CheckBlock()
-// 		if err != nil {
-// 			return token.Value{}, err
-// 		}
-// 		fmt.Println("body2", block)
-
-// 		// Swap the scopes back when the for loop is out of execution
-// 		meta.DeclarationMap = p.DeclarationMap
-// 		meta.InheritedMap = p.InheritedMap
-// 		*m = *meta
-
-// 		return token.Value{
-// 			Type:   token.If,
-// 			String: value2.String,
-// 			True: map[string]token.Value{
-// 				"body": block.True.([]token.Value)[0],
-// 				"check": token.Value{
-// 					String: value2.String,
-// 				},
-// 			},
-// 			// True: // body would go here
-// 		}, nil
-
-// 		os.Exit(9)
-// 		// TODO: there would be some composition of blocks here and shit
-
-// 	default:
-// 		fmt.Println("keyword not recognized", p.NextToken)
-// 		os.Exit(9)
-// 	}
-
-// 	return token.Value{}, nil
-// }
+// 	pathOfFile, filename string
+// 	lexer                *lex.Lexer
+// 	err                  error
+// 	lexTokens            []token.Token
+// 	// semanticTokens []token.Token
+)
 
 func TestSemantic(t *testing.T) {
 	fmt.Println("TestSemantic")
@@ -170,4 +47,172 @@ func TestSemantic(t *testing.T) {
 
 	token.PrintValues(values, "\t")
 	fmt.Println()
+}
+
+func TestAll(t *testing.T) {
+	// ls ../test/programs directory
+	// for each file
+	//	- lex the contents
+	//	- syntactically parse the contents
+	//	- semantically parse the contents
+	//	transpile to cpp
+	//	generate binary
+	//	run binary
+	//	capture output
+	// At each step, compare result with output dir
+
+	files, err := ioutil.ReadDir(testPrograms)
+	if err != nil {
+		fmt.Println("ReadDirErr", err)
+		t.Fail()
+	}
+
+	for _, file := range files {
+		if !file.IsDir() {
+			filename := file.Name()
+			pathOfFile, err := filepath.Abs(testPrograms + filename)
+			if err != nil {
+				fmt.Println("AbsErr", err)
+				// TODO: make this more individual later
+				t.Fail()
+				return
+			}
+			fmt.Println(pathOfFile)
+
+			var lexTokens []token.Token
+			lexTokens, err = lexFile(pathOfFile, filename)
+			if err != nil {
+				fmt.Println("lexFileErr", err)
+				t.Fail()
+				continue
+			}
+
+			pathOfFile, err = filepath.Abs(testPrograms + filename)
+			if err != nil {
+				fmt.Println("AbsErr", err)
+				// TODO: make this more individual later
+				t.Fail()
+				return
+			}
+			fmt.Println(pathOfFile)
+
+			syntacticTokens, err := syntacticParseFile(filename, lexTokens)
+			if err != nil {
+				fmt.Println("syntacticParseFileErr", err)
+				t.Fail()
+				continue
+			}
+
+			_, err = semanticParseFile(filename, syntacticTokens)
+			if err != nil {
+				fmt.Println("lexFileErr", err)
+				t.Fail()
+				continue
+			}
+		}
+	}
+}
+
+func lexFile(pathOfFile, filename string) ([]token.Token, error) {
+	// Make a new lexer
+	lexer, err := lex.NewFromFile(pathOfFile)
+	if err != nil {
+		fmt.Println("NewFromFileErr", err)
+		// t.Fail()
+		return []token.Token{}, err
+	}
+
+	// Lex the file
+	lexTokens, err := lexer.Lex()
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	lexTokensJSON, err := json.MarshalIndent(lexTokens, "", "\t")
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	err = writeTokensJSONToFile(lexTokensJSON, testLex+filename+".lex.json")
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	return lexTokens, nil
+}
+
+func syntacticParseFile(filename string, lexTokens []token.Token) ([]token.Token, error) {
+	// Make a new parser and syntactically parse the file
+	syntacticTokens, err := parse.New(lexTokens).Syntactic()
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	syntacticTokensJSON, err := json.MarshalIndent(syntacticTokens, "", "\t")
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	err = writeTokensJSONToFile(syntacticTokensJSON, testSyntactic+filename+".syn.json")
+	if err != nil {
+		// TODO:
+		return []token.Token{}, err
+	}
+
+	return syntacticTokens, nil
+}
+
+func semanticParseFile(filename string, syntacticTokens []token.Token) ([]token.Value, error) {
+	// Make a new parser and semantically parse the file
+	semanticTokens, err := parse.New(syntacticTokens).Semantic()
+	if err != nil {
+		// TODO:
+		return []token.Value{}, err
+	}
+
+	semanticTokensJSON, err := json.MarshalIndent(semanticTokens, "", "\t")
+	if err != nil {
+		// TODO:
+		return []token.Value{}, err
+	}
+
+	err = writeTokensJSONToFile(semanticTokensJSON, testSemantic+filename+".sem.json")
+	if err != nil {
+		// TODO:
+		return []token.Value{}, err
+	}
+
+	return semanticTokens, nil
+}
+
+func writeTokensJSONToFile(tokensJSON []byte, pathOfFile string) error {
+	lexFile, err := os.Create(pathOfFile)
+	if err != nil {
+		// TODO:
+		return err
+	}
+
+	n, err := lexFile.Write(tokensJSON)
+	if err != nil {
+		// TODO:
+		return err
+	}
+	if n != len(tokensJSON) {
+		// TODO:
+		// need to rewrite the lexFile
+		return errors.New("Not all bytes were written")
+	}
+
+	err = lexFile.Close()
+	if err != nil {
+		// TODO:
+		return err
+	}
+
+	return nil
 }

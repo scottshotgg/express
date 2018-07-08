@@ -2,6 +2,8 @@ package lex
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
 	"strconv"
 
 	"github.com/golang-collections/collections/stack"
@@ -45,12 +47,27 @@ type Lexer struct {
 	Enclosers *stack.Stack
 }
 
-// New ...
 func New(source string) *Lexer {
 	return &Lexer{
 		source:    source,
 		Enclosers: stack.New(),
 	}
+}
+
+func NewFromFile(path string) (*Lexer, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		fmt.Println("openErr", err)
+		return nil, err
+	}
+
+	data, err := ioutil.ReadAll(f)
+	if err != nil {
+		fmt.Println("openErr", err)
+		return nil, err
+	}
+
+	return New(string(data)), nil
 }
 
 func (meta *Lexer) LexLiteral() token.Token {

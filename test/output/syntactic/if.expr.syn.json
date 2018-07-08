@@ -1,0 +1,96 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "int",
+						"String": "int"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 8
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "if"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "L_THAN",
+					"Value": {
+						"Type": "lthan",
+						"String": "\u003c"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 10
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "i"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 7
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

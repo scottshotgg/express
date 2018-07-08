@@ -1,0 +1,7 @@
+// This file is for testing control statements
+
+int i = 8
+
+if i < 10 {
+  i = 7
+}

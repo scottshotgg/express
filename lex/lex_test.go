@@ -3,7 +3,6 @@ package lex_test
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -45,21 +44,15 @@ func TestLex(t *testing.T) {
 }
 
 func TestNewFromFile(t *testing.T) {
-	f, err := os.Open("../samples/if.expr")
+	lexer, err := lex.NewFromFile("../samples/really_simple.expr")
 	if err != nil {
-		fmt.Println("openErr", err)
+		fmt.Println("NewFromFile", err)
 		os.Exit(9)
 	}
 
-	data, err := ioutil.ReadAll(f)
+	lexTokens, err := lexer.Lex()
 	if err != nil {
-		fmt.Println("openErr", err)
-		os.Exit(9)
-	}
-
-	lexTokens, err := lex.New(string(data)).Lex()
-	if err != nil {
-		fmt.Println("lexErr", err)
+		fmt.Println("LexErr", err)
 		os.Exit(9)
 	}
 

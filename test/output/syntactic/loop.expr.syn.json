@@ -1,0 +1,117 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "for"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 1
+					}
+				},
+				{
+					"Type": "SEPARATOR",
+					"Value": {
+						"Type": "comma",
+						"String": ","
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "L_THAN",
+					"Value": {
+						"Type": "lthan",
+						"String": "\u003c"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 10
+					}
+				},
+				{
+					"Type": "SEPARATOR",
+					"Value": {
+						"Type": "comma",
+						"String": ","
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "INCREMENT",
+					"Value": {
+						"Type": "increment",
+						"String": "++"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "f"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 8
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

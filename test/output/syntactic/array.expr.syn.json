@@ -1,0 +1,144 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "bool1"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "bool",
+						"True": true
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "bool2"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "bool",
+						"True": false
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "array",
+						"Acting": "string",
+						"String": "array"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "thing"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "ARRAY",
+					"Value": {
+						"Type": "array",
+						"True": [
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "hey",
+									"String": "hey"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "its",
+									"String": "its"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "me",
+									"String": "me"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "thing2"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "ARRAY",
+					"Value": {
+						"Type": "array",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "bool1"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "bool2"
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]
