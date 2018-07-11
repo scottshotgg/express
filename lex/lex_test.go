@@ -44,7 +44,7 @@ func TestLex(t *testing.T) {
 }
 
 func TestNewFromFile(t *testing.T) {
-	lexer, err := lex.NewFromFile("../samples/really_simple.expr")
+	lexer, err := lex.NewFromFile("../samples/advanced.expr")
 	if err != nil {
 		fmt.Println("NewFromFile", err)
 		os.Exit(9)

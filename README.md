@@ -54,6 +54,14 @@ int zero = 0
 ```
 <br>
 
+> `Optional Verbosity`: <br>
+Before moving on, let's explain a primary motivator in the Express language development. Above, you will observe that the usage of commas and semicolons as statement delimiters seems to be optional. This is because they are! Statement delimiters are acceptable if you prefer, but are in no way required if you'd rather not deal with that. <br>
+In the underlying parser architecture, they serve a semantic purpose by marking the end of a statement parse. By default, the ending of the statement will be semantically inferred if not *expressly* specified, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action to enforce strict punctuation as granularly (or entirely) as you prefer.<br>
+In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very relaxing.<br>
+This allowed flexibility is known as *`optional verbosity`* in Express and is one of the key motivators in it's development.
+
+<br>
+
 > Now, I wouldn't do this, but as a testament towards the semantic reasoning within the parser; you can even write statements on the same line as each other:
 ```csharp
 string ay = "ayy" int timestamp = 1527799745 string waddup = "waddup"
@@ -67,14 +75,6 @@ crawl _down_ the scope tree instead of _up_? -->
 ```csharp
 anotherOne: "anotherOne"
 ```
-<br>
-
-> `Optional Verbosity`: <br>
-You will observe that the usage of commas and semicolons as statement delimiters is acceptable if you prefer, but are in no way required if you'd rather not deal with that. <br>
-In the underlying parser architecture, they serve a semantic purpose by marking the end of a statement parse. By default, the ending of the statement will be semantically inferred if not *expressly* specified, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action to enforce strict punctuation as granularly (or entirely) as you prefer.<br>
-In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very relaxing.<br>
-This allowed flexibility is known as *`optional verbosity`* in Express and is one of the key motivators in it's development.
- 
 <br>
 
 > Below shows a type inferred `object` where most of its properties are also type inferred.<br>

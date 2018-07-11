@@ -52,7 +52,7 @@ if powerlevel < 9001 {
   over9k = true
 }
 
-percent: 0
-for progress := 0, progress <= 100, progress++ {
+percent := 0
+for progress := 0, progress < 101, progress++ {
   percent = progress
 }

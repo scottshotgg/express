@@ -66,6 +66,7 @@ func main() {
 		os.Exit(9)
 	}
 	fmt.Println("Semantic Tokens")
-	token.PrintValues(semanticTokens, jsonIndent)
+	// token.PrintValues(semanticTokens, jsonIndent)
+	fmt.Println(semanticTokens)
 	fmt.Println("\n\n")
 }
