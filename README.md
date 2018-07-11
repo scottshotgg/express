@@ -82,7 +82,7 @@ anotherOne: "anotherOne"
 
 ```csharp
 testerino := {
-    id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"`
+    id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"
 ```
 <br>
 
