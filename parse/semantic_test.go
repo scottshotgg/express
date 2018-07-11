@@ -33,19 +33,25 @@ const (
 // 	// semanticTokens []token.Token
 )
 
+var (
+	semanticBlock token.Value
+)
+
 func TestSemantic(t *testing.T) {
 	fmt.Println("TestSemantic")
 
 	TestSyntactic(t)
 
-	values, err := parse.New(tokens).Semantic()
+	var err error
+	semanticBlock, err = parse.New(tokens).Semantic()
 	if err != nil {
 		fmt.Println("semanticErr", err)
 		t.Fail()
 		return
 	}
 
-	token.PrintValues(values, "\t")
+	// token.PrintValues(values, "\t")
+	fmt.Println("semanticBlock", semanticBlock)
 	fmt.Println()
 }
 
@@ -167,24 +173,24 @@ func syntacticParseFile(filename string, lexTokens []token.Token) ([]token.Token
 	return syntacticTokens, nil
 }
 
-func semanticParseFile(filename string, syntacticTokens []token.Token) ([]token.Value, error) {
+func semanticParseFile(filename string, syntacticTokens []token.Token) (token.Value, error) {
 	// Make a new parser and semantically parse the file
 	semanticTokens, err := parse.New(syntacticTokens).Semantic()
 	if err != nil {
 		// TODO:
-		return []token.Value{}, err
+		return token.Value{}, err
 	}
 
 	semanticTokensJSON, err := json.MarshalIndent(semanticTokens, "", "\t")
 	if err != nil {
 		// TODO:
-		return []token.Value{}, err
+		return token.Value{}, err
 	}
 
 	err = writeTokensJSONToFile(semanticTokensJSON, testSemantic+filename+".sem.json")
 	if err != nil {
 		// TODO:
-		return []token.Value{}, err
+		return token.Value{}, err
 	}
 
 	return semanticTokens, nil

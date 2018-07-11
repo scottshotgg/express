@@ -279,7 +279,7 @@ func New(tokens []token.Token) *Parser {
 // 	}
 // }
 
-func (p *Parser) Parse() ([]token.Value, error) {
+func (p *Parser) Parse() (token.Value, error) {
 	syntacticTokens, err := p.Syntactic()
 	if err != nil {
 		fmt.Println("error in syntactic parsing", err)
@@ -287,11 +287,11 @@ func (p *Parser) Parse() ([]token.Value, error) {
 	}
 
 	pNew := New(syntacticTokens)
-	semanticTokens, err := pNew.Semantic()
+	semanticToken, err := pNew.Semantic()
 	if err != nil {
 		fmt.Println("error in semantic parsing", err)
 		os.Exit(9)
 	}
 
-	return semanticTokens, nil
+	return semanticToken, nil
 }

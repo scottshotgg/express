@@ -23,13 +23,23 @@ var (
 )
 
 func translateArray(t token.Value) {
-	fmt.Println(t)
-	trueValue := t.True.([]token.Value)
+	fmt.Printf("%+v\n", t)
+	trueValue, ok := t.True.([]token.Token)
+	if !ok {
+		fmt.Println("shit look at t")
+		fmt.Println("trueValue", trueValue)
+		os.Exit(9)
+	}
+
 	// assuming only single type arrays until I have time to do multi type arrays in C
-	arrayType := trueValue[0].Type
+	arrayType := t.Type
 	arrayValue := func() (valueString string) {
 		for i, v := range trueValue {
-			valueString += fmt.Sprintf("%v", v.True)
+			sprintString := "%v"
+			if v.Value.Type == "string" {
+				sprintString = "\"" + sprintString + "\""
+			}
+			valueString += fmt.Sprintf(sprintString, v.Value.True)
 			if i != len(trueValue)-1 {
 				valueString += ", "
 			}
@@ -65,6 +75,7 @@ func translateVariableStatement(t token.Value) error {
 
 	case "object":
 		// translateObject(t)
+		return nil
 
 	case "array":
 		translateArray(t)
@@ -84,6 +95,8 @@ func translateVariableStatement(t token.Value) error {
 		return nil
 
 	case "int":
+		fallthrough
+	case "float":
 		fallthrough
 	case "bool":
 		thing := strings.Join([]string{t.Type, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
@@ -106,26 +119,32 @@ func translateIf(t token.Value) {
 	fmt.Println("wtf")
 	fmt.Printf("t %+v\n", t)
 
-	_, err = f.Write([]byte(fmt.Sprintf("if (%s) {\n", t.String)))
+	_, err = f.Write([]byte(fmt.Sprintf("if (%s) ", t.String)))
 	if err != nil {
 		fmt.Println("error writing to file")
 		os.Exit(9)
 	}
 
-	opMap, ok := t.True.(map[string]token.Value)
-	if !ok {
-		fmt.Println("omfg error")
-		os.Exit(9)
-	}
-
-	// body, ok := opMap["body"].True.([]token.Value)
+	// metadata, ok := t.Metadata
 	// if !ok {
 	// 	fmt.Println("omfg error")
 	// 	os.Exit(9)
 	// }
-	TranslateBlock(opMap["body"])
+	fmt.Println("metadata", t.Metadata)
 
-	_, err = f.Write([]byte("\n}\n"))
+	fmt.Println("t.True", t.True)
+	// os.Exit(9)
+
+	// // // body, ok := opMap["body"].True.([]token.Value)
+	// // // if !ok {
+	// // // 	fmt.Println("omfg error")
+	// // // 	os.Exit(9)
+	// // // }
+	TranslateBlock(token.Value{
+		Type: token.Block,
+		True: t.True,
+	})
+	_, err = f.Write([]byte("\n"))
 	if err != nil {
 		fmt.Println("error writing to file")
 		os.Exit(9)
@@ -133,30 +152,42 @@ func translateIf(t token.Value) {
 }
 
 func translateLoop(t token.Value) error {
+	fmt.Printf("t: %+v", t)
 	if t.Type != "for" {
 		return errors.New("blah")
 	}
 
-	fmt.Printf("t %+v\n", t)
-	tValue, ok := t.True.(map[string]token.Value)
-	if !ok {
-		return errors.New("not the type")
+	fmt.Println()
+	fmt.Println("t.Metadata", t.Metadata)
+	// os.Exit(9)
+
+	// tValue, ok := t.Metadata)
+	// if !ok {
+	// 	return errors.New("not the type")
+	// }
+	// fmt.Println("tValue", tValue)
+
+	for k, v := range t.Metadata {
+		fmt.Println("k, v", k, v)
 	}
-	fmt.Println(tValue)
 
 	loop := fmt.Sprintf("{\nint %s=%d;\nwhile (%s<%d) {\n",
-		tValue["start"].Name, tValue["start"].True.(int), tValue["start"].Name,
-		tValue["end"].True.(int))
-	fmt.Println(loop)
+		t.Metadata["start"].(token.Value).Name, t.Metadata["start"].(token.Value).True.(int), t.Metadata["start"].(token.Value).Name,
+		t.Metadata["end"].(token.Value).True.(int))
+	fmt.Println("loop", loop)
 	_, err = f.Write([]byte(loop))
 	if err != nil {
 		fmt.Println("error writing to file")
 		os.Exit(9)
 	}
 
-	TranslateBlock(tValue["body"])
+	fmt.Println("wtf is this")
+	TranslateBlock(token.Value{
+		Type: token.Block,
+		True: t.True,
+	})
 
-	loopEnding := fmt.Sprintf("%s+=%d;\n}\n}\n", tValue["start"].Name, tValue["step"].True.(int))
+	loopEnding := fmt.Sprintf("%s+=%d;}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
 	fmt.Println(loopEnding)
 	_, err = f.Write([]byte(loopEnding))
 	if err != nil {
@@ -178,7 +209,7 @@ func TranslateBlock(tv token.Value) {
 	fmt.Println("insideBlock", insideBlock[0])
 
 	for _, t := range insideBlock {
-		fmt.Println("t", t)
+		fmt.Println("insideBlock t", t)
 
 		if err = translateVariableStatement(t); err != nil {
 			fmt.Println("i am here translateVariableStatement", err)
@@ -191,48 +222,32 @@ func TranslateBlock(tv token.Value) {
 	f.Write([]byte("}"))
 }
 
-func (p *Parser) Transpile() ([]string, error) {
+func (p *Parser) Transpile(block token.Value) ([]string, error) {
 	fmt.Println("yo waddup")
 
-	fmt.Println(p.source)
+	fmt.Println("block", block)
 
-	fmt.Println("tokens", len(p.source))
+	// fmt.Println(p.source)
 
-	for _, st := range p.source {
-		// check if block i guess?
-		sTokens, ok := st.Value.True.([]token.Token)
-		if !ok {
-			// TODO:
-			os.Exit(9)
-		}
-		fmt.Println("st", st)
-		fmt.Println("sTokens", sTokens)
-
-		// f, err = os.Create("main.expr.shit")
-		// if err != nil {
-		// 	fmt.Println("got an err creating file")
-		// 	os.Exit(9)
-		// }
-
-		// // TODO: check all f.Write errors I guess
-		// f.Write([]byte("#include <map>\n#include <string>\n"))
-		// f.Write([]byte("struct Any { std::string type; void* data; };\n"))
-		// f.Write([]byte("int main()"))
-
-		// TranslateBlock(token.Value{
-		// 	Type: "BLOCK",
-		// 	True: func() (svs []token.Value) {
-		// 		for _, sv := range st.Value.True.([]token.Token) {
-		// 			fmt.Println("sv", sv)
-		// 			svs = append(svs, sv.Value)
-		// 		}
-
-		// 		return
-		// 	}(),
-		// })
-
-		// f.Close()
+	// fmt.Println("tokens", len(p.source))
+	for _, value := range block.True.([]token.Value) {
+		fmt.Println()
+		fmt.Printf("value %+v\n", value)
 	}
+	f, err = os.Create("main.expr.shit")
+	if err != nil {
+		fmt.Println("got an err creating file")
+		os.Exit(9)
+	}
+
+	// TODO: check all f.Write errors I guess
+	f.Write([]byte("#include <map>\n#include <string>\n"))
+	f.Write([]byte("struct Any { std::string type; void* data; };\n"))
+	f.Write([]byte("int main()"))
+
+	TranslateBlock(block)
+
+	f.Close()
 
 	return []string{}, nil
 }

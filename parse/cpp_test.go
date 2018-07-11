@@ -3,8 +3,6 @@ package parse_test
 import (
 	"fmt"
 	"testing"
-
-	"github.com/scottshotgg/ExpressRedo/parse"
 )
 
 // TODO: FIXME: this needs to be reworked to take the syntactic tokens
@@ -13,7 +11,7 @@ func TestTranspile(t *testing.T) {
 
 	TestSemantic(t)
 
-	statements, err := parse.New(tokens).Transpile()
+	statements, err := p.Transpile(semanticBlock)
 	if err != nil {
 		fmt.Println("semanticErr", err)
 		t.Fail()

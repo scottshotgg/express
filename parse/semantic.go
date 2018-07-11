@@ -248,6 +248,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		p.Shift()
 
 	default:
+		fmt.Println("last2", p.LastToken)
+		fmt.Println("current2", p.CurrentToken)
 		fmt.Println("next2", p.NextToken)
 		return token.Value{}, errors.Errorf("default %+v", p.NextToken)
 	}
@@ -281,6 +283,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		if err != nil {
 			return token.Value{}, err
 		}
+		// p.Shift()`
 	}
 
 	// FIXME: holy fuck haxorz
@@ -455,7 +458,7 @@ func (p *Parser) ParseExpression(tok token.Token) (token.Value, error) {
 // GetExpression ...
 func (p *Parser) GetExpression() (token.Value, error) {
 	fmt.Println("GetExpression")
-	fmt.Println("p.NextToken", p.NextToken)
+	fmt.Printf("p.NextToken %+v\n", p.NextToken)
 
 	switch p.NextToken.Type {
 	// Will have to experiment on where to put this
@@ -485,6 +488,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 		case "assign":
 			p.Shift()
+			fmt.Println("shifted", p.NextToken)
 			expr, err := p.GetExpression()
 			if err != nil {
 				return token.Value{}, err
@@ -497,6 +501,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				} else {
 					fmt.Println("unable to find variable")
 					fmt.Println(p.meta.currentVariable)
+					fmt.Println("scope", p.meta.currentScope)
 					os.Exit(9)
 				}
 			} else if p.meta.currentVariable.Type == SET {
@@ -540,6 +545,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			}
 
 			p.Shift()
+			fmt.Println("what do", p.NextToken)
 			expr, err := p.GetExpression()
 			if err != nil {
 				return token.Value{}, err
@@ -600,15 +606,19 @@ func (p *Parser) GetExpression() (token.Value, error) {
 }
 
 func (p *Parser) GetKeyword() (token.Value, error) {
+	fmt.Println("LAST666", p.LastToken)
+	fmt.Println("CURRENT666", p.CurrentToken)
+	fmt.Println("NEXT666", p.NextToken)
 	switch p.NextToken.Value.String {
 	case "for":
-		// Make a new meta; do not inherit
+		// Make a new meta
 		// Get a statement
 		// Get an expression
 		// Get another expression
 		// Sub operands to find step
 		p.Shift()
-		p.meta.NewScope()
+		fmt.Println("GETTING LOOP")
+		p.meta.NewInheritedScope()
 		stmt, err := p.GetStatement()
 		if err != nil {
 			fmt.Println("Error: Could not get statement")
@@ -683,6 +693,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		fmt.Printf("expr %+v\n", expr)
 		fmt.Printf("block %+v\n", block)
+		fmt.Printf("next555 %+v\n", p.NextToken)
 
 		expr.Metadata["check"] = expr.String
 
@@ -694,7 +705,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		}, nil
 
 	default:
-		fmt.Println("woah idk")
+		fmt.Println("woah idk", p.CurrentToken)
 		os.Exit(9)
 	}
 
@@ -761,13 +772,16 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			} else {
 				// fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
 				p.Shift()
-				return p.GetExpression()
+				expr, err := p.GetExpression()
+				fmt.Println("THIS IS THE EXPRESSION", expr, err)
+				return expr, err
 			}
 		}
 		fmt.Println("ASSIGNMENT DECLARED VALUE", p.meta.currentVariable.Type)
 		p.Shift()
 		fmt.Println(p.NextToken)
 		tv, err := p.GetExpression()
+		fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
 		if err != nil {
 			fmt.Println("getExpressionErr", err)
 			os.Exit(9)
@@ -781,7 +795,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		if err != nil {
 			return token.Value{}, err
 		}
-		p.Shift()
+		// p.Shift()
 		return keyword, nil
 
 	case token.Separator:
@@ -814,6 +828,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	default:
 		// TODO: this causes infinite loops when you cant parse
 		fmt.Println("hey its me the default", p.NextToken)
+		os.Exit(9)
 	}
 
 	return token.Value{}, nil
@@ -875,13 +890,13 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 }
 
 // Semantic ...
-func (p *Parser) Semantic() ([]token.Value, error) {
+func (p *Parser) Semantic() (token.Value, error) {
 	fmt.Println("Semantic")
 
 	block, err := p.CheckBlock()
 	if err != nil {
 		// TODO:
-		return []token.Value{}, err
+		return token.Value{}, err
 	}
 	fmt.Println("block", block)
 	fmt.Println()
@@ -889,7 +904,7 @@ func (p *Parser) Semantic() ([]token.Value, error) {
 	fmt.Println("End currentScope: ", p.meta.currentScope)
 	fmt.Println()
 
-	return []token.Value{block}, nil
+	return block, nil
 }
 
 // TODO: start here
