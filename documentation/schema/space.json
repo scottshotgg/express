@@ -1,0 +1,13 @@
+{
+  "type": "space",
+  "class": "ws",
+  "expected": [],
+  "index": 1,
+  "metadata": {
+    "value": {
+      "type": "string",
+      "true": " ",
+      "string": " "
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "assign",
+  "index": 4,
+  "expected": [
+    "value"
+  ],
+  "metadata": {
+    "value": {
+      "type": "string",
+      "true": "=",
+      "string": "="
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "ident",
+  "index": 2,
+  "class": "value",
+  "expected": [
+    "assign",
+    "op"
+  ],
+  "metadata": {
+    "value": {
+      "type": "string",
+      "true": "six",
+      "string": "six"
+    }
+  }
+}

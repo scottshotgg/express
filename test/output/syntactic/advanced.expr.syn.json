@@ -856,8 +856,8 @@
 				{
 					"Type": "ASSIGN",
 					"Value": {
-						"Type": "set",
-						"String": ":"
+						"Type": "init",
+						"String": ":="
 					}
 				},
 				{
@@ -915,13 +915,6 @@
 					"Value": {
 						"Type": "lthan",
 						"String": "\u003c"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
 					}
 				},
 				{

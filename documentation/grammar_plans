@@ -1,0 +1,5 @@
+https://cs.stackexchange.com/questions/79563/writing-a-context-free-grammar-using-backus-naur-form-for-a-for-loop
+
+- make grammar
+-   list out grammar for statement
+-   _generate_ parse chains for atleast the semantic parser from the grammar

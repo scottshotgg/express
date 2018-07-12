@@ -1,0 +1,15 @@
+{
+  "type": "literal",
+  "class": "value",
+  "index": 6,
+  "expected": [
+    "TODO: how do we do this without defining every single thing"
+  ],
+  "metadata": {
+    "value": {
+      "type": "int",
+      "true": 60,
+      "string": "60"
+    }
+  }
+}

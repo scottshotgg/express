@@ -1,0 +1,12 @@
+{
+  "type": "end",
+  "index": 7,
+  "expected": [],
+  "metadata": {
+    "value": {
+      "type": "string",
+      "true": ";",
+      "string": ";"
+    }
+  }
+}

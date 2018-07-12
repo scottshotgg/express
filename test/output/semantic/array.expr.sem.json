@@ -1,85 +1,83 @@
-[
-	{
-		"Type": "BLOCK",
-		"True": [
-			{
-				"Name": "bool1",
-				"Type": "bool",
-				"True": true,
-				"AccessType": "private"
-			},
-			{
-				"Name": "bool2",
-				"Type": "bool",
-				"True": false,
-				"AccessType": "private"
-			},
-			{
-				"Name": "thing",
-				"Type": "array",
-				"Acting": "string",
-				"True": [
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "hey",
-							"String": "hey"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "its",
-							"String": "its"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "me",
-							"String": "me"
-						}
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "bool1",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private"
+		},
+		{
+			"Name": "bool2",
+			"Type": "bool",
+			"True": false,
+			"AccessType": "private"
+		},
+		{
+			"Name": "thing",
+			"Type": "array",
+			"Acting": "string",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "hey",
+						"String": "hey"
 					}
-				],
-				"AccessType": "private",
-				"Metadata": {
-					"length": 3,
-					"vector": false
-				}
-			},
-			{
-				"Name": "thing2",
-				"Type": "array",
-				"Acting": "bool",
-				"True": [
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Name": "bool1",
-							"Type": "bool",
-							"True": true,
-							"AccessType": "private"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Name": "bool2",
-							"Type": "bool",
-							"True": false,
-							"AccessType": "private"
-						}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "its",
+						"String": "its"
 					}
-				],
-				"AccessType": "private",
-				"Metadata": {
-					"length": 2,
-					"vector": false
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "me",
+						"String": "me"
+					}
 				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 3,
+				"vector": false
 			}
-		]
-	}
-]
+		},
+		{
+			"Name": "thing2",
+			"Type": "array",
+			"Acting": "bool",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "bool1",
+						"Type": "bool",
+						"True": true,
+						"AccessType": "private"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "bool2",
+						"Type": "bool",
+						"True": false,
+						"AccessType": "private"
+					}
+				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 2,
+				"vector": false
+			}
+		}
+	]
+}

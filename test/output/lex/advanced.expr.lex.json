@@ -2975,10 +2975,24 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
 		"Type": "ASSIGN",
 		"Value": {
 			"Type": "set",
 			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
 		}
 	},
 	{
@@ -3090,13 +3104,6 @@
 		"Value": {
 			"Type": "lthan",
 			"String": "\u003c"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
 		}
 	},
 	{

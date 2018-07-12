@@ -1,0 +1,114 @@
+{
+  "$id": "http://example.com/example.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "definitions": {
+    "type": {
+      "$id": "/definitions/type",
+      "title": "TODO:",
+      "enum": [
+        "TODO: somehow take this from another file?",
+        "red", 
+        "amber", 
+        "green"
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "index",
+    "value"
+  ],
+  "properties": {
+    "type": {
+      "$ref": "/definitions/type"
+    },
+
+    "class": {
+      "$id": "/properties/class",
+      "type": "string",
+      "title": "TODO:",
+      "default": "",
+      "examples": [
+        "TODO:"
+      ]
+    },
+
+    "expected": {
+      "$id": "/properties/expected",
+      "title": "TODO:",
+      "type": "array",
+      "items": {
+        "$ref": "/definitions/type"
+      },
+      "default": 0,
+      "examples": [
+        "TODO:"
+      ]
+    },
+
+    "index": {
+      "$id": "/properties/index",
+      "type": "integer",
+      "title": "TODO:",
+      "default": 0,
+      "examples": [
+        "TODO:"
+      ]
+    },
+
+    "value": {
+      "$id": "/properties/value",
+      "type": "object",
+      "title": "TODO:",
+      "properties": {
+        "true": {
+          "type": "object"
+        },
+        "string": {
+          "type": "string"
+        }
+      },
+      "default": {},
+      "examples": [
+        "TODO:"
+      ]
+    },
+    
+    "metadata": {
+      "$id": "/properties/metadata",
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {
+          "$id": "/properties/metadata/properties/name",
+          "type": "object",
+          "title": "TODO: need to somehow link this with the token type",
+          "required": [
+            "type",
+            "data"
+          ],
+          "properties": {
+            "type": {
+              "$id": "/properties/metadata/properties/name/properties/type",
+              "type": "string",
+              "title": "TODO:",
+              "default": "",
+              "examples": [
+                "TODO:"
+              ]
+            },
+            "data": {
+              "$id": "/properties/metadata/properties/name/properties/data",
+              "type": "object",
+              "title": "TODO:",
+              "default": {},
+              "examples": [
+                "TODO:"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

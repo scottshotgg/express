@@ -1,45 +1,43 @@
-[
-	{
-		"Type": "BLOCK",
-		"True": [
-			{
-				"Name": "i",
-				"Type": "int",
-				"True": 8,
-				"AccessType": "private"
-			},
-			{
-				"Type": "if",
-				"True": [
-					{
-						"Name": "i",
-						"Type": "int",
-						"True": 7,
-						"AccessType": "private"
-					}
-				],
-				"String": "i\u003c10",
-				"Metadata": {
-					"check": "i\u003c10",
-					"eval": true,
-					"left": {
-						"Name": "i",
-						"Type": "int",
-						"True": 8,
-						"AccessType": "private"
-					},
-					"op": {
-						"Type": "lthan",
-						"String": "\u003c"
-					},
-					"right": {
-						"Type": "int",
-						"True": 10,
-						"String": "10"
-					},
-					"type": "bool"
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "i",
+			"Type": "int",
+			"True": 8,
+			"AccessType": "private"
+		},
+		{
+			"Type": "if",
+			"True": [
+				{
+					"Name": "i",
+					"Type": "int",
+					"True": 7,
+					"AccessType": "private"
 				}
+			],
+			"String": "i\u003c10",
+			"Metadata": {
+				"check": "i\u003c10",
+				"eval": true,
+				"left": {
+					"Name": "i",
+					"Type": "int",
+					"True": 8,
+					"AccessType": "private"
+				},
+				"op": {
+					"Type": "lthan",
+					"String": "\u003c"
+				},
+				"right": {
+					"Type": "int",
+					"True": 10,
+					"String": "10"
+				},
+				"type": "bool"
 			}
-		]
-	}
-]
+		}
+	]
+}

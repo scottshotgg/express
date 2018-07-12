@@ -1,0 +1,11 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "four",
+			"Type": "int",
+			"True": 4,
+			"AccessType": "private"
+		}
+	]
+}

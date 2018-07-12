@@ -1,340 +1,410 @@
-[
-	{
-		"Type": "BLOCK",
-		"True": [
-			{
-				"Name": "powerlevel",
-				"Type": "int",
-				"True": 9000,
-				"AccessType": "private"
-			},
-			{
-				"Name": "over9k",
-				"Type": "bool",
-				"True": false,
-				"AccessType": "private"
-			},
-			{
-				"Name": "pi",
-				"Type": "float",
-				"True": 3.14159265359,
-				"AccessType": "private"
-			},
-			{
-				"Name": "arizona",
-				"Type": "string",
-				"True": "iced out boys",
-				"AccessType": "private"
-			},
-			{
-				"Name": "zero",
-				"Type": "int",
-				"True": 0,
-				"AccessType": "private"
-			},
-			{
-				"Name": "one",
-				"Type": "int",
-				"True": 1,
-				"AccessType": "private"
-			},
-			{
-				"Name": "ayy",
-				"Type": "string",
-				"True": "ayy",
-				"AccessType": "private"
-			},
-			{
-				"Name": "timestamp",
-				"Type": "int",
-				"True": 1527799745,
-				"AccessType": "private"
-			},
-			{
-				"Name": "waddup",
-				"Type": "string",
-				"True": "waddup",
-				"AccessType": "private"
-			},
-			{
-				"Name": "anotherOne",
-				"Type": "string",
-				"True": "anotherOne",
-				"AccessType": "private"
-			},
-			{
-				"Name": "testerino",
-				"Type": "object",
-				"True": [
-					{
-						"Name": "id",
-						"Type": "string",
-						"True": "ba3d4793-cfae-48d1-ad51-47cbfd70f98a",
-						"AccessType": "private"
-					},
-					{
-						"Name": "time",
-						"Type": "int",
-						"True": 1527799745,
-						"AccessType": "private"
-					},
-					{
-						"Name": "price",
-						"Type": "float",
-						"True": 55.3592,
-						"AccessType": "private"
-					},
-					{
-						"Name": "dank_meme",
-						"Type": "bool",
-						"True": true,
-						"AccessType": "private"
-					},
-					{
-						"Name": "ð¥420ð¥",
-						"Type": "string",
-						"True": "ð±ï¸laze it",
-						"AccessType": "private"
-					},
-					{
-						"Name": "â¹â¿Khalid",
-						"Type": "string",
-						"True": "anotherOne",
-						"AccessType": "private"
-					},
-					{
-						"Name": "ten",
-						"Type": "array",
-						"Acting": "int",
-						"True": [
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Name": "one",
-									"Type": "int",
-									"True": 1,
-									"String": "1",
-									"AccessType": "private"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Name": "zero",
-									"Type": "int",
-									"True": 0,
-									"String": "0",
-									"AccessType": "private"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Name": "one",
-									"Type": "int",
-									"True": 1,
-									"String": "1",
-									"AccessType": "private"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Name": "zero",
-									"Type": "int",
-									"True": 0,
-									"String": "0",
-									"AccessType": "private"
-								}
-							}
-						],
-						"AccessType": "private",
-						"Metadata": {
-							"length": 4,
-							"vector": false
-						}
-					},
-					{
-						"Name": "throw_more_dots",
-						"Type": "object",
-						"True": [
-							{
-								"Name": "throw_more_dots",
-								"Type": "object",
-								"True": [
-									{
-										"Name": "more_dots",
-										"Type": "object",
-										"True": [
-											{
-												"Name": "more_dots",
-												"Type": "object",
-												"True": [
-													{
-														"Name": "ok",
-														"Type": "string",
-														"True": "stop dots",
-														"AccessType": "private"
-													}
-												],
-												"AccessType": "private"
-											}
-										],
-										"AccessType": "private"
-									}
-								],
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "powerlevel",
+			"Type": "int",
+			"True": 9000,
+			"AccessType": "private"
+		},
+		{
+			"Name": "over9k",
+			"Type": "bool",
+			"True": false,
+			"AccessType": "private"
+		},
+		{
+			"Name": "pi",
+			"Type": "float",
+			"True": 3.14159265359,
+			"AccessType": "private"
+		},
+		{
+			"Name": "arizona",
+			"Type": "string",
+			"True": "iced out boys",
+			"AccessType": "private"
+		},
+		{
+			"Name": "zero",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Name": "one",
+			"Type": "int",
+			"True": 1,
+			"AccessType": "private"
+		},
+		{
+			"Name": "ayy",
+			"Type": "string",
+			"True": "ayy",
+			"AccessType": "private"
+		},
+		{
+			"Name": "timestamp",
+			"Type": "int",
+			"True": 1527799745,
+			"AccessType": "private"
+		},
+		{
+			"Name": "waddup",
+			"Type": "string",
+			"True": "waddup",
+			"AccessType": "private"
+		},
+		{
+			"Name": "anotherOne",
+			"Type": "string",
+			"True": "anotherOne",
+			"AccessType": "private"
+		},
+		{
+			"Name": "testerino",
+			"Type": "object",
+			"True": [
+				{
+					"Name": "id",
+					"Type": "string",
+					"True": "ba3d4793-cfae-48d1-ad51-47cbfd70f98a",
+					"AccessType": "private"
+				},
+				{
+					"Name": "time",
+					"Type": "int",
+					"True": 1527799745,
+					"AccessType": "private"
+				},
+				{
+					"Name": "price",
+					"Type": "float",
+					"True": 55.3592,
+					"AccessType": "private"
+				},
+				{
+					"Name": "dank_meme",
+					"Type": "bool",
+					"True": true,
+					"AccessType": "private"
+				},
+				{
+					"Name": "ð¥420ð¥",
+					"Type": "string",
+					"True": "ð±ï¸laze it",
+					"AccessType": "private"
+				},
+				{
+					"Name": "â¹â¿Khalid",
+					"Type": "string",
+					"True": "anotherOne",
+					"AccessType": "private"
+				},
+				{
+					"Name": "ten",
+					"Type": "array",
+					"Acting": "int",
+					"True": [
+						{
+							"Type": "LITERAL",
+							"Value": {
+								"Name": "one",
+								"Type": "int",
+								"True": 1,
+								"String": "1",
 								"AccessType": "private"
 							}
-						],
-						"AccessType": "private"
+						},
+						{
+							"Type": "LITERAL",
+							"Value": {
+								"Name": "zero",
+								"Type": "int",
+								"True": 0,
+								"String": "0",
+								"AccessType": "private"
+							}
+						},
+						{
+							"Type": "LITERAL",
+							"Value": {
+								"Name": "one",
+								"Type": "int",
+								"True": 1,
+								"String": "1",
+								"AccessType": "private"
+							}
+						},
+						{
+							"Type": "LITERAL",
+							"Value": {
+								"Name": "zero",
+								"Type": "int",
+								"True": 0,
+								"String": "0",
+								"AccessType": "private"
+							}
+						}
+					],
+					"AccessType": "private",
+					"Metadata": {
+						"length": 4,
+						"vector": false
 					}
-				],
-				"AccessType": "private"
-			},
-			{
-				"Name": "stringArray",
-				"Type": "array",
-				"Acting": "string",
-				"True": [
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "hi",
-							"String": "hi"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "my",
-							"String": "my"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "name",
-							"String": "name"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "is",
-							"String": "is"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "scott",
-							"String": "scott"
-						}
-					}
-				],
-				"AccessType": "private",
-				"Metadata": {
-					"length": 5,
-					"vector": false
-				}
-			},
-			{
-				"Name": "here_comes",
-				"Type": "array",
-				"Acting": "string",
-				"True": [
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Name": "ayy",
-							"Type": "string",
-							"True": "ayy",
+				},
+				{
+					"Name": "throw_more_dots",
+					"Type": "object",
+					"True": [
+						{
+							"Name": "throw_more_dots",
+							"Type": "object",
+							"True": [
+								{
+									"Name": "more_dots",
+									"Type": "object",
+									"True": [
+										{
+											"Name": "more_dots",
+											"Type": "object",
+											"True": [
+												{
+													"Name": "ok",
+													"Type": "string",
+													"True": "stop dots",
+													"AccessType": "private"
+												}
+											],
+											"AccessType": "private"
+										}
+									],
+									"AccessType": "private"
+								}
+							],
 							"AccessType": "private"
 						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Name": "waddup",
-							"Type": "string",
-							"True": "waddup",
-							"AccessType": "private"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "its",
-							"String": "its"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "dat",
-							"String": "dat"
-						}
-					},
-					{
-						"Type": "LITERAL",
-						"Value": {
-							"Type": "string",
-							"True": "boi",
-							"String": "boi"
-						}
-					}
-				],
-				"AccessType": "private",
-				"Metadata": {
-					"length": 5,
-					"vector": false
+					],
+					"AccessType": "private"
 				}
-			},
-			{
-				"Type": "if",
-				"True": [
-					{
-						"Name": "powerlevel",
-						"Type": "int",
-						"True": 9001,
-						"AccessType": "private"
-					},
-					{
-						"Name": "over9k",
-						"Type": "bool",
-						"True": true,
-						"AccessType": "private"
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "stringArray",
+			"Type": "array",
+			"Acting": "string",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "hi",
+						"String": "hi"
 					}
-				],
-				"String": "powerlevel\u003c9001",
-				"Metadata": {
-					"check": "powerlevel\u003c9001",
-					"eval": true,
-					"left": {
-						"Name": "powerlevel",
-						"Type": "int",
-						"True": 9000,
-						"AccessType": "private"
-					},
-					"op": {
-						"Type": "lthan",
-						"String": "\u003c"
-					},
-					"right": {
-						"Type": "int",
-						"True": 9001,
-						"String": "9001"
-					},
-					"type": "bool"
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "my",
+						"String": "my"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "name",
+						"String": "name"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "is",
+						"String": "is"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "scott",
+						"String": "scott"
+					}
 				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 5,
+				"vector": false
 			}
-		]
-	}
-]
+		},
+		{
+			"Name": "here_comes",
+			"Type": "array",
+			"Acting": "string",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "ayy",
+						"Type": "string",
+						"True": "ayy",
+						"AccessType": "private"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "waddup",
+						"Type": "string",
+						"True": "waddup",
+						"AccessType": "private"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "its",
+						"String": "its"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "dat",
+						"String": "dat"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "boi",
+						"String": "boi"
+					}
+				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 5,
+				"vector": false
+			}
+		},
+		{
+			"Type": "if",
+			"True": [
+				{
+					"Name": "powerlevel",
+					"Type": "int",
+					"True": 9001,
+					"AccessType": "private"
+				},
+				{
+					"Name": "over9k",
+					"Type": "bool",
+					"True": true,
+					"AccessType": "private"
+				}
+			],
+			"String": "powerlevel\u003c9001",
+			"Metadata": {
+				"check": "powerlevel\u003c9001",
+				"eval": true,
+				"left": {
+					"Name": "powerlevel",
+					"Type": "int",
+					"True": 9000,
+					"AccessType": "private"
+				},
+				"op": {
+					"Type": "lthan",
+					"String": "\u003c"
+				},
+				"right": {
+					"Type": "int",
+					"True": 9001,
+					"String": "9001"
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "percent",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Type": "for",
+			"True": [
+				{
+					"Name": "percent",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"String": "progress\u003c100",
+			"Metadata": {
+				"end": {
+					"Type": "int",
+					"True": 100,
+					"String": "progress\u003c100",
+					"Metadata": {
+						"eval": true,
+						"left": {
+							"Name": "progress",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						},
+						"op": {
+							"Type": "lthan",
+							"String": "\u003c"
+						},
+						"right": {
+							"Type": "int",
+							"True": 100,
+							"String": "100"
+						},
+						"type": "bool"
+					}
+				},
+				"eval": true,
+				"left": {
+					"Name": "progress",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				},
+				"op": {
+					"Type": "lthan",
+					"String": "\u003c"
+				},
+				"right": {
+					"Type": "int",
+					"True": 100,
+					"String": "100"
+				},
+				"start": {
+					"Name": "progress",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				},
+				"step": {
+					"Type": "int",
+					"True": 1,
+					"String": "1"
+				},
+				"type": "bool"
+			}
+		}
+	]
+}

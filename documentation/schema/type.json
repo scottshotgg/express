@@ -1,0 +1,14 @@
+{
+  "type": "type",
+  "index": 0,
+  "expected": [
+    "ident"
+  ],
+  "metadata": {
+    "value": {
+      "type": "string",
+      "true": "int",
+      "string": "int"
+    }
+  }
+}
