@@ -101,6 +101,9 @@ testerino := {
 <br>
 
 > The `inference` operator can also be used within objects. Although currently it doesn't do anything different than the `set` operator within an object, it may have a more impactful use later
+<!-- 
+    Could make this a "redeclaration" operator to specifically reinterpret the type as well
+-->
 
 ```csharp
     dank_meme := true
