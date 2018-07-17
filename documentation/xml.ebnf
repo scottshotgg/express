@@ -1,0 +1,4 @@
+<XMLTree>       = [ <XMLHeader> ] <XMLElement> ;
+<XMLElement>    = "<" <XML_ELEMENT_NAME> [{ <XMLAttribute> }] ">" ( <XMLLiteral> | <XMLElement> ) "</" <XML_ELEMENT_NAME> "> ;
+<XMLAttribute>  = <XML_ATTRIBUTE_NAME> "=" <XMLLiteral> ;
+<XMLLiteral>    = <INTEGER> | <FLOAT> | <BOOL> | <STRING> ;

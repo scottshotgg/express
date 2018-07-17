@@ -41,7 +41,7 @@ string arizona = "iced out boys";
 
 /*
   Multiline
-  Comment
+  comment
 */
 ```
 <br>
@@ -64,7 +64,7 @@ This allowed flexibility is known as *`optional verbosity`* in Express and is on
 
 > Now, I wouldn't do this, but as a testament towards the semantic reasoning within the parser; you can even write statements on the same line as each other:
 ```csharp
-string ay = "ayy" int timestamp = 1527799745 string waddup = "waddup"
+string ayy = "ayy" string waddup = "waddup" int timestamp = 1527799745
 ```
 <br>
 

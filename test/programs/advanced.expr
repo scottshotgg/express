@@ -7,13 +7,13 @@ string arizona = "iced out boys"
 
 /*
   Multiline
-  Comment
+  comment
 */
 
 int zero = 0
 one := 1
 
-string ayy = "ayy" int timestamp = 1527799745 string waddup = "waddup"
+string ayy = "ayy" string waddup = "waddup" int timestamp = 1527799745
 
 anotherOne: "anotherOne"
 
@@ -24,7 +24,7 @@ testerino := {
   dank_meme := true
   🔥420🔥: "🅱️laze it"
   ⒹⒿKhalid: anotherOne
-  ten: [ one, zero, one, zero ]
+  ten: [ one, zero, one, zero ]  // static int array
   throw_more_dots: {
     throw_more_dots: {
       more_dots: {
@@ -56,3 +56,22 @@ percent := 0
 for progress := 0, progress < 100, progress++ {
   percent = progress
 }
+
+/*
+- README.md ends here -
+*/
+
+float[] differentFloatTypes = [ 1., 1.0, 1.00, .1, 0.1, 00.1 ]
+
+var thing = false
+thing = "false"
+thing = 0
+thing = 0.0
+
+html :=
+<html>
+  <title>Some Shit</title>
+  <body>
+    some body of stuff here
+  </body>
+</html>
