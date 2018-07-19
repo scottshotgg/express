@@ -50,7 +50,35 @@ func TestSemantic(t *testing.T) {
 		return
 	}
 
-	// token.PrintValues(values, "\t")
+	file, err := os.Open("../test/output/semantic/loop.expr.sem.json")
+	if err != nil {
+		fmt.Println("openErr", err)
+		t.Fail()
+		return
+	}
+
+	semanticTokensFromFile, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println("semanticTokensFromFileErr", err)
+		t.Fail()
+		return
+	}
+
+	semanticBlockJSON, err := json.MarshalIndent(semanticBlock, "", "\t")
+	if err != nil {
+		fmt.Println("semanticTokensFromFileErr", err)
+		t.Fail()
+		return
+	}
+
+	if string(semanticTokensFromFile) != string(semanticBlockJSON) {
+		fmt.Println("semanticBlock not the same as test tokens")
+		fmt.Println("string(semanticBlockJSON)", string(semanticBlockJSON))
+		fmt.Println("string(semanticTokensFromFile)", string(semanticTokensFromFile))
+		t.Fail()
+		return
+	}
+
 	fmt.Println("semanticBlock", semanticBlock)
 	fmt.Println()
 }

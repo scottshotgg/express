@@ -44,15 +44,15 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "timestamp",
-			"Type": "int",
-			"True": 1527799745,
-			"AccessType": "private"
-		},
-		{
 			"Name": "waddup",
 			"Type": "string",
 			"True": "waddup",
+			"AccessType": "private"
+		},
+		{
+			"Name": "timestamp",
+			"Type": "int",
+			"True": 1527799745,
 			"AccessType": "private"
 		},
 		{

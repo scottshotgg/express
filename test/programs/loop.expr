@@ -1,5 +1,10 @@
 // This file is for testing loops
 
-for i := 1, i < 10, i++ {
-  f := 8
-}
+i := 10
+f := i
+
+//for i := 1, i < 10, i++ {
+  // This needs to be fixed to not reference the acutal value
+  // but to pull the value at runtime
+  
+//}

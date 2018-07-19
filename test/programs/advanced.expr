@@ -59,7 +59,6 @@ for progress := 0, progress < 100, progress++ {
 
 /*
 - README.md ends here -
-*/
 
 float[] differentFloatTypes = [ 1., 1.0, 1.00, .1, 0.1, 00.1 ]
 
@@ -75,3 +74,4 @@ html :=
     some body of stuff here
   </body>
 </html>
+*/

@@ -198,34 +198,6 @@
 				{
 					"Type": "TYPE",
 					"Value": {
-						"Type": "int",
-						"String": "int"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "timestamp"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "int",
-						"True": 1527799745
-					}
-				},
-				{
-					"Type": "TYPE",
-					"Value": {
 						"Type": "string",
 						"String": "string"
 					}
@@ -250,6 +222,34 @@
 						"Type": "string",
 						"True": "waddup",
 						"String": "waddup"
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "int",
+						"String": "int"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "timestamp"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 1527799745
 					}
 				},
 				{

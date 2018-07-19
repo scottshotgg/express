@@ -14,6 +14,25 @@ import (
 func (p *Parser) LessThanOperands(left, right token.Value) (token.Value, error) {
 	// FIXME: this only works for ints right now
 	// Need to put a type on this
+
+	if ref, ok := left.Metadata["ref"]; ok {
+		if refBool, ok := ref.(bool); ok && refBool {
+			// Lookup token
+			if variable, ok := p.meta.GetVariable(p.CurrentToken.Value.String); ok {
+				// TODO: do something
+				left, err = mapVariableToTokenValue(variable), nil
+				if err != nil {
+					fmt.Println("Could not map variable to token value")
+					os.Exit(9)
+				}
+			} else {
+				// TODO: need to handle this
+			}
+		}
+	}
+
+	fmt.Println("left", left)
+
 	return token.Value{
 		True:   left.True.(int) < right.True.(int),
 		String: strconv.FormatBool(left.True.(int) < right.True.(int)),
@@ -141,6 +160,13 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			fmt.Println("Could not map variable to token value")
 			os.Exit(9)
 		}
+		// if value.Name != p.CurrentToken.Value.String {
+		// value.True = p.CurrentToken.Value.String
+		// value.Metadata["true"] = p.CurrentToken.Value.String
+		// value.Metadata["ref"] = true
+		// fmt.Println("identValue", value)
+		// }
+		// os.Exit(9)
 
 	// case token.Group:
 	// 	meta := Meta{
@@ -365,7 +391,9 @@ func (p *Parser) GetTerm() (token.Value, error) {
 		default:
 			// FIXME: holy fuck haxorz
 			if totalTerm.Type == token.IntType {
-				totalTerm.String = strconv.Itoa(totalTerm.True.(int))
+				if totalTerm.Metadata["ref"] != true {
+					totalTerm.String = strconv.Itoa(totalTerm.True.(int))
+				}
 			}
 			fmt.Println("i am here", p.NextToken)
 			fmt.Println("totalTerm", totalTerm)
@@ -422,15 +450,11 @@ func mapVariableToTokenValue(v *Variable) token.Value {
 		md[k] = value
 	}
 
-	fmt.Println("md", md)
-	fmt.Println("metadata", v.Metadata)
-
 	return token.Value{
-		Name:   v.Name,
-		Type:   VariableTypeString(v.Type),
-		Acting: VariableTypeString(v.ActingType),
-		True:   v.Value,
-		// String: ,
+		Name:       v.Name,
+		Type:       VariableTypeString(v.Type),
+		Acting:     VariableTypeString(v.ActingType),
+		True:       v.Value,
 		AccessType: AccessTypeString(v.AccessType),
 		Metadata:   md,
 	}

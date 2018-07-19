@@ -1,12 +1,5 @@
 [
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "IDENT",
 		"Value": {
 			"String": "i"
@@ -55,48 +48,6 @@
 		}
 	},
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
 		"Type": "IDENT",
 		"Value": {
 			"String": "f"
@@ -128,19 +79,6 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "i"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
 		}
 	}
 ]

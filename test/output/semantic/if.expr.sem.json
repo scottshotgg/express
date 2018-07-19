@@ -25,7 +25,11 @@
 					"Name": "i",
 					"Type": "int",
 					"True": 8,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"ref": true,
+						"true": "i"
+					}
 				},
 				"op": {
 					"Type": "lthan",

@@ -49,7 +49,8 @@ func TestNew(t *testing.T) {
 func TestNewFromFile(t *testing.T) {
 	fmt.Println("TestNewFromFile")
 
-	f, err := os.Open("../samples/advanced.expr")
+	f, err := os.Open("../test/programs/loop.expr")
+	// f, err := os.Open(filepath)
 	if err != nil {
 		fmt.Println("openErr", err)
 		os.Exit(9)

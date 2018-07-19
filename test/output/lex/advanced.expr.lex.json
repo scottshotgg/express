@@ -417,61 +417,6 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "int",
-			"String": "int"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "timestamp"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 1527799745
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "TYPE",
-		"Value": {
 			"Type": "string",
 			"String": "string"
 		}
@@ -516,6 +461,61 @@
 			"Type": "string",
 			"True": "waddup",
 			"String": "waddup"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "int",
+			"String": "int"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "timestamp"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 1527799745
 		}
 	},
 	{
@@ -1083,8 +1083,15 @@
 	{
 		"Type": "WS",
 		"Value": {
-			"Type": "newline",
-			"String": "\n"
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -3234,6 +3241,13 @@
 		"Value": {
 			"Type": "op_3",
 			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
