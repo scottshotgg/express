@@ -5,10 +5,7 @@
 			"Name": "four",
 			"Type": "int",
 			"True": 4,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "five",

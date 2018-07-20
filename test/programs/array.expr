@@ -3,6 +3,4 @@
 bool1 := true
 bool2 := false
 
-string[] thing = [ "hey", "its", "me" ]
-
 thing2 := [ bool1, bool2 ]

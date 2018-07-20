@@ -14,43 +14,6 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "thing",
-			"Type": "array",
-			"Acting": "string",
-			"True": [
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "string",
-						"True": "hey",
-						"String": "hey"
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "string",
-						"True": "its",
-						"String": "its"
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "string",
-						"True": "me",
-						"String": "me"
-					}
-				}
-			],
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true,
-				"length": 3,
-				"vector": false
-			}
-		},
-		{
 			"Name": "thing2",
 			"Type": "array",
 			"Acting": "bool",

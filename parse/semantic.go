@@ -774,8 +774,10 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		if p.meta.currentVariable.Type == UNRECOGNIZED {
 			// TODO: maybe we should just load the entire variable at this point
 			if variable, ok := p.meta.GetVariable(p.NextToken.Value.String); ok {
+				variable.Metadata["assign"] = true
 				fmt.Println("FOUND THE VAR", p.NextToken.Value.String)
 				p.meta.currentVariable.Type = variable.Type
+				p.meta.currentVariable.Metadata = variable.Metadata
 			} else {
 				// fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
 				p.Shift()
@@ -789,7 +791,6 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		fmt.Println(p.NextToken)
 		tv, err := p.GetExpression()
 		fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
-		tv.Metadata["assign"] = true
 		if err != nil {
 			fmt.Println("getExpressionErr", err)
 			os.Exit(9)

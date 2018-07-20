@@ -5,46 +5,31 @@
 			"Name": "powerlevel",
 			"Type": "int",
 			"True": 9000,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "over9k",
 			"Type": "bool",
 			"True": false,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "pi",
 			"Type": "float",
 			"True": 3.14159265359,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "arizona",
 			"Type": "string",
 			"True": "iced out boys",
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "zero",
 			"Type": "int",
 			"True": 0,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "one",
@@ -56,28 +41,19 @@
 			"Name": "ayy",
 			"Type": "string",
 			"True": "ayy",
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "waddup",
 			"Type": "string",
 			"True": "waddup",
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "timestamp",
 			"Type": "int",
 			"True": 1527799745,
-			"AccessType": "private",
-			"Metadata": {
-				"assign": true
-			}
+			"AccessType": "private"
 		},
 		{
 			"Name": "anotherOne",
@@ -105,10 +81,7 @@
 					"Name": "price",
 					"Type": "float",
 					"True": 55.3592,
-					"AccessType": "private",
-					"Metadata": {
-						"assign": true
-					}
+					"AccessType": "private"
 				},
 				{
 					"Name": "dank_meme",
@@ -277,7 +250,6 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
-				"assign": true,
 				"length": 5,
 				"vector": false
 			}
@@ -338,7 +310,6 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
-				"assign": true,
 				"length": 5,
 				"vector": false
 			}

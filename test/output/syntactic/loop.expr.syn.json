@@ -26,27 +26,6 @@
 					}
 				},
 				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "h"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "init",
-						"String": ":="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "int",
-						"True": 69
-					}
-				},
-				{
 					"ID": 9,
 					"Type": "KEYWORD",
 					"Value": {

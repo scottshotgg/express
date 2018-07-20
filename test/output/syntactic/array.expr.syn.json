@@ -47,61 +47,6 @@
 					}
 				},
 				{
-					"Type": "TYPE",
-					"Value": {
-						"Type": "array",
-						"Acting": "string",
-						"String": "array"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "thing"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"ID": 1,
-					"Type": "ARRAY",
-					"Value": {
-						"Type": "array",
-						"True": [
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "hey",
-									"String": "hey"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "its",
-									"String": "its"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "me",
-									"String": "me"
-								}
-							}
-						]
-					}
-				},
-				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",

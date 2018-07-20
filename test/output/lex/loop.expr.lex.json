@@ -55,54 +55,6 @@
 		}
 	},
 	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "h"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 69
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"ID": 9,
 		"Type": "KEYWORD",
 		"Value": {

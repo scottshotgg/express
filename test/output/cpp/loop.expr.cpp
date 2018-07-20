@@ -1,6 +1,4 @@
-#include <map>
 #include <string>
-struct Any { std::string type; void* data; };
 int main(){
 int f = 0;
 {

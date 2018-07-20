@@ -33,11 +33,8 @@ const (
 // 	// semanticTokens []token.Token
 )
 
-var (
-	semanticBlock token.Value
-)
-
 func TestSemantic(t *testing.T) {
+	var semanticBlock token.Value
 	fmt.Println("TestSemantic")
 
 	TestSyntactic(t)
@@ -106,6 +103,7 @@ func TestAll(t *testing.T) {
 	for _, file := range files {
 		if !file.IsDir() {
 			filename := file.Name()
+			fmt.Println("file:", filename)
 			pathOfFile, err := filepath.Abs(testPrograms + filename)
 			if err != nil {
 				fmt.Println("AbsErr", err)
@@ -136,14 +134,20 @@ func TestAll(t *testing.T) {
 			if err != nil {
 				fmt.Println("syntacticParseFileErr", err)
 				t.Fail()
-				continue
+				return
 			}
 
-			_, err = semanticParseFile(filename, syntacticTokens)
+			semanticTokens, err := semanticParseFile(filename, syntacticTokens)
 			if err != nil {
 				fmt.Println("lexFileErr", err)
 				t.Fail()
-				continue
+				return
+			}
+
+			err = cppTranspile(filename, semanticTokens)
+			if err != nil {
+				// TODO:
+				return
 			}
 		}
 	}
@@ -224,6 +228,39 @@ func semanticParseFile(filename string, syntacticTokens []token.Token) (token.Va
 	}
 
 	return semanticTokens, nil
+}
+
+func cppTranspile(filename string, semanticBlock token.Value) error {
+	// Make a new parser and semantically parse the file
+	cpp, err := parse.New([]token.Token{}).Transpile(semanticBlock)
+	if err != nil {
+		// TODO:
+		return err
+	}
+
+	fmt.Println("cpp transpile: \n------------------\n" +
+		cpp +
+		"\n------------------\n")
+
+	f, err := os.Create(testCpp + filename + ".cpp")
+	if err != nil {
+		fmt.Println("got an err creating file", err)
+		return err
+	}
+	n, err := f.WriteString(cpp)
+	if err != nil {
+		// TODO:
+		return err
+	}
+	if n != len(cpp) {
+		// TODO:
+	}
+	err = f.Close()
+	if err != nil {
+		// TODO:
+	}
+
+	return nil
 }
 
 func writeTokensJSONToFile(tokensJSON []byte, pathOfFile string) error {

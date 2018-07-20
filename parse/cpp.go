@@ -17,7 +17,8 @@ import (
 */
 
 var (
-	f          *os.File
+	// f          *os.File
+	f          string
 	r          *rand.Rand
 	err        error
 	insideLoop bool
@@ -33,7 +34,7 @@ func translateArray(t token.Value) {
 	}
 
 	// assuming only single type arrays until I have time to do multi type arrays in C
-	arrayType := t.Type
+	arrayType := t.Acting
 	arrayValue := func() (valueString string) {
 		for i, v := range trueValue {
 			sprintString := "%v"
@@ -47,13 +48,17 @@ func translateArray(t token.Value) {
 		}
 		return
 	}()
+	if arrayType == "string" {
+		arrayType = "std::" + arrayType
+	}
 	thing := arrayType + " " + t.Name + "[] = { " + arrayValue + " };\n"
 	fmt.Println(thing)
-	_, err = f.Write([]byte(thing))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte(thing))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += thing
 }
 
 func translateVariableStatement(t token.Value) error {
@@ -77,11 +82,12 @@ func translateVariableStatement(t token.Value) error {
 		thing := strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
 		thing += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
 		fmt.Println(thing)
-		_, err = f.Write([]byte(thing))
-		if err != nil {
-			fmt.Println("error writing to file")
-			os.Exit(9)
-		}
+		// _, err = f.Write([]byte(thing))
+		// if err != nil {
+		// 	fmt.Println("error writing to file")
+		// 	os.Exit(9)
+		// }
+		f += thing
 		return nil
 
 	case "object":
@@ -98,11 +104,12 @@ func translateVariableStatement(t token.Value) error {
 	case "string":
 		thing := "std::" + strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("\"%v\"", t.True)}, " ") + ";\n"
 		fmt.Println(thing)
-		_, err = f.Write([]byte(thing))
-		if err != nil {
-			fmt.Println("error writing to file")
-			os.Exit(9)
-		}
+		// _, err = f.Write([]byte(thing))
+		// if err != nil {
+		// 	fmt.Println("error writing to file")
+		// 	os.Exit(9)
+		// }
+		f += thing
 		return nil
 
 	case "int":
@@ -112,11 +119,12 @@ func translateVariableStatement(t token.Value) error {
 	case "bool":
 		thing := strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
 		fmt.Println(thing)
-		_, err = f.Write([]byte(thing))
-		if err != nil {
-			fmt.Println("error writing to file")
-			os.Exit(9)
-		}
+		// _, err = f.Write([]byte(thing))
+		// if err != nil {
+		// 	fmt.Println("error writing to file")
+		// 	os.Exit(9)
+		// }
+		f += thing
 		return nil
 
 	default:
@@ -130,11 +138,12 @@ func translateIf(t token.Value) {
 	fmt.Println("wtf")
 	fmt.Printf("t %+v\n", t)
 
-	_, err = f.Write([]byte(fmt.Sprintf("if (%s) ", t.String)))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte(fmt.Sprintf("if (%s) ", t.String)))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += fmt.Sprintf("if (%s) ", t.String)
 
 	// metadata, ok := t.Metadata
 	// if !ok {
@@ -155,11 +164,12 @@ func translateIf(t token.Value) {
 		Type: token.Block,
 		True: t.True,
 	})
-	_, err = f.Write([]byte("\n"))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte("\n"))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += "\n"
 }
 
 func translateLoop(t token.Value) error {
@@ -193,11 +203,12 @@ func translateLoop(t token.Value) error {
 		t.Metadata["start"].(token.Value).Name, t.Metadata["start"].(token.Value).True.(int), t.Metadata["start"].(token.Value).Name,
 		t.Metadata["end"].(token.Value).True.(int))
 	fmt.Println("loop", loop)
-	_, err = f.Write([]byte(loop))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte(loop))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += loop
 
 	fmt.Println("wtf is this")
 	TranslateBlock(token.Value{
@@ -207,21 +218,23 @@ func translateLoop(t token.Value) error {
 
 	loopEnding := fmt.Sprintf("%s+=%d;}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
 	fmt.Println(loopEnding)
-	_, err = f.Write([]byte(loopEnding))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte(loopEnding))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += loopEnding
 
 	return nil
 }
 
 func TranslateBlock(tv token.Value) {
-	_, err = f.Write([]byte("{\n"))
-	if err != nil {
-		fmt.Println("error writing to file")
-		os.Exit(9)
-	}
+	// _, err = f.Write([]byte("{\n"))
+	// if err != nil {
+	// 	fmt.Println("error writing to file")
+	// 	os.Exit(9)
+	// }
+	f += "{\n"
 
 	insideBlock := tv.True.([]token.Value)
 	fmt.Println("insideBlock", insideBlock[0])
@@ -237,10 +250,11 @@ func TranslateBlock(tv token.Value) {
 		}
 	}
 
-	f.Write([]byte("}"))
+	// f.Write([]byte("}"))
+	f += "}"
 }
 
-func (p *Parser) Transpile(block token.Value) ([]string, error) {
+func (p *Parser) Transpile(block token.Value) (string, error) {
 	fmt.Println("yo waddup")
 
 	fmt.Println("block", block)
@@ -252,20 +266,24 @@ func (p *Parser) Transpile(block token.Value) ([]string, error) {
 		fmt.Println()
 		fmt.Printf("value %+v\n", value)
 	}
-	f, err = os.Create("main.expr.shit")
-	if err != nil {
-		fmt.Println("got an err creating file")
-		os.Exit(9)
-	}
+	// f, err = os.Create("../test/output/cpp/main.expr.cpp")
+	// if err != nil {
+	// 	fmt.Println("got an err creating file", err)
+	// 	os.Exit(9)
+	// }
 
 	// TODO: check all f.Write errors I guess
-	f.Write([]byte("#include <map>\n#include <string>\n"))
-	f.Write([]byte("struct Any { std::string type; void* data; };\n"))
-	f.Write([]byte("int main()"))
+	// f+="#include <map>\n#include <string>\n"
+	// f+="struct Any { std::string type; void* data; };\n"
+	f += "#include <string>\n"
+	f += "int main()"
 
 	TranslateBlock(block)
 
-	f.Close()
+	// FIXME: A little hack for now
+	defer func() {
+		f = ""
+	}()
 
-	return []string{}, nil
+	return f, nil
 }
