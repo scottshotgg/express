@@ -8,6 +8,56 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
+						"String": "f"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 0
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "h"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 69
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "for"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
 						"String": "i"
 					}
 				},
@@ -22,21 +72,14 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 10
+						"True": 1
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "SEPARATOR",
 					"Value": {
-						"Type": "private",
-						"String": "f"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "init",
-						"String": ":="
+						"Type": "comma",
+						"String": ","
 					}
 				},
 				{
@@ -44,6 +87,91 @@
 					"Value": {
 						"Type": "private",
 						"String": "i"
+					}
+				},
+				{
+					"Type": "L_THAN",
+					"Value": {
+						"Type": "lthan",
+						"String": "\u003c"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 10
+					}
+				},
+				{
+					"Type": "SEPARATOR",
+					"Value": {
+						"Type": "comma",
+						"String": ","
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"Type": "INCREMENT",
+					"Value": {
+						"Type": "increment",
+						"String": "++"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "f"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "i"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "h"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 1
+								}
+							}
+						]
 					}
 				}
 			]

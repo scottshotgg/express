@@ -80,5 +80,18 @@
 			"Type": "space",
 			"String": " "
 		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
 	}
 ]

@@ -45,6 +45,7 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
+				"assign": true,
 				"length": 3,
 				"vector": false
 			}
@@ -60,7 +61,10 @@
 						"Name": "bool1",
 						"Type": "bool",
 						"True": true,
-						"AccessType": "private"
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "bool1"
+						}
 					}
 				},
 				{
@@ -69,7 +73,10 @@
 						"Name": "bool2",
 						"Type": "bool",
 						"True": false,
-						"AccessType": "private"
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "bool2"
+						}
 					}
 				}
 			],

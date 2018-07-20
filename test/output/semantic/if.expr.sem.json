@@ -5,7 +5,10 @@
 			"Name": "i",
 			"Type": "int",
 			"True": 8,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Type": "if",
@@ -14,7 +17,10 @@
 					"Name": "i",
 					"Type": "int",
 					"True": 7,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				}
 			],
 			"String": "i\u003c10",
@@ -27,8 +33,7 @@
 					"True": 8,
 					"AccessType": "private",
 					"Metadata": {
-						"ref": true,
-						"true": "i"
+						"refs": "i"
 					}
 				},
 				"op": {

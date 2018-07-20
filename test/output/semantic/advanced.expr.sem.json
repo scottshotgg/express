@@ -5,31 +5,46 @@
 			"Name": "powerlevel",
 			"Type": "int",
 			"True": 9000,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "over9k",
 			"Type": "bool",
 			"True": false,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "pi",
 			"Type": "float",
 			"True": 3.14159265359,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "arizona",
 			"Type": "string",
 			"True": "iced out boys",
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "zero",
 			"Type": "int",
 			"True": 0,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "one",
@@ -41,19 +56,28 @@
 			"Name": "ayy",
 			"Type": "string",
 			"True": "ayy",
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "waddup",
 			"Type": "string",
 			"True": "waddup",
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "timestamp",
 			"Type": "int",
 			"True": 1527799745,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		},
 		{
 			"Name": "anotherOne",
@@ -81,7 +105,10 @@
 					"Name": "price",
 					"Type": "float",
 					"True": 55.3592,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				},
 				{
 					"Name": "dank_meme",
@@ -113,7 +140,10 @@
 								"Type": "int",
 								"True": 1,
 								"String": "1",
-								"AccessType": "private"
+								"AccessType": "private",
+								"Metadata": {
+									"refs": "one"
+								}
 							}
 						},
 						{
@@ -123,7 +153,10 @@
 								"Type": "int",
 								"True": 0,
 								"String": "0",
-								"AccessType": "private"
+								"AccessType": "private",
+								"Metadata": {
+									"refs": "zero"
+								}
 							}
 						},
 						{
@@ -133,7 +166,10 @@
 								"Type": "int",
 								"True": 1,
 								"String": "1",
-								"AccessType": "private"
+								"AccessType": "private",
+								"Metadata": {
+									"refs": "one"
+								}
 							}
 						},
 						{
@@ -143,7 +179,10 @@
 								"Type": "int",
 								"True": 0,
 								"String": "0",
-								"AccessType": "private"
+								"AccessType": "private",
+								"Metadata": {
+									"refs": "zero"
+								}
 							}
 						}
 					],
@@ -238,6 +277,7 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
+				"assign": true,
 				"length": 5,
 				"vector": false
 			}
@@ -253,7 +293,10 @@
 						"Name": "ayy",
 						"Type": "string",
 						"True": "ayy",
-						"AccessType": "private"
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "ayy"
+						}
 					}
 				},
 				{
@@ -262,7 +305,10 @@
 						"Name": "waddup",
 						"Type": "string",
 						"True": "waddup",
-						"AccessType": "private"
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "waddup"
+						}
 					}
 				},
 				{
@@ -292,6 +338,7 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
+				"assign": true,
 				"length": 5,
 				"vector": false
 			}
@@ -303,13 +350,19 @@
 					"Name": "powerlevel",
 					"Type": "int",
 					"True": 9001,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				},
 				{
 					"Name": "over9k",
 					"Type": "bool",
 					"True": true,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				}
 			],
 			"String": "powerlevel\u003c9001",
@@ -320,7 +373,10 @@
 					"Name": "powerlevel",
 					"Type": "int",
 					"True": 9000,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "powerlevel"
+					}
 				},
 				"op": {
 					"Type": "lthan",
@@ -347,7 +403,11 @@
 					"Name": "percent",
 					"Type": "int",
 					"True": 0,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "progress"
+					}
 				}
 			],
 			"String": "progress\u003c100",
@@ -362,7 +422,10 @@
 							"Name": "progress",
 							"Type": "int",
 							"True": 0,
-							"AccessType": "private"
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "progress"
+							}
 						},
 						"op": {
 							"Type": "lthan",
@@ -381,7 +444,10 @@
 					"Name": "progress",
 					"Type": "int",
 					"True": 0,
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "progress"
+					}
 				},
 				"op": {
 					"Type": "lthan",

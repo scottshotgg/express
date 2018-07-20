@@ -1,0 +1,20 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "i",
+			"Type": "int",
+			"True": 10,
+			"AccessType": "private"
+		},
+		{
+			"Name": "f",
+			"Type": "int",
+			"True": 10,
+			"AccessType": "private",
+			"Metadata": {
+				"refs": "i"
+			}
+		}
+	]
+}

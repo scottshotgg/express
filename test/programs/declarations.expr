@@ -1,1 +1,2 @@
 int four = 4
+five := four

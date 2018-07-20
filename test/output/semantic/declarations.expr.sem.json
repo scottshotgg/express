@@ -5,7 +5,19 @@
 			"Name": "four",
 			"Type": "int",
 			"True": 4,
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "five",
+			"Type": "int",
+			"True": 4,
+			"AccessType": "private",
+			"Metadata": {
+				"refs": "four"
+			}
 		}
 	]
 }
