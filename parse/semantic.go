@@ -14,25 +14,6 @@ import (
 func (p *Parser) LessThanOperands(left, right token.Value) (token.Value, error) {
 	// FIXME: this only works for ints right now
 	// Need to put a type on this
-
-	if ref, ok := left.Metadata["ref"]; ok {
-		if refBool, ok := ref.(bool); ok && refBool {
-			// Lookup token
-			if variable, ok := p.meta.GetVariable(p.CurrentToken.Value.String); ok {
-				// TODO: do something
-				left, err = mapVariableToTokenValue(variable), nil
-				if err != nil {
-					fmt.Println("Could not map variable to token value")
-					os.Exit(9)
-				}
-			} else {
-				// TODO: need to handle this
-			}
-		}
-	}
-
-	fmt.Println("left", left)
-
 	return token.Value{
 		True:   left.True.(int) < right.True.(int),
 		String: strconv.FormatBool(left.True.(int) < right.True.(int)),
@@ -160,13 +141,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			fmt.Println("Could not map variable to token value")
 			os.Exit(9)
 		}
-		// if value.Name != p.CurrentToken.Value.String {
-		// value.True = p.CurrentToken.Value.String
-		// value.Metadata["true"] = p.CurrentToken.Value.String
-		// value.Metadata["ref"] = true
-		// fmt.Println("identValue", value)
-		// }
-		// os.Exit(9)
+		value.Metadata["refs"] = p.CurrentToken.Value.String
 
 	// case token.Group:
 	// 	meta := Meta{
@@ -328,6 +303,7 @@ func (p *Parser) GetTerm() (token.Value, error) {
 	if err != nil {
 		return token.Value{}, err
 	}
+	fmt.Println("totalTERM", totalTerm)
 
 	for {
 		switch p.NextToken.Type {
@@ -391,9 +367,7 @@ func (p *Parser) GetTerm() (token.Value, error) {
 		default:
 			// FIXME: holy fuck haxorz
 			if totalTerm.Type == token.IntType {
-				if totalTerm.Metadata["ref"] != true {
-					totalTerm.String = strconv.Itoa(totalTerm.True.(int))
-				}
+				totalTerm.String = strconv.Itoa(totalTerm.True.(int))
 			}
 			fmt.Println("i am here", p.NextToken)
 			fmt.Println("totalTerm", totalTerm)
@@ -450,11 +424,15 @@ func mapVariableToTokenValue(v *Variable) token.Value {
 		md[k] = value
 	}
 
+	fmt.Println("md", md)
+	fmt.Println("metadata", v.Metadata)
+
 	return token.Value{
-		Name:       v.Name,
-		Type:       VariableTypeString(v.Type),
-		Acting:     VariableTypeString(v.ActingType),
-		True:       v.Value,
+		Name:   v.Name,
+		Type:   VariableTypeString(v.Type),
+		Acting: VariableTypeString(v.ActingType),
+		True:   v.Value,
+		// String: ,
 		AccessType: AccessTypeString(v.AccessType),
 		Metadata:   md,
 	}
@@ -517,7 +495,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			if err != nil {
 				return token.Value{}, err
 			}
-			fmt.Printf("expr %+v\n", expr)
+			fmt.Printf("expr in assign %+v\n", expr)
 
 			if p.meta.currentVariable.Type == UNRECOGNIZED {
 				if variable, ok := p.meta.GetVariable(p.NextToken.Value.String); ok {
@@ -540,6 +518,10 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				return token.Value{}, errors.New("No implicit type casting as of now")
 			}
 			p.meta.currentVariable.Value = expr.True
+			if ref, ok := expr.Metadata["refs"]; ok {
+				fmt.Println("there was a ref")
+				p.meta.currentVariable.Metadata["refs"] = ref
+			}
 			fmt.Println("p.meta.currentVariable2", p.meta.currentVariable)
 
 			// TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
@@ -574,7 +556,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			if err != nil {
 				return token.Value{}, err
 			}
-			fmt.Printf("expr %+v\n", expr)
+			fmt.Printf("expr in set %+v\n", expr)
 
 			p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 			p.meta.currentVariable.Value = expr.True
@@ -792,12 +774,13 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		if p.meta.currentVariable.Type == UNRECOGNIZED {
 			// TODO: maybe we should just load the entire variable at this point
 			if variable, ok := p.meta.GetVariable(p.NextToken.Value.String); ok {
+				fmt.Println("FOUND THE VAR", p.NextToken.Value.String)
 				p.meta.currentVariable.Type = variable.Type
 			} else {
 				// fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
 				p.Shift()
 				expr, err := p.GetExpression()
-				fmt.Println("THIS IS THE EXPRESSION", expr, err)
+				fmt.Printf("THIS IS THE EXPRESSION %+v %s\n", expr, err)
 				return expr, err
 			}
 		}
@@ -806,6 +789,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		fmt.Println(p.NextToken)
 		tv, err := p.GetExpression()
 		fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
+		tv.Metadata["assign"] = true
 		if err != nil {
 			fmt.Println("getExpressionErr", err)
 			os.Exit(9)

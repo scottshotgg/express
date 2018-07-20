@@ -18,6 +18,6 @@ func TestTranspile(t *testing.T) {
 		return
 	}
 
-	fmt.Println(statements)
+	fmt.Println("statements", statements)
 	fmt.Println()
 }

@@ -17,9 +17,10 @@ import (
 */
 
 var (
-	f   *os.File
-	r   *rand.Rand
-	err error
+	f          *os.File
+	r          *rand.Rand
+	err        error
+	insideLoop bool
 )
 
 func translateArray(t token.Value) {
@@ -57,6 +58,16 @@ func translateArray(t token.Value) {
 
 func translateVariableStatement(t token.Value) error {
 	// if the token type is var make a var statement in C
+	if insideLoop {
+		if ref, ok := t.Metadata["refs"]; ok {
+			t.True = ref
+		}
+	}
+
+	tType := t.Type
+	if _, ok := t.Metadata["assign"]; ok {
+		tType = ""
+	}
 
 	switch t.Type {
 	case "var":
@@ -85,7 +96,7 @@ func translateVariableStatement(t token.Value) error {
 	// could just use that json library for now but wtf
 	// fmt.Println("std::map<string, " + +"> " + t.Name)
 	case "string":
-		thing := "std::" + strings.Join([]string{t.Type, t.Name, "=", fmt.Sprintf("\"%v\"", t.True)}, " ") + ";\n"
+		thing := "std::" + strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("\"%v\"", t.True)}, " ") + ";\n"
 		fmt.Println(thing)
 		_, err = f.Write([]byte(thing))
 		if err != nil {
@@ -99,7 +110,7 @@ func translateVariableStatement(t token.Value) error {
 	case "float":
 		fallthrough
 	case "bool":
-		thing := strings.Join([]string{t.Type, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		thing := strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
 		fmt.Println(thing)
 		_, err = f.Write([]byte(thing))
 		if err != nil {
@@ -152,6 +163,13 @@ func translateIf(t token.Value) {
 }
 
 func translateLoop(t token.Value) error {
+	// Turn on the loop var
+	insideLoop = true
+	// Turn off the loop var at the end
+	defer func() {
+		insideLoop = false
+	}()
+
 	fmt.Printf("t: %+v", t)
 	if t.Type != "for" {
 		return errors.New("blah")
