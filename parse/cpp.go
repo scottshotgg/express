@@ -276,6 +276,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// f+="#include <map>\n#include <string>\n"
 	// f+="struct Any { std::string type; void* data; };\n"
 	f += "#include <string>\n"
+	f += "#include \"json.hpp\"\n"
 	f += "int main()"
 
 	TranslateBlock(block)

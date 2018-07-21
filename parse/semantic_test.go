@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"testing"
 
@@ -99,6 +100,34 @@ func TestAll(t *testing.T) {
 		fmt.Println("ReadDirErr", err)
 		t.Fail()
 	}
+	if len(files) == 0 {
+		// TODO:
+		return
+	}
+
+	// binaries, err = ioutil.ReadDir(testBin)
+	// if err != nil {
+	// 	fmt.Println("ReadDirErr", err)
+	// 	t.Fail()
+	// }
+	// for _, binary := range binaries {
+	// 	if !file.IsDir() {
+	// 		os.Remove(binary)
+	// 	}
+	// }
+	err = os.RemoveAll(testBin)
+	if err != nil {
+		// TODO:
+		fmt.Println("err removing", err)
+		return
+	}
+	// FIXME: w/e just use these permissions for now
+	err = os.Mkdir(testBin, 0777)
+	if err != nil {
+		// TODO:
+		fmt.Println("err creating", err)
+		return
+	}
 
 	for _, file := range files {
 		if !file.IsDir() {
@@ -148,6 +177,12 @@ func TestAll(t *testing.T) {
 			if err != nil {
 				// TODO:
 				return
+			}
+
+			output, err := exec.Command("clang++", "-std=gnu++14", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+			if err != nil {
+				// TODO:
+				fmt.Println("err compile", err, string(output))
 			}
 		}
 	}
