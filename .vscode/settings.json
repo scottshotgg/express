@@ -23,6 +23,11 @@
     "system_error": "cpp",
     "tuple": "cpp",
     "type_traits": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "ios": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "iosfwd": "cpp"
   }
 }

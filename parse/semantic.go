@@ -611,77 +611,79 @@ func (p *Parser) GetExpression() (token.Value, error) {
 	return token.Value{}, errors.Errorf("default %+v", p.NextToken)
 }
 
+func (p *Parser) ParseStandardFor() (token.Value, error) {
+	// Make a new meta
+	// Get a statement
+	// Get an expression
+	// Get another expression
+	// Sub operands to find step
+	p.Shift()
+	fmt.Println("GETTING LOOP")
+	p.meta.NewInheritedScope()
+	stmt, err := p.GetStatement()
+	if err != nil {
+		fmt.Println("Error: Could not get statement")
+		os.Exit(9)
+		return token.Value{}, err
+	}
+
+	expr, err := p.GetExpression()
+	if err != nil {
+		fmt.Println("Error: Could not get expression")
+		os.Exit(9)
+		return token.Value{}, err
+	}
+
+	expr2, err := p.GetExpression()
+	if err != nil {
+		fmt.Println("Error: Could not get expression")
+		os.Exit(9)
+		return token.Value{}, err
+	}
+	fmt.Println("stmt", stmt)
+	fmt.Println("expr1", expr)
+	fmt.Println("expr2", expr2)
+	// os.Exit(9)
+
+	step, err := p.SubOperands(expr2, stmt)
+	if err != nil {
+		fmt.Println("Could not sub operands")
+		return token.Value{}, err
+	}
+
+	p.Shift()
+	body, err := p.CheckBlock()
+	if err != nil {
+		fmt.Println("Could not check block")
+		return token.Value{}, err
+	}
+
+	// TODO: don't know if we need to do this
+	md := map[string]interface{}{
+		"start": stmt,
+		"end":   expr,
+		"step":  step,
+	}
+	for k, v := range expr.Metadata {
+		md[k] = v
+	}
+	expr.Metadata = map[string]interface{}{}
+
+	return token.Value{
+		Type:     token.For,
+		True:     body.True.([]token.Value),
+		String:   expr.String,
+		Metadata: md,
+	}, nil
+}
+
 func (p *Parser) GetKeyword() (token.Value, error) {
 	fmt.Println("LAST666", p.LastToken)
 	fmt.Println("CURRENT666", p.CurrentToken)
 	fmt.Println("NEXT666", p.NextToken)
 	switch p.NextToken.Value.String {
 	case "for":
-		// Make a new meta
-		// Get a statement
-		// Get an expression
-		// Get another expression
-		// Sub operands to find step
-		p.Shift()
-		fmt.Println("GETTING LOOP")
-		p.meta.NewInheritedScope()
-		stmt, err := p.GetStatement()
-		if err != nil {
-			fmt.Println("Error: Could not get statement")
-			os.Exit(9)
-			return token.Value{}, err
-		}
-
-		expr, err := p.GetExpression()
-		if err != nil {
-			fmt.Println("Error: Could not get expression")
-			os.Exit(9)
-			return token.Value{}, err
-		}
-
-		expr2, err := p.GetExpression()
-		if err != nil {
-			fmt.Println("Error: Could not get expression")
-			os.Exit(9)
-			return token.Value{}, err
-		}
-		fmt.Println("stmt", stmt)
-		fmt.Println("expr1", expr)
-		fmt.Println("expr2", expr2)
-		// os.Exit(9)
-
-		step, err := p.SubOperands(expr2, stmt)
-		if err != nil {
-			fmt.Println("Could not sub operands")
-			return token.Value{}, err
-		}
-
-		p.Shift()
-		body, err := p.CheckBlock()
-		if err != nil {
-			fmt.Println("Could not check block")
-			return token.Value{}, err
-		}
-
-		// TODO: don't know if we need to do this
-		md := map[string]interface{}{
-			"start": stmt,
-			"end":   expr,
-			"step":  step,
-		}
-		for k, v := range expr.Metadata {
-			md[k] = v
-		}
-		expr.Metadata = map[string]interface{}{}
-
-		return token.Value{
-			Type:     token.For,
-			True:     body.True.([]token.Value),
-			String:   expr.String,
-			Metadata: md,
-		}, nil
-
-		os.Exit(9)
+		return p.ParseStandardFor()
 
 	case "if":
 		p.Shift()

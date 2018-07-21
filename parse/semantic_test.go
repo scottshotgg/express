@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sync"
 	"testing"
 
 	"github.com/pkg/errors"
@@ -34,8 +35,13 @@ const (
 // 	// semanticTokens []token.Token
 )
 
+var (
+	semanticBlock token.Value
+
+	semanticBlockMap = map[string]token.Value{}
+)
+
 func TestSemantic(t *testing.T) {
-	var semanticBlock token.Value
 	fmt.Println("TestSemantic")
 
 	TestSyntactic(t)
@@ -129,8 +135,12 @@ func TestAll(t *testing.T) {
 		return
 	}
 
+	wg := &sync.WaitGroup{}
 	for _, file := range files {
 		if !file.IsDir() {
+			// wg.Add(1)
+			// go func(file os.FileInfo) {
+			// 	defer wg.Done()
 			filename := file.Name()
 			fmt.Println("file:", filename)
 			pathOfFile, err := filepath.Abs(testPrograms + filename)
@@ -147,7 +157,7 @@ func TestAll(t *testing.T) {
 			if err != nil {
 				fmt.Println("lexFileErr", err)
 				t.Fail()
-				continue
+				return
 			}
 
 			pathOfFile, err = filepath.Abs(testPrograms + filename)
@@ -173,6 +183,8 @@ func TestAll(t *testing.T) {
 				return
 			}
 
+			fmt.Println("semanticTokens", semanticTokens)
+
 			err = cppTranspile(filename, semanticTokens)
 			if err != nil {
 				// TODO:
@@ -184,8 +196,12 @@ func TestAll(t *testing.T) {
 				// TODO:
 				fmt.Println("err compile", err, string(output))
 			}
+
+			// }(file)
 		}
 	}
+
+	wg.Wait()
 }
 
 func lexFile(pathOfFile, filename string) ([]token.Token, error) {
@@ -249,6 +265,8 @@ func semanticParseFile(filename string, syntacticTokens []token.Token) (token.Va
 		// TODO:
 		return token.Value{}, err
 	}
+
+	semanticBlockMap[filename] = semanticTokens
 
 	semanticTokensJSON, err := json.MarshalIndent(semanticTokens, "", "\t")
 	if err != nil {

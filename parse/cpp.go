@@ -3,7 +3,6 @@ package parse
 import (
 	"fmt"
 	"math/rand"
-	"os"
 	"strconv"
 	"strings"
 
@@ -17,51 +16,51 @@ import (
 */
 
 var (
-	// f          *os.File
-	f          string
+	// f          string
 	r          *rand.Rand
 	err        error
 	insideLoop bool
 )
 
-func translateArray(t token.Value) {
+func translateArray(t token.Value) (string, error) {
+	arrayString := ""
+
 	fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.([]token.Token)
 	if !ok {
 		fmt.Println("shit look at t")
 		fmt.Println("trueValue", trueValue)
-		os.Exit(9)
+		return "", errors.New("not ok")
 	}
 
 	// assuming only single type arrays until I have time to do multi type arrays in C
 	arrayType := t.Acting
-	arrayValue := func() (valueString string) {
-		for i, v := range trueValue {
-			sprintString := "%v"
-			if v.Value.Type == "string" {
-				sprintString = "\"" + sprintString + "\""
-			}
-			valueString += fmt.Sprintf(sprintString, v.Value.True)
-			if i != len(trueValue)-1 {
-				valueString += ", "
-			}
-		}
-		return
-	}()
+
 	if arrayType == "string" {
 		arrayType = "std::" + arrayType
 	}
-	thing := arrayType + " " + t.Name + "[] = { " + arrayValue + " };\n"
-	fmt.Println(thing)
-	// _, err = f.Write([]byte(thing))
-	// if err != nil {
-	// 	fmt.Println("error writing to file")
-	// 	os.Exit(9)
-	// }
-	f += thing
+
+	arrayString += arrayType + " " + t.Name + "[] = { "
+
+	for i, v := range trueValue {
+		sprintString := "%v"
+		if v.Value.Type == "string" {
+			sprintString = "\"" + sprintString + "\""
+		}
+		arrayString += fmt.Sprintf(sprintString, v.Value.True)
+		if i != len(trueValue)-1 {
+			arrayString += ", "
+		}
+	}
+
+	arrayString += " };\n"
+
+	return arrayString, nil
 }
 
-func translateVariableStatement(t token.Value) error {
+func translateVariableStatement(t token.Value) (string, error) {
+	variableString := ""
+
 	// if the token type is var make a var statement in C
 	if insideLoop {
 		if ref, ok := t.Metadata["refs"]; ok {
@@ -79,62 +78,68 @@ func translateVariableStatement(t token.Value) error {
 		// int abc = 5;
 		// Any zyx = Any{ "int", &abc };
 		varName := t.Name + strconv.Itoa(int(r.Uint32()))
-		thing := strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
-		thing += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
-		fmt.Println(thing)
+		variableString += strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		variableString += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
+		// fmt.Println(thing)
 		// _, err = f.Write([]byte(thing))
 		// if err != nil {
 		// 	fmt.Println("error writing to file")
 		// 	os.Exit(9)
 		// }
-		f += thing
-		return nil
+		return variableString, nil
 
 	case "object":
 		// translateObject(t)
-		return nil
+		return variableString, nil
 
 	case "array":
-		translateArray(t)
-		return nil
+		arrayString, err := translateArray(t)
+		if err != nil {
+			// TODO:
+			return "", err
+		}
+
+		return variableString + arrayString, nil
 
 	// In the case of the object we need to essentially instantiate a struct that will be used even if only temporarily
 	// could just use that json library for now but wtf
 	// fmt.Println("std::map<string, " + +"> " + t.Name)
 	case "string":
-		thing := "std::" + strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("\"%v\"", t.True)}, " ") + ";\n"
-		fmt.Println(thing)
+		variableString += "std::" + strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("\"%v\"", t.True)}, " ") + ";\n"
+		// fmt.Println(thing)
 		// _, err = f.Write([]byte(thing))
 		// if err != nil {
 		// 	fmt.Println("error writing to file")
 		// 	os.Exit(9)
 		// }
-		f += thing
-		return nil
+		// f += thing
+		return variableString, nil
 
 	case "int":
 		fallthrough
 	case "float":
 		fallthrough
 	case "bool":
-		thing := strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
-		fmt.Println(thing)
+		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		// fmt.Println(thing)
 		// _, err = f.Write([]byte(thing))
 		// if err != nil {
 		// 	fmt.Println("error writing to file")
 		// 	os.Exit(9)
 		// }
-		f += thing
-		return nil
+		// f += thing
+		return variableString, nil
 
 	default:
 		fmt.Println("am i an error ???")
-		return errors.New("i am not nil")
+		return "", errors.New("i am not nil")
 	}
-	return errors.New("why am i here")
+	return "", errors.New("why am i here")
 }
 
-func translateIf(t token.Value) {
+func translateIf(t token.Value) (string, error) {
+	controlString := ""
+
 	fmt.Println("wtf")
 	fmt.Printf("t %+v\n", t)
 
@@ -143,7 +148,7 @@ func translateIf(t token.Value) {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
-	f += fmt.Sprintf("if (%s) ", t.String)
+	controlString += fmt.Sprintf("if (%s) ", t.String)
 
 	// metadata, ok := t.Metadata
 	// if !ok {
@@ -153,26 +158,24 @@ func translateIf(t token.Value) {
 	fmt.Println("metadata", t.Metadata)
 
 	fmt.Println("t.True", t.True)
-	// os.Exit(9)
 
-	// // // body, ok := opMap["body"].True.([]token.Value)
-	// // // if !ok {
-	// // // 	fmt.Println("omfg error")
-	// // // 	os.Exit(9)
-	// // // }
-	TranslateBlock(token.Value{
+	blockString, err := translateBlock(token.Value{
 		Type: token.Block,
 		True: t.True,
 	})
-	// _, err = f.Write([]byte("\n"))
-	// if err != nil {
-	// 	fmt.Println("error writing to file")
-	// 	os.Exit(9)
-	// }
-	f += "\n"
+	if err != nil {
+		// TODO:
+		return "", err
+	}
+
+	controlString += blockString + "\n"
+
+	return controlString, nil
 }
 
-func translateLoop(t token.Value) error {
+func translateLoop(t token.Value) (string, error) {
+	loopString := ""
+
 	// Turn on the loop var
 	insideLoop = true
 	// Turn off the loop var at the end
@@ -182,7 +185,7 @@ func translateLoop(t token.Value) error {
 
 	fmt.Printf("t: %+v", t)
 	if t.Type != "for" {
-		return errors.New("blah")
+		return "", errors.New("blah")
 	}
 
 	fmt.Println()
@@ -199,59 +202,73 @@ func translateLoop(t token.Value) error {
 		fmt.Println("k, v", k, v)
 	}
 
-	loop := fmt.Sprintf("{\nint %s=%d;\nwhile (%s<%d) {\n",
+	loopString += fmt.Sprintf("{\nint %s=%d;\nwhile (%s<%d) {\n",
 		t.Metadata["start"].(token.Value).Name, t.Metadata["start"].(token.Value).True.(int), t.Metadata["start"].(token.Value).Name,
 		t.Metadata["end"].(token.Value).True.(int))
-	fmt.Println("loop", loop)
+	// fmt.Println("loop", loop)
 	// _, err = f.Write([]byte(loop))
 	// if err != nil {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
-	f += loop
+	// f += loop
 
 	fmt.Println("wtf is this")
-	TranslateBlock(token.Value{
+	blockString, err := translateBlock(token.Value{
 		Type: token.Block,
 		True: t.True,
 	})
+	if err != nil {
+		// TODO:
+		return "", err
+	}
 
-	loopEnding := fmt.Sprintf("%s+=%d;}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
-	fmt.Println(loopEnding)
+	loopString += blockString + fmt.Sprintf("%s+=%d;}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
+	// fmt.Println(loopEnding)
 	// _, err = f.Write([]byte(loopEnding))
 	// if err != nil {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
-	f += loopEnding
+	// f += loopEnding
 
-	return nil
+	return loopString, nil
 }
 
-func TranslateBlock(tv token.Value) {
+func translateBlock(tv token.Value) (string, error) {
 	// _, err = f.Write([]byte("{\n"))
 	// if err != nil {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
-	f += "{\n"
+	blockString := "{\n"
 
-	insideBlock := tv.True.([]token.Value)
-	fmt.Println("insideBlock", insideBlock[0])
+	insideBlock, ok := tv.True.([]token.Value)
+	if !ok {
+		return "", errors.New("Could not assert block")
+	}
+	fmt.Println("insideBlock", len(insideBlock))
 
 	for _, t := range insideBlock {
 		fmt.Println("insideBlock t", t)
 
-		if err = translateVariableStatement(t); err != nil {
+		variableString, err := translateVariableStatement(t)
+		if err != nil {
 			fmt.Println("i am here translateVariableStatement", err)
-			if err = translateLoop(t); err != nil {
-				translateIf(t)
+			loopString, err := translateLoop(t)
+			if err != nil {
+				ifString, err := translateIf(t)
+				if err != nil {
+					// TODO:
+				}
+				return blockString + ifString + "}", nil
 			}
+			return blockString + loopString + "}", nil
 		}
+		return blockString + variableString + "}", nil
 	}
 
-	// f.Write([]byte("}"))
-	f += "}"
+	return "", errors.New("something")
 }
 
 func (p *Parser) Transpile(block token.Value) (string, error) {
@@ -262,10 +279,10 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// fmt.Println(p.source)
 
 	// fmt.Println("tokens", len(p.source))
-	for _, value := range block.True.([]token.Value) {
-		fmt.Println()
-		fmt.Printf("value %+v\n", value)
-	}
+	// for _, value := range  {
+	// 	fmt.Println()
+	// 	fmt.Printf("value %+v\n", value)
+	// }
 	// f, err = os.Create("../test/output/cpp/main.expr.cpp")
 	// if err != nil {
 	// 	fmt.Println("got an err creating file", err)
@@ -275,16 +292,20 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// TODO: check all f.Write errors I guess
 	// f+="#include <map>\n#include <string>\n"
 	// f+="struct Any { std::string type; void* data; };\n"
+	var f string
+
 	f += "#include <string>\n"
 	f += "#include \"json.hpp\"\n"
 	f += "int main()"
 
-	TranslateBlock(block)
+	blockString, err := translateBlock(block)
+	if err != nil {
+		// TODO:
+		fmt.Println("error getting block", err)
+		return "", err
+	}
 
-	// FIXME: A little hack for now
-	defer func() {
-		f = ""
-	}()
+	f += blockString
 
 	return f, nil
 }
