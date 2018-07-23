@@ -379,6 +379,8 @@ func (p *Parser) GetTerm() (token.Value, error) {
 
 func VariableTypeString(vt VariableType) (st string) {
 	switch vt {
+	case VAR:
+		st = "var"
 	case INT:
 		st = "int"
 	case FLOAT:
@@ -387,8 +389,6 @@ func VariableTypeString(vt VariableType) (st string) {
 		st = "bool"
 	case STRING:
 		st = "string"
-	case VAR:
-		st = "var"
 	case SET:
 		st = "set"
 	case OBJECT:
@@ -476,11 +476,13 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 	// Assignment Expression
 	case token.Assign:
+		fmt.Printf("this is an assign %+v\n", p.meta.currentVariable)
 		// FIXME: I think this should go in the token.Ident case of GetStatement
 		// p.DeclaredName = p.CurrentToken.Value.String
 		// p.DeclaredAccessType = p.CurrentToken.Value.Type
 		p.meta.currentVariable.Name = p.CurrentToken.Value.String
 		p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.Type)
+
 		switch p.NextToken.Value.Type {
 		case "init":
 			if p.meta.currentVariable.Type != UNRECOGNIZED {
@@ -511,8 +513,15 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				if variable, ok := p.meta.GetVariable(p.meta.currentVariable.Name); ok {
 					fmt.Println("variable", variable, "ok", ok)
 				}
+				//  else {
+				// 	fmt.Println("wtf am i doing here", p.meta.currentVariable)
+				// 	os.Exit(9)
+				// }
 
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
+			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
+				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type != token.ArrayType {
 					fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
@@ -520,6 +529,10 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					return token.Value{}, errors.Errorf("No implicit type casting as of now: p.meta.currentVariable.Type - %s, expr.Type - %s", VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 				}
 			}
+			// else {
+			// 	fmt.Printf("wtf typerooni: %+v\n", p.meta.currentVariable)
+			// }
+
 			p.meta.currentVariable.Value = expr.True
 			if ref, ok := expr.Metadata["refs"]; ok {
 				fmt.Println("there was a ref")
@@ -974,6 +987,8 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 func variableTypeFromString(vtString string) (vt VariableType) {
 	switch vtString {
+	case "var":
+		vt = VAR
 	case "int":
 		vt = INT
 	case "bool":
@@ -1011,8 +1026,10 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	// p.Shift()
 	switch p.NextToken.Type {
 	case token.Type:
+		fmt.Println("p.NextToken.Type", p.NextToken.Type)
 		p.meta.currentVariable.Type = variableTypeFromString(p.NextToken.Value.Type)
 		p.meta.currentVariable.ActingType = variableTypeFromString(p.NextToken.Value.Acting)
+		fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
 		p.Shift()
 		// TODO: could either recurse here, or fallthrough
 		if p.NextToken.Type != token.Ident {
@@ -1023,6 +1040,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 	// // TODO: will have to consider declarations too
 	case token.Ident:
+		fmt.Println("idnet p.meta.currentVariable", p.meta.currentVariable)
 		fmt.Println("ident", p.NextToken)
 		fmt.Println("declaredMap", p.meta.currentScope)
 		if p.meta.currentVariable.Type == UNRECOGNIZED {
@@ -1049,6 +1067,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			fmt.Println("getExpressionErr", err)
 			os.Exit(9)
 		}
+		fmt.Println("TVTVTV", tv)
 		fmt.Println("another", p.NextToken)
 		return tv, nil
 

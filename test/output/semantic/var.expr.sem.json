@@ -1,0 +1,42 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "test",
+			"Type": "var",
+			"Acting": "string",
+			"True": "test_string",
+			"AccessType": "private"
+		},
+		{
+			"Name": "test",
+			"Type": "var",
+			"Acting": "int",
+			"True": 666,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "test",
+			"Type": "var",
+			"Acting": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "test",
+			"Type": "var",
+			"Acting": "float",
+			"True": 2.71828,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		}
+	]
+}

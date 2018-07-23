@@ -8,3 +8,5 @@ strategy
   - directly translate the if statement over
   - same thing with else
 
+- VM
+  - https://www.graalvm.org/

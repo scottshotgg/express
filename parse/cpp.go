@@ -3,8 +3,8 @@ package parse
 import (
 	"fmt"
 	"math/rand"
-	"strconv"
 	"strings"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/ExpressRedo/token"
@@ -79,15 +79,22 @@ func translateVariableStatement(t token.Value) (string, error) {
 	case "var":
 		// int abc = 5;
 		// Any zyx = Any{ "int", &abc };
-		varName := t.Name + strconv.Itoa(int(r.Uint32()))
-		variableString += strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
-		variableString += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
-		// fmt.Println(thing)
-		// _, err = f.Write([]byte(thing))
-		// if err != nil {
-		// 	fmt.Println("error writing to file")
-		// 	os.Exit(9)
-		// }
+		// varName := t.Name + strconv.Itoa(int(r.Uint32()))
+		// variableString +=
+		sprintfVar := "%v"
+		if t.Acting == "string" {
+			sprintfVar = "\"%v\""
+		}
+		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf(sprintfVar, t.True)}, " ") + ";\n"
+
+		// variableString += strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		// variableString += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
+		// // fmt.Println(thing)
+		// // _, err = f.Write([]byte(thing))
+		// // if err != nil {
+		// // 	fmt.Println("error writing to file")
+		// // 	os.Exit(9)
+		// // }
 		return variableString, nil
 
 	case "object":
@@ -314,10 +321,12 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// TODO: check all f.Write errors I guess
 	// f+="#include <map>\n#include <string>\n"
 	// f+="struct Any { std::string type; void* data; };\n"
+	r = rand.New(rand.NewSource(time.Now().Unix()))
+
 	var f string
 
 	f += "#include <string>\n"
-	f += "#include \"json.hpp\"\n"
+	f += "#include \"var.cpp\"\n"
 	f += "int main()"
 
 	blockString, err := translateBlock(block)
