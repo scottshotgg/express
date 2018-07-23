@@ -196,8 +196,10 @@ for progress := 0, progress < 100, progress++ {
 
 > A key-based iterator for loop (for..in):
 
-```vb
+```csharp
 int i = 0;
+```
+```vb
 for index in [ 1, 2, 4 ] {
     i = index;
 }
@@ -206,7 +208,7 @@ for index in [ 1, 2, 4 ] {
 
 > A value-based iterator for loop (for..of):
 
-```vb
+```csharp
 houstonWeHaveLiftOff := false
 countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ];
 for step of countdown {
