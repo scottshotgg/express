@@ -1,4 +1,4 @@
-#include "json.hpp"
+#include "var.cpp"
 #include <string>
 int main() {
   int powerlevel = 9000;
@@ -32,15 +32,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532324567[] = {1, 2, 4};
+    int arrayBoi_1532386801[] = {1, 2, 4};
     int index = 0;
-    int index_1532324567 = 0;
-    while (index_1532324567 < 3) {
+    int index_1532386801 = 0;
+    while (index_1532386801 < 3) {
       {
-        index = index_1532324567;
+        index = index_1532386801;
         i = index;
       }
-      index_1532324567 += 1;
+      index_1532386801 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -48,13 +48,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532324567 = 0;
-    while (step_1532324567 < 8) {
+    int step_1532386801 = 0;
+    while (step_1532386801 < 8) {
       {
-        step = countdown[step_1532324567];
+        step = countdown[step_1532386801];
         houstonWeHaveLiftOff = false;
       }
-      step_1532324567 += 1;
+      step_1532386801 += 1;
     }
   }
   houstonWeHaveLiftOff = true;

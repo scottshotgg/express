@@ -1,4 +1,4 @@
-#include "json.hpp"
+#include "var.cpp"
 #include <string>
 int main() {
   int f = 0;
@@ -15,30 +15,30 @@ int main() {
   }
 
   {
-    int arrayBoi_1532324567[] = {1, 2, 4};
+    int arrayBoi_1532386801[] = {1, 2, 4};
     int i = 0;
-    int i_1532324567 = 0;
-    while (i_1532324567 < 3) {
+    int i_1532386801 = 0;
+    while (i_1532386801 < 3) {
       {
-        i = i_1532324567;
+        i = i_1532386801;
         f = i;
         int h = 1;
       }
-      i_1532324567 += 1;
+      i_1532386801 += 1;
     }
   }
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1532324567 = 0;
-    while (i_1532324567 < 8) {
+    int i_1532386801 = 0;
+    while (i_1532386801 < 8) {
       {
-        i = countdown[i_1532324567];
+        i = countdown[i_1532386801];
         f = i;
         int h = 1;
       }
-      i_1532324567 += 1;
+      i_1532386801 += 1;
     }
   }
 }
