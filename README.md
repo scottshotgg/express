@@ -198,8 +198,6 @@ for progress := 0, progress < 100, progress++ {
 
 ```csharp
 int i = 0;
-```
-```vb
 for index in [ 1, 2, 4 ] {
     i = index;
 }
