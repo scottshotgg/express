@@ -194,17 +194,7 @@ for progress := 0, progress < 100, progress++ {
 ```
 <br>
 
-> A keyed for..in loop:
-
-```csharp
-percent: 0
-for progress := 0, progress < 100, progress++ { 
-   percent = progress
-}
-```
-<br>
-
-> A key iterator for loop (for..in):
+> A key-based iterator for loop (for..in):
 
 ```csharp
 int i = 0;
@@ -214,7 +204,7 @@ for index in [ 1, 2, 4 ] {
 ```
 <br>
 
-> A value iterator for loop (for..of):
+> A value-based iterator for loop (for..of):
 
 ```csharp
 houstonWeHaveLiftOff := false
