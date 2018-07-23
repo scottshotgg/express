@@ -30,10 +30,8 @@ struct thing = {
 }
 structTest := thing{}
 
-
+// Doesn't work because this it's an object; not a struct.
 objThing := {}
-
-// Doesn't work
 objTest := objThing{}
 
 // Iterable composition
