@@ -211,10 +211,8 @@ for index in [ 1, 2, 4 ] {
 ```csharp
 houstonWeHaveLiftOff := false
 countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ];
-  // Get ready for take off
-```
-```vb
 for step of countdown {
+  // Get ready for take off
   houstonWeHaveLiftOff = false
 }
 houstonWeHaveLiftOff = true
