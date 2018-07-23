@@ -70,12 +70,12 @@ func TestSemantic(t *testing.T) {
 	// 	return
 	// }
 
-	// semanticBlockJSON, err := json.MarshalIndent(semanticBlock, "", "\t")
-	// if err != nil {
-	// 	fmt.Println("semanticTokensFromFileErr", err)
-	// 	t.Fail()
-	// 	return
-	// }
+	semanticBlockJSON, err := json.MarshalIndent(semanticBlock, "", "\t")
+	if err != nil {
+		fmt.Println("semanticTokensFromFileErr", err)
+		t.Fail()
+		return
+	}
 
 	// if string(semanticTokensFromFile) != string(semanticBlockJSON) {
 	// 	fmt.Println("semanticBlock not the same as test tokens")
@@ -85,8 +85,8 @@ func TestSemantic(t *testing.T) {
 	// 	return
 	// }
 
-	// fmt.Println("semanticBlock", semanticBlock)
-	// fmt.Println()
+	fmt.Println("semanticBlock", string(semanticBlockJSON))
+	fmt.Println()
 }
 
 func TestAll(t *testing.T) {
@@ -111,22 +111,13 @@ func TestAll(t *testing.T) {
 		return
 	}
 
-	// binaries, err = ioutil.ReadDir(testBin)
-	// if err != nil {
-	// 	fmt.Println("ReadDirErr", err)
-	// 	t.Fail()
-	// }
-	// for _, binary := range binaries {
-	// 	if !file.IsDir() {
-	// 		os.Remove(binary)
-	// 	}
-	// }
 	err = os.RemoveAll(testBin)
 	if err != nil {
 		// TODO:
 		fmt.Println("err removing", err)
 		return
 	}
+
 	// FIXME: w/e just use these permissions for now
 	err = os.Mkdir(testBin, 0777)
 	if err != nil {
@@ -138,66 +129,73 @@ func TestAll(t *testing.T) {
 	wg := &sync.WaitGroup{}
 	for _, file := range files {
 		if !file.IsDir() {
-			// wg.Add(1)
-			// go func(file os.FileInfo) {
-			// 	defer wg.Done()
-			filename := file.Name()
-			fmt.Println("file:", filename)
-			pathOfFile, err := filepath.Abs(testPrograms + filename)
-			if err != nil {
-				fmt.Println("AbsErr", err)
-				// TODO: make this more individual later
-				t.Fail()
-				return
-			}
-			fmt.Println(pathOfFile)
+			wg.Add(1)
+			go func(file os.FileInfo) {
+				defer wg.Done()
+				filename := file.Name()
+				fmt.Println("file:", filename)
+				pathOfFile, err := filepath.Abs(testPrograms + filename)
+				if err != nil {
+					fmt.Println("AbsErr", err)
+					// TODO: make this more individual later
+					t.Fail()
+					return
+				}
+				fmt.Println(pathOfFile)
 
-			var lexTokens []token.Token
-			lexTokens, err = lexFile(pathOfFile, filename)
-			if err != nil {
-				fmt.Println("lexFileErr", err)
-				t.Fail()
-				return
-			}
+				var lexTokens []token.Token
+				lexTokens, err = lexFile(pathOfFile, filename)
+				if err != nil {
+					fmt.Println("lexFileErr", err)
+					t.Fail()
+					return
+				}
 
-			pathOfFile, err = filepath.Abs(testPrograms + filename)
-			if err != nil {
-				fmt.Println("AbsErr", err)
-				// TODO: make this more individual later
-				t.Fail()
-				return
-			}
-			fmt.Println(pathOfFile)
+				pathOfFile, err = filepath.Abs(testPrograms + filename)
+				if err != nil {
+					fmt.Println("AbsErr", err)
+					// TODO: make this more individual later
+					t.Fail()
+					return
+				}
+				fmt.Println(pathOfFile)
 
-			syntacticTokens, err := syntacticParseFile(filename, lexTokens)
-			if err != nil {
-				fmt.Println("syntacticParseFileErr", err)
-				t.Fail()
-				return
-			}
+				syntacticTokens, err := syntacticParseFile(filename, lexTokens)
+				if err != nil {
+					fmt.Println("syntacticParseFileErr", err)
+					t.Fail()
+					return
+				}
 
-			semanticTokens, err := semanticParseFile(filename, syntacticTokens)
-			if err != nil {
-				fmt.Println("lexFileErr", err)
-				t.Fail()
-				return
-			}
+				semanticTokens, err := semanticParseFile(filename, syntacticTokens)
+				if err != nil {
+					fmt.Println("lexFileErr", err)
+					t.Fail()
+					return
+				}
 
-			fmt.Println("semanticTokens", semanticTokens)
+				fmt.Println("semanticTokens", semanticTokens)
 
-			err = cppTranspile(filename, semanticTokens)
-			if err != nil {
-				// TODO:
-				return
-			}
+				err = cppTranspile(filename, semanticTokens)
+				if err != nil {
+					// TODO:
+					return
+				}
 
-			output, err := exec.Command("clang++", "-std=gnu++14", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
-			if err != nil {
-				// TODO:
-				fmt.Println("err compile", err, string(output))
-			}
+				output, err := exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
+				if err != nil {
+					// TODO:
+					fmt.Println("err compile", err, string(output))
+					return
+				}
 
-			// }(file)
+				output, err = exec.Command("clang++", "-std=gnu++14", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+				if err != nil {
+					// TODO:
+					fmt.Println("err compile", err, string(output))
+				}
+
+			}(file)
 		}
 	}
 

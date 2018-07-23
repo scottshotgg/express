@@ -73,6 +73,8 @@ func translateVariableStatement(t token.Value) (string, error) {
 		tType = ""
 	}
 
+	fmt.Println("translating shit")
+
 	switch t.Type {
 	case "var":
 		// int abc = 5;
@@ -202,7 +204,22 @@ func translateLoop(t token.Value) (string, error) {
 		fmt.Println("k, v", k, v)
 	}
 
-	loopString += fmt.Sprintf("{\nint %s=%d;\nwhile (%s<%d) {\n",
+	loopString += "\n{\n"
+
+	if extraVarsInterface, ok := t.Metadata["extraVars"]; ok {
+		if extraVars, ok := extraVarsInterface.([]token.Value); ok {
+			for _, extraVar := range extraVars {
+				variableString, err := translateVariableStatement(extraVar)
+				if err != nil {
+					return "", err
+				}
+
+				loopString += variableString
+			}
+		}
+	}
+
+	loopString += fmt.Sprintf("int %s=%d;\nwhile (%s<%d) {\n",
 		t.Metadata["start"].(token.Value).Name, t.Metadata["start"].(token.Value).True.(int), t.Metadata["start"].(token.Value).Name,
 		t.Metadata["end"].(token.Value).True.(int))
 	// fmt.Println("loop", loop)
@@ -223,7 +240,7 @@ func translateLoop(t token.Value) (string, error) {
 		return "", err
 	}
 
-	loopString += blockString + fmt.Sprintf("%s+=%d;}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
+	loopString += blockString + fmt.Sprintf("%s+=%d;\n}\n}\n", t.Metadata["start"].(token.Value).Name, t.Metadata["step"].(token.Value).True.(int))
 	// fmt.Println(loopEnding)
 	// _, err = f.Write([]byte(loopEnding))
 	// if err != nil {
@@ -241,13 +258,14 @@ func translateBlock(tv token.Value) (string, error) {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
+	fmt.Println("TVTVTVTV", tv)
+
 	blockString := "{\n"
 
 	insideBlock, ok := tv.True.([]token.Value)
 	if !ok {
 		return "", errors.New("Could not assert block")
 	}
-	fmt.Println("insideBlock", len(insideBlock))
 
 	for _, t := range insideBlock {
 		fmt.Println("insideBlock t", t)
@@ -257,18 +275,22 @@ func translateBlock(tv token.Value) (string, error) {
 			fmt.Println("i am here translateVariableStatement", err)
 			loopString, err := translateLoop(t)
 			if err != nil {
+				fmt.Println("loop translation err", err)
 				ifString, err := translateIf(t)
+				fmt.Println("if translation err", err)
 				if err != nil {
 					// TODO:
+					fmt.Println("if translate err", err)
+					return "", err
 				}
-				return blockString + ifString + "}", nil
+				blockString += ifString
 			}
-			return blockString + loopString + "}", nil
+			blockString += loopString
 		}
-		return blockString + variableString + "}", nil
+		blockString += variableString
 	}
 
-	return "", errors.New("something")
+	return blockString + "}\n", nil
 }
 
 func (p *Parser) Transpile(block token.Value) (string, error) {

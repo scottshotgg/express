@@ -66,14 +66,30 @@ import (
 // 	return token.Token{}, errors.New("Current parseIndex outside of token range")
 // }
 
+func (p *Parser) SaveState() {
+	pState := *p
+	meta := p.meta
+
+	pState.meta = meta
+	p.States = append(p.States, pState)
+}
+
+func (p *Parser) PopState() {
+	pNew := &p.States[len(p.States)-1]
+	pNew.States = append([]Parser{}, p.States[0:len(p.States)-1]...)
+	*p = *pNew
+}
+
 // Shift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) Shift() {
+	p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
 	p.LastToken = p.CurrentToken
 	p.CurrentToken = p.NextToken
 
 	for {
 		if p.Index < p.length {
 			if p.source[p.Index].Type == token.Whitespace {
+				// p.ProcessedTokens = append(p.ProcessedTokens, p.source[p.Index])
 				p.Index++
 				continue
 			}
@@ -86,6 +102,14 @@ func (p *Parser) Shift() {
 		p.NextToken = token.Token{}
 		return
 	}
+}
+
+// Unshift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
+func (p *Parser) Unshift() {
+	p.Index--
+	p.NextToken = p.CurrentToken
+	p.CurrentToken = p.LastToken
+	p.LastToken = p.ProcessedTokens[len(p.ProcessedTokens)-1]
 }
 
 // ShiftWithWS operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line

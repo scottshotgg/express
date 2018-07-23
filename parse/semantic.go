@@ -5,6 +5,7 @@ import (
 	"os"
 	"reflect"
 	"strconv"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/ExpressRedo/token"
@@ -197,7 +198,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		fmt.Println("arrayContentsExpressions", arrayContentsExpressions)
 
 		p.meta.currentVariable.Metadata = map[string]interface{}{
-			"length": len(arrayContents),
+			"length": len(arrayContents) - 1,
 			"vector": false,
 		}
 		// p.meta.currentVariable.Metadata["vector"] = false
@@ -513,9 +514,11 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
-				fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
-				// TODO: implicit type casting here
-				return token.Value{}, errors.New("No implicit type casting as of now")
+				if expr.Type != token.ArrayType {
+					fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
+					// TODO: implicit type casting here
+					return token.Value{}, errors.Errorf("No implicit type casting as of now: p.meta.currentVariable.Type - %s, expr.Type - %s", VariableTypeString(p.meta.currentVariable.Type), expr.Type)
+				}
 			}
 			p.meta.currentVariable.Value = expr.True
 			if ref, ok := expr.Metadata["refs"]; ok {
@@ -611,19 +614,227 @@ func (p *Parser) GetExpression() (token.Value, error) {
 	return token.Value{}, errors.Errorf("default %+v", p.NextToken)
 }
 
-func (p *Parser) ParseStandardFor() (token.Value, error) {
-	// Make a new meta
-	// Get a statement
-	// Get an expression
-	// Get another expression
-	// Sub operands to find step
+func (p *Parser) ParsePrepositionFor() (token.Value, error) {
+	fmt.Println("ParsePrepositionFor")
+
+	// 1. Always expect an ident after the `for` keyword
+	if p.NextToken.Type != token.Ident {
+		// TODO:
+		return token.Value{}, errors.Errorf("Ident not found after for: %+v", p.NextToken)
+	}
+
+	fmt.Printf("p.NextToken.Value %+v\n", p.NextToken.Value)
+	variableName := p.NextToken.Value.String
+	p.meta.currentVariable.Name = variableName
+	p.meta.currentVariable.Type = variableTypeFromString(token.SetType)
+	p.meta.currentVariable.ActingType = variableTypeFromString(token.SetType)
+	p.meta.currentVariable.AccessType = accessTypeFromString(token.PrivateAccessType)
 	p.Shift()
-	fmt.Println("GETTING LOOP")
-	p.meta.NewInheritedScope()
+
+	// 2 . NextToken should contain a `prepositional` keyword
+	if p.NextToken.Type != token.Keyword {
+		return token.Value{}, errors.Errorf("Keyword not found after ident: %+v", p.NextToken)
+	}
+
+	// 3. Check the preposition
+	extractKey, extractValue := false, false
+	switch p.NextToken.Value.String {
+
+	// For loop `key` composition over an iterable
+	case "in":
+		// 4. Declare `i` as the `key` of the index
+		extractKey = true
+
+	// For loop `value` composition over an iterable
+	case "of":
+		fmt.Println("of right here rn")
+		// 4. Declare `i` as the `value` of the index
+		extractValue = true
+
+		// For loop `key-value` composition over an iterable
+	case "over":
+		// 4. Declare `i` as an `object` containing the `key and value` of the index
+		// TODO:
+		extractKey, extractValue = true, true
+
+	default:
+		return token.Value{}, errors.Errorf("Preposition not found: %+v", p.NextToken)
+	}
+
+	fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
+	fmt.Println("extractKey, extractValue:", extractKey, extractValue)
+
+	// 5. Parse the `array` literal
+	p.Shift()
+	arrayExpr, err := p.GetExpression()
+	if err != nil {
+		// TODO:
+		return arrayExpr, err
+	}
+	fmt.Println("arrayExpr", arrayExpr)
+
+	p.meta.currentVariable.Type = variableTypeFromString(arrayExpr.Acting)
+	p.meta.currentVariable.ActingType = variableTypeFromString(arrayExpr.Acting)
+	p.meta.currentVariable.Value = 0
+	// arrayValue := p.meta.currentVariable.Value.([]token.Token)
+
+	// FIXME: hold on
+	// if extractKey && extractValue {
+	// 	// TODO: make an object, put both things in it
+	// 	// p.meta.currentVariable.Value = 0
+	// } else if extractKey {
+	// 	p.meta.currentVariable.Value = 0
+	// } else {
+	// 	// FIXME: check length here; try with 0 length array literal
+	// 	p.meta.currentVariable.Value = arrayValue[0].True
+	// }
+
+	// currentVar := p.meta.currentVariable
+	err = p.meta.DeclareVariable()
+	if err != nil {
+		return token.Value{}, err
+	}
+
+	// 6. Parse the body
+	// p.Shift()
+	body, err := p.CheckBlock()
+	if err != nil {
+		fmt.Println("Could not check block")
+		return body, err
+	}
+	fmt.Println("body", body)
+
+	bodyTokens := body.True.([]token.Value)
+	fmt.Println("bodyTokens", bodyTokens)
+
+	varName := variableName + "_" + strconv.FormatInt(int64(time.Now().Unix()), 10)
+
+	extraVars := []token.Value{}
+	if extractKey && extractValue {
+		// TODO: make an object, put both things in it
+		// p.meta.currentVariable.Value = 0
+	} else if extractKey {
+		arrayExpr.Name = "arrayBoi"
+		p.meta.currentVariable.Value = 0
+		extraVars = append(extraVars, token.Value{
+			Name:       variableName,
+			Type:       arrayExpr.Acting,
+			Acting:     arrayExpr.Acting,
+			True:       0,
+			String:     variableName,
+			AccessType: arrayExpr.AccessType,
+			Metadata:   map[string]interface{}{},
+		}, arrayExpr)
+
+		bodyTokens = append([]token.Value{
+			token.Value{
+				Name:       variableName,
+				Type:       arrayExpr.Acting,
+				Acting:     arrayExpr.Acting,
+				True:       0,
+				AccessType: arrayExpr.AccessType,
+				Metadata: map[string]interface{}{
+					"refs":   varName,
+					"assign": true,
+				},
+			},
+		}, bodyTokens...)
+	} else {
+		fmt.Println("inside the value thing")
+		// // FIXME: check length here; try with 0 length array literal
+		// p.meta.currentVariable.Value = arrayValue[0].Value.True
+		arrayExpr.Name = "arrayBoi"
+		p.meta.currentVariable.Value = 0
+		extraVars = append(extraVars, token.Value{
+			Name:   variableName,
+			Type:   arrayExpr.Acting,
+			Acting: arrayExpr.Acting,
+			// TODO: this only works with ints for now
+			True:       0,
+			String:     variableName,
+			AccessType: arrayExpr.AccessType,
+			Metadata:   map[string]interface{}{},
+		}, arrayExpr)
+
+		bodyTokens = append([]token.Value{
+			token.Value{
+				Name:       variableName,
+				Type:       arrayExpr.Acting,
+				Acting:     arrayExpr.Acting,
+				True:       0,
+				AccessType: arrayExpr.AccessType,
+				Metadata: map[string]interface{}{
+					"refs":   "arrayBoi[" + varName + "]",
+					"assign": true,
+				},
+			},
+		}, bodyTokens...)
+		// os.Exit(9)
+	}
+	fmt.Println("bodyTokens", bodyTokens)
+
+	intLiteralZERO := token.Value{
+		Name:       varName,
+		Type:       token.IntType,
+		True:       0,
+		String:     "0",
+		AccessType: "private",
+		// Metadata: map[string]interface{}{},
+	}
+
+	intLiteralONE := intLiteralZERO
+	intLiteralONE.True = 1
+	intLiteralONE.String = "1"
+
+	intLiteralARRAYLENGTH := intLiteralONE
+	intLiteralARRAYLENGTH.True = arrayExpr.Metadata["length"].(int) + 1
+	intLiteralARRAYLENGTH.String = fmt.Sprintf("%v", intLiteralARRAYLENGTH.True)
+
+	// 7. Format the token as a normal `for` loop with the right metadata and
+	//		variables declared within the loop for the key, value, etc
+	md := map[string]interface{}{
+		"start":     intLiteralZERO,
+		"end":       intLiteralARRAYLENGTH,
+		"step":      intLiteralONE,
+		"extraVars": extraVars,
+	}
+
+	// TODO: don't think we need this for the preposition for loop
+	// for k, v := range expr.Metadata {
+	// 	md[k] = v
+	// }
+
+	// if extractKey && extractValue {
+	// 	// TODO: make an object, put both things in it
+	// 	// p.meta.currentVariable.Value = 0
+	// } else if extractKey {
+	// 	p.meta.currentVariable.Value = 0
+	// 	// TODO: this should be the one that we want ...
+	// 	extraVars[0].True = 0
+	// 	extraVars[]
+	// } else {
+	// 	// FIXME: check length here; try with 0 length array literal
+	// 	// p.meta.currentVariable.Value = arrayValue[0].
+
+	// 	// TODO: this should be the one that we want ...
+	// 	extraVars[0].True =
+	// }
+	// p.Shift()
+
+	return token.Value{
+		Type:     token.For,
+		True:     bodyTokens,
+		String:   varName + "<" + intLiteralARRAYLENGTH.String,
+		Metadata: md,
+	}, nil
+	// return token.Value{}, nil
+}
+
+func (p *Parser) ParseStandardFor() (token.Value, error) {
 	stmt, err := p.GetStatement()
 	if err != nil {
-		fmt.Println("Error: Could not get statement")
-		os.Exit(9)
+		// TODO:
+		// os.Exit(9)
 		return token.Value{}, err
 	}
 
@@ -636,7 +847,7 @@ func (p *Parser) ParseStandardFor() (token.Value, error) {
 
 	expr2, err := p.GetExpression()
 	if err != nil {
-		fmt.Println("Error: Could not get expression")
+		fmt.Println("Error: Could not get expression2")
 		os.Exit(9)
 		return token.Value{}, err
 	}
@@ -667,6 +878,11 @@ func (p *Parser) ParseStandardFor() (token.Value, error) {
 	for k, v := range expr.Metadata {
 		md[k] = v
 	}
+
+	// fmt.Println("stuff", expr.Metadata["left"].(token.Value).Name)
+	// fmt.Println("p.meta.currentScope", p.meta.currentScope)
+	// delete(p.meta.currentScope, expr.Metadata["left"].(token.Value).Name)
+	// fmt.Println("p.meta.currentScope", p.meta.currentScope)
 	expr.Metadata = map[string]interface{}{}
 
 	return token.Value{
@@ -683,7 +899,37 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 	fmt.Println("NEXT666", p.NextToken)
 	switch p.NextToken.Value.String {
 	case "for":
-		return p.ParseStandardFor()
+		// Make a new meta
+		// Get a statement
+		// Get an expression
+		// Get another expression
+		// Sub operands to find step
+		p.Shift()
+		fmt.Println("GETTING LOOP")
+		p.meta.NewInheritedScope()
+
+		// Save the state from the beginning of the for loop parse
+		p.SaveState()
+
+		t, err := p.ParseStandardFor()
+		if err != nil {
+			// Pop back to the last state
+			p.PopState()
+
+			t, err = p.ParsePrepositionFor()
+			if err != nil {
+				// TODO:
+				return t, err
+			}
+		}
+		fmt.Println("current map", p.meta.currentScope)
+		_, err = p.meta.ExitScope()
+		if err != nil {
+			// TODO:
+			return t, err
+		}
+
+		return t, nil
 
 	case "if":
 		p.Shift()
@@ -853,7 +1099,7 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 	// Open up the block here
 	tokensFromBlock, ok := p.CurrentToken.Value.True.([]token.Token)
 	if !ok {
-		fmt.Println("Error: Current token does not contain an array", p.CurrentToken)
+		fmt.Println("Error: Current token does not contain an array of tokens for block", p.CurrentToken)
 		os.Exit(9)
 	}
 

@@ -86,9 +86,39 @@ func TestShift(t *testing.T) {
 	}
 }
 
+func TestUnshift(t *testing.T) {
+	fmt.Println("TestShift")
+	TestNew(t)
+
+	p.Shift()
+	p.Shift()
+	if reflect.DeepEqual(p.NextToken, testTokens[2]) {
+		t.Fail()
+	}
+
+	p.Unshift()
+	if reflect.DeepEqual(p.NextToken, testTokens[1]) {
+		t.Fail()
+	}
+}
+
 func TestParse(t *testing.T) {
 	fmt.Println("TestParse")
 	TestNew(t)
 
-	p.Parse()
+	value, err := p.Parse()
+	if err != nil {
+		// TODO:
+	}
+	fmt.Println("value", value)
+}
+
+func TestSaveState(t *testing.T) {
+	fmt.Println("TestSaveState")
+	TestNew(t)
+	p.Shift()
+	p.Shift()
+
+	p.SaveState()
+	fmt.Println("p", p.States)
 }

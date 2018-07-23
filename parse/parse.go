@@ -57,9 +57,12 @@ type Parser struct {
 	// CurrentLexeme lex.Lexeme
 	// NextLexeme    lex.Lexeme
 
-	LastToken    token.Token
-	CurrentToken token.Token
-	NextToken    token.Token
+	ProcessedTokens []token.Token
+	LastToken       token.Token
+	CurrentToken    token.Token
+	NextToken       token.Token
+
+	States []Parser
 }
 
 // type Variable struct {
@@ -76,6 +79,17 @@ func NewVariable(name string, value interface{}, variableType VariableType) *Var
 		Value:      value,
 		AccessType: PRIVATE,
 		Metadata:   map[string]interface{}{},
+	}
+}
+
+func NewVariableFromTokenValue(tv token.Value) *Variable {
+	return &Variable{
+		Name:       tv.Name,
+		Type:       variableTypeFromString(tv.Type),
+		ActingType: variableTypeFromString(tv.Type),
+		Value:      tv.True,
+		AccessType: accessTypeFromString(tv.AccessType),
+		Metadata:   tv.Metadata,
 	}
 }
 
@@ -156,6 +170,34 @@ func (m *Meta) DeclareVariable() error {
 	m.currentVariable = &Variable{
 		Metadata: map[string]interface{}{},
 	}
+
+	return nil
+}
+
+func (m *Meta) DeclareVariableFromTokenValue(tv token.Value) error {
+	variable := NewVariableFromTokenValue(tv)
+
+	if variable.Type == UNRECOGNIZED ||
+		// Commented this; don't really care if it's set for normal
+		// variables and it was messing up arrays
+		// tv.ActingType != UNRECOGNIZED ||
+		variable.AccessType == NOTSET ||
+		tv.Name == "" ||
+		tv.True == nil {
+		return errors.Errorf("Variable does not contain all required fields: %+v", tv)
+	}
+
+	if variable.Type == SET {
+		return errors.Errorf("Variable cannot be declared with type SET")
+	}
+
+	if variable.Type == VAR && variable.ActingType == UNRECOGNIZED {
+		return errors.Errorf("Variable of type VAR cannot be declared with no acting type: %+v", tv)
+	}
+
+	// TODO: check all the required fields and matching types, etc
+	m.currentScope[tv.Name] = variable
+	fmt.Println("metadata3", variable)
 
 	return nil
 }
