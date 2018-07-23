@@ -36,7 +36,7 @@ string arizona = "iced out boys";
 <br>
 
 > Comments also take on a familiar syntax:
-```csharp
+```vb
 // Inline comment
 
 /*
@@ -72,7 +72,7 @@ string ayy = "ayy" string waddup = "waddup" int timestamp = 1527799745
 <!--The difference from a standard declaration or assignment is that the `set` operator will enforce a *`non-destructive`* local declaration of a variable; meaning it will not crawl the scope tree to perform reassignment and will enforce that it is the  
 crawl _down_ the scope tree instead of _up_? -->
 
-```csharp
+```vb
 anotherOne: "anotherOne"
 ```
 <br>
@@ -80,7 +80,7 @@ anotherOne: "anotherOne"
 > Below shows a type inferred `object` where most of its properties are also type inferred.<br>
 *Note:* The following statements until the ending brace are all within the `testerino` variable
 
-```csharp
+```vb
 testerino := {
     id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"
 ```
@@ -95,7 +95,7 @@ testerino := {
 
 > You can also use the `assignment` operator along with a type to crimp the type of the variable instead of leaving it up for interpretation by the compiler
 
-```csharp
+```vb
     float price = 55.3592,
 ```
 <br>
@@ -105,14 +105,14 @@ testerino := {
     Could make this a "redeclaration" operator to specifically reinterpret the type as well
 -->
 
-```csharp
+```vb
     dank_meme := true
 ```
 <br>
 
 > **Any** unicode character is supported
 
-```csharp
+```vb
     🔥420🔥    : "🅱️laze it" 
     ⒹⒿKhalid : anotherOne
 ```
@@ -127,7 +127,7 @@ testerino := {
 
 > A few nested objects
 
-```csharp
+```vb
     throw_more_dots: {
         throw_more_dots: {
             more_dots: {
@@ -144,7 +144,7 @@ testerino := {
 
 > Ending of `testerino`
 
-```csharp
+```vb
 }
 ```
 
@@ -186,7 +186,7 @@ if powerlevel < 9001 {
 
 > A simple for loop:
 
-```csharp
+```vb
 percent: 0
 for progress := 0, progress < 100, progress++ { 
    percent = progress
@@ -196,7 +196,7 @@ for progress := 0, progress < 100, progress++ {
 
 > A key-based iterator for loop (for..in):
 
-```csharp
+```vb
 int i = 0;
 for index in [ 1, 2, 4 ] {
     i = index;
@@ -206,7 +206,7 @@ for index in [ 1, 2, 4 ] {
 
 > A value-based iterator for loop (for..of):
 
-```csharp
+```vb
 houstonWeHaveLiftOff := false
 countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ];
 for step of countdown {
