@@ -5,16 +5,14 @@ constant unsigned float128[] coefficients = [3.3, 4.4, 5.5, 6.6]
 
 
 struct thing = {
-    // These will take the type
-    // defined default values
+    // These fields will take the type defined default values
     int    normieInt,
     bool   normieBool,
     float  normieFloat,
     string normieString `json:"normie_string"`,
     
     
-    // These will be initialized to
-    // these default values
+    // However, these will be initialized to the defined values by default
     string field_A = "A",
     field1 `json:"field_one"` = 1
     isField := true
