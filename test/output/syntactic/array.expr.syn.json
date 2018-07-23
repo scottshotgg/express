@@ -50,7 +50,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "thing2"
+						"String": "benTen"
 					}
 				},
 				{
@@ -66,6 +66,20 @@
 					"Value": {
 						"Type": "array",
 						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "bool1"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "bool2"
+								}
+							},
 							{
 								"Type": "IDENT",
 								"Value": {

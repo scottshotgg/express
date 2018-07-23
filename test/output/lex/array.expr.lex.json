@@ -112,7 +112,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "thing2"
+			"String": "benTen"
 		}
 	},
 	{
@@ -148,6 +148,39 @@
 		"Value": {
 			"Type": "op_3",
 			"String": "["
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "bool1"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "bool2"
 		}
 	},
 	{

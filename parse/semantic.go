@@ -714,7 +714,10 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 		// TODO: make an object, put both things in it
 		// p.meta.currentVariable.Value = 0
 	} else if extractKey {
-		arrayExpr.Name = "arrayBoi"
+		if arrayExpr.Name == variableName {
+			arrayExpr.Name = "arrayBoi_" + strconv.FormatInt(int64(time.Now().Unix()), 10)
+			extraVars = append(extraVars, arrayExpr)
+		}
 		p.meta.currentVariable.Value = 0
 		extraVars = append(extraVars, token.Value{
 			Name:       variableName,
@@ -724,7 +727,7 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 			String:     variableName,
 			AccessType: arrayExpr.AccessType,
 			Metadata:   map[string]interface{}{},
-		}, arrayExpr)
+		})
 
 		bodyTokens = append([]token.Value{
 			token.Value{
@@ -743,7 +746,10 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 		fmt.Println("inside the value thing")
 		// // FIXME: check length here; try with 0 length array literal
 		// p.meta.currentVariable.Value = arrayValue[0].Value.True
-		arrayExpr.Name = "arrayBoi"
+		if arrayExpr.Name == variableName {
+			arrayExpr.Name = "arrayBoi_" + strconv.FormatInt(int64(time.Now().Unix()), 10)
+			extraVars = append(extraVars, arrayExpr)
+		}
 		p.meta.currentVariable.Value = 0
 		extraVars = append(extraVars, token.Value{
 			Name:   variableName,
@@ -754,7 +760,7 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 			String:     variableName,
 			AccessType: arrayExpr.AccessType,
 			Metadata:   map[string]interface{}{},
-		}, arrayExpr)
+		})
 
 		bodyTokens = append([]token.Value{
 			token.Value{
@@ -764,7 +770,7 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 				True:       0,
 				AccessType: arrayExpr.AccessType,
 				Metadata: map[string]interface{}{
-					"refs":   "arrayBoi[" + varName + "]",
+					"refs":   arrayExpr.Name + "[" + varName + "]",
 					"assign": true,
 				},
 			},

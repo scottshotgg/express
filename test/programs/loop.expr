@@ -1,17 +1,22 @@
 // This file is for testing loops
 
 f := 0
+
+// Standard for loop syntax
 for i := 1, i < 10, i++ {
   f = i
   h := 1
 }
 
-for i in [ 9, 8, 7, 5, 4, 3, 2, 1 ] {
+// Looping over a literal declaration
+for i in [ 1, 2, 4 ] {
   f = i
   h := 1
 }
 
-for i of [ 9, 8, 7, 5, 4, 3, 2, 1 ] {
+// Looping over an already declared array
+countdown := [ 9, 8, 7, 5, 4, 3, 2, 1 ]
+for i of countdown {
   f = i
-   h := 1
+  h := 1
 }

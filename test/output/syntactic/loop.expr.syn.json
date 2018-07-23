@@ -173,7 +173,7 @@
 					"Type": "KEYWORD",
 					"Value": {
 						"Type": "keyword",
-						"String": "in"
+						"String": "of"
 					}
 				},
 				{
@@ -186,42 +186,7 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 9
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 8
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 7
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 5
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 4
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 3
+									"True": 1
 								}
 							},
 							{
@@ -235,7 +200,7 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 1
+									"True": 4
 								}
 							}
 						]
@@ -292,26 +257,17 @@
 					}
 				},
 				{
-					"ID": 9,
-					"Type": "KEYWORD",
-					"Value": {
-						"Type": "keyword",
-						"String": "for"
-					}
-				},
-				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "i"
+						"String": "countdown"
 					}
 				},
 				{
-					"ID": 9,
-					"Type": "KEYWORD",
+					"Type": "ASSIGN",
 					"Value": {
-						"Type": "keyword",
-						"String": "of"
+						"Type": "init",
+						"String": ":="
 					}
 				},
 				{
@@ -377,6 +333,36 @@
 								}
 							}
 						]
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "for"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "of"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "countdown"
 					}
 				},
 				{

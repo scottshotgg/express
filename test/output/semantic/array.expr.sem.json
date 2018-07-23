@@ -14,10 +14,34 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "thing2",
+			"Name": "benTen",
 			"Type": "array",
 			"Acting": "bool",
 			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "bool1",
+						"Type": "bool",
+						"True": true,
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "bool1"
+						}
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "bool2",
+						"Type": "bool",
+						"True": false,
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "bool2"
+						}
+					}
+				},
 				{
 					"Type": "LITERAL",
 					"Value": {
@@ -45,7 +69,7 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
-				"length": 1,
+				"length": 3,
 				"vector": false
 			}
 		}

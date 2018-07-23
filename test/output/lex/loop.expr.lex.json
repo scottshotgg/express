@@ -55,6 +55,13 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"ID": 9,
 		"Type": "KEYWORD",
 		"Value": {
@@ -383,7 +390,7 @@
 		"Type": "KEYWORD",
 		"Value": {
 			"Type": "keyword",
-			"String": "in"
+			"String": "of"
 		}
 	},
 	{
@@ -411,112 +418,7 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 9
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 8
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 7
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 5
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 4
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 3
+			"True": 1
 		}
 	},
 	{
@@ -558,7 +460,7 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 1
+			"True": 4
 		}
 	},
 	{
@@ -734,24 +636,9 @@
 		}
 	},
 	{
-		"ID": 9,
-		"Type": "KEYWORD",
-		"Value": {
-			"Type": "keyword",
-			"String": "for"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "i"
+			"String": "countdown"
 		}
 	},
 	{
@@ -762,11 +649,17 @@
 		}
 	},
 	{
-		"ID": 9,
-		"Type": "KEYWORD",
+		"Type": "ASSIGN",
 		"Value": {
-			"Type": "keyword",
-			"String": "of"
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
 		}
 	},
 	{
@@ -961,6 +854,62 @@
 	{
 		"Type": "WS",
 		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"ID": 9,
+		"Type": "KEYWORD",
+		"Value": {
+			"Type": "keyword",
+			"String": "for"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"ID": 9,
+		"Type": "KEYWORD",
+		"Value": {
+			"Type": "keyword",
+			"String": "of"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "countdown"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
 			"Type": "space",
 			"String": " "
 		}
@@ -1031,13 +980,6 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
 		}
 	},
 	{
