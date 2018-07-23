@@ -101,6 +101,13 @@ var OperatorMap = map[string]Token{
 			String: ".",
 		},
 	},
+	"==": Token{
+		Type: IsEqual,
+		Value: Value{
+			Type:   "is_equal",
+			String: "==",
+		},
+	},
 
 	// Increment
 	"++": Token{

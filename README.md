@@ -174,7 +174,7 @@ string[] here_comes =
 ```
 <br>
 
-> Quick power level check before blasting off
+> Quick power level check before blasting off...
 
 ```vb
 if powerlevel < 9001 { 
@@ -184,11 +184,44 @@ if powerlevel < 9001 {
 ```
 <br>
 
-> A simple for loop
+> A simple for loop:
 
 ```csharp
 percent: 0
 for progress := 0, progress < 100, progress++ { 
    percent = progress
 }
+```
+<br>
+
+> A keyed for..in loop:
+
+```csharp
+percent: 0
+for progress := 0, progress < 100, progress++ { 
+   percent = progress
+}
+```
+<br>
+
+> A key iterator for loop (for..in):
+
+```csharp
+int i = 0;
+for index in [ 1, 2, 4 ] {
+    i = index;
+}
+```
+<br>
+
+> A value iterator for loop (for..of):
+
+```csharp
+houstonWeHaveLiftOff := false
+countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ];
+for step of countdown {
+  // Get ready for take off
+  houstonWeHaveLiftOff = false
+}
+houstonWeHaveLiftOff = true
 ```

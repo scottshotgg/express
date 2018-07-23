@@ -57,6 +57,19 @@ for progress := 0, progress < 100, progress++ {
   percent = progress
 }
 
+int i = 0;
+for index in [ 1, 2, 4 ] {
+    i = index;
+}
+
+houstonWeHaveLiftOff := false
+countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ]
+for step of countdown {
+  // Get ready for take off
+  houstonWeHaveLiftOff = false
+}
+houstonWeHaveLiftOff = true
+
 /*
 - README.md ends here -
 

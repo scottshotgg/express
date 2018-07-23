@@ -87,6 +87,7 @@ const (
 	Underscore   = "UNDERSCORE"
 	QuestionMark = "QM"
 	Accessor     = "ACCESSOR"
+	IsEqual      = "IS_EQUAL"
 	Increment    = "INCREMENT"
 
 	VarType         = "var"

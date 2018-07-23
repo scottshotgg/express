@@ -442,6 +442,258 @@
 				},
 				"type": "bool"
 			}
+		},
+		{
+			"Name": "i",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Type": "for",
+			"True": [
+				{
+					"Name": "index",
+					"Type": "int",
+					"Acting": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "index_1532324567"
+					}
+				},
+				{
+					"Name": "i",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "index"
+					}
+				}
+			],
+			"String": "index_1532324567\u003c3",
+			"Metadata": {
+				"end": {
+					"Name": "index_1532324567",
+					"Type": "int",
+					"True": 3,
+					"String": "3",
+					"AccessType": "private"
+				},
+				"extraVars": [
+					{
+						"Name": "arrayBoi_1532324567",
+						"Type": "array",
+						"Acting": "int",
+						"True": [
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 1,
+									"String": "1"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 2,
+									"String": "2"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 4,
+									"String": "4"
+								}
+							}
+						],
+						"AccessType": "private",
+						"Metadata": {
+							"length": 2,
+							"vector": false
+						}
+					},
+					{
+						"Name": "index",
+						"Type": "int",
+						"Acting": "int",
+						"True": 0,
+						"String": "index",
+						"AccessType": "private"
+					}
+				],
+				"start": {
+					"Name": "index_1532324567",
+					"Type": "int",
+					"True": 0,
+					"String": "0",
+					"AccessType": "private"
+				},
+				"step": {
+					"Name": "index_1532324567",
+					"Type": "int",
+					"True": 1,
+					"String": "1",
+					"AccessType": "private"
+				}
+			}
+		},
+		{
+			"Name": "houstonWeHaveLiftOff",
+			"Type": "bool",
+			"True": false,
+			"AccessType": "private"
+		},
+		{
+			"Name": "countdown",
+			"Type": "array",
+			"Acting": "int",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 9,
+						"String": "9"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 7,
+						"String": "7"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 6,
+						"String": "6"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 5,
+						"String": "5"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 4,
+						"String": "4"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 3,
+						"String": "3"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 2,
+						"String": "2"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 1,
+						"String": "1"
+					}
+				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 7,
+				"vector": false
+			}
+		},
+		{
+			"Type": "for",
+			"True": [
+				{
+					"Name": "step",
+					"Type": "int",
+					"Acting": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "countdown[step_1532324567]"
+					}
+				},
+				{
+					"Name": "houstonWeHaveLiftOff",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				}
+			],
+			"String": "step_1532324567\u003c8",
+			"Metadata": {
+				"end": {
+					"Name": "step_1532324567",
+					"Type": "int",
+					"True": 8,
+					"String": "8",
+					"AccessType": "private"
+				},
+				"extraVars": [
+					{
+						"Name": "step",
+						"Type": "int",
+						"Acting": "int",
+						"True": 0,
+						"String": "step",
+						"AccessType": "private"
+					}
+				],
+				"start": {
+					"Name": "step_1532324567",
+					"Type": "int",
+					"True": 0,
+					"String": "0",
+					"AccessType": "private"
+				},
+				"step": {
+					"Name": "step_1532324567",
+					"Type": "int",
+					"True": 1,
+					"String": "1",
+					"AccessType": "private"
+				}
+			}
+		},
+		{
+			"Name": "houstonWeHaveLiftOff",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
 		}
 	]
 }
