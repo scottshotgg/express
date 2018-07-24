@@ -180,22 +180,22 @@ public:
   }
 
   void operator+=(const double right) {
-    // printf("+= var int\n");
+    printf("+= var int\n");
     *(float *)data += right;
   }
 
   void operator+=(const string right) {
-    // printf("+= var int\n");
+    printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const char *right) {
-    // printf("+= var int\n");
+    printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const bool right) {
-    // printf("+= var int\n");
+    printf("+= var int\n");
     *(bool *)data = *(bool *)data || right;
   }
 
@@ -224,10 +224,10 @@ public:
     *(bool *)data += right;
   }
 
-  // int operator*(const var& right) {
-  //     // printf("* var var\n");
-  //     return *(int*)data * *(int*)right.data;
-  // }
+  int operator*(const var& right) {
+      // printf("* var var\n");
+      return *(int*)data * *(int*)right.data;
+  }
 
   void operator*=(const bool right) {
     // printf("* var var\n");
@@ -374,13 +374,14 @@ int operator/(const int left, const var &right) {
 }
 
 int operator+=(int left, const var &right) {
+  printf("+= int var\n");
   // printf("+= int var\n");
   return left += *(int *)right.Value();
 }
 
 int operator+=(const var &left, const var &right) {
-  // printf("+= var var\n");
-  return *(int *)left.Value() += *(int *)right.Value();
+//   printf("+= var var\n");
+  return *(int *)left.Value() + *(int *)right.Value();
 }
 
 bool operator+(const bool left, const var &right) {
@@ -409,6 +410,11 @@ var operator+(const var &left, const char *right) {
   return var(*(string *)left.Value() + right);
 }
 
+// int operator+(const var &left, const var &right) {
+//     printf("hey its me");
+//   return *(int*)left.Value() + *(int*)right.Value();
+// }
+
 // Generic constructor for right side value
 template <typename T> var operator+(const var &left, T right) {
   // FIXME: this is kinda inefficient
@@ -421,11 +427,15 @@ template <typename T> var operator-(const var &left, T right) {
   return var(-right + left);
 }
 
-// Generic constructor for right side value
-template <typename T> var operator*(const var &left, T right) {
-  // FIXME: this is kinda inefficient
-  return var(right * left);
-}
+// // Generic constructor for right side value
+// template <typename T> var operator*(const var &left, T right) {
+//   // FIXME: this is kinda inefficient
+//   cout<<"right "<<right<<endl;
+//   cout<<"left "<<left<<endl;
+//   var thing = right * left;
+//   cout<<"thing"<< thing << endl;
+//   return thing;
+// }
 
 // Generic constructor for right side value
 template <typename T> var operator/(const var &left, T right) {
@@ -433,51 +443,3 @@ template <typename T> var operator/(const var &left, T right) {
   return var((1 / right) * left);
 }
 // };
-
-int TestVarVsInt() {
-  int varOperationsAmount = 10000000; // one hundred thousand ops
-
-  auto t1 = chrono::high_resolution_clock::now();
-  var vz = 0;
-  var vy = 8;
-  var vx = 7;
-  for (int i = 0; i < varOperationsAmount; i++) {
-    vz += vx * vy;
-  }
-  cout << "vz " << vz << endl;
-
-  int varDuration = chrono::duration_cast<chrono::milliseconds>(
-                        std::chrono::high_resolution_clock::now() - t1)
-                        .count();
-
-  cout << "var type operations took " << varDuration << " milliseconds\n\n";
-
-  int intOperationsAmount = 10000000; // ten million ops
-
-  auto t3 = chrono::high_resolution_clock::now();
-  int iz = 0;
-  for (int i = 0; i < intOperationsAmount; i++) {
-    iz += 7 * 8;
-  }
-  cout << "iz " << iz << endl;
-
-  int intDuration = chrono::duration_cast<chrono::milliseconds>(
-                        std::chrono::high_resolution_clock::now() - t3)
-                        .count();
-  cout << "int type operations took " << intDuration << " milliseconds\n\n";
-
-  // var statsObj = map<string, var>{
-  //     { "varOperations", map<string, var>{
-  //         { "amount", varOperationsAmount },
-  //         { "duration", varDuration }},
-  //     },
-  //     { "intOperations",  map<string, var>{
-  //         { "amount", varOperationsAmount },
-  //         { "duration", intDuration }},
-  //     }
-  // };
-
-  // cout << "stats: " << statsObj << endl << endl;
-
-  return 0;
-}
