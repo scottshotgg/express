@@ -180,22 +180,22 @@ public:
   }
 
   void operator+=(const double right) {
-    printf("+= var int\n");
+    //printf("+= var int\n");
     *(float *)data += right;
   }
 
   void operator+=(const string right) {
-    printf("+= var int\n");
+    //printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const char *right) {
-    printf("+= var int\n");
+    //printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const bool right) {
-    printf("+= var int\n");
+    //printf("+= var int\n");
     *(bool *)data = *(bool *)data || right;
   }
 
@@ -374,7 +374,6 @@ int operator/(const int left, const var &right) {
 }
 
 int operator+=(int left, const var &right) {
-  printf("+= int var\n");
   // printf("+= int var\n");
   return left += *(int *)right.Value();
 }
