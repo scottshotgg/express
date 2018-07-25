@@ -25,7 +25,7 @@ An overhaul of Express, from the ground up. This will soon be moved to the Expre
     - [] `array[]`
     - [] `function[]`
     - [x] Type inference
-- [] `var` types
+- [-] `var` types
     - [x] Basic type encapsulation (`int`, `bool`, `float`, `string`)
     - [] `object` type encapsulation
     - [] `<struct>` type encapsulation
@@ -44,15 +44,15 @@ An overhaul of Express, from the ground up. This will soon be moved to the Expre
     - [] `s` postfix
     - [] `u` prefix
     - [] `c` prefix
-- [] Function usage
-    - [] Function declaration
+- [-] Function usage
+    - [-] Function declaration
         - [x] No args and no returns
         - [] Args without returns
         - [] Returns without args
         - [] Args and returns
     - [] Function call
 - [x] Blocks
-- [] Access types
+- [-] Access types
     - [x] `private`
     - [] `public`
     - [] `fileprivate`
