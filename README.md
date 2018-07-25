@@ -1,19 +1,41 @@
-# Express
+# express
 
-Express is a _strongly-typed_ language containing both _type_inference_ and  dynamically typed `var` (think JavaScript, except better) containing an _extremely_ lite runtime that currently does dynamic typing and RAII lifetime management. In the future it will include a greenthread scheduler a la Golang, atomization of operations, garbage collection, SQLite3/GraphQL, and a few other ideas that are currently only conceptual. Most features will be optional and able to be enabled and disabled at compile time and possible runtime.
+<!--
+    Put a demo proposal in for GraalVM and stuff
+-->
 
-All programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC through something like BinaryNinja. Later on, this will most likely be changed in favor  LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support the development of the language.
+Express is a _strongly-typed_ language containing both _type inference_ and a dynamic type (`var` &mdash; think JavaScript, except better), with an _extremely_ lite embedded runtime within the binary. The runtime currently does dynamic typing and RAII lifetime management, howver, in the future it will include a greenthread scheduler a la Go, atomization of operations, garbage collection, RTTI and reflection, SQLite3/GraphQL embedded databases, DOM instantiation and manipulation, and a few other ideas that are currently only conceptual. Most features will be optional and the programmer will be allowed to enable and disable at compile time and possibly runtime (if a JIT/AOT is supported).
 
-The lexer, syntax parser, semantic parser, and C++ transpiler are currently all implemented in `Go` and will later be converted to `Rust`, but a `JavaScript` implementation in Node is also being developed and will later on be consolidated into this repo after a reorganization of the file structure.
+For binary production, programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via a flag. At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC through something like BinaryNinja. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
+
+Each stage of the compiler (lexer, syntax parser, semantic parser, and C++ transpiler) are currently all implemented in `Go` and will later be converted to `Rust`, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated into this repo after a reorganization of the file structure.
 <br>
 It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
 <br>
 
-## Features Implemented 
+## State of the Compiler
+
+### `Stages Implemented:`
+
+- [x] Lexer
+- [x] Syntax
+- [x] Semantics
+- [x] C++ Transpiler with `clang-format`
+- [x] Binary
+
+<br>
+
+### `Features Implemented:`
+
 [~] means it may not be implemented
 
+- [x] Blocks
 - [x] Basic types (`int`, `bool`, `float`, `string`)
+- [ ] `object` type
+- [ ] `struct` type
+    - [ ] Tags
+- [ ] `function` type
 - [-] `array` type
     - [ ] `int[]`
     - [ ] `float[]`
@@ -25,45 +47,33 @@ It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
     - [ ] `array[]`
     - [ ] `function[]`
     - [x] Type inference
-- [-] `var` types
+- [-] `var` type
     - [x] Basic type encapsulation (`int`, `bool`, `float`, `string`)
     - [ ] `object` type encapsulation
     - [ ] `<struct>` type encapsulation
     - [~] `array` type encapsulation
-        - `Not sure if I want a singular value to be able to hold multiple values`
+        - _Leaning against: not sure if I want to allow a single `var` to be able to contain multiple values_
     - [~] `function` type encapsulation
-        - `A var holding a function doesn't make a lot of sense right now`
-- [ ] `struct` type
-    - [ ] Tags
-- [ ] `function` type
+        - _A var holding a function doesn't make a lot of sense right now_
 - [ ] Type modifier keywords
     - [ ] `array` postfix
     - [ ] `unsigned` prefix
     - [ ] `constant` prefix
-- [ ] Type modifiers
+- [ ] Type modifiers _shorts_
     - [ ] `s` postfix
     - [ ] `u` prefix
     - [ ] `c` prefix
 - [-] Function usage
     - [-] Function declaration
-        - [x] No args and no returns
-        - [ ] Args without returns
-        - [ ] Returns without args
-        - [ ] Args and returns
+        - [x] no args and no returns
+        - [ ] args without returns
+        - [ ] returns without args
+        - [ ] args and returns
     - [ ] Function call
-- [x] Blocks
-- [-] Access types
+- [-] Access modifiers
     - [x] `private`
     - [ ] `public`
     - [ ] `fileprivate`
-<br>
-
-## Stages Implemented
-- [x] Lexer
-- [x] Syntax
-- [x] Semantics
-- [x] C++ Transpiler with `clang-format`
-- [x] Binary
 
 <br>
 <br>
@@ -76,7 +86,7 @@ Proposals are the first step to contributing your ideas and work into Express. T
 <br>
 <br>
 
-- `Features`
+- `Features:`
 
     _Features_ should be submitted using a markdown file (`title_of_your_feature.md`) describing the new abilities or features into an `appropriate_labeled` folder within the `proposals` root folder. Proposals need to use fenced code blocks with the `cs` highlighting tag and contain an Express program example.
 <br>
@@ -88,7 +98,7 @@ Proposals are the first step to contributing your ideas and work into Express. T
 <br>
 <br>
 
-- `Implementations and Experiments`
+- `Implementations and Experiments:`
     <br>
     _Implementations_ and _Experiments_ should be done in a separate branch off of the repo. When you are ready to submit your implementation, you should merge your code locally with the latest `master` branch pull and then submit a PR to `master`.
     <br>
