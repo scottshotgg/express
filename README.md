@@ -29,9 +29,9 @@ An overhaul of Express, from the ground up. This will soon be moved to the Expre
     - [x] Basic type encapsulation (`int`, `bool`, `float`, `string`)
     - [ ] `object` type encapsulation
     - [ ] `<struct>` type encapsulation
-    - [ ] ~ `array` type encapsulation; 
+    - [~] `array` type encapsulation
         - `Not sure if I want a singular value to be able to hold multiple values`
-    - [ ] ~ `function` type encapsulation
+    - [~] `function` type encapsulation
         - `A var holding a function doesn't make a lot of sense right now`
 - [ ] `struct` type
     - [ ] Tags
