@@ -170,6 +170,43 @@ func (p *Parser) ParseArray() token.Token {
 	}
 }
 
+func (p *Parser) ParseNamedFuncDef() token.Token {
+	functionTokens := []token.Token{p.NextToken}
+	p.Shift()
+
+	// if p.NextToken == ""
+
+	return token.Token{
+		ID:   1,
+		Type: token.Function,
+		Value: token.Value{
+			Type: token.FunctionType,
+			True: functionTokens,
+		},
+	}
+}
+
+func (p *Parser) ParseFunctionDef() token.Token {
+	next := p.NextToken
+
+	switch next.Type {
+	case token.Ident:
+		// Named function case
+		return p.ParseNamedFuncDef()
+
+	case token.LParen:
+		// Lambda function case
+
+	default:
+		fmt.Println("did not find an L_PAREN")
+		os.Exit(9)
+	}
+
+	return token.Token{
+		Type: "BROKEN",
+	}
+}
+
 // ParseIdent parses an identifier
 func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 	if blockTokens == nil {
@@ -242,11 +279,24 @@ func (p *Parser) ParseBlock() token.Token {
 		case token.Keyword:
 			fmt.Println("we are here at the keyword thing")
 			blockTokens = append(blockTokens, current)
-			// switch current.Value.Type {
-			// case token.SQL:
-			// 	fmt.Println("found a sql keyword")
+			// if p.CurrentToken.Value.String == "func" {
+			// 	// if p.NextToken.Type != token.Ident {
+			// 	// 	fmt.Println("wtf im here??")
+			// 	// 	continue // for now
+			// 	// }
+
+			// 	fmt.Println("IMPLEMENT p.ParseFunctionDef here")
+			// 	function := p.ParseFunctionDef()
+			// 	fmt.Println("function", function)
+			// 	os.Exit(9)
+
+			// 	// p.ParseFunctionDef
 			// }
-			// os.Exit(9)
+			// // switch current.Value.Type {
+			// // case token.SQL:
+			// // 	fmt.Println("found a sql keyword")
+			// // }
+			// // os.Exit(9)
 
 		case token.GThan:
 			fmt.Println("found a greater than")
@@ -438,15 +488,15 @@ func (p *Parser) ParseBlock() token.Token {
 			}
 
 		case token.Ident:
-			peek := p.NextToken
+			// peek := p.NextToken
 
-			if peek.Type == token.LParen {
-				fmt.Println("IMPLEMENT p.ParseFunctionCall")
-				os.Exit(9)
-				// blockTokens = append(blockTokens, //p.ParseFunctionCall(p.CurrentToken))
-			} else {
-				p.ParseIdent(&blockTokens, p.CurrentToken)
-			}
+			// if peek.Type == token.LParen {
+			// 	fmt.Println("IMPLEMENT p.ParseFunctionCall")
+			// 	os.Exit(9)
+			// 	// blockTokens = append(blockTokens, //p.ParseFunctionCall(p.CurrentToken))
+			// } else {
+			p.ParseIdent(&blockTokens, p.CurrentToken)
+			// }
 
 			// TODO: this case might need to move to the Syntactic part of the parser
 		case token.Literal:

@@ -98,6 +98,7 @@ const (
 	CharType        = "char"
 	ObjectType      = "object"
 	ArrayType       = "array"
+	FunctionType    = "function"
 	SetType         = "set"
 	IntArrayType    = "int[]"
 	StringArrayType = "string[]"

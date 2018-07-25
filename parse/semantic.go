@@ -144,32 +144,22 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		}
 		value.Metadata["refs"] = p.CurrentToken.Value.String
 
-	// case token.Group:
-	// 	meta := Meta{
-	// 		AppendDeclarations: true,
-	// 		IgnoreWS:           true,
-	// 		Tokens:             p.NextToken.Value.True.([]token.Token),
-	// 		Length:             len(p.NextToken.Value.True.([]token.Token)),
-	// 		CheckOptmization:   true,
-	// 		LastMeta:           m,
-	// 		DeclarationMap:     map[string]token.Value{},
-	// 	}
-	// 	meta.Shift()
-	// 	// Might have to change this to GetExpression
-	// 	value, err = meta.GetExpression()
-	// 	if err != nil {
-	// 		return token.Value{}, err
-	// 	}
-	// 	// FIXME: holy fuck haxorz
-	// 	if value.Type == token.IntType {
-	// 		value.String = strconv.Itoa(value.True.(int))
-	// 	}
-	// 	p.Shift()
-	// 	// os.Exit(9)
+	case token.Group:
+		// fmt.Println("getting group", next.Value)
+		// groupContents, ok := next.Value.True.([]token.Token)
+		// fmt.Println("groupContents, ok", groupContents, ok)
 
-	// // case "":
-	// // 	fmt.Println("we at the end?")
-	// // 	os.Exit(8)
+		// for _, groupee := range groupContents {
+		// 	fmt.Println("groupee", groupee)
+		// }
+
+		// os.Exit(9)
+
+		value = next.Value
+
+	// case "":
+	// 	fmt.Println("we at the end?")
+	// 	os.Exit(8)
 
 	case token.Array:
 		fmt.Println("ayy rayy")
@@ -977,8 +967,79 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 			Metadata: expr.Metadata,
 		}, nil
 
+	case "func":
+		// Check for ident
+		// Check for arguments (group)
+		// Check for returns (statement/group)
+		// Check for block
+
+		// Shift away the "func" keyword
+		p.Shift()
+
+		fmt.Println("GETTING FUNC")
+		p.meta.NewInheritedScope()
+
+		// Save the state from the beginning of the function parse
+		p.SaveState()
+
+		// 1. Always expect an ident after the `func` keyword
+		if p.NextToken.Type != token.Ident {
+			// TODO:
+			return token.Value{}, errors.Errorf("Ident not found after for: %+v", p.NextToken)
+		}
+
+		fmt.Printf("p.NextToken.Value %+v\n", p.NextToken.Value)
+		variableName := p.NextToken.Value.String
+		p.meta.currentVariable.Name = variableName
+		p.meta.currentVariable.Type = variableTypeFromString(token.FunctionType)
+		// p.meta.currentVariable.ActingType = variableTypeFromString(token.FunctionType)
+		p.meta.currentVariable.AccessType = accessTypeFromString(token.PrivateAccessType)
+		p.Shift()
+
+		// Get arguments
+		groupExpr, err := p.GetExpression()
+		if err != nil {
+			return token.Value{}, err
+		}
+		groupExpr.Name = "args"
+		fmt.Println("groupExpr, err", groupExpr, err)
+
+		p.Shift()
+
+		// Get returns
+		// // Save the state from before the return parse
+		// p.SaveState()
+		// groupExpr2, err := p.GetExpression()
+		// if err != nil {
+		// 	// return token.Value{}, err
+		// }
+		// fmt.Println("groupExpr2, err", groupExpr2, err)
+
+		blockToken, err := p.CheckBlock()
+		if err != nil {
+			os.Exit(9)
+		}
+		fmt.Println("blockToken, err", blockToken, err)
+
+		// bodyTokens := body.True.([]token.Value)
+		// fmt.Println("bodyTokens", bodyTokens)
+
+		return token.Value{
+			Name:       p.meta.currentVariable.Name,
+			AccessType: token.PrivateAccessType,
+			Type:       token.Function,
+			True: map[string]token.Value{
+				"args":    groupExpr,
+				"returns": token.Value{},
+				"body":    blockToken,
+			},
+			Metadata: map[string]interface{}{
+				"lambda": false,
+			},
+		}, nil
+
 	default:
-		fmt.Println("woah idk", p.CurrentToken)
+		fmt.Println("woah idk", p.NextToken)
 		os.Exit(9)
 	}
 

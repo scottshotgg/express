@@ -23,6 +23,7 @@ const (
 	STRING
 	VAR // I think we should prevent var from being a multiple things
 	ARRAY
+	GROUP
 	OBJECT // Use this for a hashmap
 	POINTER
 	SET

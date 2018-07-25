@@ -6,7 +6,66 @@ hey *its* me
 -->
 
 # Express-rearch
-An overhaul of Express, from the ground up
+An overhaul of Express, from the ground up. This will soon be moved to the Express repo
+<br>
+<br>
+
+### Features Implemented 
+~ means it may not be implemented
+
+- [x] Basic types (`int`, `bool`, `float`, `string`)
+- [] `array` type
+    - [] `int[]`
+    - [] `float[]`
+    - [x] `bool[]`
+    - [x] `string[]`
+    - [] `var[]`
+    - [] `object[]`
+    - [] `<struct>[]`
+    - [] `array[]`
+    - [] `function[]`
+    - [x] Type inference
+- [] `var` types
+    - [x] Basic type encapsulation (`int`, `bool`, `float`, `string`)
+    - [] `object` type encapsulation
+    - [] `<struct>` type encapsulation
+    - ~ [] `array` type encapsulation; 
+        - `Not sure if I want a singular value to be able to hold multiple values`
+    - ~ [] `function` type encapsulation
+        - `A var holding a function doesn't make a lot of sense right now`
+- [] `struct` type
+    - [] Tags
+- [] `function` type
+- [] Type modifier keywords
+    - [] `array` postfix
+    - [] `unsigned` prefix
+    - [] `constant` prefix
+- [] Type modifiers
+    - [] `s` postfix
+    - [] `u` prefix
+    - [] `c` prefix
+- [] Function usage
+    - [] Function declaration
+        - [x] No args and no returns
+        - [] Args without returns
+        - [] Returns without args
+        - [] Args and returns
+    - [] Function call
+- [x] Blocks
+- [] Access types
+    - [x] `private`
+    - [] `public`
+    - [] `fileprivate`
+<br>
+<br>
+
+### Stages Implemented
+- [x] Lexer
+- [x] Syntax
+- [x] Semantics
+- [x] C++ Transpiler with `clang-format`
+- [x] Binary
+
 <br>
 <br>
 

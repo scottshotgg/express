@@ -17,10 +17,63 @@ import (
 
 var (
 	// f          string
-	r          *rand.Rand
-	err        error
-	insideLoop bool
+	r               *rand.Rand
+	err             error
+	insideLoop      bool
+	functionStrings = ""
 )
+
+func translateFunction(t token.Value) (string, error) {
+	functionString := ""
+
+	fmt.Printf("%+v\n", t)
+	trueValue, ok := t.True.(map[string]token.Value)
+	if !ok {
+		fmt.Println("shit look at t")
+		return "", errors.New("not ok")
+	}
+
+	// TODO: only supporting void type for now
+	if trueValue["return"].True == nil {
+		functionString += "void "
+	}
+
+	// Append the name of the function
+	functionString += t.Name
+
+	argsInterface := trueValue["args"].True
+	if argsInterface == nil {
+		functionString += "()"
+	} else {
+		args, ok := argsInterface.([]token.Token)
+		if !ok {
+			fmt.Println("shit look at args interface")
+			return "", errors.New("not ok")
+		}
+		functionString += "("
+
+		for i, arg := range args {
+			functionString += arg.Type + " " + arg.Value.Name
+
+			if i != len(args)-1 {
+				functionString += ","
+			}
+		}
+		functionString += ") "
+
+	}
+
+	fmt.Println("trueValue", trueValue)
+
+	bodyString, err := translateBlock(trueValue["body"])
+	if err != nil {
+		// TODO:
+	}
+
+	functionString += bodyString
+
+	return functionString, nil
+}
 
 func translateArray(t token.Value) (string, error) {
 	arrayString := ""
@@ -149,6 +202,10 @@ func translateVariableStatement(t token.Value) (string, error) {
 func translateIf(t token.Value) (string, error) {
 	controlString := ""
 
+	if t.Type != token.If {
+		return "", errors.New("blah")
+	}
+
 	fmt.Println("wtf")
 	fmt.Printf("t %+v\n", t)
 
@@ -157,7 +214,6 @@ func translateIf(t token.Value) (string, error) {
 	// 	fmt.Println("error writing to file")
 	// 	os.Exit(9)
 	// }
-	controlString += fmt.Sprintf("if (%s) ", t.String)
 
 	// metadata, ok := t.Metadata
 	// if !ok {
@@ -177,7 +233,7 @@ func translateIf(t token.Value) (string, error) {
 		return "", err
 	}
 
-	controlString += blockString + "\n"
+	controlString = fmt.Sprintf("if (%s) ", t.String) + blockString + "\n"
 
 	return controlString, nil
 }
@@ -284,17 +340,25 @@ func translateBlock(tv token.Value) (string, error) {
 			if err != nil {
 				fmt.Println("loop translation err", err)
 				ifString, err := translateIf(t)
-				fmt.Println("if translation err", err)
 				if err != nil {
 					// TODO:
 					fmt.Println("if translate err", err)
-					return "", err
+					functionString, err := translateFunction(t)
+					if err != nil {
+						fmt.Println("function translate err", err)
+						return "", err
+					}
+					functionStrings += functionString + "\n"
+					continue
 				}
 				blockString += ifString
+				continue
 			}
 			blockString += loopString
+			continue
 		}
 		blockString += variableString
+		continue
 	}
 
 	return blockString + "}\n", nil
@@ -327,7 +391,6 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 
 	f += "#include <string>\n"
 	f += "#include \"var.cpp\"\n"
-	f += "int main()"
 
 	blockString, err := translateBlock(block)
 	if err != nil {
@@ -336,7 +399,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += blockString
+	f += functionStrings + "\nint main()" + blockString
 
 	return f, nil
 }

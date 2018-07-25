@@ -1,0 +1,32 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "declareSomething",
+			"Type": "FUNCTION",
+			"True": {
+				"args": {
+					"Name": "args",
+					"Type": "GROUP",
+					"True": []
+				},
+				"body": {
+					"Type": "BLOCK",
+					"True": [
+						{
+							"Name": "i",
+							"Type": "bool",
+							"True": true,
+							"AccessType": "private"
+						}
+					]
+				},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false
+			}
+		}
+	]
+}
