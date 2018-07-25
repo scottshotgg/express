@@ -82,40 +82,40 @@ It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
 ### Proposals
 
-Proposals are the first step to contributing your ideas and work into Express. The first step to contributing is submitting a `feature` proposal through a PR. Below contains the list of steps and criteria for submission and approval.
+Proposal submission is **the** method to contribute your ideas and work into Express. The first step to submitting a proposal is a usually `feature` request through a PR. Below contains the list of steps and the corresponding criteria for submission and approval.
 <br>
 <br>
 
 - `Features:`
-
-    _Features_ should be submitted using a markdown file (`title_of_your_feature.md`) describing the new abilities or features into an `appropriate_labeled` folder within the `proposals` root folder. Proposals need to use fenced code blocks with the `cs` highlighting tag and contain an Express program example.
+    <br>
+    _Features_ should be submitted in the form of a markdown file (`title_of_your_feature.md`) describing the proposed abilities into a folder within `proposals/features/<appropriately_labeled>` folder. Proposals need to use fenced code blocks with a combination of `cs`, `vb` and `js` highlighting tags and contain an Express program example of your feature.
 <br>
 <br>
 
 - `Ideas:`
     <br>
-    _Ideas_ about the languages direction, internals related to the architecture, or general core-langaage level imlementations should go into the `proposals/ideas` folder and should be formatted as a whitepaper with detail containing a beginning narative that will explain <u>where</u> and <u>how</u> the idea came from, atleast two supporting arguments that should answer the question of <u>why</u> your proposal should be considered, and one informal/abstract (i.e, pseudocode) use-case on <u>how</u> it would be used after implementation.
+    _Ideas_ about the languages direction, internals related to the architecture, or general core-langaage level imlementations requests should go into the `proposals/ideas` folder and should be formatted as a whitepaper with detail containing a beginning narative that will explain <u>where</u> and <u>how</u> the idea came from, atleast two supporting arguments that should answer the question of <u>why</u> your proposal should be considered, and one informal/abstract (i.e, pseudocode) use-case on <u>how</u> it would be used after implementation.
 <br>
 <br>
 
 - `Implementations and Experiments:`
     <br>
-    _Implementations_ and _Experiments_ should be done in a separate branch off of the repo. When you are ready to submit your implementation, you should merge your code locally with the latest `master` branch pull and then submit a PR to `master`.
+    _Implementations_ and _Experiments_ should be done in a separate branch off of the repo after approval of a submitted `feature` request. When you are ready to submit your implementation, you should fetch the latest upstream `master` and merge your code in locally, confirm that tests still work, and then submit a PR into `master`.
     <br>
-    Your PR should also contain an Express test program in the `test/output/programs` folder, along with the respective `lex`, `syn`, `sem`, `cpp`, and `bin` files.
+    Your PR should also contain an Express test program in the `test/output/programs` folder, along with the respective `lex`, `syn`, `sem`, `cpp`, and `bin` files that will be used to verify the tests.
 <br>
 <br>
 
->_`Note`_: If your PR **does not** meet the criteria when it is submitted or cannot be merged it will be _automatically_ denied by the CI/CD pipeline with comments about failure. You will need to submit another one after fixing the problems.
+>_`Note`_: If your PR **does not** meet the criteria when it is submitted, tests do not pass, or cannot be merged into the parent branch, it will be _automatically_ denied by the CI/CD pipeline with comments about failure. You will need to submit another PR after fixing the mentioned issues.
 
 <br>
 <br>
 
 ## Example Program
 
-Below is currently the most advanced program that can be written in Express. You can find the **full** *uncommented* version labeled `advanced.expr` under the `samples` directory.
+Below is currently the most advanced program that can be written in Express. You can find the *full* **uncommented** version under `advanced.expr` under the `test/programs` directory.
 <br>
-You will find a few examples of the allowed flexibilities and optional verbosity that allow the language to be so _Expressive_.
+In the program below, you will find a few examples of the allowed flexibilities and optional verbosity that allow the language to be so _Expressive_.
 
 <br>
 
@@ -129,7 +129,7 @@ ____
 
 > Start off by declaring some variables:
 
-```csharp
+```cs
 int powerlevel = 0x2327;
 bool over9k = false;
 float pi = 3.14159265359;
@@ -138,17 +138,19 @@ string arizona = "iced out boys";
 
 <br>
 
-> Beyond basic static types, Express also supports using dynamically typed variables as well. 
+> In addition to the basic static types, Express also supports using dynamically typed variables as well.
 <br>
-> It is important to note that these variable dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables.
+> It is important to note that these variables are dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables correlating to the same shadow type.
 <br>
-> To see how the runtime that manages this in C++, open `var.cpp` from `test/output/cpp`.
+> For a look at closer look at how the runtime manages this in C++, see the source code in `var.cpp` from `test/output/cpp`.
+<br>
+> More documentation and better comments (_as if there is any, lol - really though_) will be added later - <sup><sub>_i promise_</sub></sup>
 
 ```js
 // start 'hi_my_type_is' off as a dynamically typed string variable
 var hi_my_type_is = "what"
 
-// change to an integer
+// now i'm an integer
 hi_my_type_is = 666
 
 // here's a bool
@@ -174,29 +176,31 @@ hi_my_type_is = 2.71828
 <br>
 
 > Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression:
-
-```csharp
+<br>
+```cs
 int zero = 0
     one := 1    // tabbed for visibility
 ```
+
+> _`Note`_: Type inference will never *produce* a `var` or a `struct` type.
 
 <br>
 
 > `Optional Verbosity`:
 <br>
-> Before moving on, let's explain a primary motivator in the Express language development. Above, you will observe that the usage of commas and semicolons as statement delimiters seems to be optional. This is because they are! Statement delimiters are acceptable if you prefer, but are in no way required if you'd rather not deal with that.
+> Before moving on, let's explain a primary motivator in the Express language development. Above, you might have observed that the usage of commas and semicolons as statement delimiters seems to be optional, and indeed they are! Statement delimiters are not required, but are acceptable (`;` or `,`) if you'd prefer to be more verbose or are accustomed to C-style programming.
 <br>
-> In the underlying parser architecture, they serve a semantic purpose by marking the end of a statement parse. By default, the ending of the statement will be semantically inferred if not *expressly* specified, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action to enforce strict punctuation as granularly (or entirely) as you prefer.
+> In the underlying parser architecture, they (`;` or `,`) serve a semantic purpose by marking the end of a statement parse which will manually command the compiler to dump the current parse. By default, the ending of the statement will be semantically inferred, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action and enforce strict punctuation as granularly (or entirely) as you prefer.
 <br>
-> In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very relaxing.
+> In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very satisfying and relaxing when programming.
 <br>
-> This allowed flexibility is known as *`optional verbosity`* in Express and is one of the key motivators in it's development.
+> This allowed flexibility is known as _`optional verbosity`_ in Express and is one of the key motivators in it's development.
 
 <br>
 
 > Now, I wouldn't do this, but as a testament towards the semantic reasoning within the parser; you can even write statements on the same line as each other:
 
-```csharp
+```cs
 string ayy = "ayy" string waddup = "waddup" int timestamp = 1527799745
 ```
 
@@ -215,11 +219,9 @@ anotherOne: "anotherOne"
 
 <br>
 
-> Below shows a type inferred `object` where most of its properties are also type inferred.
-<br>
-> *Note:* The following statements until the ending brace are all within the `testerino` variable
+> Below shows a type inferred `object` where most of its properties are also type inferred. The following statements until the ending brace are all conatined within the `testerino` variable.
 
-```vb
+```js
 testerino := {
     id: "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"
 ```
@@ -228,7 +230,7 @@ testerino := {
 
 > Reference one of the above variables in a new property declaration
 
-```csharp
+```cs
     time: timestamp
 ```
 
@@ -236,7 +238,7 @@ testerino := {
 
 > You can also use the `assignment` operator along with a type to crimp the type of the variable instead of leaving it up for interpretation by the compiler
 
-```vb
+```cs
     float price = 55.3592,
 ```
 
@@ -263,9 +265,9 @@ testerino := {
 
 <br>
 
-> An `array` composition using the above definitions of `zero` and `one` to derive a `type` and `length` inference
+> An `array` composition using the above definitions of `zero` and `one` to derive a `type` and `length` inference:
 
-```csharp
+```js
     ten: [ one, zero, one, zero ]
 ```
 
@@ -287,7 +289,7 @@ testerino := {
 
 <br>
 
-> Ending of `testerino`
+> Ending of the `testerino` object
 
 ```vb
 }
@@ -295,20 +297,21 @@ testerino := {
 
 <br>
 
-> Arrays can be declared as well; below is a `static` `string` type `array` using composition to infer a `length`.
+> Arrays can be declared as well; below is a `static` `string` type `array` using composition to infer an array `length`:
 
-```csharp
+```cs
 string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
 ```
 
 <br>
 
-> Expanding on the above example, delineatiation of elements from one another using commas isn't required but should be used at your own descretion of verbosity.
+> Expanding on the above example, delineatiation of elements from one another using commas follows the same logic as the aforementioned statement delimiters. It isn't required but should be used at your own descretion of verbosity.
 <br>
-The spacing also doesn't matter, but *readable* code does. <br>
-Again - its all *semantics* `¯\_(ツ)_/¯`
+> The spacing also doesn't matter, but *readable* code does. 
+<br>
+> Again - its all *semantics* `¯\_(ツ)_/¯`
 
-```csharp
+```cs
 string[] here_comes =
 [
   ayy,
@@ -345,7 +348,7 @@ for progress := 0, progress < 100, progress++ {
 
 > A key-based iterator for loop (for..in):
 
-```csharp
+```cs
 int i = 0;
 for index in [ 1, 2, 4 ] {
     i = index;
@@ -356,7 +359,7 @@ for index in [ 1, 2, 4 ] {
 
 > A value-based iterator for loop (for..of):
 
-```csharp
+```cs
 houstonWeHaveLiftOff := false
 countdown := [ 9, 7, 6, 5, 4, 3, 2, 1 ];
 for step of countdown {
@@ -364,4 +367,16 @@ for step of countdown {
   houstonWeHaveLiftOff = false
 }
 houstonWeHaveLiftOff = true
+```
+
+<br>
+
+> A simple function:
+
+```go
+func lookAtme() {
+    // function contents...
+    
+    something := "else"
+}
 ```
