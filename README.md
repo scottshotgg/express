@@ -14,7 +14,7 @@ An overhaul of Express, from the ground up. This will soon be moved to the Expre
 ~ means it may not be implemented
 
 - [x] Basic types (`int`, `bool`, `float`, `string`)
-- [] `array` type
+- [-] `array` type
     - [] `int[]`
     - [] `float[]`
     - [x] `bool[]`
@@ -56,7 +56,6 @@ An overhaul of Express, from the ground up. This will soon be moved to the Expre
     - [x] `private`
     - [] `public`
     - [] `fileprivate`
-<br>
 <br>
 
 ### Stages Implemented
