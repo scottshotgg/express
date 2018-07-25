@@ -1,12 +1,4 @@
 ```csharp
-// Most verbose to least verbose
-constant unsigned float128 array filter_coefficients = [3.3, 4.4, 5.5, 6.6]
-constant unsigned float128[] filter_coefficients = [3.3, 4.4, 5.5, 6.6]
-constant unsigned float128s filter_coefficients = [3.3, 4.4, 5.5, 6.6]
-constant ufloat128s filter_coefficients = [3.3, 4.4, 5.5, 6.6]
-cufloat128s filter_coefficients = [3.3, 4.4, 5.5, 6.6]
-
-
 struct thing = {
     // These fields will take the type defined default values
     int    normieInt,
@@ -34,9 +26,4 @@ structTest := thing{}
 // Doesn't work because this it's an object; not a struct.
 objThing := {}
 objTest := objThing{}
-
-// Iterable composition
-something := thing over things {
-    thing + 2
-}
 ```

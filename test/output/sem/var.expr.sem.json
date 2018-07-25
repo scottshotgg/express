@@ -2,14 +2,14 @@
 	"Type": "BLOCK",
 	"True": [
 		{
-			"Name": "test",
+			"Name": "hi_my_type_is",
 			"Type": "var",
 			"Acting": "string",
-			"True": "test_string",
+			"True": "what",
 			"AccessType": "private"
 		},
 		{
-			"Name": "test",
+			"Name": "hi_my_type_is",
 			"Type": "var",
 			"Acting": "int",
 			"True": 666,
@@ -19,7 +19,7 @@
 			}
 		},
 		{
-			"Name": "test",
+			"Name": "hi_my_type_is",
 			"Type": "var",
 			"Acting": "bool",
 			"True": true,
@@ -29,7 +29,7 @@
 			}
 		},
 		{
-			"Name": "test",
+			"Name": "hi_my_type_is",
 			"Type": "var",
 			"Acting": "float",
 			"True": 2.71828,

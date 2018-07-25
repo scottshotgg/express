@@ -21,8 +21,8 @@ const (
 	testOutput = testRoot + "output/"
 
 	testLex       = testOutput + "lex/"
-	testSemantic  = testOutput + "semantic/"
-	testSyntactic = testOutput + "syntactic/"
+	testSemantic  = testOutput + "sem/"
+	testSyntactic = testOutput + "syn/"
 	testCpp       = testOutput + "cpp/"
 	testBin       = testOutput + "bin/"
 

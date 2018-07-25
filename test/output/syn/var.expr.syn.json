@@ -15,7 +15,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "test"
+						"String": "hi_my_type_is"
 					}
 				},
 				{
@@ -29,15 +29,15 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "string",
-						"True": "test_string",
-						"String": "test_string"
+						"True": "what",
+						"String": "what"
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "test"
+						"String": "hi_my_type_is"
 					}
 				},
 				{
@@ -58,7 +58,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "test"
+						"String": "hi_my_type_is"
 					}
 				},
 				{
@@ -79,7 +79,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "test"
+						"String": "hi_my_type_is"
 					}
 				},
 				{

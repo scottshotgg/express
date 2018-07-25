@@ -3,5 +3,5 @@
 
 int main() {
   int four = 4;
-  int five = four;
+  int five = 4;
 }
