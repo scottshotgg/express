@@ -16,7 +16,7 @@ int main() {
   // TODO: need to see about implementing function arguments
 
   // Using a function that is already declared
-  defer ____(nullptr, [](...){ something(); });
+  defer hey_its_me(nullptr, [](...){ something(); });
 
   // Anonymous statements
   defer ___(nullptr, [](...){ cout << "hi my name is scott" << endl; });

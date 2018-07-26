@@ -53,6 +53,8 @@
     "cwctype": "cpp",
     "istream": "cpp",
     "streambuf": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "__tuple": "cpp",
+    "__string": "cpp"
   }
 }
