@@ -138,13 +138,7 @@ string arizona = "iced out boys";
 
 <br>
 
-> In addition to the basic static types, Express also supports using dynamically typed variables as well.
-<br>
-It is important to note that these variables are dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables correlating to the same shadow type.
-<br>
-For a look at closer look at how the runtime manages this in C++, see the source code in `var.cpp` from `test/output/cpp`.
-<br>
-More documentation and better comments (_as if there is any, lol - really though_) will be added later - <sup><sub>_i promise_</sub></sup>
+> In addition to the basic static types, Express also supports using dynamically typed variables as well. <br> It is important to note that these variables are dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables correlating to the same shadow type. <br> For a look at closer look at how the runtime manages this in C++, see the source code in `var.cpp` from `test/output/cpp`. <br> More documentation and better comments (_as if there is any, lol - really though_) will be added later - <sup><sub>_i promise_</sub></sup>
 
 ```js
 // start 'hi_my_type_is' off as a dynamically typed string variable
