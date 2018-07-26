@@ -34,15 +34,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532545221[] = {1, 2, 4};
+    int arrayBoi_1532576309[] = {1, 2, 4};
     int index = 0;
-    int index_1532545221 = 0;
-    while (index_1532545221 < 3) {
+    int index_1532576309 = 0;
+    while (index_1532576309 < 3) {
       {
-        index = index_1532545221;
+        index = index_1532576309;
         i = index;
       }
-      index_1532545221 += 1;
+      index_1532576309 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -50,13 +50,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532545221 = 0;
-    while (step_1532545221 < 8) {
+    int step_1532576309 = 0;
+    while (step_1532576309 < 8) {
       {
-        step = countdown[step_1532545221];
+        step = countdown[step_1532576309];
         houstonWeHaveLiftOff = false;
       }
-      step_1532545221 += 1;
+      step_1532576309 += 1;
     }
   }
   houstonWeHaveLiftOff = true;
