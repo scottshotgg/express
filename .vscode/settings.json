@@ -36,6 +36,23 @@
     "forward_list": "cpp",
     "list": "cpp",
     "map": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "utility": "cpp",
+    "sstream": "cpp",
+    "*.tcc": "cpp",
+    "cctype": "cpp",
+    "clocale": "cpp",
+    "cmath": "cpp",
+    "cstdarg": "cpp",
+    "cstddef": "cpp",
+    "cstdio": "cpp",
+    "cstdlib": "cpp",
+    "cstring": "cpp",
+    "ctime": "cpp",
+    "cwchar": "cpp",
+    "cwctype": "cpp",
+    "istream": "cpp",
+    "streambuf": "cpp",
+    "memory_resource": "cpp"
   }
 }
