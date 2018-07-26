@@ -87,21 +87,21 @@ Proposal submission is **the** method to contribute your ideas and work into Exp
 <br>
 
 - `Features:`
-    <br>
+   <br>
     _Features_ should be submitted in the form of a markdown file (`title_of_your_feature.md`) describing the proposed abilities into a folder within `proposals/features/<appropriately_labeled>` folder. Proposals need to use fenced code blocks with a combination of `cs`, `vb` and `js` highlighting tags and contain an Express program example of your feature.
 <br>
 <br>
 
 - `Ideas:`
-    <br>
+   <br>
     _Ideas_ about the languages direction, internals related to the architecture, or general core-langaage level imlementations requests should go into the `proposals/ideas` folder and should be formatted as a whitepaper with detail containing a beginning narative that will explain <u>where</u> and <u>how</u> the idea came from, atleast two supporting arguments that should answer the question of <u>why</u> your proposal should be considered, and one informal/abstract (i.e, pseudocode) use-case on <u>how</u> it would be used after implementation.
 <br>
 <br>
 
 - `Implementations and Experiments:`
-    <br>
+   <br>
     _Implementations_ and _Experiments_ should be done in a separate branch off of the repo after approval of a submitted `feature` request. When you are ready to submit your implementation, you should fetch the latest upstream `master` and merge your code in locally, confirm that tests still work, and then submit a PR into `master`.
-    <br>
+   <br>
     Your PR should also contain an Express test program in the `test/output/programs` folder, along with the respective `lex`, `syn`, `sem`, `cpp`, and `bin` files that will be used to verify the tests.
 <br>
 <br>
@@ -138,7 +138,7 @@ string arizona = "iced out boys";
 
 <br>
 
-> In addition to the basic static types, Express also supports using dynamically typed variables as well. <br> It is important to note that these variables are dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables correlating to the same shadow type. <br> For a look at closer look at how the runtime manages this in C++, see the source code in `var.cpp` from `test/output/cpp`. <br> More documentation and better comments (_as if there is any, lol - really though_) will be added later - <sup><sub>_i promise_</sub></sup>
+> In addition to the basic static types, Express also supports using dynamically typed variables as well.<br> It is important to note that these variables are dynamically typed at _run-time_ and thus will incur a performance penalty in constrast to static variables correlating to the same shadow type.<br> For a look at closer look at how the runtime manages this in C++, see the source code in `var.cpp` from `test/output/cpp`.<br> More documentation and better comments (_as if there is any, lol - really though_) will be added later - <sup><sub>_i promise_</sub></sup>
 
 ```js
 // start 'hi_my_type_is' off as a dynamically typed string variable
@@ -180,15 +180,7 @@ int zero = 0
 
 <br>
 
-> `Optional Verbosity`:
-<br>
-> Before moving on, let's explain a primary motivator in the Express language development. Above, you might have observed that the usage of commas and semicolons as statement delimiters seems to be optional, and indeed they are! Statement delimiters are not required, but are acceptable (`;` or `,`) if you'd prefer to be more verbose or are accustomed to C-style programming.
-<br>
-> In the underlying parser architecture, they (`;` or `,`) serve a semantic purpose by marking the end of a statement parse which will manually command the compiler to dump the current parse. By default, the ending of the statement will be semantically inferred, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action and enforce strict punctuation as granularly (or entirely) as you prefer.
-<br>
-> In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very satisfying and relaxing when programming.
-<br>
-> This allowed flexibility is known as _`optional verbosity`_ in Express and is one of the key motivators in it's development.
+> `Optional Verbosity`:<br> Before moving on, let's explain a primary motivator in the Express language development. Above, you might have observed that the usage of commas and semicolons as statement delimiters seems to be optional, and indeed they are! Statement delimiters are not required, but are acceptable (`;` or `,`) if you'd prefer to be more verbose or are accustomed to C-style programming.<br> In the underlying parser architecture, they (`;` or `,`) serve a semantic purpose by marking the end of a statement parse which will manually command the compiler to dump the current parse. By default, the ending of the statement will be semantically inferred, however, there are compiler `flags` and [ECMA-335](https://www.ecma-international.org/publications/standards/Ecma-335.htm) `attributes` to modify the default action and enforce strict punctuation as granularly (or entirely) as you prefer.<br> In this regard, having the flexibility to allow the compiler to semantically infer the end of the statement, while also retaining the ability to manually signal when a statement should end, can be very satisfying and relaxing when programming.<br> This allowed flexibility is known as _`optional verbosity`_ in Express and is one of the key motivators in it's development.
 
 <br>
 
@@ -299,11 +291,7 @@ string[] stringArray = [ "hi", "my", "name", "is", "scott" ]
 
 <br>
 
-> Expanding on the above example, delineatiation of elements from one another using commas follows the same logic as the aforementioned statement delimiters. It isn't required but should be used at your own descretion of verbosity.
-<br>
-> The spacing also doesn't matter, but *readable* code does. 
-<br>
-> Again - its all *semantics* `¯\_(ツ)_/¯`
+> Expanding on the above example, delineatiation of elements from one another using commas follows the same logic as the aforementioned statement delimiters. It isn't required but should be used at your own descretion of verbosity.<br> The spacing also doesn't matter, but *readable* code does. <br> Again - its all *semantics* `¯\_(ツ)_/¯`
 
 ```cs
 string[] here_comes =
