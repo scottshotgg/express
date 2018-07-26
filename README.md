@@ -170,7 +170,7 @@ hi_my_type_is = 2.71828
 <br>
 
 > Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression:
-<br>
+
 ```cs
 int zero = 0
     one := 1    // tabbed for visibility
