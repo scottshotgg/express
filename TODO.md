@@ -17,3 +17,4 @@
       - [ ] `cpp {file}`
       - [ ] `bin {file}`
       - [ ] `all {file}`<br><br>
+- [ ] Setup circleCI to build the project
