@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+clang++ -std=gnu++2a defer.test.cpp -o defer && ./defer

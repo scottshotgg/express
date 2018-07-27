@@ -1,0 +1,33 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "print"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "GROUP",
+					"Value": {
+						"Type": "GROUP",
+						"True": [
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 1
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

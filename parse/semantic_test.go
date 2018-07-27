@@ -89,6 +89,7 @@ func TestSemantic(t *testing.T) {
 	fmt.Println()
 }
 
+// TODO: this needs to print out a summary of what passed, what stages failed, etc
 func TestAll(t *testing.T) {
 	// ls ../test/programs directory
 	// for each file
@@ -105,9 +106,10 @@ func TestAll(t *testing.T) {
 	if err != nil {
 		fmt.Println("ReadDirErr", err)
 		t.Fail()
+		return
 	}
 	if len(files) == 0 {
-		// TODO:
+		// TODO: make a printout or something here
 		return
 	}
 
@@ -115,6 +117,7 @@ func TestAll(t *testing.T) {
 	if err != nil {
 		// TODO:
 		fmt.Println("err removing", err)
+		t.Fail()
 		return
 	}
 
@@ -123,6 +126,7 @@ func TestAll(t *testing.T) {
 	if err != nil {
 		// TODO:
 		fmt.Println("err creating", err)
+		t.Fail()
 		return
 	}
 
@@ -138,7 +142,6 @@ func TestAll(t *testing.T) {
 				if err != nil {
 					fmt.Println("AbsErr", err)
 					// TODO: make this more individual later
-					t.Fail()
 					return
 				}
 				fmt.Println(pathOfFile)
@@ -147,7 +150,6 @@ func TestAll(t *testing.T) {
 				lexTokens, err = lexFile(pathOfFile, filename)
 				if err != nil {
 					fmt.Println("lexFileErr", err)
-					t.Fail()
 					return
 				}
 
@@ -155,7 +157,6 @@ func TestAll(t *testing.T) {
 				if err != nil {
 					fmt.Println("AbsErr", err)
 					// TODO: make this more individual later
-					t.Fail()
 					return
 				}
 				fmt.Println(pathOfFile)
@@ -163,14 +164,12 @@ func TestAll(t *testing.T) {
 				syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 				if err != nil {
 					fmt.Println("syntacticParseFileErr", err)
-					t.Fail()
 					return
 				}
 
 				semanticTokens, err := semanticParseFile(filename, syntacticTokens)
 				if err != nil {
 					fmt.Println("lexFileErr", err)
-					t.Fail()
 					return
 				}
 
@@ -200,6 +199,8 @@ func TestAll(t *testing.T) {
 	}
 
 	wg.Wait()
+
+	fmt.Println("Finished!")
 }
 
 func lexFile(pathOfFile, filename string) ([]token.Token, error) {

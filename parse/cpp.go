@@ -3,6 +3,9 @@ package parse
 import (
 	"fmt"
 	"math/rand"
+	"os"
+	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -21,6 +24,8 @@ var (
 	err             error
 	insideLoop      bool
 	functionStrings = ""
+
+	libBase = ""
 )
 
 func translateFunction(t token.Value) (string, error) {
@@ -387,10 +392,35 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// f+="struct Any { std::string type; void* data; };\n"
 	r = rand.New(rand.NewSource(time.Now().Unix()))
 
+	libBase, err = filepath.Abs("../lib/")
+	if err != nil {
+		os.Exit(9)
+	}
+
 	var f string
 
-	f += "#include <string>\n"
-	f += "#include \"var.cpp\"\n"
+	baseLibs := []string{
+		"#include <string>",
+	}
+
+	f += strings.Join(baseLibs, "\n")
+
+	// Make the semantic parser declare these as it parses later
+	// For now just include everything that we could ever need:
+	//	- var
+	//	- std
+	//	- defer
+	extraLibs := []string{
+		"var.cpp",
+		"std.cpp",
+		// "defer.cpp",
+	}
+
+	for k, _ := range extraLibs {
+		extraLibs[k] = "#include " + strconv.Quote(libBase+"/"+extraLibs[k])
+	}
+
+	f += "\n" + strings.Join(extraLibs, "\n")
 
 	blockString, err := translateBlock(block)
 	if err != nil {
@@ -399,7 +429,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += functionStrings + "\nint main()" + blockString
+	f += "\n" + functionStrings + "\nint main()" + blockString
 
 	return f, nil
 }
