@@ -1,4 +1,5 @@
-#include "var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/ExpressRedo/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/ExpressRedo/lib/var.cpp"
 #include <string>
 void declareSomething() { bool i = true; }
 
@@ -34,15 +35,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532576309[] = {1, 2, 4};
+    int arrayBoi_1532709183[] = {1, 2, 4};
     int index = 0;
-    int index_1532576309 = 0;
-    while (index_1532576309 < 3) {
+    int index_1532709183 = 0;
+    while (index_1532709183 < 3) {
       {
-        index = index_1532576309;
+        index = index_1532709183;
         i = index;
       }
-      index_1532576309 += 1;
+      index_1532709183 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -50,13 +51,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532576309 = 0;
-    while (step_1532576309 < 8) {
+    int step_1532709183 = 0;
+    while (step_1532709183 < 8) {
       {
-        step = countdown[step_1532576309];
+        step = countdown[step_1532709183];
         houstonWeHaveLiftOff = false;
       }
-      step_1532576309 += 1;
+      step_1532709183 += 1;
     }
   }
   houstonWeHaveLiftOff = true;

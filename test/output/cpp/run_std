@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-clang++ -std=gnu++2a std.test.cpp -o std && ./std
