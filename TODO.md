@@ -1,6 +1,6 @@
 # TODO
 
-## General
+## `General`
 
 - [ ] Make a demo `feature` request, `idea`, and `misc`
 - [ ] Comment `lib` - atleast `lib/var.cpp`
@@ -27,7 +27,9 @@
     - [ ] `bin {file}`
     - [ ] `all {file}`
 
-## Architecture Redesign
+<br>
+
+## `Architecture Redesign`
 
 - [ ] Convert to cobra/viper for commands
 - [ ] Move `TestAll` from `semantic_test.go` to it's own package
@@ -38,6 +40,8 @@
 - [ ] Develop tests for every part of the lexer, parsers, and transpiler
 - [ ] Rearchitecture the parser into multiple packages, or subpackages; especially for the transpiler
 
-## Misc And Extra
+<br>
+
+## `Misc And Extra`
 
 - [~] Attempt to make a formal grammar
