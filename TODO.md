@@ -2,6 +2,7 @@
 
 ## `General`
 
+- [ ] Make `var.cpp` only printout if a variable is asserted or if `DEBUG` is turned on
 - [ ] Make a demo `feature` request, `idea`, and `misc`
 - [ ] Comment `lib` - atleast `lib/var.cpp`
 - [ ] Look into making header files for `lib`

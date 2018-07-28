@@ -8,4 +8,19 @@ obj := {
   }
 }
 
+//f: 0,
+//for i of [ 9, 8, 7 ] {
+//  f = i
+//}
+
 objs := [ { another: "object" }, obj, obj ]
+
+// fix arbitrary statements within objects
+// make the map[string]var, but call an init
+// function for the object that does
+// objs := [ { another: "object"
+//   f: 0
+//   for i of [ 9, 8, 7 ] {
+//     f = i
+//   }
+// }, obj, obj ]

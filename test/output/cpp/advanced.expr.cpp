@@ -14,27 +14,22 @@ int main() {
   std::string waddup = "waddup";
   int timestamp = 1527799745;
   std::string anotherOne = "anotherOne";
-  var testerino = map<string, var>{
-      {"id", "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"},
-      {"time", 1527799745},
-      {"price", 55.3592},
-      {"dank_meme", true},
-      {"ð¥420ð¥", "ð±ï¸laze it"},
-      {"â¹â¿Khalid", "anotherOne"},
-      {"throw_more_dots",
-       map<string, var>{
-           {"throw_more_dots",
-            map<string, var>{
-                {"more_dots",
-                 map<string, var>{
-                     {"more_dots",
-                      map<string, var>{
-                          {"ok", "stop dots"},
-                      }},
-                 }},
-            }},
-       }},
-  };
+  var testerino = {};
+  testerino["id"] = "ba3d4793-cfae-48d1-ad51-47cbfd70f98a";
+  testerino["time"] = 1527799745;
+  testerino["price"] = 55.3592;
+  testerino["dank_meme"] = true;
+  testerino["ð¥420ð¥"] = "ð±ï¸laze it";
+  testerino["â¹â¿Khalid"] = "anotherOne";
+  var throw_more_dots = {};
+  var throw_more_dots = {};
+  var more_dots = {};
+  var more_dots = {};
+  more_dots["ok"] = "stop dots";
+  more_dots["more_dots"] = more_dots;
+  throw_more_dots["more_dots"] = more_dots;
+  throw_more_dots["throw_more_dots"] = throw_more_dots;
+  testerino["throw_more_dots"] = throw_more_dots;
   std::string stringArray[] = {"hi", "my", "name", "is", "scott"};
   std::string here_comes[] = {ayy, waddup, "its", "dat", "boi"};
   if (powerlevel < 9001) {
@@ -56,15 +51,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532752227[] = {1, 2, 4};
+    int arrayBoi_1532797501[] = {1, 2, 4};
     int index = 0;
-    int index_1532752227 = 0;
-    while (index_1532752227 < 3) {
+    int index_1532797501 = 0;
+    while (index_1532797501 < 3) {
       {
-        index = index_1532752227;
+        index = index_1532797501;
         i = index;
       }
-      index_1532752227 += 1;
+      index_1532797501 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -72,13 +67,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532752227 = 0;
-    while (step_1532752227 < 8) {
+    int step_1532797501 = 0;
+    while (step_1532797501 < 8) {
       {
-        step = countdown[step_1532752227];
+        step = countdown[step_1532797501];
         houstonWeHaveLiftOff = false;
       }
-      step_1532752227 += 1;
+      step_1532797501 += 1;
     }
   }
   houstonWeHaveLiftOff = true;

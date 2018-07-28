@@ -18,10 +18,16 @@ import (
 	certain functions so that other transpilations can be implemeneted
 */
 
+const (
+	letterBytes   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+)
+
 var (
 	// f          string
 	r          *rand.Rand
-	err        error
 	insideLoop bool
 
 	// TODO: FIXME: this is causing functions to be compiled in every single file
@@ -96,13 +102,18 @@ func translateArray(t token.Value) (string, error) {
 	// assuming only single type arrays until I have time to do multi type arrays in C
 	arrayType := t.Acting
 
+	// TODO: was lazy with the defers, need to fix
 	if arrayType == "string" {
 		arrayType = "std::" + arrayType
 	} else if arrayType == "object" {
-		arrayType = "map<string,var>"
+		arrayType = "var"
 	}
 
 	arrayString += arrayType + " " + t.Name + "[] = { "
+
+	if arrayType == "var" {
+		arrayString += " };\n"
+	}
 
 	for i, v := range trueValue {
 
@@ -117,44 +128,109 @@ func translateArray(t token.Value) (string, error) {
 			sprintString = "\"" + sprintString + "\""
 			arrayString += fmt.Sprintf(sprintString, v.Value.True)
 		} else if v.Value.Type == "object" {
-			arrayString += makeMap(v.Value)
+			// Assert a name for the object
+			// if v.Value.Name == "" {
+			v.Value.Name = v.Value.Name + "_" + RandStringBytesMaskImprSrc(10)
+			fmt.Println("NAME_BYTES", v.Value.Name)
+			// }
+			objectString, err := translateObject(v.Value)
+			if err != nil {
+				return "", err
+			}
+			arrayString += "{" + objectString
+			arrayString += fmt.Sprintf("%s[%d] = %s;\n}\n", t.Name, i, v.Value.Name)
+			continue
 		} else {
 			arrayString += fmt.Sprintf(sprintString, v.Value.True)
 		}
 
+		// FIXME: Change the loop to not require this; loop till before the last one
 		if i != len(trueValue)-1 {
 			arrayString += ", "
 		}
 	}
 
-	arrayString += " };\n"
+	if arrayType != "var" {
+		arrayString += " };\n"
+	}
 
 	return arrayString, nil
 }
 
-func makeMap(t token.Value) string {
-	mapString := "map<string,var>{\n"
-	for _, v := range t.True.([]token.Value) {
-		// fmt.Println("k, v", k, v)
-		if v.Type == "object" {
-			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, makeMap(v))
-		} else if v.Type == "string" {
-			mapString += fmt.Sprintf("{ \"%s\", \"%v\" },\n", v.Name, v.True)
+// Old makeMap for map<string,var> initialization
+// func makeMap(t token.Value) string {
+// 	mapString := "map<string,var>{\n"
+// 	for _, v := range t.True.([]token.Value) {
+// 		// fmt.Println("k, v", k, v)
+// 		if v.Type == "object" {
+// 			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, makeMap(v))
+// 		} else if v.Type == "string" {
+// 			mapString += fmt.Sprintf("{ \"%s\", \"%v\" },\n", v.Name, v.True)
 
-		} else if v.Type == "array" {
-			continue
-		} else {
-			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, v.True)
+// 		} else if v.Type == "array" {
+// 			continue
+// 		} else {
+// 			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, v.True)
+// 		}
+// 	}
+
+// 	return mapString + "}"
+// }
+
+// FIXME: recode this so it's not so fucky looking
+func RandStringBytesMaskImprSrc(n int) string {
+	var src = rand.NewSource(time.Now().UnixNano())
+
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
 		}
+		if idx := int(cache & letterIdxMask); idx < len(letterBytes) {
+			b[i] = letterBytes[idx]
+			i--
+		}
+		cache >>= letterIdxBits
+		remain--
 	}
 
-	return mapString + "}"
+	return string(b)
 }
 
 // FIXME: just use var for now, but later we will try to not use var
 // FIXME: ideally we want to store this in a "symbol map" with the defaults already there
 func translateObject(t token.Value) (string, error) {
-	return "var " + t.Name + " = " + makeMap(t) + "\n;", nil
+	objectString := "var " + t.Name + " = {};\n"
+
+	for _, v := range t.True.([]token.Value) {
+		// fmt.Println("k, v", k, v)
+		if v.Type == "object" {
+			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, v.True)
+			anotherObjectString, err := translateObject(v)
+			if err != nil {
+				return objectString, err
+			}
+			objectString += anotherObjectString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
+
+		} else if v.Type == "string" {
+			objectString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, v.True)
+
+		} else if v.Type == "array" {
+			// I am not supporting arrays for now, will have to debate how to
+			// do this later. By definition, if objects are just map[string]<var>
+			// and objects should be able to have keys with array values, then
+			// <var> has to be able to containerize an array.
+			// FIXME: the underlying C++ var could hold an array, but Express
+			// could only allow its usage in arrays
+			continue
+
+		} else {
+			objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, v.True)
+		}
+	}
+
+	return objectString, nil
 }
 
 func translateVariableStatement(t token.Value) (string, error) {
@@ -437,6 +513,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// f+="struct Any { std::string type; void* data; };\n"
 	r = rand.New(rand.NewSource(time.Now().Unix()))
 
+	var err error
 	libBase, err = filepath.Abs("../lib/")
 	if err != nil {
 		os.Exit(9)

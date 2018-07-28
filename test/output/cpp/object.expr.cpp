@@ -4,31 +4,34 @@
 void declareSomething() { bool i = true; }
 
 int main() {
-  var obj = map<string, var>{
-      {"something", "here"},
-      {"hey",
-       map<string, var>{
-           {"me", true},
-           {"anIntVariable", 69},
-       }},
-  };
-  map<string, var> objs[] = {map<string, var>{
-                                 {"another", "object"},
-                             },
-                             map<string, var>{
-                                 {"something", "here"},
-                                 {"hey",
-                                  map<string, var>{
-                                      {"me", true},
-                                      {"anIntVariable", 69},
-                                  }},
-                             },
-                             map<string, var>{
-                                 {"something", "here"},
-                                 {"hey",
-                                  map<string, var>{
-                                      {"me", true},
-                                      {"anIntVariable", 69},
-                                  }},
-                             }};
+  var obj = {};
+  obj["something"] = "here";
+  var hey = {};
+  hey["me"] = true;
+  hey["anIntVariable"] = 69;
+  obj["hey"] = hey;
+  var objs[] = {};
+  {
+    var _SOTdhyFFyv = {};
+    _SOTdhyFFyv["another"] = "object";
+    objs[0] = _SOTdhyFFyv;
+  }
+  {
+    var obj_YSkjXlpSzV = {};
+    obj_YSkjXlpSzV["something"] = "here";
+    var hey = {};
+    hey["me"] = true;
+    hey["anIntVariable"] = 69;
+    obj_YSkjXlpSzV["hey"] = hey;
+    objs[1] = obj_YSkjXlpSzV;
+  }
+  {
+    var obj_FFXnkfZvAP = {};
+    obj_FFXnkfZvAP["something"] = "here";
+    var hey = {};
+    hey["me"] = true;
+    hey["anIntVariable"] = 69;
+    obj_FFXnkfZvAP["hey"] = hey;
+    objs[2] = obj_FFXnkfZvAP;
+  }
 }

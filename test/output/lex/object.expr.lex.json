@@ -339,6 +339,13 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"Type": "IDENT",
 		"Value": {
 			"String": "objs"
@@ -494,6 +501,20 @@
 		"Value": {
 			"Type": "lthan",
 			"String": "]"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	}
 ]
