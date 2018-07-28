@@ -14,8 +14,29 @@ int main() {
   std::string waddup = "waddup";
   int timestamp = 1527799745;
   std::string anotherOne = "anotherOne";
+  map<string, var> testerino = map<string, var>{
+      {"id", "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"},
+      {"time", 1527799745},
+      {"price", 55.3592},
+      {"dank_meme", true},
+      {"ð¥420ð¥", "ð±ï¸laze it"},
+      {"â¹â¿Khalid", "anotherOne"},
+      {"throw_more_dots",
+       map<string, var>{
+           {"throw_more_dots",
+            map<string, var>{
+                {"more_dots",
+                 map<string, var>{
+                     {"more_dots",
+                      map<string, var>{
+                          {"ok", "stop dots"},
+                      }},
+                 }},
+            }},
+       }},
+  };
   std::string stringArray[] = {"hi", "my", "name", "is", "scott"};
-  std::string here_comes[] = {"ayy", "waddup", "its", "dat", "boi"};
+  std::string here_comes[] = {ayy, waddup, "its", "dat", "boi"};
   if (powerlevel < 9001) {
     powerlevel = 9001;
     over9k = true;
@@ -35,15 +56,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532709183[] = {1, 2, 4};
+    int arrayBoi_1532743117[] = {1, 2, 4};
     int index = 0;
-    int index_1532709183 = 0;
-    while (index_1532709183 < 3) {
+    int index_1532743117 = 0;
+    while (index_1532743117 < 3) {
       {
-        index = index_1532709183;
+        index = index_1532743117;
         i = index;
       }
-      index_1532709183 += 1;
+      index_1532743117 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -51,13 +72,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532709183 = 0;
-    while (step_1532709183 < 8) {
+    int step_1532743117 = 0;
+    while (step_1532743117 < 8) {
       {
-        step = countdown[step_1532709183];
+        step = countdown[step_1532743117];
         houstonWeHaveLiftOff = false;
       }
-      step_1532709183 += 1;
+      step_1532743117 += 1;
     }
   }
   houstonWeHaveLiftOff = true;
