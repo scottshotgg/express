@@ -17,7 +17,7 @@ GOOS=windows GOARCH=$arch go build -o "dist/windows/$arch/expr_"$arch"_$date.exe
 GOOS=darwin GOARCH=$arch go build -o "dist/osx/$arch/expr_"$arch"_$date.exe"
 
 # Build arm
-#arch=arm
+arch=arm
 GOOS=linux GOARCH=$arch go build -o "dist/linux/$arch/expr_"$arch"_$date.exe"
 #GOOS=darwin GOARCH=$arch go build -o "dist/osx/$arch/expr_"$arch"_$date.exe"
 
