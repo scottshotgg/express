@@ -2,9 +2,12 @@
 
 ## `General`
 
-- [ ] Make `var.cpp` only printout if a variable is asserted or if `DEBUG` is turned on
+_[~] means the TODO may not happen_<br>
+_[=] means I am currently working on completing that TODO_<br><br>
+
+- [=] Make `var.cpp` only printout if a variable is asserted or if `DEBUG` is turned on
+- [=] Comment `lib` - atleast `lib/var.cpp`
 - [ ] Make a demo `feature` request, `idea`, and `misc`
-- [ ] Comment `lib` - atleast `lib/var.cpp`
 - [ ] Look into making header files for `lib`
   - [ ] Look into making a single header file
 - [ ] Setup circleCI to build the project
@@ -13,7 +16,7 @@
   - [ ] `documentation`
   - [ ] `documentation_old`
   - [ ] `lib/var.cpp`<br><br>
-- [ ] Commands for:
+- [=] Commands for:
   - [ ] `lex [file]`
   - [ ] `parse [type=syn,sem] [file]`
   - [ ] `transpile [file] {translation_lang}`
@@ -32,7 +35,7 @@
 
 ## `Architecture Redesign`
 
-- [ ] Convert to cobra/viper for commands
+- [=] Convert to cobra/viper for commands
 - [ ] Move `TestAll` from `semantic_test.go` to it's own package
 - [ ] Entirely restructure the data of the compiler (interfaces, structs, `token2`, etc)
   - [ ] Look into the collection/token method that Joseph implemented in the JS verion

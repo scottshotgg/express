@@ -28,7 +28,8 @@ It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
 ### `Features Implemented:`
 
-[~] means it may not be implemented
+_[~] means the feature is still being decided on_<br>
+_[=] means I am currently working on implementing that feature_<br><br>
 
 - [x] Blocks
 - [x] Basic types (`int`, `bool`, `float`, `string`)
