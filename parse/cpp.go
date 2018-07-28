@@ -20,9 +20,11 @@ import (
 
 var (
 	// f          string
-	r               *rand.Rand
-	err             error
-	insideLoop      bool
+	r          *rand.Rand
+	err        error
+	insideLoop bool
+
+	// TODO: FIXME: this is causing functions to be compiled in every single file
 	functionStrings = ""
 
 	libBase = ""
@@ -96,16 +98,30 @@ func translateArray(t token.Value) (string, error) {
 
 	if arrayType == "string" {
 		arrayType = "std::" + arrayType
+	} else if arrayType == "object" {
+		arrayType = "map<string,var>"
 	}
 
 	arrayString += arrayType + " " + t.Name + "[] = { "
 
 	for i, v := range trueValue {
+
 		sprintString := "%v"
-		if v.Value.Type == "string" {
+		// FIXME: for some reason array composition using only one object variable causes
+		// each object to change when one does because of the pointers and stuff
+		// It's because the memory is not copied (i.e, constructor is not called) when putting the var into the
+		// map
+		if ref, ok := v.Value.Metadata["refs"]; v.Value.Type != "object" && ok {
+			arrayString += ref.(string)
+		} else if v.Value.Type == "string" {
 			sprintString = "\"" + sprintString + "\""
+			arrayString += fmt.Sprintf(sprintString, v.Value.True)
+		} else if v.Value.Type == "object" {
+			arrayString += makeMap(v.Value)
+		} else {
+			arrayString += fmt.Sprintf(sprintString, v.Value.True)
 		}
-		arrayString += fmt.Sprintf(sprintString, v.Value.True)
+
 		if i != len(trueValue)-1 {
 			arrayString += ", "
 		}
@@ -114,6 +130,31 @@ func translateArray(t token.Value) (string, error) {
 	arrayString += " };\n"
 
 	return arrayString, nil
+}
+
+func makeMap(t token.Value) string {
+	mapString := "map<string,var>{\n"
+	for _, v := range t.True.([]token.Value) {
+		// fmt.Println("k, v", k, v)
+		if v.Type == "object" {
+			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, makeMap(v))
+		} else if v.Type == "string" {
+			mapString += fmt.Sprintf("{ \"%s\", \"%v\" },\n", v.Name, v.True)
+
+		} else if v.Type == "array" {
+			continue
+		} else {
+			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, v.True)
+		}
+	}
+
+	return mapString + "}"
+}
+
+// FIXME: just use var for now, but later we will try to not use var
+// FIXME: ideally we want to store this in a "symbol map" with the defaults already there
+func translateObject(t token.Value) (string, error) {
+	return "var " + t.Name + " = " + makeMap(t) + "\n;", nil
 }
 
 func translateVariableStatement(t token.Value) (string, error) {
@@ -156,8 +197,12 @@ func translateVariableStatement(t token.Value) (string, error) {
 		return variableString, nil
 
 	case "object":
-		// translateObject(t)
-		return variableString, nil
+		objectString, err := translateObject(t)
+		if err != nil {
+			// TODO:
+			return "", err
+		}
+		return variableString + objectString, nil
 
 	case "array":
 		arrayString, err := translateArray(t)
@@ -416,7 +461,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		// "defer.cpp",
 	}
 
-	for k, _ := range extraLibs {
+	for k := range extraLibs {
 		extraLibs[k] = "#include " + strconv.Quote(libBase+"/"+extraLibs[k])
 	}
 

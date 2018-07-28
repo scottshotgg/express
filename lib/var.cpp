@@ -17,11 +17,6 @@ enum varType {
   arrayType
 };
 
-map<string, varType> typeidMap = {
-    {"i", intType},
-    {"PKc", stringType},
-};
-
 class var {
 private:
   varType type;
@@ -31,43 +26,43 @@ public:
   void deallocate() {
     switch (type) {
     case intType: {
-      // cout << "int decons; Type: " << type << " Value: " << *(int *)data
-      //     << " Pointer: " << data << endl;
+      cout << "int decons; Type: " << type << " Value: " << *(int *)data
+           << " Pointer: " << data << endl;
       delete (int *)data;
       break;
     }
 
     case stringType: {
-      // cout << "string decons; Type: " << type << " Value: " << *(string *)data
-      //     << " Pointer: " << data << endl;
-      delete (string *)data;
+      cout << "string decons; Type: " << type << " Value: " << *(string *)data
+           << " Pointer: " << data << endl;
+      // delete (string *)data;
       break;
     }
 
     case boolType: {
-      // cout << "bool decons; Type: " << type << " Value: " << *(bool *)data
-      //     << " Pointer: " << data << endl;
+      cout << "bool decons; Type: " << type << " Value: " << *(bool *)data
+           << " Pointer: " << data << endl;
       delete (bool *)data;
       break;
     }
 
     case charType: {
-      // cout << "char decons; Type: " << type << " Value: " << *(char *)data
-      //     << " Pointer: " << data << endl;
+      cout << "char decons; Type: " << type << " Value: " << *(char *)data
+           << " Pointer: " << data << endl;
       delete (char *)data;
       break;
     }
 
     case floatType: {
-      // cout << "float decons; Type: " << type << " Value: " << *(float *)data
-      //     << " Pointer: " << data << endl;
+      cout << "float decons; Type: " << type << " Value: " << *(float *)data
+           << " Pointer: " << data << endl;
       delete (float *)data;
       break;
     }
 
     case objectType: {
-      // cout << "object decons; Type: " << type << " Value: " << *this
-      //     << " Pointer: " << data << endl;
+      cout << "object decons; Type: " << type << " Value: " << *this
+           << " Pointer: " << data << endl;
       delete (map<string, var> *)data;
       break;
     }
@@ -78,47 +73,52 @@ public:
   }
 
   var(void) : type(objectType), data(new map<string, var>) {}
-
   var(void *value) : type(pointerType), data(value) {}
 
   var(int value) : type(intType), data(new int(value)) {
-    // cout << "int cons; Type: " << type << " Value: " << value
-    //     << " Pointer: " << data << endl;
+    cout << "int cons; Type: " << type << " Value: " << value
+         << " Pointer: " << data << endl;
   }
 
   var(bool value) : type(boolType), data(new bool(value)) {
-    // cout << "bool cons; Type: " << type << " Value: " << value
-    //     << " Pointer: " << data << endl;
+    cout << "bool cons; Type: " << type << " Value: " << value
+         << " Pointer: " << data << endl;
   }
 
   var(char value) : type(charType), data(new char(value)) {}
 
   var(float value) : type(floatType), data(new float(value)) {
-    // cout << "float cons; Type: " << type << " Value: " << value
-    //     << " Pointer: " << data << endl;
+    cout << "float cons; Type: " << type << " Value: " << value
+         << " Pointer: " << data << endl;
   }
 
   var(double value) : type(floatType), data(new float(value)) {
-    // cout << "float cons; Type: " << type << " Value: " << value
-    //     << " Pointer: " << data << endl;
+    cout << "float cons; Type: " << type << " Value: " << value
+         << " Pointer: " << data << endl;
   }
 
   // all string literal constructions are going in here
   var(const char *value) : type(stringType), data(new string(value)) {
-    // cout << "string cons; Type: " << type << " Value: \"" << value
-    //     << "\" Pointer: " << data << endl;
+    cout << "string cons; Type: " << type << " Value: \"" << value
+         << "\" Pointer: " << data << endl;
   }
 
   var(string value) : type(stringType), data(new string(value)) {
-    // cout << "string cons; Type: " << type << " Value: \"" << value
-    //     << "\" Pointer: " << data << endl;
+    cout << "string cons; Type: " << type << " Value: \"" << value
+         << "\" Pointer: " << data << endl;
+  }
+
+  var(map<string,var> propMap) : type(objectType), data(new map<string,var>(propMap)) {
+    cout << "object cons; Type: " << type << " Value: \""
+         << "\" Pointer: " << data << endl;
+    // data = new map<string,var>(propMap);
   }
 
   var(initializer_list<var> propList) : type(objectType) {
-    if (propList.size() % 2 != 0) {
-      cout << "ERROR: invalid amount of arguments to object" << endl;
-      exit(9);
-    }
+    // if (propList.size() % 2 != 0) {
+    //   cout << "ERROR: invalid amount of arguments to object" << endl;
+    //   exit(9);
+    // }
 
     map<string, var> object;
 
@@ -180,22 +180,22 @@ public:
   }
 
   void operator+=(const double right) {
-    //printf("+= var int\n");
+    printf("+= var int\n");
     *(float *)data += right;
   }
 
   void operator+=(const string right) {
-    //printf("+= var int\n");
+    printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const char *right) {
-    //printf("+= var int\n");
+    printf("+= var int\n");
     *(string *)data = *(string *)data + right;
   }
 
   void operator+=(const bool right) {
-    //printf("+= var int\n");
+    printf("+= var int\n");
     *(bool *)data = *(bool *)data || right;
   }
 
@@ -266,8 +266,8 @@ public:
     } else {
       // var::~var();
       deallocate();
-      // cout << "string cons; Type: " << type << " Value: \"" << right
-      //     << "\" Pointer: " << data << endl;
+      cout << "string cons; Type: " << type << " Value: \"" << right
+           << "\" Pointer: " << data << endl;
       type = stringType;
       data = new string(right);
       // *(string*)data = right;
@@ -290,13 +290,13 @@ public:
   // FIXME: fix this
   void operator=(initializer_list<var> propList) {
     deallocate();
-    // // cout << "object cons; Type: " << type << " Value: " << propList << "
+    // cout << "object cons; Type: " << type << " Value: " << propList << "
     // Pointer: " << data << endl;
-    // cout << "object cons; Type: " << type << " Pointer: " << data << endl;
+    cout << "object cons; Type: " << type << " Pointer: " << data << endl;
     type = objectType;
     data = var(propList).data;
     // var thing = propList;
-    // // cout << thing << endl;
+    // cout << thing << endl;
     // data = thing.data;
   }
 
@@ -313,16 +313,14 @@ public:
       return stream << "false";
 
     case charType:
-      // return stream << "\"" << *(char *)v.data << "\"";
-      return stream << *(char *)v.data;
+      return stream << "\"" << *(char *)v.data << "\"";
 
     case floatType:
       return stream << *(float *)v.data;
 
     case stringType:
-      // // cout << "printing string" << endl;;
-      // return stream << "\"" << *(string *)v.data << "\"";
-      return stream << *(string *)v.data;
+      // cout << "printing string" << endl;;
+      return stream << "\"" << *(string *)v.data << "\"";
 
     case objectType: {
       int counter = 0;
@@ -376,6 +374,7 @@ int operator/(const int left, const var &right) {
 }
 
 int operator+=(int left, const var &right) {
+  printf("+= int var\n");
   // printf("+= int var\n");
   return left += *(int *)right.Value();
 }
@@ -431,10 +430,10 @@ template <typename T> var operator-(const var &left, T right) {
 // // Generic constructor for right side value
 // template <typename T> var operator*(const var &left, T right) {
 //   // FIXME: this is kinda inefficient
-//   // cout<<"right "<<right<<endl;
-//   // cout<<"left "<<left<<endl;
+//   cout<<"right "<<right<<endl;
+//   cout<<"left "<<left<<endl;
 //   var thing = right * left;
-//   // cout<<"thing"<< thing << endl;
+//   cout<<"thing"<< thing << endl;
 //   return thing;
 // }
 

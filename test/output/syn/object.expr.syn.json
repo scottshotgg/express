@@ -1,0 +1,178 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "obj"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "something"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "here",
+									"String": "here"
+								}
+							},
+							{
+								"Type": "SEPARATOR",
+								"Value": {
+									"Type": "comma",
+									"String": ","
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "hey"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "me"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "bool",
+												"True": true
+											}
+										},
+										{
+											"Type": "SEPARATOR",
+											"Value": {
+												"Type": "comma",
+												"String": ","
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "objs"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "ARRAY",
+					"Value": {
+						"Type": "array",
+						"True": [
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "another"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "object",
+												"String": "object"
+											}
+										}
+									]
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "obj"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "obj"
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

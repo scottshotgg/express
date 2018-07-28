@@ -1,0 +1,437 @@
+[
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "obj"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "here",
+			"String": "here"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "hey"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "me"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "bool",
+			"True": true
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "objs"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACKET",
+		"Value": {
+			"Type": "op_3",
+			"String": "["
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "object",
+			"String": "object"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "obj"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "obj"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "R_BRACKET",
+		"Value": {
+			"Type": "lthan",
+			"String": "]"
+		}
+	}
+]

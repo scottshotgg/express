@@ -49,7 +49,7 @@ func TestNew(t *testing.T) {
 func TestNewFromFile(t *testing.T) {
 	fmt.Println("TestNewFromFile")
 
-	f, err := os.Open("../test/programs/function.expr")
+	f, err := os.Open("../test/programs/object.expr")
 	// f, err := os.Open(filepath)
 	if err != nil {
 		fmt.Println("openErr", err)

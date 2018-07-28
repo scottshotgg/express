@@ -158,9 +158,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "bool1"
+			"Type": "bool",
+			"True": true
 		}
 	},
 	{
@@ -218,9 +219,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "bool2"
+			"Type": "bool",
+			"True": false
 		}
 	},
 	{

@@ -21,13 +21,8 @@
 				{
 					"Type": "LITERAL",
 					"Value": {
-						"Name": "bool1",
 						"Type": "bool",
-						"True": true,
-						"AccessType": "private",
-						"Metadata": {
-							"refs": "bool1"
-						}
+						"True": true
 					}
 				},
 				{
@@ -57,13 +52,8 @@
 				{
 					"Type": "LITERAL",
 					"Value": {
-						"Name": "bool2",
 						"Type": "bool",
-						"True": false,
-						"AccessType": "private",
-						"Metadata": {
-							"refs": "bool2"
-						}
+						"True": false
 					}
 				}
 			],

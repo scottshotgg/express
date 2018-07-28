@@ -74,6 +74,7 @@ func TestSemantic(t *testing.T) {
 	if err != nil {
 		fmt.Println("semanticTokensFromFileErr", err)
 		t.Fail()
+		os.Exit(9)
 		return
 	}
 
@@ -150,6 +151,7 @@ func TestAll(t *testing.T) {
 				lexTokens, err = lexFile(pathOfFile, filename)
 				if err != nil {
 					fmt.Println("lexFileErr", err)
+					os.Exit(9)
 					return
 				}
 
@@ -157,6 +159,7 @@ func TestAll(t *testing.T) {
 				if err != nil {
 					fmt.Println("AbsErr", err)
 					// TODO: make this more individual later
+					os.Exit(9)
 					return
 				}
 				fmt.Println(pathOfFile)
@@ -164,12 +167,14 @@ func TestAll(t *testing.T) {
 				syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 				if err != nil {
 					fmt.Println("syntacticParseFileErr", err)
+					os.Exit(9)
 					return
 				}
 
 				semanticTokens, err := semanticParseFile(filename, syntacticTokens)
 				if err != nil {
 					fmt.Println("lexFileErr", err)
+					os.Exit(9)
 					return
 				}
 
@@ -178,6 +183,7 @@ func TestAll(t *testing.T) {
 				err = cppTranspile(filename, semanticTokens)
 				if err != nil {
 					// TODO:
+					os.Exit(9)
 					return
 				}
 
@@ -185,6 +191,7 @@ func TestAll(t *testing.T) {
 				if err != nil {
 					// TODO:
 					fmt.Println("err compile", err, string(output))
+					os.Exit(9)
 					return
 				}
 
@@ -192,6 +199,7 @@ func TestAll(t *testing.T) {
 				if err != nil {
 					// TODO:
 					fmt.Println("err compile", err, string(output))
+					os.Exit(9)
 				}
 
 			}(file)

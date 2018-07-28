@@ -1,0 +1,121 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "obj",
+			"Type": "object",
+			"True": [
+				{
+					"Name": "something",
+					"Type": "string",
+					"True": "here",
+					"AccessType": "private"
+				},
+				{
+					"Name": "hey",
+					"Type": "object",
+					"True": [
+						{
+							"Name": "me",
+							"Type": "bool",
+							"True": true,
+							"AccessType": "private"
+						}
+					],
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "objs",
+			"Type": "array",
+			"Acting": "object",
+			"True": [
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "object",
+						"True": [
+							{
+								"Name": "another",
+								"Type": "string",
+								"True": "object",
+								"AccessType": "private"
+							}
+						]
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "obj",
+						"Type": "object",
+						"True": [
+							{
+								"Name": "something",
+								"Type": "string",
+								"True": "here",
+								"AccessType": "private"
+							},
+							{
+								"Name": "hey",
+								"Type": "object",
+								"True": [
+									{
+										"Name": "me",
+										"Type": "bool",
+										"True": true,
+										"AccessType": "private"
+									}
+								],
+								"AccessType": "private"
+							}
+						],
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "obj"
+						}
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Name": "obj",
+						"Type": "object",
+						"True": [
+							{
+								"Name": "something",
+								"Type": "string",
+								"True": "here",
+								"AccessType": "private"
+							},
+							{
+								"Name": "hey",
+								"Type": "object",
+								"True": [
+									{
+										"Name": "me",
+										"Type": "bool",
+										"True": true,
+										"AccessType": "private"
+									}
+								],
+								"AccessType": "private"
+							}
+						],
+						"AccessType": "private",
+						"Metadata": {
+							"refs": "obj"
+						}
+					}
+				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"length": 2,
+				"vector": false
+			}
+		}
+	]
+}

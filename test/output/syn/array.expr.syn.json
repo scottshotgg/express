@@ -67,10 +67,10 @@
 						"Type": "array",
 						"True": [
 							{
-								"Type": "IDENT",
+								"Type": "LITERAL",
 								"Value": {
-									"Type": "private",
-									"String": "bool1"
+									"Type": "bool",
+									"True": true
 								}
 							},
 							{
@@ -88,10 +88,10 @@
 								}
 							},
 							{
-								"Type": "IDENT",
+								"Type": "LITERAL",
 								"Value": {
-									"Type": "private",
-									"String": "bool2"
+									"Type": "bool",
+									"True": false
 								}
 							}
 						]

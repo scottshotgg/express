@@ -1,0 +1,10 @@
+// This file is for testing objects
+
+obj := {
+  something: "here",
+  hey: {
+    me: true,
+  }
+}
+
+objs := [ { another: "object" }, obj, obj ]

@@ -195,9 +195,19 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// fmt.Println("metadata", p.meta.currentVariable.Metadata["length"])
 		// arrayType := VariableTypeString(p.meta.currentVariable.ActingType)
 		arrayType := arrayContentsExpressions[0].Value.Type
+		if arrayType == "BLOCK" {
+			arrayType = "object"
+		}
+
 		if len(arrayContents) > 0 {
 			fmt.Println("arrayType", arrayType)
-			for _, arrayValue := range arrayContentsExpressions {
+			for i, arrayValue := range arrayContentsExpressions {
+
+				if arrayValue.Value.Type == "BLOCK" {
+					arrayValue.Value.Type = "object"
+					arrayContentsExpressions[i].Value.Type = "object"
+				}
+
 				// fmt.Println("arrayType", arrayType, arrayValue.Value.Type)
 				fmt.Println("arrayType.Value.Type", arrayValue.Value.Type)
 				if arrayValue.Value.Type != arrayType {
@@ -1064,6 +1074,12 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = SET
 	case "array":
 		vt = ARRAY
+	case "object":
+		vt = OBJECT
+
+		// default:
+		// 	fmt.Println(vtString)
+		// 	os.Exit(9)
 	}
 
 	return
