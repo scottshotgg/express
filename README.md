@@ -33,7 +33,7 @@ _[=] means I am currently working on implementing that feature_<br><br>
 
 - [x] Blocks
 - [x] Basic types (`int`, `bool`, `float`, `string`)
-- [ ] `object` type
+- [x] `object` type
 - [ ] `struct` type
     - [ ] Tags
 - [ ] `function` type
@@ -56,11 +56,11 @@ _[=] means I am currently working on implementing that feature_<br><br>
         - _Leaning against: not sure if I want to allow a single `var` to be able to contain multiple values_
     - [~] `function` type encapsulation
         - _A var holding a function doesn't make a lot of sense right now_
-- [ ] Type modifier keywords
+- [ ] Type modifiers - keywords
     - [ ] `array` postfix
     - [ ] `unsigned` prefix
     - [ ] `constant` prefix
-- [ ] Type modifiers _shorts_
+- [ ] Type modifiers - shorts
     - [ ] `s` postfix
     - [ ] `u` prefix
     - [ ] `c` prefix
