@@ -34,6 +34,7 @@ _[=] means I am currently working on implementing that feature_<br><br>
 - [x] Blocks
 - [x] Basic types (`int`, `bool`, `float`, `string`)
 - [x] `object` type
+    - [ ] statements within objects (making objects and blocks identical structures)
 - [ ] `struct` type
     - [ ] Tags
 - [ ] `function` type
