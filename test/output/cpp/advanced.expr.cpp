@@ -14,7 +14,7 @@ int main() {
   std::string waddup = "waddup";
   int timestamp = 1527799745;
   std::string anotherOne = "anotherOne";
-  map<string, var> testerino = map<string, var>{
+  var testerino = map<string, var>{
       {"id", "ba3d4793-cfae-48d1-ad51-47cbfd70f98a"},
       {"time", 1527799745},
       {"price", 55.3592},
@@ -56,15 +56,15 @@ int main() {
   int i = 0;
 
   {
-    int arrayBoi_1532743117[] = {1, 2, 4};
+    int arrayBoi_1532747125[] = {1, 2, 4};
     int index = 0;
-    int index_1532743117 = 0;
-    while (index_1532743117 < 3) {
+    int index_1532747125 = 0;
+    while (index_1532747125 < 3) {
       {
-        index = index_1532743117;
+        index = index_1532747125;
         i = index;
       }
-      index_1532743117 += 1;
+      index_1532747125 += 1;
     }
   }
   bool houstonWeHaveLiftOff = false;
@@ -72,13 +72,13 @@ int main() {
 
   {
     int step = 0;
-    int step_1532743117 = 0;
-    while (step_1532743117 < 8) {
+    int step_1532747125 = 0;
+    while (step_1532747125 < 8) {
       {
-        step = countdown[step_1532743117];
+        step = countdown[step_1532747125];
         houstonWeHaveLiftOff = false;
       }
-      step_1532743117 += 1;
+      step_1532747125 += 1;
     }
   }
   houstonWeHaveLiftOff = true;

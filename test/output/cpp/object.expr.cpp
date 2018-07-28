@@ -4,14 +4,13 @@
 void declareSomething() { bool i = true; }
 
 int main() {
-  map<string, var> obj = map<string, var>{
+  var obj = map<string, var>{
       {"something", "here"},
       {"hey",
        map<string, var>{
            {"me", true},
        }},
   };
-
   map<string, var> objs[] = {map<string, var>{
                                  {"another", "object"},
                              },
@@ -30,13 +29,8 @@ int main() {
                                   }},
                              }};
 
-    cout << objs[0] << endl;
-    objs[0]["woah"] = true;
-    cout << objs[0] << endl;
-
-    cout << objs[1] << endl;
-    cout << objs[2] << endl;
-    objs[2]["something"] = "there";
-    cout << objs[1] << endl;
-    cout << objs[2] << endl;
+    obj["something"] = true;
+    objs[1]["hey"]["another_key_to_use"] = 666;
+    cout << "objs1 " << objs[1] << endl;
+    cout << "objs2 " << objs[2] << endl;
 }
