@@ -107,7 +107,7 @@ Proposal submission is **the** method to contribute your ideas and work into Exp
 <br>
 <br>
 
->_`Note`_: If your PR **does not** meet the criteria when it is submitted, tests do not pass, or cannot be merged into the parent branch, it will be _automatically_ denied by the CI/CD pipeline with comments about failure. You will need to submit another PR after fixing the mentioned issues.
+>_`Note`_: If your PR **does not** meet the criteria when it is submitted, cannot be merged into the parent branch, or standard tests do not pass, it will be _automatically_ denied by the CI/CD pipeline with comments about failure. You will need to submit another PR after fixing the mentioned issues.
 
 <br>
 <br>
