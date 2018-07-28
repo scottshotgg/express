@@ -20,6 +20,12 @@
 							"Type": "bool",
 							"True": true,
 							"AccessType": "private"
+						},
+						{
+							"Name": "anIntVariable",
+							"Type": "int",
+							"True": 69,
+							"AccessType": "private"
 						}
 					],
 					"AccessType": "private"
@@ -67,6 +73,12 @@
 										"Type": "bool",
 										"True": true,
 										"AccessType": "private"
+									},
+									{
+										"Name": "anIntVariable",
+										"Type": "int",
+										"True": 69,
+										"AccessType": "private"
 									}
 								],
 								"AccessType": "private"
@@ -98,6 +110,12 @@
 										"Name": "me",
 										"Type": "bool",
 										"True": true,
+										"AccessType": "private"
+									},
+									{
+										"Name": "anIntVariable",
+										"Type": "int",
+										"True": 69,
 										"AccessType": "private"
 									}
 								],

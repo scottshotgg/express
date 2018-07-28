@@ -93,6 +93,27 @@
 											}
 										},
 										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "anIntVariable"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 69
+											}
+										},
+										{
 											"Type": "SEPARATOR",
 											"Value": {
 												"Type": "comma",

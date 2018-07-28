@@ -3,7 +3,8 @@
 obj := {
   something: "here",
   hey: {
-    me: true,
+    me: true
+    anIntVariable: 69,
   }
 }
 

@@ -9,6 +9,7 @@ int main() {
       {"hey",
        map<string, var>{
            {"me", true},
+           {"anIntVariable", 69},
        }},
   };
   map<string, var> objs[] = {map<string, var>{
@@ -19,6 +20,7 @@ int main() {
                                  {"hey",
                                   map<string, var>{
                                       {"me", true},
+                                      {"anIntVariable", 69},
                                   }},
                              },
                              map<string, var>{
@@ -26,11 +28,7 @@ int main() {
                                  {"hey",
                                   map<string, var>{
                                       {"me", true},
+                                      {"anIntVariable", 69},
                                   }},
                              }};
-
-    obj["something"] = true;
-    objs[1]["hey"]["another_key_to_use"] = 666;
-    cout << "objs1 " << objs[1] << endl;
-    cout << "objs2 " << objs[2] << endl;
 }
