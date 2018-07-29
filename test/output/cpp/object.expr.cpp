@@ -1,7 +1,6 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/ExpressRedo/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/ExpressRedo/lib/var.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express-rearch/lib/std.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express-rearch/lib/var.cpp"
 #include <string>
-void declareSomething() { bool i = true; }
 
 int main() {
   var obj = {};
@@ -12,26 +11,26 @@ int main() {
   obj["hey"] = hey;
   var objs[] = {};
   {
-    var _SOTdhyFFyv = {};
-    _SOTdhyFFyv["another"] = "object";
-    objs[0] = _SOTdhyFFyv;
+    var _wCWvQFSYGe = {};
+    _wCWvQFSYGe["another"] = "object";
+    objs[0] = _wCWvQFSYGe;
   }
   {
-    var obj_YSkjXlpSzV = {};
-    obj_YSkjXlpSzV["something"] = "here";
+    var obj_XncSBIWSBK = {};
+    obj_XncSBIWSBK["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_YSkjXlpSzV["hey"] = hey;
-    objs[1] = obj_YSkjXlpSzV;
+    obj_XncSBIWSBK["hey"] = hey;
+    objs[1] = obj_XncSBIWSBK;
   }
   {
-    var obj_FFXnkfZvAP = {};
-    obj_FFXnkfZvAP["something"] = "here";
+    var obj_IANNwVcfXW = {};
+    obj_IANNwVcfXW["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_FFXnkfZvAP["hey"] = hey;
-    objs[2] = obj_FFXnkfZvAP;
+    obj_IANNwVcfXW["hey"] = hey;
+    objs[2] = obj_IANNwVcfXW;
   }
 }

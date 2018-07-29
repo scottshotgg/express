@@ -5,6 +5,20 @@
 			"Type": "BLOCK",
 			"True": [
 				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "int",
+						"String": "int"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "i"
+					}
+				},
+				{
 					"ID": 9,
 					"Type": "KEYWORD",
 					"Value": {
@@ -16,7 +30,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "declareSomething"
+						"String": "setToOne"
 					}
 				},
 				{
@@ -24,7 +38,22 @@
 					"Type": "GROUP",
 					"Value": {
 						"Type": "GROUP",
-						"True": []
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "i"
+								}
+							}
+						]
 					}
 				},
 				{
@@ -42,15 +71,15 @@
 							{
 								"Type": "ASSIGN",
 								"Value": {
-									"Type": "init",
-									"String": ":="
+									"Type": "assign",
+									"String": "="
 								}
 							},
 							{
 								"Type": "LITERAL",
 								"Value": {
-									"Type": "bool",
-									"True": true
+									"Type": "int",
+									"True": 1
 								}
 							}
 						]

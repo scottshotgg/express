@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 // SubOperands returns the addition of two operands based on their type

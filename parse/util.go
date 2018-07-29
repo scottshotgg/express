@@ -2,8 +2,10 @@ package parse
 
 import (
 	"encoding/json"
+	"fmt"
 
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/pkg/errors"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 // // CollectTokens appends an array of tokens passed in to the EndTokens attribute of Meta
@@ -138,4 +140,148 @@ func TokenToString(t token.Token) string {
 	}
 
 	return string(jsonToken)
+}
+
+func variableTypeFromString(vtString string) (vt VariableType) {
+	switch vtString {
+	case "var":
+		vt = VAR
+	case "int":
+		vt = INT
+	case "bool":
+		vt = BOOL
+	case "string":
+		vt = STRING
+	case "float":
+		vt = FLOAT
+	case "BLOCK":
+		vt = OBJECT
+	case "set":
+		vt = SET
+	case "array":
+		vt = ARRAY
+	case "object":
+		vt = OBJECT
+
+		// default:
+		// 	fmt.Println(vtString)
+		// 	os.Exit(9)
+	}
+
+	return
+}
+
+func accessTypeFromString(atString string) (at AccessType) {
+	switch atString {
+	case "public":
+		at = PUBLIC
+	case "private":
+		at = PRIVATE
+	}
+
+	return
+}
+
+func VariableTypeString(vt VariableType) (st string) {
+	switch vt {
+	case VAR:
+		st = "var"
+	case INT:
+		st = "int"
+	case FLOAT:
+		st = "float"
+	case BOOL:
+		st = "bool"
+	case STRING:
+		st = "string"
+	case SET:
+		st = "set"
+	case OBJECT:
+		st = "object"
+	case ARRAY:
+		st = "array"
+	// case STRINGA:
+	// 	st = "string[]"
+
+	default:
+		st = ""
+	}
+
+	return
+}
+
+func AccessTypeString(at AccessType) (st string) {
+	switch at {
+	case PUBLIC:
+		st = "public"
+	case PRIVATE:
+		st = "private"
+
+	default:
+		st = ""
+	}
+
+	return
+}
+
+func getBaseForType(trueType, actingType string) (interface{}, error) {
+	switch trueType {
+	case token.IntType:
+		return 0, nil
+
+	case token.StringType:
+		return "", nil
+
+	case token.BoolType:
+		return false, nil
+
+	case token.FloatType:
+		return 0.0, nil
+
+	case token.CharType:
+		return "", nil
+
+	// case token.StructType:
+	// 	fallthrough
+	// case token.ObjectType:
+	// 	return
+
+	// case token.FunctionType:
+
+	// case token.VarType:
+
+	// case token.ArrayType:
+	// 	return
+
+	default:
+		var shit interface{}
+		return shit, errors.Errorf("Base not defined for type: %s %s", trueType, actingType)
+	}
+}
+
+// func getAccessTypeFromIdentName(string identName) (string, error) {
+// 	if len(identName) > 0 {
+// 		PRIVATE
+// 	}
+// 	return "", error
+// }
+
+func mapVariableToTokenValue(v *Variable) token.Value {
+	md := map[string]interface{}{}
+	for k, value := range v.Metadata {
+		md[k] = value
+	}
+
+	fmt.Println("md", md)
+	fmt.Println("metadata", v.Metadata)
+
+	return token.Value{
+		Name:   v.Name,
+		Type:   VariableTypeString(v.Type),
+		Acting: VariableTypeString(v.ActingType),
+		True:   v.Value,
+		// String: ,
+		AccessType: AccessTypeString(v.AccessType),
+		Metadata:   md,
+	}
 }

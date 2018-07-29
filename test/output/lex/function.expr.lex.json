@@ -7,6 +7,47 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "int",
+			"String": "int"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"ID": 9,
 		"Type": "KEYWORD",
 		"Value": {
@@ -24,7 +65,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "declareSomething"
+			"String": "setToOne"
 		}
 	},
 	{
@@ -32,6 +73,26 @@
 		"Value": {
 			"Type": "op_3",
 			"String": "("
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "int",
+			"String": "int"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "i"
 		}
 	},
 	{
@@ -92,13 +153,6 @@
 	{
 		"Type": "ASSIGN",
 		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
 			"Type": "assign",
 			"String": "="
 		}
@@ -113,8 +167,8 @@
 	{
 		"Type": "LITERAL",
 		"Value": {
-			"Type": "bool",
-			"True": true
+			"Type": "int",
+			"True": 1
 		}
 	},
 	{

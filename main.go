@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/scottshotgg/ExpressRedo/lex"
-	"github.com/scottshotgg/ExpressRedo/parse"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/lex"
+	"github.com/scottshotgg/express-rearch/parse"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 var (

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/scottshotgg/ExpressRedo/parse"
+	"github.com/scottshotgg/express-rearch/parse"
 )
 
 var (

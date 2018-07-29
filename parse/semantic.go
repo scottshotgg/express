@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 // FIXME: move this to its own file
@@ -144,22 +144,22 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		}
 		value.Metadata["refs"] = p.CurrentToken.Value.String
 
-	case token.Group:
-		// fmt.Println("getting group", next.Value)
-		// groupContents, ok := next.Value.True.([]token.Token)
-		// fmt.Println("groupContents, ok", groupContents, ok)
+	// case token.Group:
+	// 	// fmt.Println("getting group", next.Value)
+	// 	// groupContents, ok := next.Value.True.([]token.Token)
+	// 	// fmt.Println("groupContents, ok", groupContents, ok)
 
-		// for _, groupee := range groupContents {
-		// 	fmt.Println("groupee", groupee)
-		// }
+	// 	// for _, groupee := range groupContents {
+	// 	// 	fmt.Println("groupee", groupee)
+	// 	// }
 
-		// os.Exit(9)
+	// 	// os.Exit(9)
 
-		value = next.Value
+	// 	value = next.Value
 
-	// case "":
-	// 	fmt.Println("we at the end?")
-	// 	os.Exit(8)
+	// // case "":
+	// // 	fmt.Println("we at the end?")
+	// // 	os.Exit(8)
 
 	case token.Array:
 		fmt.Println("ayy rayy")
@@ -248,6 +248,41 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		fmt.Printf("value: %+v\n", value)
 		fmt.Println("value", value)
 		p.Shift()
+
+	case token.Group:
+		// Do something here to get the statements
+		fmt.Println("grouperooni")
+		groupContents, ok := next.Value.True.([]token.Token)
+		// FIXME:
+		if !ok {
+			fmt.Println("wtf no group stuffs", next)
+			os.Exit(9)
+		}
+		fmt.Println("current", p.CurrentToken)
+		fmt.Println("next", next.Value)
+		fmt.Println("groupContents", groupContents)
+
+		// // var groupContentsExpressions []token.Token
+		// for _, piece := range groupContents {
+		// 	fmt.Println("expression1", piece)
+		// 	fmt.Println(p.ParseExpression(p.NextToken))
+		// 	os.Exit(9)
+		// }
+
+		pa := New(groupContents)
+		pa.meta.NewScopeFromScope(p.meta.currentScope)
+		for pa.NextToken.Type != "" {
+			stmt, err := pa.GetStatement()
+			if err != nil {
+				fmt.Println("Error: could not parse expression inside group")
+				fmt.Println(err.Error())
+				return token.Value{}, err
+			}
+
+			fmt.Println("insidexpression", stmt)
+		}
+
+		// os.Exit(9)
 
 	default:
 		fmt.Println("last2", p.LastToken)
@@ -374,68 +409,6 @@ func (p *Parser) GetTerm() (token.Value, error) {
 			fmt.Println("totalTerm", totalTerm)
 			return totalTerm, nil
 		}
-	}
-}
-
-func VariableTypeString(vt VariableType) (st string) {
-	switch vt {
-	case VAR:
-		st = "var"
-	case INT:
-		st = "int"
-	case FLOAT:
-		st = "float"
-	case BOOL:
-		st = "bool"
-	case STRING:
-		st = "string"
-	case SET:
-		st = "set"
-	case OBJECT:
-		st = "object"
-	case ARRAY:
-		st = "array"
-	// case STRINGA:
-	// 	st = "string[]"
-
-	default:
-		st = ""
-	}
-
-	return
-}
-
-func AccessTypeString(at AccessType) (st string) {
-	switch at {
-	case PUBLIC:
-		st = "public"
-	case PRIVATE:
-		st = "private"
-
-	default:
-		st = ""
-	}
-
-	return
-}
-
-func mapVariableToTokenValue(v *Variable) token.Value {
-	md := map[string]interface{}{}
-	for k, value := range v.Metadata {
-		md[k] = value
-	}
-
-	fmt.Println("md", md)
-	fmt.Println("metadata", v.Metadata)
-
-	return token.Value{
-		Name:   v.Name,
-		Type:   VariableTypeString(v.Type),
-		Acting: VariableTypeString(v.ActingType),
-		True:   v.Value,
-		// String: ,
-		AccessType: AccessTypeString(v.AccessType),
-		Metadata:   md,
 	}
 }
 
@@ -1012,7 +985,19 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 			return token.Value{}, err
 		}
 		groupExpr.Name = "args"
-		fmt.Println("groupExpr, err", groupExpr, err)
+		fmt.Printf("groupExpr %+v, err %v\n", groupExpr, err)
+		fmt.Println("currentScope", p.meta.currentScope)
+
+		args, ok := groupExpr.True.([]token.Token)
+		fmt.Println("args, ok", args, ok)
+		if ok && len(args) > 0 {
+			// os.Exit(9)
+		}
+
+		// err = p.meta.DeclareVariableFromTokenValue()
+		// if err != nil {
+		// 	return token.Value{}, err
+		// }
 
 		p.Shift()
 
@@ -1054,46 +1039,6 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 	}
 
 	return token.Value{}, nil
-}
-
-func variableTypeFromString(vtString string) (vt VariableType) {
-	switch vtString {
-	case "var":
-		vt = VAR
-	case "int":
-		vt = INT
-	case "bool":
-		vt = BOOL
-	case "string":
-		vt = STRING
-	case "float":
-		vt = FLOAT
-	case "BLOCK":
-		vt = OBJECT
-	case "set":
-		vt = SET
-	case "array":
-		vt = ARRAY
-	case "object":
-		vt = OBJECT
-
-		// default:
-		// 	fmt.Println(vtString)
-		// 	os.Exit(9)
-	}
-
-	return
-}
-
-func accessTypeFromString(atString string) (at AccessType) {
-	switch atString {
-	case "public":
-		at = PUBLIC
-	case "private":
-		at = PRIVATE
-	}
-
-	return
 }
 
 // GetStatement ...
@@ -1138,14 +1083,34 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		fmt.Println("ASSIGNMENT DECLARED VALUE", p.meta.currentVariable.Type)
 		p.Shift()
 		fmt.Println(p.NextToken)
-		tv, err := p.GetExpression()
-		fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
-		if err != nil {
-			fmt.Println("getExpressionErr", err)
-			os.Exit(9)
+		var tv token.Value
+		var err error
+		// FIXME: this seems kinda hacky, but w/e fix it later - GetFactor should defer it's judgement
+		if p.NextToken.Type == "ASSIGN" {
+			tv, err = p.GetExpression()
+			fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
+			if err != nil {
+				fmt.Println("getExpressionErr", err)
+				os.Exit(9)
+			}
+			fmt.Println("TVTVTV", tv)
+			fmt.Println("another", p.NextToken)
+		} else {
+			p.meta.currentVariable.Name = p.CurrentToken.Value.String
+			baseValue, err := getBaseForType(VariableTypeString(p.meta.currentVariable.Type), p.CurrentToken.Value.Acting)
+			if err != nil {
+				return token.Value{}, err
+			}
+			p.meta.currentVariable.Value = baseValue
+			p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.Type)
+			fmt.Printf("p.CurrentToken %+v\n", p.CurrentToken)
+			fmt.Printf("else p.meta.currentVariable %+v\n", p.meta.currentVariable)
+			tv = mapVariableToTokenValue(p.meta.currentVariable)
+			err = p.meta.DeclareVariable()
+			if err != nil {
+				return tv, err
+			}
 		}
-		fmt.Println("TVTVTV", tv)
-		fmt.Println("another", p.NextToken)
 		return tv, nil
 
 	// FIXME: TODO: didn't wanna fix right now

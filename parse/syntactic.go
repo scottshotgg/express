@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 // ParseString parses a string literal. Anything surrounded by quotes.
@@ -70,6 +70,9 @@ func (p *Parser) ParseGroup() token.Token {
 				os.Exit(8)
 
 			case token.Ident:
+				groupTokens = append(groupTokens, p.CurrentToken)
+				p.Shift()
+				fmt.Println("GROUP PARSE IDENT")
 				p.ParseIdent(&groupTokens, p.CurrentToken)
 
 			case token.Literal:

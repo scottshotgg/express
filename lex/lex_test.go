@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/scottshotgg/ExpressRedo/lex"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/lex"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 var (

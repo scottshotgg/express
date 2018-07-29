@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/golang-collections/collections/stack"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 // TokenType ...

@@ -8,9 +8,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/scottshotgg/ExpressRedo/lex"
-	"github.com/scottshotgg/ExpressRedo/parse"
-	"github.com/scottshotgg/ExpressRedo/token"
+	"github.com/scottshotgg/express-rearch/lex"
+	"github.com/scottshotgg/express-rearch/parse"
+	"github.com/scottshotgg/express-rearch/token"
 )
 
 var (
@@ -49,7 +49,7 @@ func TestNew(t *testing.T) {
 func TestNewFromFile(t *testing.T) {
 	fmt.Println("TestNewFromFile")
 
-	f, err := os.Open("../test/programs/object.expr")
+	f, err := os.Open("../test/programs/function.expr")
 	// f, err := os.Open(filepath)
 	if err != nil {
 		fmt.Println("openErr", err)
