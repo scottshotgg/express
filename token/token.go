@@ -63,6 +63,7 @@ const (
 	Hash         = "HASH"
 	Block        = "BLOCK"
 	Function     = "FUNCTION"
+	Return       = "RETURN"
 	Group        = "GROUP"
 	Array        = "ARRAY"
 	Set          = "SET"

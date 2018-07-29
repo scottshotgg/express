@@ -8,18 +8,21 @@
 int i
 
 // Function with one argument
-func setToOne(int i) {
-  i = 1
+//func setToOne(int i) {
+//  i = 1
+//}
+
+func increment(int i) (int j) {
+  return 100
 }
+
+increment(100)
 
 // Save these for later
 // TODO: we also need to do 
 // an example with desctructuring
 /*
   // Function with return
-  func gimmeSomething() int {
-    return 10
-  }
 
   // Function with arguments and return
   func incrementAndReturn(int i) int {

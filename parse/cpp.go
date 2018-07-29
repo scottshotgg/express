@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
@@ -10,7 +11,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
 )
 
 /*
@@ -37,6 +38,8 @@ var (
 )
 
 func translateFunction(t token.Value) (string, error) {
+	tJSON, err := json.Marshal(t)
+	fmt.Printf("FUNCTION AND STUFF %+v\n", string(tJSON))
 	functionString := ""
 
 	fmt.Printf("%+v\n", t)
@@ -46,35 +49,54 @@ func translateFunction(t token.Value) (string, error) {
 		return "", errors.New("not ok")
 	}
 
+	// expectReturn := false
 	// TODO: only supporting void type for now
-	if trueValue["return"].True == nil {
+	returnsInterface := trueValue["returns"].True
+	if returnsInterface == nil {
 		functionString += "void "
+	} else {
+		returns, ok := returnsInterface.([]token.Value)
+		if !ok {
+			return "", errors.Errorf("Could not assert `returns[0]` to token.Value: %+v", returns[0])
+		}
+		if len(returns) == 0 {
+			fmt.Println("wtf no returns brah")
+			os.Exit(9)
+		}
+		// FIXME: gimp the returns to only be based on the first one for now
+		firstReturn := returns[0]
+		if firstReturn.Type == "" {
+			return "", errors.Errorf("No return type found on `returns[0]`: %+v", returns[0])
+		}
+
+		// expectReturn = true
+		functionString += firstReturn.Type + " "
 	}
 
 	// Append the name of the function
-	functionString += t.Name
-
+	functionString += t.Name + "("
 	argsInterface := trueValue["args"].True
-	if argsInterface == nil {
-		functionString += "()"
-	} else {
-		args, ok := argsInterface.([]token.Token)
+	if argsInterface != nil {
+		fmt.Println("ARGSINTERFACE", argsInterface)
+
+		args, ok := argsInterface.([]token.Value)
+		fmt.Println("ARGS", args)
 		if !ok {
 			fmt.Println("shit look at args interface")
 			return "", errors.New("not ok")
 		}
-		functionString += "("
 
+		// FIXME: change to standard for loop until the end and add commas
+		// everytime, w/e
 		for i, arg := range args {
-			functionString += arg.Type + " " + arg.Value.Name
+			functionString += arg.Type + " " + arg.Name
 
 			if i != len(args)-1 {
 				functionString += ","
 			}
 		}
-		functionString += ") "
-
 	}
+	functionString += ")"
 
 	fmt.Println("trueValue", trueValue)
 
@@ -441,6 +463,28 @@ func translateLoop(t token.Value) (string, error) {
 	return loopString, nil
 }
 
+func translateReturn(t token.Value) (string, error) {
+	returnString := "return "
+
+	if t.Type != token.Return {
+		fmt.Println("return token", t)
+		return "", errors.New("not a return token")
+	}
+
+	returnValue, ok := t.True.(token.Value)
+	if !ok {
+		// FIXME:
+	}
+
+	if returnValue.Metadata["refs"] != nil {
+		returnString += returnValue.Name + ";\n"
+	} else {
+		returnString += fmt.Sprintf("%+v;\n", returnValue.True)
+	}
+
+	return returnString, nil
+}
+
 func translateBlock(tv token.Value) (string, error) {
 	// _, err = f.Write([]byte("{\n"))
 	// if err != nil {
@@ -472,7 +516,13 @@ func translateBlock(tv token.Value) (string, error) {
 					functionString, err := translateFunction(t)
 					if err != nil {
 						fmt.Println("function translate err", err)
-						return "", err
+						returnString, err := translateReturn(t)
+						if err != nil {
+							fmt.Println("function translate err", err)
+							return "", err
+						}
+						blockString += returnString
+						continue
 					}
 					functionStrings += functionString + "\n"
 					continue

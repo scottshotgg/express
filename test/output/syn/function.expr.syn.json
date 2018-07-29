@@ -30,7 +30,92 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "setToOne"
+						"String": "increment"
+					}
+				},
+				{
+					"ID": 4,
+					"Type": "FUNCTION",
+					"Value": {
+						"Type": "def",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "i"
+											}
+										}
+									]
+								}
+							},
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "j"
+											}
+										}
+									]
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "return"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 100
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "increment"
 					}
 				},
 				{
@@ -40,46 +125,10 @@
 						"Type": "GROUP",
 						"True": [
 							{
-								"Type": "TYPE",
-								"Value": {
-									"Type": "int",
-									"String": "int"
-								}
-							},
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "i"
-								}
-							}
-						]
-					}
-				},
-				{
-					"Type": "BLOCK",
-					"Value": {
-						"Type": "BLOCK",
-						"True": [
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "i"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "assign",
-									"String": "="
-								}
-							},
-							{
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 1
+									"True": 100
 								}
 							}
 						]

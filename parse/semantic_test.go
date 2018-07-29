@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/lex"
-	"github.com/scottshotgg/express-rearch/parse"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/lex"
+	"github.com/scottshotgg/express/parse"
+	"github.com/scottshotgg/express/token"
 )
 
 const (
@@ -30,7 +30,7 @@ const (
 
 // 	pathOfFile, filename string
 // 	lexer                *lex.Lexer
-// 	errexpress-rearch                 error
+// 	errexpress                 error
 // 	lexTokens            []token.Token
 // 	// semanticTokens []token.Token
 )

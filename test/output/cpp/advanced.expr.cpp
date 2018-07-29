@@ -1,5 +1,5 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express-rearch/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express-rearch/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 void declareSomething() { bool i = true; }
 

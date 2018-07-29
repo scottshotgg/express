@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/scottshotgg/express-rearch/parse"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/parse"
+	"github.com/scottshotgg/express/token"
 )
 
 // TODO: FIXME: this needs to be reworked to take the syntactic tokens

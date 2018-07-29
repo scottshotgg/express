@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
 )
 
 var (

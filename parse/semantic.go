@@ -8,7 +8,11 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
+)
+
+var (
+	functionOpType = ""
 )
 
 // FIXME: move this to its own file
@@ -134,6 +138,10 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		fmt.Println(variable, ok)
 		if !ok {
 			return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
+		}
+
+		if variable.Type == FUNCTION {
+			functionOpType = "call"
 		}
 
 		// return p.GetExpression()
@@ -269,10 +277,16 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// 	os.Exit(9)
 		// }
 
+		groupTokens := []token.Value{}
 		pa := New(groupContents)
 		pa.meta.NewScopeFromScope(p.meta.currentScope)
 		for pa.NextToken.Type != "" {
-			stmt, err := pa.GetStatement()
+			var stmt token.Value
+			if functionOpType == "declaration" {
+				stmt, err = pa.GetStatement()
+			} else {
+				stmt, err = pa.GetExpression()
+			}
 			if err != nil {
 				fmt.Println("Error: could not parse expression inside group")
 				fmt.Println(err.Error())
@@ -280,9 +294,24 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			}
 
 			fmt.Println("insidexpression", stmt)
+
+			groupTokens = append(groupTokens, stmt)
+			value.True = groupTokens
 		}
 
 		// os.Exit(9)
+
+	case token.Function:
+		fmt.Println("hey im here")
+
+		//	Unpack FUNCTION token into:
+		//		1) If type is "def":
+		//			A) IDENT > GROUP > BLOCK
+		//			B) IDENT > GROUP > GROUP > BLOCK
+		//		2) If type is "call"
+		//			A) IDENT > GROUP
+
+		os.Exit(9)
 
 	default:
 		fmt.Println("last2", p.LastToken)
@@ -956,6 +985,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		// Check for returns (statement/group)
 		// Check for block
 
+		functionOpType = "declaration"
 		// Shift away the "func" keyword
 		p.Shift()
 
@@ -987,6 +1017,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		groupExpr.Name = "args"
 		fmt.Printf("groupExpr %+v, err %v\n", groupExpr, err)
 		fmt.Println("currentScope", p.meta.currentScope)
+		// os.Exit(9)
 
 		args, ok := groupExpr.True.([]token.Token)
 		fmt.Println("args, ok", args, ok)
@@ -1001,36 +1032,83 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		p.Shift()
 
+		var groupExpr2 token.Value
 		// Get returns
-		// // Save the state from before the return parse
-		// p.SaveState()
-		// groupExpr2, err := p.GetExpression()
-		// if err != nil {
-		// 	// return token.Value{}, err
-		// }
+		// Save the state from before the return parse
+		p.SaveState()
+		if p.NextToken.Type == token.Group {
+			groupExpr2, err = p.GetExpression()
+			if err != nil {
+				return token.Value{}, err
+			}
+		}
+
+		fmt.Println("groupExpr2, err", groupExpr2, err)
+		fmt.Println("p.LastToken", p.LastToken)
+		fmt.Println("CURRENT TOKEN", p.CurrentToken)
+		fmt.Println("p.NextToken", p.NextToken)
+		// p.Unshift()
 		// fmt.Println("groupExpr2, err", groupExpr2, err)
+		// fmt.Println("p.LastToken", p.LastToken)
+		// fmt.Println("CURRENT TOKEN", p.CurrentToken)
+		// fmt.Println("p.NextToken", p.NextToken)
+		// p.Shift()
+		// p.Shift()
+		p.Shift()
+		fmt.Println("p.LastToken", p.LastToken)
+		fmt.Println("CURRENT TOKEN", p.CurrentToken)
+		fmt.Println("p.NextToken", p.NextToken)
+		// os.Exit(9)
+		// fmt.Println("groupExpr2, err", groupExpr2, err)
+		// fmt.Println("p.LastToken", p.LastToken)
+		// fmt.Println("CURRENT TOKEN", p.CurrentToken)
+		// fmt.Println("p.NextToken", p.NextToken)
 
 		blockToken, err := p.CheckBlock()
 		if err != nil {
-			os.Exit(9)
+			return token.Value{}, err
 		}
 		fmt.Println("blockToken, err", blockToken, err)
 
 		// bodyTokens := body.True.([]token.Value)
 		// fmt.Println("bodyTokens", bodyTokens)
 
-		return token.Value{
+		functionOpType = ""
+		tv := token.Value{
 			Name:       p.meta.currentVariable.Name,
 			AccessType: token.PrivateAccessType,
-			Type:       token.Function,
+			Type:       "function",
 			True: map[string]token.Value{
 				"args":    groupExpr,
-				"returns": token.Value{},
+				"returns": groupExpr2,
 				"body":    blockToken,
 			},
 			Metadata: map[string]interface{}{
 				"lambda": false,
 			},
+		}
+
+		fmt.Println("tv and stuff", tv)
+		// FIXME: fix this later
+		tv.AccessType = "private"
+		fmt.Println(p.meta.DeclareVariableFromTokenValue(tv))
+		fmt.Println("currentScope again", p.meta.currentScope)
+
+		return tv, nil
+
+	case "return":
+		p.Shift()
+
+		returnExpr, err := p.GetExpression()
+		if err != nil {
+			return token.Value{}, err
+		}
+		fmt.Println("returnExpr", returnExpr)
+
+		// FIXME: fuck it idc about checking the token type for now
+		return token.Value{
+			Type: token.Return,
+			True: returnExpr,
 		}, nil
 
 	default:
@@ -1080,7 +1158,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				return expr, err
 			}
 		}
-		fmt.Println("ASSIGNMENT DECLARED VALUE", p.meta.currentVariable.Type)
+		fmt.Println("ASSIGNMENT DECLARED TYPE", p.meta.currentVariable.Type)
 		p.Shift()
 		fmt.Println(p.NextToken)
 		var tv token.Value
@@ -1160,14 +1238,14 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 // CheckBlock ...
 func (p *Parser) CheckBlock() (token.Value, error) {
-	fmt.Println("CheckBlock")
+	fmt.Printf("CheckBlock %+v\n", p.CurrentToken)
 
 	p.Shift()
+	fmt.Printf("CheckBlock2 %+v\n", p.CurrentToken)
 	// Open up the block here
 	tokensFromBlock, ok := p.CurrentToken.Value.True.([]token.Token)
 	if !ok {
-		fmt.Println("Error: Current token does not contain an array of tokens for block", p.CurrentToken)
-		os.Exit(9)
+		return token.Value{}, errors.Errorf("Error: Current token does not contain an array of tokens for block %+v", p.CurrentToken)
 	}
 
 	// FIXME: TODO: we need to fix this hacky shit

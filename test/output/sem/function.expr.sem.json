@@ -1,4 +1,55 @@
 {
 	"Type": "BLOCK",
-	"True": []
+	"True": [
+		{
+			"Name": "i",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Name": "increment",
+			"Type": "FUNCTION",
+			"True": {
+				"args": {
+					"Name": "args",
+					"True": [
+						{
+							"Name": "i",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				},
+				"body": {
+					"Type": "BLOCK",
+					"True": [
+						{
+							"Type": "RETURN",
+							"True": {
+								"Type": "int",
+								"True": 100,
+								"String": "100"
+							}
+						}
+					]
+				},
+				"returns": {
+					"True": [
+						{
+							"Name": "j",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false
+			}
+		}
+	]
 }

@@ -65,4 +65,12 @@ var KeywordMap = map[string]Token{
 			String: "func",
 		},
 	},
+	"return": Token{
+		ID:   9,
+		Type: "KEYWORD",
+		Value: Value{
+			Type:   "keyword", // TODO: what to put here?
+			String: "return",
+		},
+	},
 }

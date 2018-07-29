@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
 )
 
 // // CollectTokens appends an array of tokens passed in to the EndTokens attribute of Meta
@@ -162,6 +162,8 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = ARRAY
 	case "object":
 		vt = OBJECT
+	case "function":
+		vt = FUNCTION
 
 		// default:
 		// 	fmt.Println(vtString)
@@ -200,6 +202,8 @@ func VariableTypeString(vt VariableType) (st string) {
 		st = "object"
 	case ARRAY:
 		st = "array"
+	case FUNCTION:
+		st = "function"
 	// case STRINGA:
 	// 	st = "string[]"
 

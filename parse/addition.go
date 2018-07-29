@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
 )
 
 // AddOperands returns the addition of two operands based on their type

@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/token"
 )
 
 // ParseString parses a string literal. Anything surrounded by quotes.
@@ -280,9 +280,9 @@ func (p *Parser) ParseBlock() token.Token {
 			blockTokens = append(blockTokens, current)
 
 		case token.Keyword:
-			fmt.Println("we are here at the keyword thing")
+			// fmt.Println("we are here at the keyword thing")
 			blockTokens = append(blockTokens, current)
-			// if p.CurrentToken.Value.String == "func" {
+			// if p.CurrentToken.Value.String == token.Funtion {
 			// 	// if p.NextToken.Type != token.Ident {
 			// 	// 	fmt.Println("wtf im here??")
 			// 	// 	continue // for now
@@ -293,13 +293,12 @@ func (p *Parser) ParseBlock() token.Token {
 			// 	fmt.Println("function", function)
 			// 	os.Exit(9)
 
-			// 	// p.ParseFunctionDef
 			// }
-			// // switch current.Value.Type {
-			// // case token.SQL:
-			// // 	fmt.Println("found a sql keyword")
-			// // }
-			// // os.Exit(9)
+			// switch current.Value.Type {
+			// case token.SQL:
+			// 	fmt.Println("found a sql keyword")
+			// }
+			// os.Exit(9)
 
 		case token.GThan:
 			fmt.Println("found a greater than")
@@ -333,28 +332,45 @@ func (p *Parser) ParseBlock() token.Token {
 
 		case token.Group:
 			fmt.Println("\nGOTAGROUP")
-			fmt.Println()
+
+			// Getting an ident for the lastToken
+			fmt.Println(p.LastToken)
+			fmt.Println(p.CurrentToken)
+			fmt.Println(p.NextToken)
+
+			// FIXME: just assume for now that groups are only used in functions
+			// so if we get one we need to determine what kind of function we
+			// are in
 
 			functionTokens := []token.Token{current}
 
 			peek := p.NextToken
+			fmt.Println("stuff and yeah", peek)
 			// TODO: FIXME: for now we are going to assume that two groups only appear in sequence for a function
 			switch peek.Type {
 			case token.Group:
 				// blockTokens = append(blockTokens, //p.ParseFunctionDef(current))
 				p.Shift()
+				fmt.Println(p.LastToken)
+				fmt.Println(p.CurrentToken)
+
+				// Getting block for the nextToken
+				fmt.Println(p.NextToken)
+				fmt.Println("stuff and yeah", p.NextToken)
 				functionTokens = append(functionTokens, p.CurrentToken)
 
 				if p.NextToken.Type == token.Block {
 					p.Shift()
-					blockTokens = append(blockTokens, token.Token{
+					functionToken := token.Token{
 						ID:   4,
 						Type: token.Function,
 						Value: token.Value{
 							Type: "def",
 							True: append(functionTokens, p.CurrentToken),
 						},
-					})
+					}
+					fmt.Println("functionToken", functionToken)
+					blockTokens = append(blockTokens, functionToken)
 				}
 
 			case token.Block:
@@ -577,7 +593,16 @@ func (p *Parser) Syntactic() ([]token.Token, error) {
 	block := p.ParseBlock()
 	fmt.Println("parseBlock", block)
 
+	blockTokens := block.Value.True.([]token.Token)
+	fmt.Println(blockTokens)
+
+	fmt.Println("going again")
+	// Make a new parser and syntactically parse the file
+	syntacticTokens := New(blockTokens).ParseBlock()
+
+	fmt.Println("got stuff", syntacticTokens)
+
 	return []token.Token{
-		block,
+		syntacticTokens,
 	}, nil
 }

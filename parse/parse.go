@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/pkg/errors"
-	"github.com/scottshotgg/express-rearch/lex"
-	"github.com/scottshotgg/express-rearch/token"
+	"github.com/scottshotgg/express/lex"
+	"github.com/scottshotgg/express/token"
 )
 
 var (
@@ -26,6 +26,7 @@ const (
 	GROUP
 	OBJECT // Use this for a hashmap
 	POINTER
+	FUNCTION
 	SET
 )
 
@@ -84,11 +85,12 @@ func NewVariable(name string, value interface{}, variableType VariableType) *Var
 }
 
 func NewVariableFromTokenValue(tv token.Value) *Variable {
+	trueValue := tv.True
 	return &Variable{
 		Name:       tv.Name,
 		Type:       variableTypeFromString(tv.Type),
 		ActingType: variableTypeFromString(tv.Type),
-		Value:      tv.True,
+		Value:      trueValue,
 		AccessType: accessTypeFromString(tv.AccessType),
 		Metadata:   tv.Metadata,
 	}
@@ -178,14 +180,22 @@ func (m *Meta) DeclareVariable() error {
 func (m *Meta) DeclareVariableFromTokenValue(tv token.Value) error {
 	variable := NewVariableFromTokenValue(tv)
 
-	if variable.Type == UNRECOGNIZED ||
-		// Commented this; don't really care if it's set for normal
-		// variables and it was messing up arrays
-		// tv.ActingType != UNRECOGNIZED ||
-		variable.AccessType == NOTSET ||
-		tv.Name == "" ||
-		tv.True == nil {
-		return errors.Errorf("Variable does not contain all required fields: %+v", tv)
+	fmt.Println("variable::", variable)
+
+	if variable.Type == UNRECOGNIZED {
+		return errors.Errorf("Variable type still unrecognized: %+v", tv)
+	}
+	// Commented this; don't really care if it's set for normal
+	// variables and it was messing up arrays
+	// tv.ActingType != UNRECOGNIZED ||
+	if variable.AccessType == NOTSET {
+		return errors.Errorf("Variable access type not set: %+v", tv)
+	}
+	if tv.Name == "" {
+		return errors.Errorf("Variable does not have a name: %+v", tv)
+	}
+	if tv.True == nil {
+		return errors.Errorf("Variable does not have any value: %+v", tv)
 	}
 
 	if variable.Type == SET {
