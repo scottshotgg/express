@@ -4,11 +4,11 @@
     Put a demo proposal in for GraalVM and stuff
 -->
 
-Express is an extremely flexible language that supports both static types and a dynamic type (`var` &mdash; think JavaScript, except better) with an _extremely_ lite, variadic, embedded runtime within the binary allowing for typing to be as _weak_ or _strong_ as you want. The runtime currently does dynamic typing and RAII lifetime management, however, in the future it will include a greenthread scheduler a la Go, atomization of operations, garbage collection, RTTI and reflection, SQLite3/GraphQL embedded databases, DOM instantiation and manipulation, and a few other ideas that are currently only conceptual. Most features will be optional and the programmer will be allowed to enable and disable at compile time and possibly runtime (if a JIT/AOT is supported).
+Express is an extremely flexible language that supports both static types and a dynamic type (`var` &mdash; think `JavaScript` or `Python`, except better) with an _extremely_ lite, dynamically embedded runtime within the binary allowing for typing to be as _weak_ or _strong_ as you like. The runtime currently does dynamic typing and RAII lifetime management, however, in the future it will include a greenthread scheduler a la Go, atomization of operations, garbage collection, RTTI and reflection, SQLite3/GraphQL embedded databases, DOM instantiation and manipulation, and a few other ideas that are currently only conceptual. Most features will be optional and the programmer will be allowed to enable and disable at compile time and possibly runtime (if a JIT/AOT is supported).<br>The main influences in the languages design are: `C++`, `JavaScript`, `Go`, and (atleast _conceptually)_ `Rust`.
 
-For binary production, programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via a flag. At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC through something like BinaryNinja. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
+For binary production, programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via a flag. At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
 
-Each stage of the compiler (lexer, syntax parser, semantic parser, and C++ transpiler) are currently all implemented in `Go` and will later be converted to `Rust`, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated into this repo after a reorganization of the file structure.
+Each stage of the compiler (lexer, syntax parser, semantic parser, and C++ transpiler) are currently all implemented in `Go` and may be converter to `Rust` later on, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated with this repo after a reorganization of the file structure.
 <br>
 It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
@@ -53,6 +53,7 @@ _[=] means I am currently working on implementing that feature_<br><br>
     - [x] Basic type encapsulation (`int`, `bool`, `float`, `string`)
     - [ ] `object` type encapsulation
     - [ ] `<struct>` type encapsulation
+        - _This is doing the same thing as casting your struct to an object_
     - [~] `array` type encapsulation
         - _Leaning against: not sure if I want to allow a single `var` to be able to contain multiple values_
     - [~] `function` type encapsulation
@@ -65,12 +66,12 @@ _[=] means I am currently working on implementing that feature_<br><br>
     - [ ] `s` postfix
     - [ ] `u` prefix
     - [ ] `c` prefix
-- [-] Function usage
-    - [-] Function declaration
+- [=] Function usage
+    - [=] Function declaration
         - [x] no args and no returns
-        - [ ] args without returns
-        - [ ] returns without args
-        - [ ] args and returns
+        - [=] args without returns
+        - [=] returns without args
+        - [=] args and returns
     - [ ] Function call
 - [-] Access modifiers
     - [x] `private`
