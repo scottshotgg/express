@@ -5,6 +5,7 @@
 _[~] means the TODO may not happen_<br>
 _[=] means I am currently working on completing that TODO_<br><br>
 
+- [=] Make a TextMate grammar and VS Code extension
 - [=] Fix arbitrary object statements
 - [=] Implement _index_ `[]` and _access_ `.` operations
 - [=] Implement all binary operations for basic types
