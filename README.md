@@ -97,7 +97,7 @@ Proposal submission is **the** method to contribute your ideas and work into Exp
 
 - `Ideas:`
    <br>
-    _Ideas_ about the languages direction, internals related to the architecture, or general core-langaage level imlementations requests should go into the `proposals/ideas` folder and should be formatted as a whitepaper with detail containing a beginning narative that will explain <u>where</u> and <u>how</u> the idea came from, atleast two supporting arguments that should answer the question of <u>why</u> your proposal should be considered, and one informal/abstract (i.e, pseudocode) use-case on <u>how</u> it would be used after implementation.
+    _Ideas_ about the languages direction, internals related to the architecture, or general core-langaage level implementations requests should go into the `proposals/ideas` folder and should be formatted as a whitepaper with detail containing a beginning narative that will explain <u>where</u> and <u>how</u> the idea came from, atleast two supporting arguments that should answer the question of <u>why</u> your proposal should be considered, and one informal/abstract (i.e, pseudocode) use-case on <u>how</u> it would be used after implementation.
 <br>
 <br>
 
