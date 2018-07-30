@@ -1,0 +1,14 @@
+// This file is a testing scratchpad for generic testing scenarios
+
+
+func isThereSomethingLessThan(int i) (int j) {
+  for k of [ 2, 4, 5, 9 ] {
+    if i < k {
+      return k
+    }
+  }
+
+  return 1000
+}
+
+isThereSomethingLessThan(5)

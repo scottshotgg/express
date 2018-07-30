@@ -1,41 +1,17 @@
 // This file is for testing functions
 
-// Function without any arguments
-//func declareSomething() {
-//  i := true
-//}
-
-//int i
-
-// Function with one argument
-//func setToOne(int i) {
-//  i = 1
-//}
-
-func increment(int i) (int j) {
-  return 100
+/* 
+  Function defintion example; currently 
+  functions have to have atleast one 
+  argument and a return type, but don't 
+  have to have a return statement
+*/
+func increment(object i) (object j) {
+  return { something: "else" }
 }
 
-//increment(100)
+//objs := [ { another: "object" } ]
 
-// Save these for later
-// TODO: we also need to do 
-// an example with desctructuring
-/*
-  // Function with return
-
-  // Function with arguments and return
-  func incrementAndReturn(int i) int {
-    return i + 1
-  }
-
-  // Function with only named return
-  func gimmeNamed() int j {
-    j = 1
-  }
-
-  // Function with argument and named return
-  func incrementNamed(int i) int j {
-    j = i + 1
-  }
-*/
+// Function call example
+increment({ another: "object" }
+)

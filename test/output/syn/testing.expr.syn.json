@@ -1,0 +1,245 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "findIndexOf",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "i"
+											}
+										}
+									]
+								}
+							},
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "j"
+											}
+										}
+									]
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "for"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "k"
+											}
+										},
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "of"
+											}
+										},
+										{
+											"ID": 1,
+											"Type": "ARRAY",
+											"Value": {
+												"Type": "array",
+												"True": [
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "int",
+															"True": 2
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "int",
+															"True": 4
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "int",
+															"True": 5
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "int",
+															"True": 9
+														}
+													}
+												]
+											}
+										},
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "if"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "i"
+														}
+													},
+													{
+														"Type": "L_THAN",
+														"Value": {
+															"Type": "lthan",
+															"String": "\u003c"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "k"
+														}
+													},
+													{
+														"Type": "BLOCK",
+														"Value": {
+															"Type": "BLOCK",
+															"True": [
+																{
+																	"ID": 9,
+																	"Type": "KEYWORD",
+																	"Value": {
+																		"Type": "keyword",
+																		"String": "return"
+																	}
+																},
+																{
+																	"Type": "IDENT",
+																	"Value": {
+																		"Type": "private",
+																		"String": "k"
+																	}
+																}
+															]
+														}
+													}
+												]
+											}
+										},
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "return"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 1000
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "def"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "findIndexOf",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 5
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				}
+			]
+		}
+	}
+]

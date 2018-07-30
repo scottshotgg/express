@@ -1,7 +1,6 @@
 package parse
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
@@ -37,9 +36,62 @@ var (
 	libBase = ""
 )
 
-func translateFunction(t token.Value) (string, error) {
-	tJSON, err := json.Marshal(t)
-	fmt.Printf("FUNCTION AND STUFF %+v\n", string(tJSON))
+func translateFunctionCall(t token.Value) (string, error) {
+	functionString := ""
+
+	fmt.Printf("%+v\n", t)
+	trueValue, ok := t.True.(map[string]token.Value)
+	if !ok {
+		fmt.Println("shit look at t")
+		return "", errors.New("not ok")
+	}
+
+	// Append the name of the function
+	functionString += t.Name + "("
+	argsInterface := trueValue["args"].True
+	if argsInterface != nil {
+		fmt.Println("ARGSINTERFACE", argsInterface)
+
+		args, ok := argsInterface.([]token.Value)
+		fmt.Println("ARGS", args)
+		if !ok {
+			fmt.Println("shit look at args interface")
+			return "", errors.New("not ok")
+		}
+
+		// FIXME: change to standard for loop until the end and add commas
+		// everytime, w/e
+		for i, arg := range args {
+			if ref, ok := arg.Metadata["refs"]; ok {
+
+				functionString += ref.(string)
+				continue
+			}
+
+			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
+				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
+				fmt.Println("NAME_BYTES", arg.Name)
+
+				objectString, err := translateObject(arg)
+				if err != nil {
+					return "", err
+				}
+				functionString = objectString + functionString + arg.Name
+			} else {
+				functionString += fmt.Sprintf("%+v", arg.True)
+			}
+
+			if i != len(args)-1 {
+				functionString += ","
+			}
+		}
+	}
+	functionString += ");\n"
+
+	return functionString, nil
+}
+
+func translateFunctionDef(t token.Value) (string, error) {
 	functionString := ""
 
 	fmt.Printf("%+v\n", t)
@@ -67,10 +119,12 @@ func translateFunction(t token.Value) (string, error) {
 		firstReturn := returns[0]
 		if firstReturn.Type == "" {
 			return "", errors.Errorf("No return type found on `returns[0]`: %+v", returns[0])
+		} else if firstReturn.Type == "BLOCK" || firstReturn.Type == "object" || firstReturn.Type == "var" {
+			functionString += "var "
+		} else {
+			// expectReturn = true
+			functionString += firstReturn.Type + " "
 		}
-
-		// expectReturn = true
-		functionString += firstReturn.Type + " "
 	}
 
 	// Append the name of the function
@@ -89,7 +143,11 @@ func translateFunction(t token.Value) (string, error) {
 		// FIXME: change to standard for loop until the end and add commas
 		// everytime, w/e
 		for i, arg := range args {
-			functionString += arg.Type + " " + arg.Name
+			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
+				functionString += "var " + arg.Name
+			} else {
+				functionString += arg.Type + " " + arg.Name
+			}
 
 			if i != len(args)-1 {
 				functionString += ","
@@ -103,6 +161,7 @@ func translateFunction(t token.Value) (string, error) {
 	bodyString, err := translateBlock(trueValue["body"])
 	if err != nil {
 		// TODO:
+		return "", err
 	}
 
 	functionString += bodyString
@@ -226,9 +285,14 @@ func translateObject(t token.Value) (string, error) {
 	objectString := "var " + t.Name + " = {};\n"
 
 	for _, v := range t.True.([]token.Value) {
+		objectValue := v.True
+		if ref, ok := v.Metadata["refs"]; ok {
+			objectValue = ref
+		}
+
 		// fmt.Println("k, v", k, v)
 		if v.Type == "object" {
-			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, v.True)
+			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, objectValue)
 			anotherObjectString, err := translateObject(v)
 			if err != nil {
 				return objectString, err
@@ -236,7 +300,7 @@ func translateObject(t token.Value) (string, error) {
 			objectString += anotherObjectString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
 
 		} else if v.Type == "string" {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, v.True)
+			objectString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
 
 		} else if v.Type == "array" {
 			// I am not supporting arrays for now, will have to debate how to
@@ -248,7 +312,7 @@ func translateObject(t token.Value) (string, error) {
 			continue
 
 		} else {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, v.True)
+			objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
 		}
 	}
 
@@ -370,7 +434,28 @@ func translateIf(t token.Value) (string, error) {
 	// }
 	fmt.Println("metadata", t.Metadata)
 
-	fmt.Println("t.True", t.True)
+	fmt.Println("t.True in translateIf", t)
+	// evalString := ""
+	// var leftInterface, opInterface, rightInterface interface{}
+	// var left, op, right token.Value
+
+	// if leftInterface = t.Metadata["left"]; leftInterface == nil {
+	// 	return "", errors.New("Left was nil")
+	// }
+	// left = leftInterface.(token.Value)
+	// evalString += left.String
+
+	// if opInterface = t.Metadata["op"]; opInterface == nil {
+	// 	return "", errors.New("Op was nil")
+	// }
+	// op = opInterface.(token.Value)
+	// evalString += op.String
+
+	// if rightInterface = t.Metadata["right"]; rightInterface == nil {
+	// 	return "", errors.New("Right was nil")
+	// }
+	// right = rightInterface.(token.Value)
+	// evalString += right.String
 
 	blockString, err := translateBlock(token.Value{
 		Type: token.Block,
@@ -474,10 +559,24 @@ func translateReturn(t token.Value) (string, error) {
 	returnValue, ok := t.True.(token.Value)
 	if !ok {
 		// FIXME:
+		return "", errors.Errorf("wtf happened %+v", t)
 	}
 
 	if returnValue.Metadata["refs"] != nil {
 		returnString += returnValue.Name + ";\n"
+		// FIXME: do something about the char later
+	} else if returnValue.Type == "string" || returnValue.Type == "char" {
+		returnString += fmt.Sprintf("\"%+v\";\n", returnValue.True)
+	} else if returnValue.Type == "BLOCK" || returnValue.Type == "object" || returnValue.Type == "var" {
+		returnValue.Name = returnValue.Name + "_" + RandStringBytesMaskImprSrc(10)
+		fmt.Println("NAME_BYTES", returnValue.Name)
+
+		objectString, err := translateObject(returnValue)
+		if err != nil {
+			return "", err
+		}
+		returnString = objectString + returnString + returnValue.Name + ";"
+		// returnString += "{};\n"
 	} else {
 		returnString += fmt.Sprintf("%+v;\n", returnValue.True)
 	}
@@ -513,15 +612,21 @@ func translateBlock(tv token.Value) (string, error) {
 				if err != nil {
 					// TODO:
 					fmt.Println("if translate err", err)
-					functionString, err := translateFunction(t)
+					functionString, err := translateFunctionDef(t)
 					if err != nil {
-						fmt.Println("function translate err", err)
-						returnString, err := translateReturn(t)
+						fmt.Println("function def translate err", err)
+						functionCallString, err := translateFunctionCall(t)
 						if err != nil {
-							fmt.Println("function translate err", err)
-							return "", err
+							fmt.Println("function def translate err", err)
+							returnString, err := translateReturn(t)
+							if err != nil {
+								fmt.Println("function translate err", err)
+								return "", err
+							}
+							blockString += returnString
+							continue
 						}
-						blockString += returnString
+						blockString += functionCallString
 						continue
 					}
 					functionStrings += functionString + "\n"

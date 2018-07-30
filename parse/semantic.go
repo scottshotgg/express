@@ -19,9 +19,11 @@ var (
 func (p *Parser) LessThanOperands(left, right token.Value) (token.Value, error) {
 	// FIXME: this only works for ints right now
 	// Need to put a type on this
+
+	fmt.Printf("LessThanOperands %+v %+v\n", left, right)
+
 	return token.Value{
-		True:   left.True.(int) < right.True.(int),
-		String: strconv.FormatBool(left.True.(int) < right.True.(int)),
+		True: left.True.(int) < right.True.(int),
 	}, nil
 }
 
@@ -80,9 +82,21 @@ func (p *Parser) EvaluateBinaryOperation(left, right, op token.Value) (opToken t
 		"right": right,
 		// "string": left.String + op.String + right.String,
 	}
-	if opToken.Type == token.IntType {
-		opToken.String = strconv.Itoa(opToken.True.(int))
+	// if opToken.Type == token.IntType {
+	// 	opToken.String = strconv.Itoa(opToken.True.(int))
+	// }
+
+	leftString := left.Name
+	if leftString == "" {
+		leftString = left.String
 	}
+
+	rightString := right.Name
+	if rightString == "" {
+		rightString = right.String
+	}
+	opToken.String = leftString + op.String + rightString
+
 	return
 }
 
@@ -283,8 +297,10 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		for pa.NextToken.Type != "" {
 			var stmt token.Value
 			if functionOpType == "def" {
+				fmt.Println("FUCKTION OP TYPE", functionOpType)
 				stmt, err = pa.GetStatement()
 			} else {
+				fmt.Println("FUNCTION OP TYPE", functionOpType)
 				stmt, err = pa.GetExpression()
 			}
 			if err != nil {
@@ -293,7 +309,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 				return token.Value{}, err
 			}
 
-			fmt.Println("insidexpression", stmt)
+			fmt.Println("inside group expression", stmt)
 
 			groupTokens = append(groupTokens, stmt)
 			value.True = groupTokens
@@ -389,7 +405,7 @@ func (p *Parser) GetTerm() (token.Value, error) {
 		case token.LThan:
 			fmt.Println("in the lthan")
 			// ident := p.LastToken
-			nextTokenOpString := p.NextToken.Value.String
+			// nextTokenOpString := p.NextToken.Value.String
 			p.Shift()
 			op := p.CurrentToken
 			factor2, ferr := p.GetTerm()
@@ -402,11 +418,12 @@ func (p *Parser) GetTerm() (token.Value, error) {
 			if err != nil {
 				return token.Value{}, err
 			}
+			fmt.Println("things totalTermEval", totalTermEval)
 			// FIXME: holy fuck haxorz
 			// if totalTerp.Type == token.IntType {
 			// TODO: should use totalTerm.String here
 			fmt.Printf("factor2before %+v\n", factor2)
-			factor2.String = totalTerm.Name + nextTokenOpString + factor2.String
+			factor2.String = totalTermEval.String
 			// }
 			fmt.Printf("totalTerm %+v\n", totalTerm)
 			fmt.Printf("totalTermEval %+v\n", totalTermEval)
@@ -571,6 +588,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 			p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 			p.meta.currentVariable.Value = expr.True
+			p.meta.currentVariable.Metadata = expr.Metadata
 
 			// TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
 			currentName := p.meta.currentVariable.Name
@@ -1016,6 +1034,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		fmt.Println("args, ok", args, ok)
 		if ok && len(args) > 0 {
 			// os.Exit(9)
+			// FIXME: fix this shit
 		}
 
 		// err = p.meta.DeclareVariableFromTokenValue()
@@ -1078,6 +1097,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 			},
 			Metadata: map[string]interface{}{
 				"lambda": false,
+				"type":   "def",
 			},
 		}
 
@@ -1172,8 +1192,16 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			if err != nil {
 				return token.Value{}, err
 			}
+			if VariableTypeString(p.meta.currentVariable.Type) == "var" {
+				p.meta.currentVariable.ActingType = OBJECT
+			}
+
 			p.meta.currentVariable.Value = baseValue
-			p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.Type)
+			p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.AccessType)
+			// if it's still not set, just make it private because it's a literal or something
+			if p.meta.currentVariable.AccessType < 1 {
+				p.meta.currentVariable.AccessType = 1
+			}
 			fmt.Printf("p.CurrentToken %+v\n", p.CurrentToken)
 			fmt.Printf("else p.meta.currentVariable %+v\n", p.meta.currentVariable)
 			tv = mapVariableToTokenValue(p.meta.currentVariable)
@@ -1223,17 +1251,13 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	case token.Function:
 		fmt.Println("hey i found a function")
 
-		md := p.NextToken.Value.Metadata["type"]
+		next := p.NextToken
+		md := next.Value.Metadata["type"]
 		fmt.Println("md", md)
 
 		// Unpack tokens from function into new parser
 		// Unpack tokens from each in True into a new parser
 		// parse group then group, then block
-
-		// Check for function definition
-		// if md == "def" {
-
-		// }
 		unpackedFunctionTokens := p.NextToken.Value.True.([]token.Token)
 		// functionTokens := []token.Value{}
 		fmt.Printf("unpackedFunctionTokens %+v\n", unpackedFunctionTokens)
@@ -1243,10 +1267,6 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		fmt.Println()
 		argsUnpacked := unpackedFunctionTokens[0]
 		fmt.Printf("argsUnpacked %+v\n\n", argsUnpacked)
-		returnsUnpacked := unpackedFunctionTokens[1]
-		fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
-		bodyUnpacked := unpackedFunctionTokens[2]
-		fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
 
 		functionOpType = p.NextToken.Value.Metadata["type"].(string)
 		pa := New([]token.Token{argsUnpacked})
@@ -1261,46 +1281,68 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		fmt.Println("argExpr", argExpr)
 		p.Shift()
 
-		pa = New([]token.Token{returnsUnpacked})
-		pa.meta.NewScopeFromScope(p.meta.currentScope)
-		returnExpr, err := pa.GetExpression()
-		if err != nil {
-			fmt.Println("Error: could not parse expression inside group")
-			fmt.Println(err.Error())
-			return token.Value{}, err
-		}
-		p.Shift()
+		var returnExpr, block token.Value
 
-		pa = New([]token.Token{bodyUnpacked})
-		pa.meta.NewScopeFromScope(p.meta.currentScope)
-		block, err := pa.CheckBlock()
-		if err != nil {
-			return token.Value{}, nil
+		// TODO: if it is not a function defintion or a lambda call,
+		// it needs to be validated that the function exists
+		// Check for function definition
+		if md == "def" {
+			// Declare all the variables in the args so that we have them when parsing the
+			// return value and the body
+			for _, arg := range argExpr.True.([]token.Value) {
+				err = p.meta.DeclareVariableFromTokenValue(arg)
+				if err != nil {
+					return token.Value{}, err
+				}
+			}
+
+			returnsUnpacked := unpackedFunctionTokens[1]
+			fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
+
+			bodyUnpacked := unpackedFunctionTokens[2]
+			fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
+
+			pa = New([]token.Token{returnsUnpacked})
+			pa.meta.NewScopeFromScope(p.meta.currentScope)
+			returnExpr, err = pa.GetExpression()
+			if err != nil {
+				fmt.Println("Error: could not parse expression inside group")
+				fmt.Println(err.Error())
+				return token.Value{}, err
+			}
+
+			pa = New([]token.Token{bodyUnpacked})
+			pa.meta.NewScopeFromScope(p.meta.currentScope)
+			block, err = pa.CheckBlock()
+			if err != nil {
+				return token.Value{}, nil
+			}
+			fmt.Println("last after block", p.LastToken)
+			fmt.Println("current after block", p.CurrentToken)
+			fmt.Println("Next after block", p.NextToken)
 		}
 
 		functionOpType = ""
 		tv := token.Value{
-			Name:       p.meta.currentVariable.Name,
+			Name:       next.Value.Name,
 			AccessType: token.PrivateAccessType,
 			Type:       "function",
 			True: map[string]token.Value{
 				"args":    argExpr,
 				"returns": returnExpr,
-				// "body":    block,
+				"body":    block,
 			},
 			Metadata: map[string]interface{}{
 				"lambda": false,
+				"type":   md.(string),
 			},
 		}
 
 		return tv, nil
 
-		//	Unpack FUNCTION token into:
-		//		1) If type is "def":
-		//			A) IDENT > GROUP > BLOCK
-		//			B) IDENT > GROUP > GROUP > BLOCK
-		//		2) If type is "call"
-		//			A) IDENT > GROUP
+	case "":
+		fmt.Println("im fuckin here")
+		return token.Value{}, nil
 
 	default:
 		// TODO: this causes infinite loops when you cant parse

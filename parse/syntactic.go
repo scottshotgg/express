@@ -256,6 +256,50 @@ func (p *Parser) ParseFunctionDef() token.Token {
 	}
 }
 
+func (p *Parser) ParseFunctionCall() token.Token {
+	// next := p.NextToken
+
+	fmt.Println("woah i got a function call", p.CurrentToken)
+
+	// Append the ident token
+	nameToken := p.CurrentToken
+	functionTokens := []token.Token{}
+	fmt.Println("wowee", p.NextToken)
+	p.Shift()
+	args := p.ParseGroup()
+	functionTokens = append(functionTokens, args)
+	fmt.Println("wowe2e", p.NextToken)
+
+	// FIXME: fix this later
+	if len(nameToken.Value.String) < 1 {
+		fmt.Println("wtf that name")
+		os.Exit(9)
+	}
+
+	accessType := token.PrivateAccessType
+	if nameToken.Value.String[0] > 64 || nameToken.Value.String[0] < 91 {
+		accessType = token.PublicAccessType
+	}
+
+	ft := token.Token{
+		ID:   1,
+		Type: token.Function,
+		Value: token.Value{
+			Name:       nameToken.Value.String,
+			AccessType: accessType,
+			Type:       token.FunctionType,
+			True:       functionTokens,
+			Metadata: map[string]interface{}{
+				"lambda": false,
+				"type":   "call",
+			},
+		},
+	}
+
+	fmt.Println("ft", ft)
+	return ft
+}
+
 // ParseIdent parses an identifier
 func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 	if blockTokens == nil {
@@ -555,15 +599,14 @@ func (p *Parser) ParseBlock() token.Token {
 			}
 
 		case token.Ident:
-			// peek := p.NextToken
+			peek := p.NextToken
 
-			// if peek.Type == token.LParen {
-			// 	fmt.Println("IMPLEMENT p.ParseFunctionCall")
-			// 	os.Exit(9)
-			// 	// blockTokens = append(blockTokens, //p.ParseFunctionCall(p.CurrentToken))
-			// } else {
-			p.ParseIdent(&blockTokens, p.CurrentToken)
-			// }
+			if peek.Type == token.LParen {
+				fmt.Println("IMPLEMENT p.ParseFunctionCall")
+				blockTokens = append(blockTokens, p.ParseFunctionCall())
+			} else {
+				p.ParseIdent(&blockTokens, p.CurrentToken)
+			}
 
 			// TODO: this case might need to move to the Syntactic part of the parser
 		case token.Literal:

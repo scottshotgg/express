@@ -245,14 +245,14 @@ func getBaseForType(trueType, actingType string) (interface{}, error) {
 	case token.CharType:
 		return "", nil
 
-	// case token.StructType:
-	// 	fallthrough
-	// case token.ObjectType:
-	// 	return
+	case token.VarType:
+		fallthrough
+	case token.StructType:
+		fallthrough
+	case token.ObjectType:
+		return map[string]interface{}{}, nil
 
 	// case token.FunctionType:
-
-	// case token.VarType:
 
 	// case token.ArrayType:
 	// 	return

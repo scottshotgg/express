@@ -2,15 +2,35 @@
 	"Type": "BLOCK",
 	"True": [
 		{
+			"Name": "increment",
 			"Type": "function",
 			"True": {
 				"args": {
 					"True": [
 						{
 							"Name": "i",
-							"Type": "int",
-							"True": 0,
+							"Type": "object",
+							"True": {},
 							"AccessType": "private"
+						}
+					]
+				},
+				"body": {
+					"Type": "BLOCK",
+					"True": [
+						{
+							"Type": "RETURN",
+							"True": {
+								"Type": "BLOCK",
+								"True": [
+									{
+										"Name": "something",
+										"Type": "string",
+										"True": "else",
+										"AccessType": "private"
+									}
+								]
+							}
 						}
 					]
 				},
@@ -18,8 +38,8 @@
 					"True": [
 						{
 							"Name": "j",
-							"Type": "int",
-							"True": 0,
+							"Type": "object",
+							"True": {},
 							"AccessType": "private"
 						}
 					]
@@ -27,7 +47,36 @@
 			},
 			"AccessType": "private",
 			"Metadata": {
-				"lambda": false
+				"lambda": false,
+				"type": "def"
+			}
+		},
+		{
+			"Name": "increment",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "BLOCK",
+							"True": [
+								{
+									"Name": "another",
+									"Type": "string",
+									"True": "object",
+									"AccessType": "private"
+								}
+							]
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
 			}
 		}
 	]

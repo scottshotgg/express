@@ -1,0 +1,219 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "findIndexOf",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "i",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				},
+				"body": {
+					"Type": "BLOCK",
+					"True": [
+						{
+							"Type": "for",
+							"True": [
+								{
+									"Name": "k",
+									"Type": "int",
+									"Acting": "int",
+									"True": 0,
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"refs": "arrayBoi_1532932300[k_1532932300]"
+									}
+								},
+								{
+									"Type": "if",
+									"True": [
+										{
+											"Type": "RETURN",
+											"True": {
+												"Name": "k",
+												"Type": "int",
+												"Acting": "int",
+												"True": 0,
+												"String": "0",
+												"AccessType": "private",
+												"Metadata": {
+													"length": 3,
+													"refs": "k",
+													"vector": false
+												}
+											}
+										}
+									],
+									"String": "i\u003ck",
+									"Metadata": {
+										"check": "i\u003ck",
+										"eval": false,
+										"left": {
+											"Name": "i",
+											"Type": "int",
+											"Acting": "int",
+											"True": 0,
+											"AccessType": "private",
+											"Metadata": {
+												"refs": "i"
+											}
+										},
+										"op": {
+											"Type": "lthan",
+											"String": "\u003c"
+										},
+										"right": {
+											"Name": "k",
+											"Type": "int",
+											"Acting": "int",
+											"True": 0,
+											"String": "0",
+											"AccessType": "private",
+											"Metadata": {
+												"length": 3,
+												"refs": "k",
+												"vector": false
+											}
+										},
+										"type": "bool"
+									}
+								}
+							],
+							"String": "k_1532932300\u003c4",
+							"Metadata": {
+								"end": {
+									"Name": "k_1532932300",
+									"Type": "int",
+									"True": 4,
+									"String": "4",
+									"AccessType": "private"
+								},
+								"extraVars": [
+									{
+										"Name": "arrayBoi_1532932300",
+										"Type": "array",
+										"Acting": "int",
+										"True": [
+											{
+												"Type": "LITERAL",
+												"Value": {
+													"Type": "int",
+													"True": 2,
+													"String": "2"
+												}
+											},
+											{
+												"Type": "LITERAL",
+												"Value": {
+													"Type": "int",
+													"True": 4,
+													"String": "4"
+												}
+											},
+											{
+												"Type": "LITERAL",
+												"Value": {
+													"Type": "int",
+													"True": 5,
+													"String": "5"
+												}
+											},
+											{
+												"Type": "LITERAL",
+												"Value": {
+													"Type": "int",
+													"True": 9,
+													"String": "9"
+												}
+											}
+										],
+										"AccessType": "private",
+										"Metadata": {
+											"length": 3,
+											"vector": false
+										}
+									},
+									{
+										"Name": "k",
+										"Type": "int",
+										"Acting": "int",
+										"True": 0,
+										"String": "k",
+										"AccessType": "private"
+									}
+								],
+								"start": {
+									"Name": "k_1532932300",
+									"Type": "int",
+									"True": 0,
+									"String": "0",
+									"AccessType": "private"
+								},
+								"step": {
+									"Name": "k_1532932300",
+									"Type": "int",
+									"True": 1,
+									"String": "1",
+									"AccessType": "private"
+								}
+							}
+						},
+						{
+							"Type": "RETURN",
+							"True": {
+								"Type": "int",
+								"True": 1000,
+								"String": "1000"
+							}
+						}
+					]
+				},
+				"returns": {
+					"True": [
+						{
+							"Name": "j",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "def"
+			}
+		},
+		{
+			"Name": "findIndexOf",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "int",
+							"True": 5,
+							"String": "5"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		}
+	]
+}

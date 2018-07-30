@@ -98,6 +98,7 @@ const (
 	BoolType        = "bool"
 	CharType        = "char"
 	ObjectType      = "object"
+	StructType      = "struct"
 	ArrayType       = "array"
 	FunctionType    = "function"
 	SetType         = "set"

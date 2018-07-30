@@ -20,8 +20,8 @@
 										{
 											"Type": "TYPE",
 											"Value": {
-												"Type": "int",
-												"String": "int"
+												"Type": "object",
+												"String": "object"
 											}
 										},
 										{
@@ -43,8 +43,8 @@
 										{
 											"Type": "TYPE",
 											"Value": {
-												"Type": "int",
-												"String": "int"
+												"Type": "object",
+												"String": "object"
 											}
 										},
 										{
@@ -71,10 +71,33 @@
 											}
 										},
 										{
-											"Type": "LITERAL",
+											"Type": "BLOCK",
 											"Value": {
-												"Type": "int",
-												"True": 100
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "something"
+														}
+													},
+													{
+														"Type": "ASSIGN",
+														"Value": {
+															"Type": "set",
+															"String": ":"
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "string",
+															"True": "else",
+															"String": "else"
+														}
+													}
+												]
 											}
 										}
 									]
@@ -85,6 +108,60 @@
 						"Metadata": {
 							"lambda": false,
 							"type": "def"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "increment",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "another"
+														}
+													},
+													{
+														"Type": "ASSIGN",
+														"Value": {
+															"Type": "set",
+															"String": ":"
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "string",
+															"True": "object",
+															"String": "object"
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
 						}
 					}
 				}
