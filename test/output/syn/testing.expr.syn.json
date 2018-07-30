@@ -43,8 +43,8 @@
 										{
 											"Type": "TYPE",
 											"Value": {
-												"Type": "int",
-												"String": "int"
+												"Type": "var",
+												"String": "var"
 											}
 										},
 										{
@@ -170,10 +170,32 @@
 																	}
 																},
 																{
-																	"Type": "IDENT",
+																	"Type": "BLOCK",
 																	"Value": {
-																		"Type": "private",
-																		"String": "k"
+																		"Type": "BLOCK",
+																		"True": [
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "value"
+																				}
+																			},
+																			{
+																				"Type": "ASSIGN",
+																				"Value": {
+																					"Type": "set",
+																					"String": ":"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "k"
+																				}
+																			}
+																		]
 																	}
 																}
 															]
@@ -191,10 +213,32 @@
 											}
 										},
 										{
-											"Type": "LITERAL",
+											"Type": "BLOCK",
 											"Value": {
-												"Type": "int",
-												"True": 1000
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "value"
+														}
+													},
+													{
+														"Type": "ASSIGN",
+														"Value": {
+															"Type": "set",
+															"String": ":"
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "int",
+															"True": 1000
+														}
+													}
+												]
 											}
 										}
 									]

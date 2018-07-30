@@ -85,8 +85,8 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "int",
-			"String": "int"
+			"Type": "var",
+			"String": "var"
 		}
 	},
 	{
@@ -461,9 +461,57 @@
 		}
 	},
 	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "value"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
 		"Type": "IDENT",
 		"Value": {
 			"String": "k"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
 		}
 	},
 	{
@@ -580,10 +628,58 @@
 		}
 	},
 	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "value"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
 			"True": 1000
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
 		}
 	},
 	{

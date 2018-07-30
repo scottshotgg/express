@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1532933301[k_1532933301]"
+										"refs": "arrayBoi_1532933539[k_1532933539]"
 									}
 								},
 								{
@@ -38,17 +38,20 @@
 										{
 											"Type": "RETURN",
 											"True": {
-												"Name": "k",
-												"Type": "int",
-												"Acting": "int",
-												"True": 0,
-												"String": "0",
-												"AccessType": "private",
-												"Metadata": {
-													"length": 3,
-													"refs": "k",
-													"vector": false
-												}
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Name": "value",
+														"Type": "int",
+														"True": 0,
+														"AccessType": "private",
+														"Metadata": {
+															"length": 3,
+															"refs": "k",
+															"vector": false
+														}
+													}
+												]
 											}
 										}
 									],
@@ -87,10 +90,10 @@
 									}
 								}
 							],
-							"String": "k_1532933301\u003c4",
+							"String": "k_1532933539\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1532933301",
+									"Name": "k_1532933539",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -98,7 +101,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1532933301",
+										"Name": "arrayBoi_1532933539",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -151,14 +154,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1532933301",
+									"Name": "k_1532933539",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1532933301",
+									"Name": "k_1532933539",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -169,9 +172,15 @@
 						{
 							"Type": "RETURN",
 							"True": {
-								"Type": "int",
-								"True": 1000,
-								"String": "1000"
+								"Type": "BLOCK",
+								"True": [
+									{
+										"Name": "value",
+										"Type": "int",
+										"True": 1000,
+										"AccessType": "private"
+									}
+								]
 							}
 						}
 					]
@@ -180,8 +189,9 @@
 					"True": [
 						{
 							"Name": "j",
-							"Type": "int",
-							"True": 0,
+							"Type": "var",
+							"Acting": "object",
+							"True": {},
 							"AccessType": "private"
 						}
 					]
