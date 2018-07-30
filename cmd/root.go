@@ -158,7 +158,13 @@ to quickly create a Cobra application.`,
 			os.Exit(9)
 		}
 
-		f, err := os.Create(filename + ".cpp")
+		cppFilename := filename + ".cpp"
+		if !viper.GetBool("emit-cpp") && !viper.GetBool("emit-all") {
+			tempDir := os.TempDir()
+			cppFilename = tempDir + cppFilename
+		}
+
+		f, err := os.Create(cppFilename)
 		if err != nil {
 			fmt.Println("got an err creating file", err)
 			return
@@ -177,7 +183,7 @@ to quickly create a Cobra application.`,
 		}
 
 		// FIXME: write this to a temp dir/file using Go and then move it if we need it
-		output, err := exec.Command("clang++", "-std=gnu++2a", filename+".cpp", "-o", filename+".exe").CombinedOutput()
+		output, err := exec.Command("clang++", "-std=gnu++2a", cppFilename, "-o", filename+".exe").CombinedOutput()
 		if err != nil {
 			// TODO:
 			fmt.Println("err compile", err, string(output))
@@ -185,7 +191,7 @@ to quickly create a Cobra application.`,
 		}
 
 		if viper.GetBool("emit-cpp") || viper.GetBool("emit-all") {
-			output, err = exec.Command("clang-format", "-i", filename+".cpp").CombinedOutput()
+			output, err = exec.Command("clang-format", "-i", cppFilename).CombinedOutput()
 			if err != nil {
 				// TODO:
 				fmt.Println("err compile", err, string(output))
@@ -193,7 +199,7 @@ to quickly create a Cobra application.`,
 				return
 			}
 		} else {
-			output, err = exec.Command("rm", filename+".cpp").CombinedOutput()
+			output, err = exec.Command("rm", cppFilename).CombinedOutput()
 			if err != nil {
 				// TODO:
 				fmt.Println("err delete", err, string(output))

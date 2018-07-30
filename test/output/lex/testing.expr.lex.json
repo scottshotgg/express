@@ -7,13 +7,6 @@
 		}
 	},
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"ID": 9,
 		"Type": "KEYWORD",
 		"Value": {
