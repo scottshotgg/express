@@ -1,0 +1,86 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "total",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Type": "for",
+			"True": [
+				{
+					"Name": "total",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				}
+			],
+			"String": "i\u003c1000000",
+			"Metadata": {
+				"end": {
+					"Type": "int",
+					"True": 1000000,
+					"String": "i\u003c1000000",
+					"Metadata": {
+						"eval": true,
+						"left": {
+							"Name": "i",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "i"
+							}
+						},
+						"op": {
+							"Type": "lthan",
+							"String": "\u003c"
+						},
+						"right": {
+							"Type": "int",
+							"True": 1000000,
+							"String": "1000000"
+						},
+						"type": "bool"
+					}
+				},
+				"eval": true,
+				"left": {
+					"Name": "i",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "i"
+					}
+				},
+				"op": {
+					"Type": "lthan",
+					"String": "\u003c"
+				},
+				"right": {
+					"Type": "int",
+					"True": 1000000,
+					"String": "1000000"
+				},
+				"start": {
+					"Name": "i",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				},
+				"step": {
+					"Type": "int",
+					"True": 1,
+					"String": "1"
+				},
+				"type": "bool"
+			}
+		}
+	]
+}

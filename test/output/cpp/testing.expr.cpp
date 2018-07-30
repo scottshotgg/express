@@ -2,32 +2,32 @@
 #include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _BqVnRSfVsp = {};
-  _BqVnRSfVsp["something"] = "else";
-  return _BqVnRSfVsp;
+  var _SPVDPFHzgj = {};
+  _SPVDPFHzgj["something"] = "else";
+  return _SPVDPFHzgj;
 }
 
 var isThereSomethingLessThan(int i) {
 
   {
-    int arrayBoi_1532933539[] = {2, 4, 5, 9};
+    int arrayBoi_1532934172[] = {2, 4, 5, 9};
     int k = 0;
-    int k_1532933539 = 0;
-    while (k_1532933539 < 4) {
+    int k_1532934172 = 0;
+    while (k_1532934172 < 4) {
       {
-        k = arrayBoi_1532933539[k_1532933539];
+        k = arrayBoi_1532934172[k_1532934172];
         if (i < k) {
-          var _eLeZbrrtkD = {};
-          _eLeZbrrtkD["value"] = k;
-          return _eLeZbrrtkD;
+          var _BAZehFpjuG = {};
+          _BAZehFpjuG["value"] = k;
+          return _BAZehFpjuG;
         }
       }
-      k_1532933539 += 1;
+      k_1532934172 += 1;
     }
   }
-  var _VvGINbKkBA = {};
-  _VvGINbKkBA["value"] = 1000;
-  return _VvGINbKkBA;
+  var _KiVoJGNveL = {};
+  _KiVoJGNveL["value"] = 1000;
+  return _KiVoJGNveL;
 }
 
 int main() { isThereSomethingLessThan(5); }
