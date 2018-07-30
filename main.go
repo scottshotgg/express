@@ -1,72 +1,21 @@
+// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"os"
-
-	"github.com/scottshotgg/express/lex"
-	"github.com/scottshotgg/express/parse"
-	"github.com/scottshotgg/express/token"
-)
-
-var (
-	jsonIndent = "\t"
-)
+import "github.com/scottshotgg/express/cmd"
 
 func main() {
-	argLen := len(os.Args)
-
-	if argLen < 2 {
-		fmt.Println("ERROR: You must provide an input program")
-		return
-	}
-
-	input, err := ioutil.ReadFile(os.Args[argLen-1])
-	if err != nil {
-		fmt.Printf("ERROR: Cannot read input program: %s\n", os.Args[argLen-1])
-		os.Exit(9)
-	}
-
-	l := lex.New(string(input))
-
-	lexTokens, err := l.Lex()
-	if err != nil {
-		fmt.Println("error lexing", err)
-		os.Exit(9)
-	}
-	token.PrintTokens(lexTokens, jsonIndent)
-	fmt.Println("\n\n")
-
-	p := parse.New(lexTokens)
-	// tokens, err := p.Parse()
-	// if err != nil {
-	// 	fmt.Println("error in syntactic parsing", err)
-	// 	os.Exit(9)
-	// }
-	// fmt.Println("tokens", tokens)
-	// // PrintTokens(tokens, jsonIndent)
-	// // fmt.Println("\n\n")
-
-	// // p = parse.New(syntacticTokens)
-
-	syntacticTokens, err := p.Syntactic()
-	if err != nil {
-		fmt.Println("error in syntactic parsing", err)
-		os.Exit(9)
-	}
-	fmt.Println("Syntactic Tokens")
-	token.PrintTokens(syntacticTokens, jsonIndent)
-	fmt.Println("\n\n")
-
-	pNew := parse.New(syntacticTokens)
-	semanticTokens, err := pNew.Semantic()
-	if err != nil {
-		fmt.Println("error in semantic parsing", err)
-		os.Exit(9)
-	}
-	fmt.Println("Semantic Tokens")
-	// token.PrintValues(semanticTokens, jsonIndent)
-	fmt.Println(semanticTokens)
-	fmt.Println("\n\n")
+	cmd.Execute()
 }

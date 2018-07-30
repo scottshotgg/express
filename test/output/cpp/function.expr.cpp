@@ -1,14 +1,14 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _SPVDPFHzgj = {};
-  _SPVDPFHzgj["something"] = "else";
-  return _SPVDPFHzgj;
+  var _uYZmTVdXgE = {};
+  _uYZmTVdXgE["something"] = "else";
+  return _uYZmTVdXgE;
 }
 
 int main() {
-  var _ATBzDadbPv = {};
-  _ATBzDadbPv["another"] = "object";
-  increment(_ATBzDadbPv);
+  var _YSJprWpNzP = {};
+  _YSJprWpNzP["another"] = "object";
+  increment(_YSJprWpNzP);
 }

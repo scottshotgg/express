@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -33,7 +32,7 @@ var (
 	// TODO: FIXME: this is causing functions to be compiled in every single file
 	functionStrings = ""
 
-	libBase = ""
+	LibBase = ""
 )
 
 func translateFunctionCall(t token.Value) (string, error) {
@@ -668,12 +667,6 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// f+="struct Any { std::string type; void* data; };\n"
 	r = rand.New(rand.NewSource(time.Now().Unix()))
 
-	var err error
-	libBase, err = filepath.Abs("../lib/")
-	if err != nil {
-		os.Exit(9)
-	}
-
 	var f string
 
 	baseLibs := []string{
@@ -694,7 +687,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	}
 
 	for k := range extraLibs {
-		extraLibs[k] = "#include " + strconv.Quote(libBase+"/"+extraLibs[k])
+		extraLibs[k] = "#include " + strconv.Quote(LibBase+"/"+extraLibs[k])
 	}
 
 	f += "\n" + strings.Join(extraLibs, "\n")

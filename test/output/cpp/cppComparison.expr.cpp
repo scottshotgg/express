@@ -1,5 +1,5 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 
 int main() {
@@ -7,9 +7,9 @@ int main() {
 
   {
     int i = 0;
-    while (i < 1000000000) {
+    while (i < 1000000) {
       {
-        total += i;
+        total = 0;
       }
       i += 1;
     }

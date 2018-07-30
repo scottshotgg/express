@@ -103,6 +103,12 @@ func TestAll(t *testing.T) {
 	//	capture output
 	// At each step, compare result with output dir
 
+	var err error
+	parse.LibBase, err = filepath.Abs("../lib/")
+	if err != nil {
+		os.Exit(9)
+	}
+
 	files, err := ioutil.ReadDir(testPrograms)
 	if err != nil {
 		fmt.Println("ReadDirErr", err)
@@ -195,7 +201,7 @@ func TestAll(t *testing.T) {
 					return
 				}
 
-				output, err = exec.Command("clang++", "-std=gnu++14", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+				output, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
 				if err != nil {
 					// TODO:
 					fmt.Println("err compile", err, string(output))
