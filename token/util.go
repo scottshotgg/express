@@ -13,6 +13,7 @@ func PrintTokens(tokens []Token, jsonIndent string) {
 
 			tks, ok := t.Value.True.([]Token)
 			if !ok {
+				fmt.Println("could not assert interface to []token")
 				os.Exit(9)
 			}
 
@@ -40,6 +41,7 @@ func PrintValues(tokens []Value, jsonIndent string) {
 
 			tks, ok := t.True.([]Value)
 			if !ok {
+				fmt.Println("could not assert value")
 				os.Exit(9)
 			}
 

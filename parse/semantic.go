@@ -282,7 +282,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		pa.meta.NewScopeFromScope(p.meta.currentScope)
 		for pa.NextToken.Type != "" {
 			var stmt token.Value
-			if functionOpType == "declaration" {
+			if functionOpType == "def" {
 				stmt, err = pa.GetStatement()
 			} else {
 				stmt, err = pa.GetExpression()
@@ -301,17 +301,10 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 		// os.Exit(9)
 
-	case token.Function:
-		fmt.Println("hey im here")
+	// case token.Function:
+	// 	fmt.Println("hey im here")
 
-		//	Unpack FUNCTION token into:
-		//		1) If type is "def":
-		//			A) IDENT > GROUP > BLOCK
-		//			B) IDENT > GROUP > GROUP > BLOCK
-		//		2) If type is "call"
-		//			A) IDENT > GROUP
-
-		os.Exit(9)
+	// 	os.Exit(9)
 
 	default:
 		fmt.Println("last2", p.LastToken)
@@ -1226,6 +1219,88 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		}
 		p.Shift()
 		return block, err
+
+	case token.Function:
+		fmt.Println("hey i found a function")
+
+		md := p.NextToken.Value.Metadata["type"]
+		fmt.Println("md", md)
+
+		// Unpack tokens from function into new parser
+		// Unpack tokens from each in True into a new parser
+		// parse group then group, then block
+
+		// Check for function definition
+		// if md == "def" {
+
+		// }
+		unpackedFunctionTokens := p.NextToken.Value.True.([]token.Token)
+		// functionTokens := []token.Value{}
+		fmt.Printf("unpackedFunctionTokens %+v\n", unpackedFunctionTokens)
+		// args
+		// returns
+		// body
+		fmt.Println()
+		argsUnpacked := unpackedFunctionTokens[0]
+		fmt.Printf("argsUnpacked %+v\n\n", argsUnpacked)
+		returnsUnpacked := unpackedFunctionTokens[1]
+		fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
+		bodyUnpacked := unpackedFunctionTokens[2]
+		fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
+
+		functionOpType = p.NextToken.Value.Metadata["type"].(string)
+		pa := New([]token.Token{argsUnpacked})
+		pa.meta.NewScopeFromScope(p.meta.currentScope)
+		argExpr, err := pa.GetExpression()
+		if err != nil {
+			fmt.Println("Error: could not parse expression inside group")
+			fmt.Println(err.Error())
+			return token.Value{}, err
+		}
+
+		fmt.Println("argExpr", argExpr)
+		p.Shift()
+
+		pa = New([]token.Token{returnsUnpacked})
+		pa.meta.NewScopeFromScope(p.meta.currentScope)
+		returnExpr, err := pa.GetExpression()
+		if err != nil {
+			fmt.Println("Error: could not parse expression inside group")
+			fmt.Println(err.Error())
+			return token.Value{}, err
+		}
+		p.Shift()
+
+		pa = New([]token.Token{bodyUnpacked})
+		pa.meta.NewScopeFromScope(p.meta.currentScope)
+		block, err := pa.CheckBlock()
+		if err != nil {
+			return token.Value{}, nil
+		}
+
+		functionOpType = ""
+		tv := token.Value{
+			Name:       p.meta.currentVariable.Name,
+			AccessType: token.PrivateAccessType,
+			Type:       "function",
+			True: map[string]token.Value{
+				"args":    argExpr,
+				"returns": returnExpr,
+				// "body":    block,
+			},
+			Metadata: map[string]interface{}{
+				"lambda": false,
+			},
+		}
+
+		return tv, nil
+
+		//	Unpack FUNCTION token into:
+		//		1) If type is "def":
+		//			A) IDENT > GROUP > BLOCK
+		//			B) IDENT > GROUP > GROUP > BLOCK
+		//		2) If type is "call"
+		//			A) IDENT > GROUP
 
 	default:
 		// TODO: this causes infinite loops when you cant parse

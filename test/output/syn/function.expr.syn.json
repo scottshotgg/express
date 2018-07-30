@@ -5,39 +5,11 @@
 			"Type": "BLOCK",
 			"True": [
 				{
-					"Type": "TYPE",
-					"Value": {
-						"Type": "int",
-						"String": "int"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "i"
-					}
-				},
-				{
-					"ID": 9,
-					"Type": "KEYWORD",
-					"Value": {
-						"Type": "keyword",
-						"String": "func"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "increment"
-					}
-				},
-				{
-					"ID": 4,
+					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Type": "def",
+						"Name": "increment",
+						"Type": "function",
 						"True": [
 							{
 								"ID": 1,
@@ -108,30 +80,12 @@
 									]
 								}
 							}
-						]
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "increment"
-					}
-				},
-				{
-					"ID": 1,
-					"Type": "GROUP",
-					"Value": {
-						"Type": "GROUP",
-						"True": [
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 100
-								}
-							}
-						]
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "def"
+						}
 					}
 				}
 			]

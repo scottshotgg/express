@@ -14,33 +14,6 @@
 		}
 	},
 	{
-		"Type": "TYPE",
-		"Value": {
-			"Type": "int",
-			"String": "int"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "i"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -226,40 +199,6 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "increment"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 100
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
 		}
 	},
 	{

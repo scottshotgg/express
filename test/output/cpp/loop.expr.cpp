@@ -1,9 +1,9 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
-int increment(int i) { return 100; }
+int(int i)
 
-int main() {
+    int main() {
   int f = 0;
 
   {
@@ -18,30 +18,30 @@ int main() {
   }
 
   {
-    int arrayBoi_1532850496[] = {1, 2, 4};
+    int arrayBoi_1532919320[] = {1, 2, 4};
     int i = 0;
-    int i_1532850496 = 0;
-    while (i_1532850496 < 3) {
+    int i_1532919320 = 0;
+    while (i_1532919320 < 3) {
       {
-        i = i_1532850496;
+        i = i_1532919320;
         f = i;
         int h = 1;
       }
-      i_1532850496 += 1;
+      i_1532919320 += 1;
     }
   }
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1532850496 = 0;
-    while (i_1532850496 < 8) {
+    int i_1532919320 = 0;
+    while (i_1532919320 < 8) {
       {
-        i = countdown[i_1532850496];
+        i = countdown[i_1532919320];
         f = i;
         int h = 1;
       }
-      i_1532850496 += 1;
+      i_1532919320 += 1;
     }
   }
 }

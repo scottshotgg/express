@@ -174,23 +174,69 @@ func (p *Parser) ParseArray() token.Token {
 }
 
 func (p *Parser) ParseNamedFuncDef() token.Token {
-	functionTokens := []token.Token{p.NextToken}
+	// Append the ident token
+	nameToken := p.NextToken
+	functionTokens := []token.Token{}
 	p.Shift()
+	fmt.Println("wowee", p.NextToken)
+	p.Shift()
+	args := p.ParseGroup()
+	functionTokens = append(functionTokens, args)
+	fmt.Println("wowe2e", p.NextToken)
+	p.Shift()
+	returns := p.ParseGroup()
+	functionTokens = append(functionTokens, returns)
+	fmt.Println("args", args)
+	fmt.Println("wowee3", p.NextToken)
+	fmt.Println("returns", returns)
+	p.Shift()
+	body := p.ParseBlock()
+	functionTokens = append(functionTokens, body)
+	// bodyTokens := body.Value.True.([]token.Token)
+	// fmt.Println("bodyTokens", bodyTokens)
+	// fmt.Println("body", body)
 
-	// if p.NextToken == ""
+	// if p.NextToken.Type == token.Group {
+	// 	fmt.Println("woah we hit a group")
+	// 	os.Exit(9)
+	// }
+
+	// FIXME: fix this later
+	if len(nameToken.Value.String) < 1 {
+		fmt.Println("wtf that name")
+		os.Exit(9)
+	}
+
+	accessType := token.PrivateAccessType
+	if nameToken.Value.String[0] > 64 || nameToken.Value.String[0] < 91 {
+		accessType = token.PublicAccessType
+	}
 
 	return token.Token{
 		ID:   1,
 		Type: token.Function,
 		Value: token.Value{
-			Type: token.FunctionType,
+			Name:       nameToken.Value.String,
+			AccessType: accessType,
+			Type:       token.FunctionType,
+			// True: map[string]token.Token{
+			// 	"args":    args,
+			// 	"returns": returns,
+			// 	"body":    body,
+			// },
 			True: functionTokens,
+			Metadata: map[string]interface{}{
+				"lambda": false,
+				"type":   "def",
+			},
 		},
 	}
 }
 
 func (p *Parser) ParseFunctionDef() token.Token {
 	next := p.NextToken
+
+	fmt.Println("woah a function def", next)
 
 	switch next.Type {
 	case token.Ident:
@@ -280,20 +326,21 @@ func (p *Parser) ParseBlock() token.Token {
 			blockTokens = append(blockTokens, current)
 
 		case token.Keyword:
-			// fmt.Println("we are here at the keyword thing")
-			blockTokens = append(blockTokens, current)
-			// if p.CurrentToken.Value.String == token.Funtion {
-			// 	// if p.NextToken.Type != token.Ident {
-			// 	// 	fmt.Println("wtf im here??")
-			// 	// 	continue // for now
-			// 	// }
+			if p.CurrentToken.Value.String == "func" {
+				// if p.NextToken.Type != token.Ident {
+				// 	fmt.Println("wtf im here??")
+				// 	os.Exit(9) // for now
+				// }
 
-			// 	fmt.Println("IMPLEMENT p.ParseFunctionDef here")
-			// 	function := p.ParseFunctionDef()
-			// 	fmt.Println("function", function)
-			// 	os.Exit(9)
+				// fmt.Println("IMPLEMENT p.ParseFunctionDef here")
+				function := p.ParseFunctionDef()
+				fmt.Println("function", function)
+				// os.Exit(9)
+				blockTokens = append(blockTokens, function)
 
-			// }
+			} else {
+				blockTokens = append(blockTokens, p.CurrentToken)
+			}
 			// switch current.Value.Type {
 			// case token.SQL:
 			// 	fmt.Println("found a sql keyword")
@@ -327,6 +374,7 @@ func (p *Parser) ParseBlock() token.Token {
 		case token.Attribute:
 			fallthrough
 		case token.Function:
+			fmt.Println("woah its a function")
 			blockTokens = append(blockTokens, current)
 			// fmt.Println(token.Function)
 
