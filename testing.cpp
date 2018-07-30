@@ -4,24 +4,24 @@
 var someFunction(int arg1) {
 
   {
-    int arrayBoi_1532978563[] = {2, 4, 5, 9};
+    int arrayBoi_1532987607[] = {2, 4, 5, 9};
     int k = 0;
-    int k_1532978563 = 0;
-    while (k_1532978563 < 4) {
+    int k_1532987607 = 0;
+    while (k_1532987607 < 4) {
       {
-        k = arrayBoi_1532978563[k_1532978563];
+        k = arrayBoi_1532987607[k_1532987607];
         if (arg1 < k) {
-          var _BCCsqULJyB = {};
-          _BCCsqULJyB["value"] = k;
-          return _BCCsqULJyB;
+          var _KZcehGNfKr = {};
+          _KZcehGNfKr["value"] = k;
+          return _KZcehGNfKr;
         }
       }
-      k_1532978563 += 1;
+      k_1532987607 += 1;
     }
   }
-  var _IJHOuZTrWj = {};
-  _IJHOuZTrWj["value"] = 1000;
-  return _IJHOuZTrWj;
+  var _szchZTqNQg = {};
+  _szchZTqNQg["value"] = 1000;
+  return _szchZTqNQg;
 }
 
-int main() { someFunction(5); }
+int main() { println(someFunction(5)); }

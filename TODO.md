@@ -5,6 +5,13 @@
 _[~] means the TODO may not happen_<br>
 _[=] means I am currently working on completing that TODO_<br><br>
 
+- [=] Fix arbitrary object statements
+- [=] Implement _index_ `[]` and _access_ `.` operations
+- [=] Implement all binary operations for basic types
+- [=] Figure out std lib usage
+  - [=] Import statement
+  - [=] Auto import/lib adding
+  - [=] Create `print`/`println` functions<br><br>
 - [=] Make `var.cpp` only printout if a variable is asserted or if `DEBUG` is turned on
 - [=] Comment `lib` - atleast `lib/var.cpp`
 - [ ] Make a demo `feature` request, `idea`, and `misc`
