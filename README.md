@@ -68,10 +68,10 @@ _[=] means I am currently working on implementing that feature_<br><br>
     - [ ] `c` prefix
 - [=] Function usage
     - [=] Function declaration
-        - [x] no args and no returns
+        - [=] no args and no returns
         - [=] args without returns
         - [=] returns without args
-        - [=] args and returns
+        - [x] args and returns
     - [ ] Function call
 - [-] Access modifiers
     - [x] `private`
