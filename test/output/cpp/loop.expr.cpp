@@ -2,25 +2,25 @@
 #include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _SEWdUHbrxD = {};
-  _SEWdUHbrxD["something"] = "else";
-  return _SEWdUHbrxD;
+  var _RspSklyhyO = {};
+  _RspSklyhyO["something"] = "else";
+  return _RspSklyhyO;
 }
 
-int findIndexOf(int i) {
+int isThereSomethingLessThan(int i) {
 
   {
-    int arrayBoi_1532932300[] = {2, 4, 5, 9};
+    int arrayBoi_1532933301[] = {2, 4, 5, 9};
     int k = 0;
-    int k_1532932300 = 0;
-    while (k_1532932300 < 4) {
+    int k_1532933301 = 0;
+    while (k_1532933301 < 4) {
       {
-        k = arrayBoi_1532932300[k_1532932300];
+        k = arrayBoi_1532933301[k_1532933301];
         if (i < k) {
           return k;
         }
       }
-      k_1532932300 += 1;
+      k_1532933301 += 1;
     }
   }
   return 1000;
@@ -41,30 +41,30 @@ int main() {
   }
 
   {
-    int arrayBoi_1532932300[] = {1, 2, 4};
+    int arrayBoi_1532933301[] = {1, 2, 4};
     int i = 0;
-    int i_1532932300 = 0;
-    while (i_1532932300 < 3) {
+    int i_1532933301 = 0;
+    while (i_1532933301 < 3) {
       {
-        i = i_1532932300;
+        i = i_1532933301;
         f = i;
         int h = 1;
       }
-      i_1532932300 += 1;
+      i_1532933301 += 1;
     }
   }
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1532932300 = 0;
-    while (i_1532932300 < 8) {
+    int i_1532933301 = 0;
+    while (i_1532933301 < 8) {
       {
-        i = countdown[i_1532932300];
+        i = countdown[i_1532933301];
         f = i;
         int h = 1;
       }
-      i_1532932300 += 1;
+      i_1532933301 += 1;
     }
   }
 }

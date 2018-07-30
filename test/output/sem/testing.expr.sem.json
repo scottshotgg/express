@@ -2,7 +2,7 @@
 	"Type": "BLOCK",
 	"True": [
 		{
-			"Name": "findIndexOf",
+			"Name": "isThereSomethingLessThan",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1532932300[k_1532932300]"
+										"refs": "arrayBoi_1532933301[k_1532933301]"
 									}
 								},
 								{
@@ -87,10 +87,10 @@
 									}
 								}
 							],
-							"String": "k_1532932300\u003c4",
+							"String": "k_1532933301\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1532932300",
+									"Name": "k_1532933301",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -98,7 +98,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1532932300",
+										"Name": "arrayBoi_1532933301",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -151,14 +151,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1532932300",
+									"Name": "k_1532933301",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1532932300",
+									"Name": "k_1532933301",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -194,7 +194,7 @@
 			}
 		},
 		{
-			"Name": "findIndexOf",
+			"Name": "isThereSomethingLessThan",
 			"Type": "function",
 			"True": {
 				"args": {

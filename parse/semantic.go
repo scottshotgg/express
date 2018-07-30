@@ -95,6 +95,7 @@ func (p *Parser) EvaluateBinaryOperation(left, right, op token.Value) (opToken t
 	if rightString == "" {
 		rightString = right.String
 	}
+
 	opToken.String = leftString + op.String + rightString
 
 	return

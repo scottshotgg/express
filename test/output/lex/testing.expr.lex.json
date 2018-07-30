@@ -31,7 +31,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "findIndexOf"
+			"String": "isThereSomethingLessThan"
 		}
 	},
 	{
@@ -617,7 +617,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "findIndexOf"
+			"String": "isThereSomethingLessThan"
 		}
 	},
 	{

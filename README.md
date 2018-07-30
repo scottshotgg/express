@@ -8,7 +8,7 @@ Express is an extremely flexible language that supports both static types and a 
 
 For binary production, programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via a flag. At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
 
-Each stage of the compiler (lexer, syntax parser, semantic parser, and C++ transpiler) are currently all implemented in `Go` and may be converter to `Rust` later on, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated with this repo after a reorganization of the file structure.
+Each stage of the compiler (lexer, syntax parser, semantics parser, and C++ transpiler) are currently all implemented in `Go` and may be converter to `Rust` later on, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated with this repo after a reorganization of the file structure.
 <br>
 It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
