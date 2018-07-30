@@ -2,9 +2,9 @@
 #include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _RspSklyhyO = {};
-  _RspSklyhyO["something"] = "else";
-  return _RspSklyhyO;
+  var _BqVnRSfVsp = {};
+  _BqVnRSfVsp["something"] = "else";
+  return _BqVnRSfVsp;
 }
 
 int main() {
@@ -16,26 +16,26 @@ int main() {
   obj["hey"] = hey;
   var objs[] = {};
   {
-    var _anHbZbMols = {};
-    _anHbZbMols["another"] = "object";
-    objs[0] = _anHbZbMols;
+    var _KZlPOGPTFX = {};
+    _KZlPOGPTFX["another"] = "object";
+    objs[0] = _KZlPOGPTFX;
   }
   {
-    var obj_qRGyQcNkZA = {};
-    obj_qRGyQcNkZA["something"] = "here";
+    var obj_EBxzRQFktr = {};
+    obj_EBxzRQFktr["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_qRGyQcNkZA["hey"] = hey;
-    objs[1] = obj_qRGyQcNkZA;
+    obj_EBxzRQFktr["hey"] = hey;
+    objs[1] = obj_EBxzRQFktr;
   }
   {
-    var obj_gGtMtndLRY = {};
-    obj_gGtMtndLRY["something"] = "here";
+    var obj_lvCVDCjSbU = {};
+    obj_lvCVDCjSbU["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_gGtMtndLRY["hey"] = hey;
-    objs[2] = obj_gGtMtndLRY;
+    obj_lvCVDCjSbU["hey"] = hey;
+    objs[2] = obj_lvCVDCjSbU;
   }
 }
