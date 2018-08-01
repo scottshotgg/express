@@ -35,6 +35,63 @@ import (
 
 var cfgFile string
 
+func init() {
+	cobra.OnInitialize(initConfig)
+
+	RootCmd.PersistentFlags().StringP("json-indent", "j", "\t", "Whether or not to output C++ transpilation")
+
+	// TODO: make a debug logger for every level, or just make our own logger that checks the level
+	RootCmd.PersistentFlags().BoolP("debug", "d", false, "Whether or not to output logs during compilation")
+	RootCmd.PersistentFlags().BoolP("emit-all", "a", false, "Whether or not to output C++ transpilation")
+	RootCmd.PersistentFlags().BoolP("emit-lex", "l", false, "Whether or not to output C++ transpilation")
+	RootCmd.PersistentFlags().BoolP("emit-syn", "s", false, "Whether or not to output C++ transpilation")
+	RootCmd.PersistentFlags().BoolP("emit-sem", "x", false, "Whether or not to output C++ transpilation")
+	RootCmd.PersistentFlags().BoolP("emit-cpp", "c", false, "Whether or not to output C++ transpilation")
+
+	_ = viper.BindPFlag("json-indent", RootCmd.PersistentFlags().Lookup("json-indent"))
+	_ = viper.BindPFlag("debug", RootCmd.PersistentFlags().Lookup("debug"))
+	_ = viper.BindPFlag("emit-all", RootCmd.PersistentFlags().Lookup("emit-all"))
+	_ = viper.BindPFlag("emit-lex", RootCmd.PersistentFlags().Lookup("emit-lex"))
+	_ = viper.BindPFlag("emit-syn", RootCmd.PersistentFlags().Lookup("emit-syn"))
+	_ = viper.BindPFlag("emit-sem", RootCmd.PersistentFlags().Lookup("emit-sem"))
+	_ = viper.BindPFlag("emit-cpp", RootCmd.PersistentFlags().Lookup("emit-cpp"))
+}
+
+// initConfig reads in config file and ENV variables if set.
+func initConfig() {
+	if cfgFile != "" {
+		// Use config file from the flag.
+		viper.SetConfigFile(cfgFile)
+	} else {
+		// Find home directory.
+		home, err := homedir.Dir()
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		// Search config in home directory with name ".express" (without extension).
+		viper.AddConfigPath(home)
+		viper.SetConfigName(".express")
+	}
+
+	viper.AutomaticEnv() // read in environment variables that match
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	}
+}
+
+// Execute adds all child commands to the root command and sets flags appropriately.
+// This is called by main.main(). It only needs to happen once to the rootCmd.
+func Execute() {
+	if err := RootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "express",
@@ -53,7 +110,7 @@ to quickly create a Cobra application.`,
 			return
 		}
 
-		fmt.Println("args", args)
+		//fmt.Println("args", args)
 
 		// This is where I would need an env variable
 		var err error
@@ -220,34 +277,6 @@ to quickly create a Cobra application.`,
 	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := RootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-}
-
-func init() {
-	cobra.OnInitialize(initConfig)
-
-	RootCmd.PersistentFlags().StringP("json-indent", "j", "\t", "Whether or not to output C++ transpilation")
-	RootCmd.PersistentFlags().BoolP("emit-all", "a", false, "Whether or not to output C++ transpilation")
-	RootCmd.PersistentFlags().BoolP("emit-lex", "l", false, "Whether or not to output C++ transpilation")
-	RootCmd.PersistentFlags().BoolP("emit-syn", "s", false, "Whether or not to output C++ transpilation")
-	RootCmd.PersistentFlags().BoolP("emit-sem", "x", false, "Whether or not to output C++ transpilation")
-	RootCmd.PersistentFlags().BoolP("emit-cpp", "c", false, "Whether or not to output C++ transpilation")
-
-	_ = viper.BindPFlag("json-indent", RootCmd.PersistentFlags().Lookup("json-indent"))
-	_ = viper.BindPFlag("emit-all", RootCmd.PersistentFlags().Lookup("emit-all"))
-	_ = viper.BindPFlag("emit-lex", RootCmd.PersistentFlags().Lookup("emit-lex"))
-	_ = viper.BindPFlag("emit-syn", RootCmd.PersistentFlags().Lookup("emit-syn"))
-	_ = viper.BindPFlag("emit-sem", RootCmd.PersistentFlags().Lookup("emit-sem"))
-	_ = viper.BindPFlag("emit-cpp", RootCmd.PersistentFlags().Lookup("emit-cpp"))
-
-}
-
 func writeTokensJSONToFile(tokensJSON []byte, pathOfFile string) error {
 	lexFile, err := os.Create(pathOfFile)
 	if err != nil {
@@ -273,30 +302,4 @@ func writeTokensJSONToFile(tokensJSON []byte, pathOfFile string) error {
 	}
 
 	return nil
-}
-
-// initConfig reads in config file and ENV variables if set.
-func initConfig() {
-	if cfgFile != "" {
-		// Use config file from the flag.
-		viper.SetConfigFile(cfgFile)
-	} else {
-		// Find home directory.
-		home, err := homedir.Dir()
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
-		// Search config in home directory with name ".express" (without extension).
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".express")
-	}
-
-	viper.AutomaticEnv() // read in environment variables that match
-
-	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
-	}
 }

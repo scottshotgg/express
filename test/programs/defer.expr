@@ -1,20 +1,25 @@
 // This file is for testing defer
 
+// When in main scope, `defer` is a macro for `onexit`
 defer println("im actually at the end")
 
 func printStuff(int k) (int j) {
-
-  for i := 0, i < 4, i++ {
-    defer println("woah bro", i)
+  for i := 0, i < k, i++ {
     onexit println("on exit", i)
+
+    // `defer` is the a macro for `onreturn` in functions
+    defer println("on return", i)
+
     onleave println("on leave", i)
   }
 
+  // It does not like having 'j' here instead of 0
+  // Need to declare the return var in the function
   return 0
 }
 
 println("me first")
 
-printStuff(7)
+println(printStuff(3))
 
 defer println("im actually at the start")

@@ -2,7 +2,6 @@ package parse
 
 import (
 	"encoding/json"
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -168,7 +167,7 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = FUNCTION
 
 		// default:
-		// 	fmt.Println(vtString)
+		// 	//fmt.Println(vtString)
 		// 	os.Exit(9)
 	}
 
@@ -278,8 +277,8 @@ func mapVariableToTokenValue(v *Variable) token.Value {
 		md[k] = value
 	}
 
-	fmt.Println("md", md)
-	fmt.Println("metadata", v.Metadata)
+	//fmt.Println("md", md)
+	//fmt.Println("metadata", v.Metadata)
 
 	return token.Value{
 		Name:   v.Name,

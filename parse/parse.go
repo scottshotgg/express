@@ -1,16 +1,24 @@
 package parse
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/express/lex"
 	"github.com/scottshotgg/express/token"
+	"go.uber.org/zap"
+)
+
+const (
+	// FIXME: see if we can change this in the binary as a compile time flag
+	expressDebug = "EXPR_DEBUG"
 )
 
 var (
 	ErrCouldNotParseType = errors.New("Could not parse type")
+	logger               *zap.Logger
+	sugar                *zap.SugaredLogger
+	err                  error
 )
 
 type VariableType int
@@ -72,6 +80,19 @@ type Parser struct {
 // 	value        interface{}
 // 	variableType VariableType
 // }
+
+func init() {
+	// FIXME: for now just check 'true' for now
+	// If debug is not turned on, instantiate a logger that ignore those
+	if os.Getenv(expressDebug) == "true" {
+		logger, _ = zap.NewDevelopment()
+	} else {
+		logger, _ = zap.NewProduction()
+	}
+
+	// Use a sugared logger; slower but has print/f/ln which makes it more versatile and readable
+	sugar = logger.Sugar()
+}
 
 func NewVariable(name string, value interface{}, variableType VariableType) *Variable {
 	return &Variable{
@@ -169,7 +190,7 @@ func (m *Meta) DeclareVariable() error {
 
 	// TODO: check all the required fields and matching types, etc
 	m.currentScope[m.currentVariable.Name] = m.currentVariable
-	fmt.Println("metadata3", m.currentVariable)
+	////fmt.Println("metadata3", m.currentVariable)
 	m.currentVariable = &Variable{
 		Metadata: map[string]interface{}{},
 	}
@@ -180,7 +201,7 @@ func (m *Meta) DeclareVariable() error {
 func (m *Meta) DeclareVariableFromTokenValue(tv token.Value) error {
 	variable := NewVariableFromTokenValue(tv)
 
-	fmt.Println("variable::", variable)
+	//fmt.Println("variable::", variable)
 
 	if variable.Type == UNRECOGNIZED {
 		return errors.Errorf("Variable type still unrecognized: %+v", tv)
@@ -208,7 +229,7 @@ func (m *Meta) DeclareVariableFromTokenValue(tv token.Value) error {
 
 	// TODO: check all the required fields and matching types, etc
 	m.currentScope[tv.Name] = variable
-	fmt.Println("metadata3", variable)
+	//fmt.Println("metadata3", variable)
 
 	return nil
 }
@@ -287,11 +308,11 @@ func (m *Meta) ExitScope() (Scope, error) {
 }
 
 // func (p *Parser) PeekNext() lex.Lexeme {
-// 	fmt.Println("peeking")
+// 	//fmt.Println("peeking")
 // 	if p.Index < p.length {
 // 		current := p.source[p.Index+1]
 // 		for p.IgnoreWhiteSpace && current.Type == "space" {
-// 			fmt.Println("in the loop")
+// 			//fmt.Println("in the loop")
 // 			return p.PeekNext()
 // 		}
 // 		return current
@@ -335,14 +356,14 @@ func New(tokens []token.Token) *Parser {
 func (p *Parser) Parse() (token.Value, error) {
 	syntacticTokens, err := p.Syntactic()
 	if err != nil {
-		fmt.Println("error in syntactic parsing", err)
+		//fmt.Println("error in syntactic parsing", err)
 		os.Exit(9)
 	}
 
 	pNew := New(syntacticTokens)
 	semanticToken, err := pNew.Semantic()
 	if err != nil {
-		fmt.Println("error in semantic parsing", err)
+		//fmt.Println("error in semantic parsing", err)
 		os.Exit(9)
 	}
 

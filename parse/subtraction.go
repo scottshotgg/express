@@ -14,7 +14,7 @@ func (p *Parser) SubOperands(left, right token.Value) (token.Value, error) {
 	var valueToken token.Value
 	leftType := left.Type
 	rightType := right.Type
-	fmt.Println("firsttime", left, right, leftType, rightType)
+	// fmt.Println("firsttime", left, right, leftType, rightType)
 
 	if leftType == rightType {
 		valueToken.Type = leftType

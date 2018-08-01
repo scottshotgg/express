@@ -4,7 +4,6 @@ package parse
 
 import (
 	"errors"
-	"fmt"
 	"sync"
 )
 
@@ -68,6 +67,6 @@ func (s *Stack) Push(push interface{}) {
 
 	s.stack = append(s.stack, push)
 	s.top = &s.stack[s.length]
-	fmt.Println("s.top push", *s.top)
+	//fmt.Println("s.top push", *s.top)
 	s.length++
 }

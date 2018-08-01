@@ -1,7 +1,6 @@
 package parse
 
 import (
-	"fmt"
 	"os"
 	"reflect"
 	"strings"
@@ -14,7 +13,7 @@ func (p *Parser) ParseString() token.Token {
 	stringLiteral := ""
 	for {
 		p.ShiftWithWS()
-		fmt.Println("current", p.CurrentToken)
+		//fmt.Println("current", p.CurrentToken)
 
 		// FIXME: stop doing hacky shit, purge this shit, need to preserve whitespaces in the lexer
 		stringLiteral += p.CurrentToken.Value.String
@@ -66,13 +65,13 @@ func (p *Parser) ParseGroup() token.Token {
 			peek := p.NextToken
 			switch peek.Type {
 			case token.LBracket:
-				fmt.Println("found array")
+				//fmt.Println("found array")
 				os.Exit(8)
 
 			case token.Ident:
 				groupTokens = append(groupTokens, p.CurrentToken)
 				p.Shift()
-				fmt.Println("GROUP PARSE IDENT")
+				//fmt.Println("GROUP PARSE IDENT")
 				p.ParseIdent(&groupTokens, p.CurrentToken)
 
 			case token.Literal:
@@ -108,9 +107,9 @@ func (p *Parser) ParseGroup() token.Token {
 			groupTokens = append(groupTokens, current)
 
 		case token.Group:
-			fmt.Println("CURRENT SHIT", current)
+			//fmt.Println("CURRENT SHIT", current)
 			currentTrue := current.Value.True.([]token.Token)
-			fmt.Println("CURRENT STUFFS", currentTrue)
+			//fmt.Println("CURRENT STUFFS", currentTrue)
 			newCurrent := append(
 				[]token.Token{token.Token{
 					Type: token.LParen,
@@ -125,29 +124,29 @@ func (p *Parser) ParseGroup() token.Token {
 							Type: "op_3",
 						},
 					})...)
-			fmt.Println("NEW CURRENT", newCurrent)
+			//fmt.Println("NEW CURRENT", newCurrent)
 			if currentTrue != nil {
 				newParser := New(newCurrent)
 				newParser.Shift()
-				fmt.Println("newParser.LastToken", p.LastToken)
-				fmt.Println(newParser.CurrentToken)
-				fmt.Println(newParser.NextToken)
+				//fmt.Println("newParser.LastToken", p.LastToken)
+				//fmt.Println(newParser.CurrentToken)
+				//fmt.Println(newParser.NextToken)
 
 				iterationCurrent := newParser.ParseGroup()
 
-				fmt.Println("ITERATION CURRENT", iterationCurrent)
+				//fmt.Println("ITERATION CURRENT", iterationCurrent)
 
 				groupTokens = append(groupTokens, iterationCurrent.Value.True.([]token.Token)...)
 			} else {
-				fmt.Println("ELSE CURRENT", current)
+				//fmt.Println("ELSE CURRENT", current)
 				groupTokens = append(groupTokens, current)
 			}
 
 		default:
-			fmt.Printf("ERROR: Unrecognized group token; current: %+v\n meta: %+v\n\n", current, p)
-			fmt.Println("p.LastToken", p.LastToken)
-			fmt.Println(p.CurrentToken)
-			fmt.Println(p.NextToken)
+			//fmt.Printf("ERROR: Unrecognized group token; current: %+v\n meta: %+v\n\n", current, p)
+			//fmt.Println("p.LastToken", p.LastToken)
+			//fmt.Println(p.CurrentToken)
+			//fmt.Println(p.NextToken)
 			os.Exit(8)
 		}
 	}
@@ -158,12 +157,12 @@ func (p *Parser) ParseArray() token.Token {
 	arrayTokens := []token.Token{}
 
 	for {
-		fmt.Println("arrayTokens", arrayTokens)
+		//fmt.Println("arrayTokens", arrayTokens)
 		p.Shift()
 
 		switch p.CurrentToken.Type {
 		case token.Separator:
-			fmt.Println("found separator")
+			//fmt.Println("found separator")
 			continue
 
 		case token.Ident:
@@ -185,7 +184,7 @@ func (p *Parser) ParseArray() token.Token {
 			// arrayTokens = append(arrayTokens, p.ParseArray())
 
 		case token.RBracket:
-			fmt.Println("arrayTokens2", arrayTokens)
+			//fmt.Println("arrayTokens2", arrayTokens)
 			return token.Token{
 				ID:   1,
 				Type: token.Array,
@@ -202,18 +201,18 @@ func (p *Parser) ParseArray() token.Token {
 			arrayTokens = append(arrayTokens, p.CurrentToken)
 
 		case "":
-			fmt.Println("we got nothing", arrayTokens)
+			//fmt.Println("we got nothing", arrayTokens)
 			// return arrayTokens,
 			os.Exit(9)
 
 		default:
-			fmt.Println("ERROR: Unrecognized array token", p.CurrentToken, p)
+			//fmt.Println("ERROR: Unrecognized array token", p.CurrentToken, p)
 			os.Exit(8)
 		}
 
 		// // FIXME: This should throw an error
 		// if p.NextToken == (token.Token{}) {
-		// 	fmt.Println("nextToken array", arrayTokens)
+		// 	//fmt.Println("nextToken array", arrayTokens)
 		// 	return token.Token{}
 		// }
 	}
@@ -224,32 +223,32 @@ func (p *Parser) ParseNamedFuncDef() token.Token {
 	nameToken := p.NextToken
 	functionTokens := []token.Token{}
 	p.Shift()
-	fmt.Println("wowee", p.NextToken)
+	//fmt.Println("wowee", p.NextToken)
 	p.Shift()
 	args := p.ParseGroup()
 	functionTokens = append(functionTokens, args)
-	fmt.Println("wowe2e", p.NextToken)
+	//fmt.Println("wowe2e", p.NextToken)
 	p.Shift()
 	returns := p.ParseGroup()
 	functionTokens = append(functionTokens, returns)
-	fmt.Println("args", args)
-	fmt.Println("wowee3", p.NextToken)
-	fmt.Println("returns", returns)
+	//fmt.Println("args", args)
+	//fmt.Println("wowee3", p.NextToken)
+	//fmt.Println("returns", returns)
 	p.Shift()
 	body := p.ParseBlock()
 	functionTokens = append(functionTokens, body)
 	// bodyTokens := body.Value.True.([]token.Token)
-	// fmt.Println("bodyTokens", bodyTokens)
-	// fmt.Println("body", body)
+	// //fmt.Println("bodyTokens", bodyTokens)
+	// //fmt.Println("body", body)
 
 	// if p.NextToken.Type == token.Group {
-	// 	fmt.Println("woah we hit a group")
+	// 	//fmt.Println("woah we hit a group")
 	// 	os.Exit(9)
 	// }
 
 	// FIXME: fix this later
 	if len(nameToken.Value.String) < 1 {
-		fmt.Println("wtf that name")
+		//fmt.Println("wtf that name")
 		os.Exit(9)
 	}
 
@@ -282,7 +281,7 @@ func (p *Parser) ParseNamedFuncDef() token.Token {
 func (p *Parser) ParseFunctionDef() token.Token {
 	next := p.NextToken
 
-	fmt.Println("woah a function def", next)
+	//fmt.Println("woah a function def", next)
 
 	switch next.Type {
 	case token.Ident:
@@ -293,7 +292,7 @@ func (p *Parser) ParseFunctionDef() token.Token {
 		// Lambda function case
 
 	default:
-		fmt.Println("did not find an L_PAREN")
+		//fmt.Println("did not find an L_PAREN")
 		os.Exit(9)
 	}
 
@@ -305,20 +304,20 @@ func (p *Parser) ParseFunctionDef() token.Token {
 func (p *Parser) ParseFunctionCall() token.Token {
 	// next := p.NextToken
 
-	fmt.Println("woah i got a function call", p.CurrentToken)
+	//fmt.Println("woah i got a function call", p.CurrentToken)
 
 	// Append the ident token
 	nameToken := p.CurrentToken
 	functionTokens := []token.Token{}
-	fmt.Println("wowee", p.NextToken)
+	//fmt.Println("wowee", p.NextToken)
 	p.Shift()
 	args := p.ParseGroup()
 	functionTokens = append(functionTokens, args)
-	fmt.Println("wowe2e", p.NextToken)
+	//fmt.Println("wowe2e", p.NextToken)
 
 	// FIXME: fix this later
 	if len(nameToken.Value.String) < 1 {
-		fmt.Println("wtf that name")
+		//fmt.Println("wtf that name")
 		os.Exit(9)
 	}
 
@@ -342,14 +341,14 @@ func (p *Parser) ParseFunctionCall() token.Token {
 		},
 	}
 
-	fmt.Println("ft", ft)
+	//fmt.Println("ft", ft)
 	return ft
 }
 
 // ParseIdent parses an identifier
 func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 	if blockTokens == nil {
-		fmt.Println("ERROR: blockTokens is nil")
+		//fmt.Println("ERROR: blockTokens is nil")
 		os.Exit(5)
 	}
 
@@ -380,10 +379,10 @@ func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 		}
 	}
 
-	fmt.Println("LOOKING")
-	fmt.Println("p.LastToken", p.LastToken)
-	fmt.Println(p.CurrentToken)
-	fmt.Println(p.NextToken)
+	//fmt.Println("LOOKING")
+	//fmt.Println("p.LastToken", p.LastToken)
+	//fmt.Println(p.CurrentToken)
+	//fmt.Println(p.NextToken)
 	if p.NextToken.Type == token.LParen {
 		// Check if the last token was function
 		if p.LastToken.Type == token.Function {
@@ -405,22 +404,22 @@ func (p *Parser) ParseBlock() token.Token {
 		p.Shift()
 
 		current := p.CurrentToken
-		fmt.Println("token", current)
+		//fmt.Println("token", current)
 
 		switch current.Type {
 		// TODO: this needs to change to PRI_OP
 		case token.PriOp:
-			fmt.Println("found a pri_op")
+			//fmt.Println("found a pri_op")
 			blockTokens = append(blockTokens, current)
 
 		case token.SecOp:
-			fmt.Println("found a sec_op")
+			//fmt.Println("found a sec_op")
 			if p.NextToken.Type == current.Type {
 				p.Shift()
 				if t, ok := token.TokenMap[current.Value.String+p.CurrentToken.Value.String]; ok {
 					blockTokens = append(blockTokens, t)
 				} else {
-					fmt.Println("wtf happened here: ", current.Value.String+p.CurrentToken.Value.String)
+					//fmt.Println("wtf happened here: ", current.Value.String+p.CurrentToken.Value.String)
 					os.Exit(9)
 				}
 			} else {
@@ -429,19 +428,19 @@ func (p *Parser) ParseBlock() token.Token {
 			// blockTokens = append(blockTokens, current)
 
 		case token.Array:
-			fmt.Println("found an array")
+			//fmt.Println("found an array")
 			blockTokens = append(blockTokens, current)
 
 		case token.Keyword:
 			if p.CurrentToken.Value.String == "func" {
 				// if p.NextToken.Type != token.Ident {
-				// 	fmt.Println("wtf im here??")
+				// 	//fmt.Println("wtf im here??")
 				// 	os.Exit(9) // for now
 				// }
 
-				// fmt.Println("IMPLEMENT p.ParseFunctionDef here")
+				// //fmt.Println("IMPLEMENT p.ParseFunctionDef here")
 				function := p.ParseFunctionDef()
-				fmt.Println("function", function)
+				//fmt.Println("function", function)
 				// os.Exit(9)
 				blockTokens = append(blockTokens, function)
 
@@ -450,24 +449,24 @@ func (p *Parser) ParseBlock() token.Token {
 			}
 			// switch current.Value.Type {
 			// case token.SQL:
-			// 	fmt.Println("found a sql keyword")
+			// 	//fmt.Println("found a sql keyword")
 			// }
 			// os.Exit(9)
 
 		case token.GThan:
-			fmt.Println("found a greater than")
+			//fmt.Println("found a greater than")
 			blockTokens = append(blockTokens, current)
 
 		case token.LThan:
-			fmt.Println("found a greater than")
+			//fmt.Println("found a greater than")
 			blockTokens = append(blockTokens, current)
 
 		case token.Increment:
-			fmt.Println("found an increment")
+			//fmt.Println("found an increment")
 			blockTokens = append(blockTokens, current)
 
 		case token.At:
-			fmt.Println("found an at")
+			//fmt.Println("found an at")
 			blockTokens = append(blockTokens, current)
 
 		// TODO: put all of these at the bottom
@@ -481,7 +480,7 @@ func (p *Parser) ParseBlock() token.Token {
 		case token.Attribute:
 			fallthrough
 		case token.Function:
-			fmt.Println("woah its a function")
+			//fmt.Println("woah its a function")
 
 			// loop over len(trueValue)
 			// 	Create a new parser
@@ -492,16 +491,16 @@ func (p *Parser) ParseBlock() token.Token {
 
 			// currentCopy := current
 			// currentCopy.Value.True = New(currentTrue).ParseGroup()
-			// fmt.Println("CURRENT COPY", currentCopy)
+			// //fmt.Println("CURRENT COPY", currentCopy)
 			blockTokens = append(blockTokens, current)
 
 		case token.Group:
-			fmt.Println("\nGOTAGROUP")
+			//fmt.Println("\nGOTAGROUP")
 
 			// Getting an ident for the lastToken
-			fmt.Println(p.LastToken)
-			fmt.Println(p.CurrentToken)
-			fmt.Println(p.NextToken)
+			//fmt.Println(p.LastToken)
+			//fmt.Println(p.CurrentToken)
+			//fmt.Println(p.NextToken)
 
 			// FIXME: just assume for now that groups are only used in functions
 			// so if we get one we need to determine what kind of function we
@@ -510,18 +509,18 @@ func (p *Parser) ParseBlock() token.Token {
 			functionTokens := []token.Token{current}
 
 			peek := p.NextToken
-			fmt.Println("stuff and yeah", peek)
+			//fmt.Println("stuff and yeah", peek)
 			// TODO: FIXME: for now we are going to assume that two groups only appear in sequence for a function
 			switch peek.Type {
 			case token.Group:
 				// blockTokens = append(blockTokens, //p.ParseFunctionDef(current))
 				p.Shift()
-				fmt.Println(p.LastToken)
-				fmt.Println(p.CurrentToken)
+				//fmt.Println(p.LastToken)
+				//fmt.Println(p.CurrentToken)
 
 				// Getting block for the nextToken
-				fmt.Println(p.NextToken)
-				fmt.Println("stuff and yeah", p.NextToken)
+				//fmt.Println(p.NextToken)
+				//fmt.Println("stuff and yeah", p.NextToken)
 				functionTokens = append(functionTokens, p.CurrentToken)
 
 				if p.NextToken.Type == token.Block {
@@ -534,7 +533,7 @@ func (p *Parser) ParseBlock() token.Token {
 							True: append(functionTokens, p.CurrentToken),
 						},
 					}
-					fmt.Println("functionToken", functionToken)
+					//fmt.Println("functionToken", functionToken)
 					blockTokens = append(blockTokens, functionToken)
 				}
 
@@ -556,9 +555,9 @@ func (p *Parser) ParseBlock() token.Token {
 				})
 
 			default:
-				fmt.Printf("%+v\n%+v", p.CurrentToken, p.NextToken)
+				//fmt.Printf("%+v\n%+v", p.CurrentToken, p.NextToken)
 				blockTokens = append(blockTokens, p.CurrentToken)
-				// fmt.Printf("wtf peek following group %+v \n%+v\n", peek, p)
+				// //fmt.Printf("wtf peek following group %+v \n%+v\n", peek, p)
 				// os.Exit(8)
 
 			}
@@ -594,10 +593,10 @@ func (p *Parser) ParseBlock() token.Token {
 				blockTokens = append(blockTokens, p.CurrentToken)
 
 			case token.LBracket:
-				fmt.Println("found array", current)
+				//fmt.Println("found array", current)
 				p.Shift()
 				if p.NextToken.Type != token.RBracket {
-					fmt.Println("syntax ERROR: missing ] after type declaration")
+					//fmt.Println("syntax ERROR: missing ] after type declaration")
 					os.Exit(8)
 				}
 
@@ -605,52 +604,52 @@ func (p *Parser) ParseBlock() token.Token {
 				// FIXME: fix this and make the ok check
 				arrayToken, ok := token.TokenMap[current.Value.String+peek.Value.String+p.NextToken.Value.String]
 				if !ok {
-					fmt.Println("TokenMap check failed on", current.Value.String+peek.Value.String+p.NextToken.Value.String)
+					//fmt.Println("TokenMap check failed on", current.Value.String+peek.Value.String+p.NextToken.Value.String)
 					os.Exit(9)
 				}
 
 				p.Shift()
 				// p.Shift()
-				// fmt.Println("arrayToken", arrayToken)
+				// //fmt.Println("arrayToken", arrayToken)
 				// parsedArrayToken := p.ParseArray()
 				// var arrayTokens []token.Token
 				// // var ok bool
 				// arrayTokens, ok = parsedArrayToken.Value.True.([]token.Token)
 				// arrayToken.Value.True = arrayTokens
-				// fmt.Println("arrayToken", arrayToken, ok)
+				// //fmt.Println("arrayToken", arrayToken, ok)
 				// // blockTokens = append(blockTokens, arrayToken)
 				blockTokens[len(blockTokens)-1] = arrayToken
 
-				fmt.Println()
-				fmt.Println("blockTokens", blockTokens)
-				fmt.Println()
+				//fmt.Println()
+				//fmt.Println("blockTokens", blockTokens)
+				//fmt.Println()
 				// p.Shift()
 				// blockTokens = append(blockTokens, //p.ParseArray())
 				// p.Shift()
-				// fmt.Println("p.Current shit", p.CurrentToken)
+				// //fmt.Println("p.Current shit", p.CurrentToken)
 
 				// if p.CurrentToken.Type != token.Ident {
-				// 	fmt.Println("syntax error: no ident after array type declaration")
+				// 	//fmt.Println("syntax error: no ident after array type declaration")
 				// 	os.Exit(8)
 				// }
 				// //p.ParseIdent(&blockTokens, p.CurrentToken)
 
 			default:
-				fmt.Printf("meta %+v\n", p)
-				fmt.Println("ERROR after type declaration: peek, current", peek, current)
+				//fmt.Printf("meta %+v\n", p)
+				//fmt.Println("ERROR after type declaration: peek, current", peek, current)
 				os.Exit(77)
 			}
 
 		case token.Assign:
-			fmt.Println("ASSIGN", current)
-			fmt.Printf("CURRENTVALUETYPE %+v\n", current)
+			//fmt.Println("ASSIGN", current)
+			//fmt.Printf("CURRENTVALUETYPE %+v\n", current)
 			switch current.Value.Type {
 			case "set":
 				peek := p.NextToken
-				fmt.Println("PEEK", peek)
+				//fmt.Println("PEEK", peek)
 				switch peek.Type {
 				case token.Assign:
-					fmt.Println("FOUND :=", current.Value.String+peek.Value.String)
+					//fmt.Println("FOUND :=", current.Value.String+peek.Value.String)
 					if t, ok := token.TokenMap[current.Value.String+peek.Value.String]; ok {
 						blockTokens = append(blockTokens, t)
 						p.Shift()
@@ -667,7 +666,7 @@ func (p *Parser) ParseBlock() token.Token {
 			default:
 				// blockTokens = append(blockTokens, current)
 				// continue
-				fmt.Println("ERROR, how did we get in here without an assign type token", current)
+				//fmt.Println("ERROR, how did we get in here without an assign type token", current)
 				os.Exit(9)
 			}
 
@@ -675,7 +674,7 @@ func (p *Parser) ParseBlock() token.Token {
 			peek := p.NextToken
 
 			if peek.Type == token.LParen {
-				fmt.Println("IMPLEMENT p.ParseFunctionCall")
+				//fmt.Println("IMPLEMENT p.ParseFunctionCall")
 				blockTokens = append(blockTokens, p.ParseFunctionCall())
 			} else {
 				p.ParseIdent(&blockTokens, p.CurrentToken)
@@ -725,19 +724,19 @@ func (p *Parser) ParseBlock() token.Token {
 			blockTokens = append(blockTokens, p.ParseString())
 
 		case "":
-			fmt.Println("got nothing")
+			//fmt.Println("got nothing")
 
 		default:
-			fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
+			//fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
 			os.Exit(6)
 		}
-		fmt.Println(current, p.NextToken)
+		//fmt.Println(current, p.NextToken)
 
 		if reflect.DeepEqual(p.NextToken, token.Token{}) {
-			fmt.Println()
-			fmt.Println("nextToken block", blockTokens)
-			fmt.Println()
-			// fmt.Println("blockTokens", blockTokens)
+			//fmt.Println()
+			//fmt.Println("nextToken block", blockTokens)
+			//fmt.Println()
+			// //fmt.Println("blockTokens", blockTokens)
 			return token.Token{
 				ID:   0,
 				Type: token.Block,
@@ -755,16 +754,16 @@ func (p *Parser) ParseBlock() token.Token {
 // Syntactic begins the parsing process for a passes set of tokens
 func (p *Parser) Syntactic() ([]token.Token, error) {
 	block := p.ParseBlock()
-	fmt.Println("parseBlock", block)
+	//fmt.Println("parseBlock", block)
 
 	blockTokens := block.Value.True.([]token.Token)
-	fmt.Println(blockTokens)
+	//fmt.Println(blockTokens)
 
-	fmt.Println("going again")
+	//fmt.Println("going again")
 	// Make a new parser and syntactically parse the file
 	syntacticTokens := New(blockTokens).ParseBlock()
 
-	fmt.Println("got stuff", syntacticTokens)
+	//fmt.Println("got stuff", syntacticTokens)
 
 	return []token.Token{
 		syntacticTokens,

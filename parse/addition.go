@@ -11,11 +11,11 @@ import (
 
 // AddOperands returns the addition of two operands based on their type
 func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
-	fmt.Println("AddOperands")
+	// fmt.Println("AddOperands")
 	var valueToken token.Value
 	leftType := left.Type
 	rightType := right.Type
-	fmt.Println("firsttime", left, right, leftType, rightType)
+	// fmt.Println("firsttime", left, right, leftType, rightType)
 
 	if leftType == rightType {
 		valueToken.Type = leftType
