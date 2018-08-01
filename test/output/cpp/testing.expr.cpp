@@ -2,32 +2,38 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _eeTUwiBLmw = {};
-  _eeTUwiBLmw["something"] = "else";
-  return _eeTUwiBLmw;
+  var _RqgWSYnuMV = {};
+  _RqgWSYnuMV["something"] = "else";
+  return _RqgWSYnuMV;
 }
 
 var someFunction(int arg1) {
 
   {
-    int arrayBoi_1533092542[] = {2, 4, 5, 9};
+    int arrayBoi_1533097791[] = {2, 4, 5, 9};
     int k = 0;
-    int k_1533092542 = 0;
-    while (k_1533092542 < 4) {
+    int k_1533097791 = 0;
+    while (k_1533097791 < 4) {
       {
-        k = arrayBoi_1533092542[k_1533092542];
+        k = arrayBoi_1533097791[k_1533097791];
         if (arg1 < k) {
-          var _GbDXeAjgjK = {};
-          _GbDXeAjgjK["value"] = k;
-          return _GbDXeAjgjK;
+          var _XFbvMgUAyT = {};
+          _XFbvMgUAyT["value"] = k;
+          return _XFbvMgUAyT;
         }
       }
-      k_1533092542 += 1;
+      k_1533097791 += 1;
     }
   }
-  var _WoAztYuEHZ = {};
-  _WoAztYuEHZ["value"] = 1000;
-  return _WoAztYuEHZ;
+  var _CodrIsxPQi = {};
+  _CodrIsxPQi["value"] = 1000;
+  return _CodrIsxPQi;
 }
 
-int main() { println("hey its me", ""); }
+int main() {
+
+  shared_ptr<void> _ULowEiYuGd(nullptr, [](...) {
+    println("waddup", "");
+  });
+  println("hey its me", "");
+}

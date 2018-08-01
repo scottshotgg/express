@@ -73,4 +73,40 @@ var KeywordMap = map[string]Token{
 			String: "return",
 		},
 	},
+	"onexit": Token{
+		ID:   9,
+		Type: "KEYWORD",
+		Value: Value{
+			Type: "keyword", // TODO: what to put here?
+			// String: OnExit,
+			String: "onexit",
+		},
+	},
+	"onreturn": Token{
+		ID:   9,
+		Type: "KEYWORD",
+		Value: Value{
+			Type: "keyword", // TODO: what to put here?
+			// String: OnReturn,
+			String: "onreturn",
+		},
+	},
+	"onleave": Token{
+		ID:   9,
+		Type: "KEYWORD",
+		Value: Value{
+			Type: "keyword", // TODO: what to put here?
+			// String: OnLeave,
+			String: "onleave",
+		},
+	},
+	"defer": Token{
+		ID:   9,
+		Type: "KEYWORD",
+		Value: Value{
+			Type: "keyword", // TODO: what to put here?
+			// String: Defer,
+			String: "defer",
+		},
+	},
 }

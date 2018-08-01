@@ -10,6 +10,10 @@ import (
 
 // TODO: FIXME: this needs to be reworked to take the syntactic tokens
 func TestTranspile(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
 	// var semanticBlock token.Value
 	fmt.Println("TestTranspile")
 

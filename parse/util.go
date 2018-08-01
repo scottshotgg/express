@@ -3,6 +3,8 @@ package parse
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/express/token"
@@ -288,4 +290,25 @@ func mapVariableToTokenValue(v *Variable) token.Value {
 		AccessType: AccessTypeString(v.AccessType),
 		Metadata:   md,
 	}
+}
+
+// FIXME: recode this so it's not so fucky looking
+func RandStringBytesMaskImprSrc(n int) string {
+	var src = rand.NewSource(time.Now().UnixNano())
+
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
+		}
+		if idx := int(cache & letterIdxMask); idx < len(letterBytes) {
+			b[i] = letterBytes[idx]
+			i--
+		}
+		cache >>= letterIdxBits
+		remain--
+	}
+
+	return string(b)
 }

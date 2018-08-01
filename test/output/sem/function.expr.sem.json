@@ -19,7 +19,7 @@
 					"Type": "BLOCK",
 					"True": [
 						{
-							"Type": "RETURN",
+							"Type": "KEYWORD",
 							"True": {
 								"Type": "BLOCK",
 								"True": [
@@ -30,7 +30,8 @@
 										"AccessType": "private"
 									}
 								]
-							}
+							},
+							"String": "RETURN"
 						}
 					]
 				},

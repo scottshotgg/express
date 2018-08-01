@@ -1,0 +1,20 @@
+// This file is for testing defer
+
+defer println("im actually at the end")
+
+func printStuff(int k) (int j) {
+
+  for i := 0, i < 4, i++ {
+    defer println("woah bro", i)
+    onexit println("on exit", i)
+    onleave println("on leave", i)
+  }
+
+  return 0
+}
+
+println("me first")
+
+printStuff(7)
+
+defer println("im actually at the start")

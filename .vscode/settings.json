@@ -55,6 +55,11 @@
     "streambuf": "cpp",
     "memory_resource": "cpp",
     "__tuple": "cpp",
-    "__string": "cpp"
+    "__string": "cpp",
+    "iomanip": "cpp",
+    "cstdint": "cpp",
+    "__functional_03": "cpp",
+    "stack": "cpp",
+    "deque": "cpp"
   }
 }

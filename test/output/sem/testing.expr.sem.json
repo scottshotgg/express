@@ -29,14 +29,14 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1533092542[k_1533092542]"
+										"refs": "arrayBoi_1533097791[k_1533097791]"
 									}
 								},
 								{
 									"Type": "if",
 									"True": [
 										{
-											"Type": "RETURN",
+											"Type": "KEYWORD",
 											"True": {
 												"Type": "BLOCK",
 												"True": [
@@ -52,7 +52,8 @@
 														}
 													}
 												]
-											}
+											},
+											"String": "RETURN"
 										}
 									],
 									"String": "arg1\u003ck",
@@ -90,10 +91,10 @@
 									}
 								}
 							],
-							"String": "k_1533092542\u003c4",
+							"String": "k_1533097791\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1533092542",
+									"Name": "k_1533097791",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -101,7 +102,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1533092542",
+										"Name": "arrayBoi_1533097791",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -154,14 +155,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1533092542",
+									"Name": "k_1533097791",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1533092542",
+									"Name": "k_1533097791",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -170,7 +171,7 @@
 							}
 						},
 						{
-							"Type": "RETURN",
+							"Type": "KEYWORD",
 							"True": {
 								"Type": "BLOCK",
 								"True": [
@@ -181,7 +182,8 @@
 										"AccessType": "private"
 									}
 								]
-							}
+							},
+							"String": "RETURN"
 						}
 					]
 				},
@@ -202,6 +204,32 @@
 				"lambda": false,
 				"type": "def"
 			}
+		},
+		{
+			"Type": "KEYWORD",
+			"True": {
+				"Name": "println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "waddup",
+								"String": "waddup"
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
+			},
+			"String": "DEFER"
 		},
 		{
 			"Name": "println",

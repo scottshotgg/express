@@ -5,6 +5,7 @@ import (
 	"os"
 	"reflect"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/pkg/errors"
@@ -80,7 +81,7 @@ func (p *Parser) EvaluateBinaryOperation(left, right, op token.Value) (opToken t
 		"left":  left,
 		"op":    op,
 		"right": right,
-		// "string": left.String + op.String + right.String,
+		// "string": left.String + op.String + right.Stri fng,
 	}
 	// if opToken.Type == token.IntType {
 	// 	opToken.String = strconv.Itoa(opToken.True.(int))
@@ -1013,7 +1014,8 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 	fmt.Println("LAST666", p.LastToken)
 	fmt.Println("CURRENT666", p.CurrentToken)
 	fmt.Println("NEXT666", p.NextToken)
-	switch p.NextToken.Value.String {
+	keyword := p.NextToken.Value.String
+	switch keyword {
 	case "for":
 		// Make a new meta
 		// Get a statement
@@ -1204,8 +1206,31 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		// FIXME: fuck it idc about checking the token type for now
 		return token.Value{
-			Type: token.Return,
-			True: returnExpr,
+			Type:   token.Keyword,
+			True:   returnExpr,
+			String: token.Return,
+		}, nil
+
+	case "onexit":
+		fallthrough
+	case "onreturn":
+		fallthrough
+	case "onleave":
+		fallthrough
+	case "defer":
+		p.Shift()
+
+		deferExpr, err := p.GetStatement()
+		if err != nil {
+			return token.Value{}, err
+		}
+		fmt.Println("deferExpr", deferExpr)
+
+		// FIXME: fuck it idc about checking the token type for now
+		return token.Value{
+			Type:   token.Keyword,
+			True:   deferExpr,
+			String: strings.ToUpper(keyword),
 		}, nil
 
 	default:

@@ -34,6 +34,8 @@ var (
 
 	LibBase = ""
 
+	blockDepth = 0
+
 	// stdLibMap = map[string]func(t token.Value) string{
 	// 	"print": stdlib_Print,
 	// }
@@ -93,7 +95,7 @@ var (
 // }
 
 func translateFunctionCall(t token.Value) (string, error) {
-	functionString := ""
+	functionString := "\n"
 
 	fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.(map[string]token.Value)
@@ -125,12 +127,9 @@ func translateFunctionCall(t token.Value) (string, error) {
 		// everytime, w/e
 		for i, arg := range args {
 			if ref, ok := arg.Metadata["refs"]; ok {
-
 				functionString += ref.(string)
-				continue
-			}
 
-			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
+			} else if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
 				fmt.Println("NAME_BYTES", arg.Name)
 
@@ -146,10 +145,12 @@ func translateFunctionCall(t token.Value) (string, error) {
 				}
 				// Cut off the newline and semicolon that is on the end
 				functionString += innerFunctionCall[:len(innerFunctionCall)-2]
-			} else if arg.Type == "string" {
+			} else if arg.Type == "string" || arg.Type == "char" {
 				// The extra `, ""` is a hack to get strings to work in the template
 				// functions in the C++ bindings
-				functionString += fmt.Sprintf("\"%+v\", \"\"", arg.True)
+
+				fmt.Println("THISI SI TRUE", arg.True)
+				functionString += fmt.Sprintf("\"%+v\"", arg.True)
 			} else {
 				functionString += fmt.Sprintf("%+v", arg.True)
 			}
@@ -158,6 +159,9 @@ func translateFunctionCall(t token.Value) (string, error) {
 				functionString += ","
 			}
 		}
+		if len(args) == 1 && args[0].Type == "string" || args[0].Type == "char" {
+			functionString += ", \"\""
+		}
 	}
 	functionString += ");\n"
 
@@ -165,9 +169,8 @@ func translateFunctionCall(t token.Value) (string, error) {
 }
 
 func translateFunctionDef(t token.Value) (string, error) {
-	functionString := ""
+	functionString := "\n"
 
-	fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.(map[string]token.Value)
 	if !ok {
 		fmt.Println("shit look at t")
@@ -237,7 +240,7 @@ func translateFunctionDef(t token.Value) (string, error) {
 		return "", err
 	}
 
-	functionString += bodyString
+	functionString += "{\ndefer onReturnFuncs;\n" + bodyString + "}"
 
 	return functionString, nil
 }
@@ -330,27 +333,6 @@ func translateArray(t token.Value) (string, error) {
 
 // 	return mapString + "}"
 // }
-
-// FIXME: recode this so it's not so fucky looking
-func RandStringBytesMaskImprSrc(n int) string {
-	var src = rand.NewSource(time.Now().UnixNano())
-
-	b := make([]byte, n)
-	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
-	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
-		if remain == 0 {
-			cache, remain = src.Int63(), letterIdxMax
-		}
-		if idx := int(cache & letterIdxMask); idx < len(letterBytes) {
-			b[i] = letterBytes[idx]
-			i--
-		}
-		cache >>= letterIdxBits
-		remain--
-	}
-
-	return string(b)
-}
 
 // FIXME: just use var for now, but later we will try to not use var
 // FIXME: ideally we want to store this in a "symbol map" with the defaults already there
@@ -621,13 +603,119 @@ func translateLoop(t token.Value) (string, error) {
 	return loopString, nil
 }
 
+// FIXME: this will not work for lambda functions but we don't even have
+// that supported yet so idc
+func translateOnExit(t token.Value) (string, error) {
+	// TODO: look into what is the best way to do defer: might have to change whether we use:
+	//		[=] - value
+	//		[&] - reference
+	onExitString := "onExitFuncs.deferStack.push([=](...){\n"
+
+	onExitValue, ok := t.True.(token.Value)
+	if !ok {
+		// FIXME:
+		return "", errors.Errorf("wtf happened %+v", t)
+	}
+
+	functionCallString, err := translateFunctionCall(onExitValue)
+
+	onExitString += functionCallString + "});\n"
+	return onExitString, err
+}
+
+// FIXME: this will not work for lambda functions but we don't even have
+// that supported yet so idc
+func translateOnReturn(t token.Value) (string, error) {
+	// TODO: look into what is the best way to do defer: might have to change whether we use:
+	//		[=] - value
+	//		[&] - reference
+	onReturnString := "onReturnFuncs.deferStack.push([=](...){\n"
+
+	onReturnValue, ok := t.True.(token.Value)
+	if !ok {
+		// FIXME:
+		return "", errors.Errorf("wtf happened %+v", t)
+	}
+
+	functionCallString, err := translateFunctionCall(onReturnValue)
+
+	onReturnString += functionCallString + "});\n"
+	return onReturnString, err
+}
+
+// FIXME: this will not work for lambda functions but we don't even have
+// that supported yet so idc
+func translateOnLeave(t token.Value) (string, error) {
+	// TODO: look into what is the best way to do defer: might have to change whether we use:
+	//		[=] - value
+	//		[&] - reference
+	onLeaveString := "onLeaveFuncs.deferStack.push([=](...){\n"
+
+	onLeaveValue, ok := t.True.(token.Value)
+	if !ok {
+		// FIXME:
+		return "", errors.Errorf("wtf happened %+v", t)
+	}
+
+	functionCallString, err := translateFunctionCall(onLeaveValue)
+
+	onLeaveString += functionCallString + "});\n"
+	return onLeaveString, err
+}
+
+// FIXME: this will not work for lambda functions but we don't even have
+// that supported yet so idc
+func translateDefer(t token.Value) (string, error) {
+	// TODO: look into what is the best way to do defer: might have to change whether we use:
+	//		[=] - value
+	//		[&] - reference
+	stackName := "onExitFuncs"
+	if blockDepth > 1 {
+		stackName = "onReturnFuncs"
+	}
+
+	deferString := stackName + ".deferStack.push([=](...){\n"
+
+	deferValue, ok := t.True.(token.Value)
+	if !ok {
+		// FIXME:
+		return "", errors.Errorf("wtf happened %+v", t)
+	}
+
+	functionCallString, err := translateFunctionCall(deferValue)
+
+	deferString += functionCallString + "});\n"
+	return deferString, err
+}
+
+func translateKeyword(t token.Value) (string, error) {
+	if t.Type != token.Keyword {
+		return "", errors.New("not a keyword")
+	}
+
+	switch t.String {
+	case token.Return:
+		return translateReturn(t)
+
+	case token.OnExit:
+		return translateOnExit(t)
+
+	case token.OnReturn:
+		return translateOnReturn(t)
+
+	case token.OnLeave:
+		return translateOnLeave(t)
+
+	case token.Defer:
+		return translateDefer(t)
+
+	default:
+		return "", errors.Errorf("idk wtf this is %+v", t)
+	}
+}
+
 func translateReturn(t token.Value) (string, error) {
 	returnString := "return "
-
-	if t.Type != token.Return {
-		fmt.Println("return token", t)
-		return "", errors.New("not a return token")
-	}
 
 	returnValue, ok := t.True.(token.Value)
 	if !ok {
@@ -658,6 +746,8 @@ func translateReturn(t token.Value) (string, error) {
 }
 
 func translateBlock(tv token.Value) (string, error) {
+	blockDepth++
+	defer func() { blockDepth-- }()
 	// _, err = f.Write([]byte("{\n"))
 	// if err != nil {
 	// 	fmt.Println("error writing to file")
@@ -665,7 +755,10 @@ func translateBlock(tv token.Value) (string, error) {
 	// }
 	fmt.Println("TVTVTVTV", tv)
 
-	blockString := "{\n"
+	blockString := "\n"
+	if blockDepth != 1 {
+		blockString = "{" + blockString + "defer onLeaveFuncs;\n"
+	}
 
 	insideBlock, ok := tv.True.([]token.Value)
 	if !ok {
@@ -691,12 +784,12 @@ func translateBlock(tv token.Value) (string, error) {
 						functionCallString, err := translateFunctionCall(t)
 						if err != nil {
 							fmt.Println("function def translate err", err)
-							returnString, err := translateReturn(t)
+							keywordString, err := translateKeyword(t)
 							if err != nil {
-								fmt.Println("function translate err", err)
+								fmt.Println("keyword translate err", err)
 								return "", err
 							}
-							blockString += returnString
+							blockString += keywordString
 							continue
 						}
 						blockString += functionCallString
@@ -715,7 +808,11 @@ func translateBlock(tv token.Value) (string, error) {
 		continue
 	}
 
-	return blockString + "}\n", nil
+	if blockDepth != 1 {
+		blockString += "\n}"
+	}
+
+	return blockString, nil
 }
 
 func (p *Parser) Transpile(block token.Value) (string, error) {
@@ -757,7 +854,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	extraLibs := []string{
 		"var.cpp",
 		"std.cpp",
-		// "defer.cpp",
+		"defer.cpp",
 	}
 
 	for k := range extraLibs {
@@ -765,6 +862,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	}
 
 	f += "\n" + strings.Join(extraLibs, "\n")
+	f += "\ndefer onExitFuncs;"
 
 	blockString, err := translateBlock(block)
 	if err != nil {
@@ -773,7 +871,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += "\n" + functionStrings + "\nint main()" + blockString
+	f += "\n" + functionStrings + "\nint main() {" + blockString + "}\n"
 
 	return f, nil
 }

@@ -63,6 +63,8 @@ to quickly create a Cobra application.`,
 		}
 
 		jsonIndent := viper.GetString("json-indent")
+
+		// Replace the \t and \n string literals with their non-escaped counterparts
 		jsonIndent = strings.Replace(jsonIndent, `\n`, "\n", -1)
 		jsonIndent = strings.Replace(jsonIndent, `\t`, "\t", -1)
 

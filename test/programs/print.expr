@@ -1,0 +1,21 @@
+// This file is for testing print*
+
+var thingy = 7
+print("thingy =", thingy, "\n")
+println(thingy)
+println()
+
+thingy = 69.69
+print("thingy =", thingy, "\n")
+println(thingy)
+println()
+
+thingy = "woah woah woah"
+print("thingy =", thingy, "\n")
+println(thingy)
+println()
+
+thingy = false
+print("thingy =", thingy, "\n")
+println(thingy)
+println()
