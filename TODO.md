@@ -9,10 +9,10 @@ _[=] means I am currently working on completing that TODO_<br><br>
 - [=] Fix arbitrary object statements
 - [=] Implement _index_ `[]` and _access_ `.` operations
 - [=] Implement all binary operations for basic types
-- [=] Figure out std lib usage
-  - [=] Import statement
+- [=] Figure out `stdlib` usage
+  - [=] `import` statement
   - [=] Auto import/lib adding
-  - [=] Create `print`/`println` functions<br><br>
+  - [x] Create `print`/`println` functions<br>_just make the functions translate to C++_<br><br>
 - [=] Make `var.cpp` only printout if a variable is asserted or if `DEBUG` is turned on
 - [=] Comment `lib` - atleast `lib/var.cpp`
 - [ ] Make a demo `feature` request, `idea`, and `misc`

@@ -2,13 +2,13 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _ICEsAjAUfF = {};
-  _ICEsAjAUfF["something"] = "else";
-  return _ICEsAjAUfF;
+  var _eeTUwiBLmw = {};
+  _eeTUwiBLmw["something"] = "else";
+  return _eeTUwiBLmw;
 }
 
 int main() {
-  var _yGdmUMSJIS = {};
-  _yGdmUMSJIS["another"] = "object";
-  increment(_yGdmUMSJIS);
+  var _hMnSoErZDm = {};
+  _hMnSoErZDm["another"] = "object";
+  increment(_hMnSoErZDm);
 }

@@ -8,7 +8,6 @@ void print(T data) {
   std::cout << data;
 }
 
-// TODO: make one of these for objects and arrays
 void print(bool data) {
   if (data) {
     std::cout << "true";
@@ -25,6 +24,8 @@ void print(T first, Args... args) {
   print(args...);
 }
 
+// Print for arrays
+// TODO: this might be moved to the `var` lib if vars are allowed to hold arrays
 template <typename T>
 void print(T rest[]) {
   std::cout << "[ ";
@@ -43,3 +44,4 @@ void println(T first, Args... args) {
   print(first, args...);
   std::cout << std::endl;
 }
+

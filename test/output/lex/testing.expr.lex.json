@@ -24,7 +24,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "isThereSomethingLessThan"
+			"String": "someFunction"
 		}
 	},
 	{
@@ -51,7 +51,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "i"
+			"String": "arg1"
 		}
 	},
 	{
@@ -92,7 +92,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "j"
+			"String": "returnValue"
 		}
 	},
 	{
@@ -345,7 +345,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "i"
+			"String": "arg1"
 		}
 	},
 	{
@@ -706,7 +706,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "isThereSomethingLessThan"
+			"String": "println"
 		}
 	},
 	{
@@ -719,8 +719,9 @@
 	{
 		"Type": "LITERAL",
 		"Value": {
-			"Type": "int",
-			"True": 5
+			"Type": "string",
+			"True": "hey its me",
+			"String": "hey its me"
 		}
 	},
 	{

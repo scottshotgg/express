@@ -2,13 +2,13 @@
 	"Type": "BLOCK",
 	"True": [
 		{
-			"Name": "isThereSomethingLessThan",
+			"Name": "someFunction",
 			"Type": "function",
 			"True": {
 				"args": {
 					"True": [
 						{
-							"Name": "i",
+							"Name": "arg1",
 							"Type": "int",
 							"True": 0,
 							"AccessType": "private"
@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1532978403[k_1532978403]"
+										"refs": "arrayBoi_1533092542[k_1533092542]"
 									}
 								},
 								{
@@ -55,18 +55,18 @@
 											}
 										}
 									],
-									"String": "i\u003ck",
+									"String": "arg1\u003ck",
 									"Metadata": {
-										"check": "i\u003ck",
+										"check": "arg1\u003ck",
 										"eval": false,
 										"left": {
-											"Name": "i",
+											"Name": "arg1",
 											"Type": "int",
 											"Acting": "int",
 											"True": 0,
 											"AccessType": "private",
 											"Metadata": {
-												"refs": "i"
+												"refs": "arg1"
 											}
 										},
 										"op": {
@@ -90,10 +90,10 @@
 									}
 								}
 							],
-							"String": "k_1532978403\u003c4",
+							"String": "k_1533092542\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1532978403",
+									"Name": "k_1533092542",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -101,7 +101,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1532978403",
+										"Name": "arrayBoi_1533092542",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -154,14 +154,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1532978403",
+									"Name": "k_1533092542",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1532978403",
+									"Name": "k_1533092542",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -188,7 +188,7 @@
 				"returns": {
 					"True": [
 						{
-							"Name": "j",
+							"Name": "returnValue",
 							"Type": "var",
 							"Acting": "object",
 							"True": {},
@@ -204,15 +204,15 @@
 			}
 		},
 		{
-			"Name": "isThereSomethingLessThan",
+			"Name": "println",
 			"Type": "function",
 			"True": {
 				"args": {
 					"True": [
 						{
-							"Type": "int",
-							"True": 5,
-							"String": "5"
+							"Type": "string",
+							"True": "hey its me",
+							"String": "hey its me"
 						}
 					]
 				},

@@ -318,10 +318,93 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 		// os.Exit(9)
 
-	// case token.Function:
-	// 	fmt.Println("hey im here")
+	case token.Function:
+		next := p.NextToken
+		md := next.Value.Metadata["type"]
+		fmt.Println("md", md)
 
-	// 	os.Exit(9)
+		// Unpack tokens from function into new parser
+		// Unpack tokens from each in True into a new parser
+		// parse group then group, then block
+		unpackedFunctionTokens := p.NextToken.Value.True.([]token.Token)
+		// functionTokens := []token.Value{}
+		fmt.Printf("unpackedFunctionTokens %+v\n", unpackedFunctionTokens)
+		// args
+		// returns
+		// body
+		fmt.Println()
+		argsUnpacked := unpackedFunctionTokens[0]
+		fmt.Printf("argsUnpacked %+v\n\n", argsUnpacked)
+
+		functionOpType = p.NextToken.Value.Metadata["type"].(string)
+		pa := New([]token.Token{argsUnpacked})
+		pa.meta.NewScopeFromScope(p.meta.currentScope)
+		argExpr, err := pa.GetExpression()
+		if err != nil {
+			fmt.Println("Error: could not parse expression inside group2")
+			fmt.Println(err.Error())
+			return token.Value{}, err
+		}
+
+		fmt.Println("argExpr", argExpr)
+		p.Shift()
+
+		var returnExpr, block token.Value
+
+		// TODO: if it is not a function defintion or a lambda call,
+		// it needs to be validated that the function exists
+		// Check for function definition
+		if md == "def" {
+			// Declare all the variables in the args so that we have them when parsing the
+			// return value and the body
+			for _, arg := range argExpr.True.([]token.Value) {
+				err = p.meta.DeclareVariableFromTokenValue(arg)
+				if err != nil {
+					return token.Value{}, err
+				}
+			}
+
+			returnsUnpacked := unpackedFunctionTokens[1]
+			fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
+
+			bodyUnpacked := unpackedFunctionTokens[2]
+			fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
+
+			pa = New([]token.Token{returnsUnpacked})
+			pa.meta.NewScopeFromScope(p.meta.currentScope)
+			returnExpr, err = pa.GetExpression()
+			if err != nil {
+				fmt.Println("Error: could not parse expression inside group3")
+				fmt.Println(err.Error())
+				return token.Value{}, err
+			}
+
+			pa = New([]token.Token{bodyUnpacked})
+			pa.meta.NewScopeFromScope(p.meta.currentScope)
+			block, err = pa.CheckBlock()
+			if err != nil {
+				return token.Value{}, nil
+			}
+			fmt.Println("last after block", p.LastToken)
+			fmt.Println("current after block", p.CurrentToken)
+			fmt.Println("Next after block", p.NextToken)
+		}
+
+		functionOpType = ""
+		value = token.Value{
+			Name:       next.Value.Name,
+			AccessType: token.PrivateAccessType,
+			Type:       "function",
+			True: map[string]token.Value{
+				"args":    argExpr,
+				"returns": returnExpr,
+				"body":    block,
+			},
+			Metadata: map[string]interface{}{
+				"lambda": false,
+				"type":   md.(string),
+			},
+		}
 
 	default:
 		fmt.Println("last2", p.LastToken)
@@ -1252,94 +1335,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	case token.Function:
 		fmt.Println("hey i found a function")
 
-		next := p.NextToken
-		md := next.Value.Metadata["type"]
-		fmt.Println("md", md)
-
-		// Unpack tokens from function into new parser
-		// Unpack tokens from each in True into a new parser
-		// parse group then group, then block
-		unpackedFunctionTokens := p.NextToken.Value.True.([]token.Token)
-		// functionTokens := []token.Value{}
-		fmt.Printf("unpackedFunctionTokens %+v\n", unpackedFunctionTokens)
-		// args
-		// returns
-		// body
-		fmt.Println()
-		argsUnpacked := unpackedFunctionTokens[0]
-		fmt.Printf("argsUnpacked %+v\n\n", argsUnpacked)
-
-		functionOpType = p.NextToken.Value.Metadata["type"].(string)
-		pa := New([]token.Token{argsUnpacked})
-		pa.meta.NewScopeFromScope(p.meta.currentScope)
-		argExpr, err := pa.GetExpression()
-		if err != nil {
-			fmt.Println("Error: could not parse expression inside group")
-			fmt.Println(err.Error())
-			return token.Value{}, err
-		}
-
-		fmt.Println("argExpr", argExpr)
-		p.Shift()
-
-		var returnExpr, block token.Value
-
-		// TODO: if it is not a function defintion or a lambda call,
-		// it needs to be validated that the function exists
-		// Check for function definition
-		if md == "def" {
-			// Declare all the variables in the args so that we have them when parsing the
-			// return value and the body
-			for _, arg := range argExpr.True.([]token.Value) {
-				err = p.meta.DeclareVariableFromTokenValue(arg)
-				if err != nil {
-					return token.Value{}, err
-				}
-			}
-
-			returnsUnpacked := unpackedFunctionTokens[1]
-			fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
-
-			bodyUnpacked := unpackedFunctionTokens[2]
-			fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
-
-			pa = New([]token.Token{returnsUnpacked})
-			pa.meta.NewScopeFromScope(p.meta.currentScope)
-			returnExpr, err = pa.GetExpression()
-			if err != nil {
-				fmt.Println("Error: could not parse expression inside group")
-				fmt.Println(err.Error())
-				return token.Value{}, err
-			}
-
-			pa = New([]token.Token{bodyUnpacked})
-			pa.meta.NewScopeFromScope(p.meta.currentScope)
-			block, err = pa.CheckBlock()
-			if err != nil {
-				return token.Value{}, nil
-			}
-			fmt.Println("last after block", p.LastToken)
-			fmt.Println("current after block", p.CurrentToken)
-			fmt.Println("Next after block", p.NextToken)
-		}
-
-		functionOpType = ""
-		tv := token.Value{
-			Name:       next.Value.Name,
-			AccessType: token.PrivateAccessType,
-			Type:       "function",
-			True: map[string]token.Value{
-				"args":    argExpr,
-				"returns": returnExpr,
-				"body":    block,
-			},
-			Metadata: map[string]interface{}{
-				"lambda": false,
-				"type":   md.(string),
-			},
-		}
-
-		return tv, nil
+		return p.GetExpression()
 
 	case "":
 		fmt.Println("im fuckin here")

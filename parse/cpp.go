@@ -33,7 +33,64 @@ var (
 	functionStrings = ""
 
 	LibBase = ""
+
+	// stdLibMap = map[string]func(t token.Value) string{
+	// 	"print": stdlib_Print,
+	// }
 )
+
+// func stdlib_Print(t) string {
+// 	printString +=
+
+// 	printString += t.Name + "("
+// 	argsInterface := trueValue["args"].True
+// 	if argsInterface != nil {
+// 		fmt.Println("ARGSINTERFACE", argsInterface)
+
+// 		args, ok := argsInterface.([]token.Value)
+// 		fmt.Println("ARGS", args)
+// 		if !ok {
+// 			fmt.Println("shit look at args interface")
+// 			return "", errors.New("not ok")
+// 		}
+
+// 		// FIXME: change to standard for loop until the end and add commas
+// 		// everytime, w/e
+// 		for i, arg := range args {
+// 			if ref, ok := arg.Metadata["refs"]; ok {
+
+// 				functionString += ref.(string)
+// 				continue
+// 			}
+
+// 			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
+// 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
+// 				fmt.Println("NAME_BYTES", arg.Name)
+
+// 				objectString, err := translateObject(arg)
+// 				if err != nil {
+// 					return "", err
+// 				}
+// 				functionString = objectString + functionString + arg.Name
+// 			} else if arg.Type == "function" {
+// 				innerFunctionCall, err := translateFunctionCall(arg)
+// 				if err != nil {
+// 					return "", nil
+// 				}
+// 				// Cut off the newline and semicolon that is on the end
+// 				functionString += innerFunctionCall[:len(innerFunctionCall)-2]
+// 			} else {
+// 				functionString += fmt.Sprintf("%+v", arg.True)
+// 			}
+
+// 			if i != len(args)-1 {
+// 				functionString += ","
+// 			}
+// 		}
+// 	}
+
+// 	return printString
+// }
 
 func translateFunctionCall(t token.Value) (string, error) {
 	functionString := ""
@@ -45,7 +102,13 @@ func translateFunctionCall(t token.Value) (string, error) {
 		return "", errors.New("not ok")
 	}
 
-	// Append the name of the function
+	// // Append the name of the function
+	// libFunc := stdLibMap[t.Name]
+	// if libFunc != nil {
+	// 	// Just modify t.Name here; not sure if this has any other effects
+	// 	return libFunc(t), nil
+	// }
+
 	functionString += t.Name + "("
 	argsInterface := trueValue["args"].True
 	if argsInterface != nil {
@@ -76,6 +139,17 @@ func translateFunctionCall(t token.Value) (string, error) {
 					return "", err
 				}
 				functionString = objectString + functionString + arg.Name
+			} else if arg.Type == "function" {
+				innerFunctionCall, err := translateFunctionCall(arg)
+				if err != nil {
+					return "", nil
+				}
+				// Cut off the newline and semicolon that is on the end
+				functionString += innerFunctionCall[:len(innerFunctionCall)-2]
+			} else if arg.Type == "string" {
+				// The extra `, ""` is a hack to get strings to work in the template
+				// functions in the C++ bindings
+				functionString += fmt.Sprintf("\"%+v\", \"\"", arg.True)
 			} else {
 				functionString += fmt.Sprintf("%+v", arg.True)
 			}

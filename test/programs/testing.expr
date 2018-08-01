@@ -1,8 +1,8 @@
 // This file is a testing scratchpad for generic testing scenarios
 
-func isThereSomethingLessThan(int i) (var j) {
+func someFunction(int arg1) (var returnValue) {
   for k of [ 2, 4, 5, 9 ] {
-    if i < k {
+    if arg1 < k {
       return { value: k }
     }
   }
@@ -10,4 +10,4 @@ func isThereSomethingLessThan(int i) (var j) {
   return { value: 1000 }
 }
 
-isThereSomethingLessThan(5)
+println("hey its me")

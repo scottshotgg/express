@@ -8,7 +8,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "isThereSomethingLessThan",
+						"Name": "someFunction",
 						"Type": "function",
 						"True": [
 							{
@@ -28,7 +28,7 @@
 											"Type": "IDENT",
 											"Value": {
 												"Type": "private",
-												"String": "i"
+												"String": "arg1"
 											}
 										}
 									]
@@ -51,7 +51,7 @@
 											"Type": "IDENT",
 											"Value": {
 												"Type": "private",
-												"String": "j"
+												"String": "returnValue"
 											}
 										}
 									]
@@ -139,7 +139,7 @@
 														"Type": "IDENT",
 														"Value": {
 															"Type": "private",
-															"String": "i"
+															"String": "arg1"
 														}
 													},
 													{
@@ -256,7 +256,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "isThereSomethingLessThan",
+						"Name": "println",
 						"Type": "function",
 						"True": [
 							{
@@ -268,8 +268,9 @@
 										{
 											"Type": "LITERAL",
 											"Value": {
-												"Type": "int",
-												"True": 5
+												"Type": "string",
+												"True": "hey its me",
+												"String": "hey its me"
 											}
 										}
 									]

@@ -100,8 +100,54 @@ func (p *Parser) ParseGroup() token.Token {
 		case token.LBracket:
 			groupTokens = append(groupTokens, p.ParseArray())
 
+		// New grouping
+		case token.LParen:
+			groupTokens = append(groupTokens, p.ParseGroup())
+
+		case token.Block:
+			groupTokens = append(groupTokens, current)
+
+		case token.Group:
+			fmt.Println("CURRENT SHIT", current)
+			currentTrue := current.Value.True.([]token.Token)
+			fmt.Println("CURRENT STUFFS", currentTrue)
+			newCurrent := append(
+				[]token.Token{token.Token{
+					Type: token.LParen,
+					Value: token.Value{
+						Type: "op_3",
+					},
+				}},
+				append(currentTrue,
+					token.Token{
+						Type: token.RParen,
+						Value: token.Value{
+							Type: "op_3",
+						},
+					})...)
+			fmt.Println("NEW CURRENT", newCurrent)
+			if currentTrue != nil {
+				newParser := New(newCurrent)
+				newParser.Shift()
+				fmt.Println("newParser.LastToken", p.LastToken)
+				fmt.Println(newParser.CurrentToken)
+				fmt.Println(newParser.NextToken)
+
+				iterationCurrent := newParser.ParseGroup()
+
+				fmt.Println("ITERATION CURRENT", iterationCurrent)
+
+				groupTokens = append(groupTokens, iterationCurrent.Value.True.([]token.Token)...)
+			} else {
+				fmt.Println("ELSE CURRENT", current)
+				groupTokens = append(groupTokens, current)
+			}
+
 		default:
 			fmt.Printf("ERROR: Unrecognized group token; current: %+v\n meta: %+v\n\n", current, p)
+			fmt.Println("p.LastToken", p.LastToken)
+			fmt.Println(p.CurrentToken)
+			fmt.Println(p.NextToken)
 			os.Exit(8)
 		}
 	}
@@ -307,9 +353,12 @@ func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 		os.Exit(5)
 	}
 
+	identTokens := []token.Token{}
+
 	identSplit := strings.Split(peek.Value.String, ".")
+	// TODO: change this to a traditional for to right before the length
 	for i, ident := range identSplit {
-		*blockTokens = append(*blockTokens, token.Token{
+		identTokens = append(identTokens, token.Token{
 			ID:   0,
 			Type: token.Ident,
 			// Expected:
@@ -330,6 +379,20 @@ func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 			*blockTokens = append(*blockTokens, token.TokenMap["."])
 		}
 	}
+
+	fmt.Println("LOOKING")
+	fmt.Println("p.LastToken", p.LastToken)
+	fmt.Println(p.CurrentToken)
+	fmt.Println(p.NextToken)
+	if p.NextToken.Type == token.LParen {
+		// Check if the last token was function
+		if p.LastToken.Type == token.Function {
+		} else {
+			identTokens = append(identTokens[:len(identTokens)-1], p.ParseFunctionCall())
+		}
+	}
+
+	*blockTokens = append(*blockTokens, identTokens...)
 }
 
 // ParseBlock parses the center piece of the language; the block. Anything encapulated in curly braces.
@@ -419,8 +482,18 @@ func (p *Parser) ParseBlock() token.Token {
 			fallthrough
 		case token.Function:
 			fmt.Println("woah its a function")
+
+			// loop over len(trueValue)
+			// 	Create a new parser
+			//		parse each group
+			// 		replace the group with the output
+
+			// currentTrue := current.Value.True.([]token.Token)
+
+			// currentCopy := current
+			// currentCopy.Value.True = New(currentTrue).ParseGroup()
+			// fmt.Println("CURRENT COPY", currentCopy)
 			blockTokens = append(blockTokens, current)
-			// fmt.Println(token.Function)
 
 		case token.Group:
 			fmt.Println("\nGOTAGROUP")

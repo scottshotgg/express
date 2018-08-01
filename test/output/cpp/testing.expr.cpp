@@ -2,32 +2,32 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 var increment(var i) {
-  var _ICEsAjAUfF = {};
-  _ICEsAjAUfF["something"] = "else";
-  return _ICEsAjAUfF;
+  var _eeTUwiBLmw = {};
+  _eeTUwiBLmw["something"] = "else";
+  return _eeTUwiBLmw;
 }
 
-var isThereSomethingLessThan(int i) {
+var someFunction(int arg1) {
 
   {
-    int arrayBoi_1532978403[] = {2, 4, 5, 9};
+    int arrayBoi_1533092542[] = {2, 4, 5, 9};
     int k = 0;
-    int k_1532978403 = 0;
-    while (k_1532978403 < 4) {
+    int k_1533092542 = 0;
+    while (k_1533092542 < 4) {
       {
-        k = arrayBoi_1532978403[k_1532978403];
-        if (i < k) {
-          var _oNNHWhLrkE = {};
-          _oNNHWhLrkE["value"] = k;
-          return _oNNHWhLrkE;
+        k = arrayBoi_1533092542[k_1533092542];
+        if (arg1 < k) {
+          var _GbDXeAjgjK = {};
+          _GbDXeAjgjK["value"] = k;
+          return _GbDXeAjgjK;
         }
       }
-      k_1532978403 += 1;
+      k_1533092542 += 1;
     }
   }
-  var _DBRPMlrPaj = {};
-  _DBRPMlrPaj["value"] = 1000;
-  return _DBRPMlrPaj;
+  var _WoAztYuEHZ = {};
+  _WoAztYuEHZ["value"] = 1000;
+  return _WoAztYuEHZ;
 }
 
-int main() { isThereSomethingLessThan(5); }
+int main() { println("hey its me", ""); }

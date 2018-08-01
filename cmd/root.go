@@ -55,6 +55,7 @@ to quickly create a Cobra application.`,
 
 		fmt.Println("args", args)
 
+		// This is where I would need an env variable
 		var err error
 		parse.LibBase, err = filepath.Abs("lib/")
 		if err != nil {
@@ -67,13 +68,23 @@ to quickly create a Cobra application.`,
 
 		// TODO: need to check it for all the available characters
 		filenameArg := args[len(args)-1]
-		filename := filenameArg
-		filenameSplit := strings.Split(filenameArg, ".")
+		// filenameFull, err := filepath.Abs()
+		stat, err := os.Stat(filenameArg)
+		if err != nil {
+			fmt.Println("ERROR:", err)
+			return
+		}
+		if stat.IsDir() {
+			fmt.Println("Directories compilation is not currently supported.")
+			os.Exit(0)
+		}
+		filename := stat.Name()
+		filenameSplit := strings.Split(filename, ".")
+		// TODO: not sure why I cut out having en-extensioned files
 		if len(filenameSplit) < 1 {
 			os.Exit(9)
-		} else if len(filenameSplit) > 1 {
-			filename = filenameSplit[0]
 		}
+		filenameNoExt := filenameSplit[0]
 
 		input, err := ioutil.ReadFile(filenameArg)
 		if err != nil {
@@ -81,9 +92,7 @@ to quickly create a Cobra application.`,
 			os.Exit(9)
 		}
 
-		l := lex.New(string(input))
-
-		lexTokens, err := l.Lex()
+		lexTokens, err := lex.New(string(input)).Lex()
 		if err != nil {
 			fmt.Println("error lexing", err)
 			os.Exit(9)
@@ -95,14 +104,14 @@ to quickly create a Cobra application.`,
 				// TODO:
 				return
 			}
-			err = writeTokensJSONToFile(lexTokensJSON, filename+".lex.json")
+			err = writeTokensJSONToFile(lexTokensJSON, filenameNoExt+".lex.json")
 			if err != nil {
 				// TODO:
 				return
 			}
 		}
 
-		p := parse.New(lexTokens)
+		// p := parse.New(lexTokens)
 		// tokens, err := p.Parse()
 		// if err != nil {
 		// 	fmt.Println("error in syntactic parsing", err)
@@ -114,7 +123,7 @@ to quickly create a Cobra application.`,
 
 		// // p = parse.New(syntacticTokens)
 
-		syntacticTokens, err := p.Syntactic()
+		syntacticTokens, err := parse.New(lexTokens).Syntactic()
 		if err != nil {
 			fmt.Println("error in syntactic parsing", err)
 			os.Exit(9)
@@ -126,7 +135,7 @@ to quickly create a Cobra application.`,
 				// TODO:
 				return
 			}
-			err = writeTokensJSONToFile(syntacticTokensJSON, filename+".syn.json")
+			err = writeTokensJSONToFile(syntacticTokensJSON, filenameNoExt+".syn.json")
 			if err != nil {
 				// TODO:
 				return
@@ -146,14 +155,14 @@ to quickly create a Cobra application.`,
 				// TODO:
 				return
 			}
-			err = writeTokensJSONToFile(semanticTokensJSON, filename+".sem.json")
+			err = writeTokensJSONToFile(semanticTokensJSON, filenameNoExt+".sem.json")
 			if err != nil {
 				// TODO:
 				return
 			}
 		}
 
-		cpp, err := p.Transpile(semanticTokens)
+		cpp, err := pNew.Transpile(semanticTokens)
 		if err != nil {
 			os.Exit(9)
 		}
@@ -183,7 +192,7 @@ to quickly create a Cobra application.`,
 		}
 
 		// FIXME: write this to a temp dir/file using Go and then move it if we need it
-		output, err := exec.Command("clang++", "-std=gnu++2a", cppFilename, "-o", filename+".exe").CombinedOutput()
+		output, err := exec.Command("clang++", "-std=gnu++2a", cppFilename, "-o", filenameNoExt+".exe").CombinedOutput()
 		if err != nil {
 			// TODO:
 			fmt.Println("err compile", err, string(output))
