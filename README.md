@@ -116,11 +116,13 @@ Proposal submission is **the** method to contribute your ideas and work into Exp
 
 ## Example Program
 
-Below is currently the most advanced program that can be written in Express. You can find the *full* **uncommented** version under `advanced.expr` under the `test/programs` directory.
-<br>
+_Apologies before we get started, but this does need to be updated when I have time as there are quite a few features missing in contrast to what is supported and even what is in `test/programs/`_.
+<br><br>
 In the program below, you will find a few examples of the allowed flexibilities and optional verbosity that allow the language to be so _Expressive_.
-
 <br>
+You can find the **full uncommented** version located in `test/programs/advanced.expr`.
+
+<br><br>
 
 ```html
 Let's Begin:
@@ -138,6 +140,7 @@ bool over9k = false;
 float pi = 3.14159265359;
 string arizona = "iced out boys";
 ```
+> _`Note`_: If you're experienced in programming, you might have noticed that we did not begin by declaring a `main` function or designated execution entry point; this is _definitely_ not by design and will be enforced at a later date.
 
 <br>
 
@@ -173,7 +176,7 @@ hi_my_type_is = 2.71828
 
 <br>
 
-> Both of these are `int` variables, with the latter showing a *type inference* based on evaluation of the `rvalue` expression:
+> Another way to declare variables in Express is through _type inference_. Both of the variables below are of type `int`, however the latter type was inferred based on evaluation of the `rvalue`:
 
 ```cs
 int zero = 0

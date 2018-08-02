@@ -49,3 +49,4 @@ This is where I will put some notes...
 > Implementation ideas:
 > 1. https://www.infoq.com/articles/cs8-ranges-and-recursive-patterns
 > 2. https://talks.golang.org/2012/10things.slide#3
+> 3. Think about scipting vs functional vs imperative execution insertion points in code. (i.e, _do we want to enforce a main function_, etc)
