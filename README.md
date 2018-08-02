@@ -130,7 +130,7 @@ Let's Begin:
 
 ____
 
-<br>
+<br><br>
 
 > Start off by declaring some variables:
 
