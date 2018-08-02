@@ -1,0 +1,31 @@
+-- Tunable namespace: glibc.malloc
+glibc.malloc.check
+glibc.malloc.top_pad
+glibc.malloc.perturb
+glibc.malloc.mmap_threshold
+glibc.malloc.trim_threshold
+glibc.malloc.mmap_max
+glibc.malloc.arena_test
+glibc.malloc.arena_max
+glibc.malloc.tcache_max
+glibc.malloc.tcache_count
+glibc.malloc.tcache_unsorted_limit
+
+\-\- Tunable namespace: glibc.elision
+glibc.elision.enable
+glibc.elision.skip_lock_busy
+glibc.elision.skip_lock_internal_abort
+glibc.elision.skip_lock_after_retries
+glibc.elision.tries
+glibc.elision.skip_trylock_internal_abort
+
+\-\- Tunable namespace: glibc.tune
+glibc.tune.hwcap_mask
+glibc.tune.hwcaps
+glibc.tune.cached_memopt
+glibc.tune.cpu
+glibc.tune.x86_data_cache_size
+glibc.tune.x86_shared_cache_size
+glibc.tune.x86_non_temporal_threshold
+glibc.tune.x86_ibt
+glibc.tune.x86_shstk

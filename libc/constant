@@ -1,0 +1,5 @@
+size_t IFNAMSIZ
+struct in6_addr in6addr_loopback
+struct in6_addr in6addr_any
+int SOL_SOCKET
+rlim_t RLIM_INFINITY
