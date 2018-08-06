@@ -2,35 +2,43 @@
 #include <stack>
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
 
-class defer {
-  public:
-    std::stack <std::function<void()>> deferStack;
+// class defer {
+//   public:
+//     std::stack <std::function<void()>> deferStack;
     
-    ~defer() {
-      while (!deferStack.empty()) {
-        (deferStack.top())();
-        deferStack.pop();
-      }
-    }
-};
+//     ~defer() {
+//       while (!deferStack.empty()) {
+//         (deferStack.top())();
+//         deferStack.pop();
+//       }
+//     }
+// };
 
 int main() {
 
-  defer deferFuncs;
+    // cout << ReadFile("../defer.cpp") << endl;
+    // WriteFile("../defer_copy.cpp", ReadFile("../defer.cpp"), false);
+
+    File file = Open("../defer.cpp", "rw");
+    cout << file.ReadLine() << endl;
+    cout << file.ReadLine() << endl;
+    cout << file.ReadLine() << endl;
+//   defer deferFuncs;
   
 
-  std::cout << "start" << std::endl;
-  // Express needs to take care of putting these in reverse order
-  // and assigning random names to the functions
+//   std::cout << "start" << std::endl;
+//   // Express needs to take care of putting these in reverse order
+//   // and assigning random names to the functions
 
-  // TODO: need to see about implementing function arguments
-  deferFuncs.deferStack.push(([=](...){ println("hi", ""); }));
+//   // TODO: need to see about implementing function arguments
+//   deferFuncs.deferStack.push(([=](...){ println("hi", ""); }));
 
-  for (int i = 0; i < 10; i++) {
-    println("i:", i);
-    deferFuncs.deferStack.push(([=](...){ println(i); /* println(i); */ }));
-  }
+//   for (int i = 0; i < 10; i++) {
+//     println("i:", i);
+//     deferFuncs.deferStack.push(([=](...){ println(i); /* println(i); */ }));
+//   }
 }
 
 /*

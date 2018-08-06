@@ -26,3 +26,6 @@ Function: .*? \(.*?\)\n
  ```
 -- Data Type:
  ```
+
+### How I'm gonna do it:
+  > 1. Write a frontend parser for C

@@ -12,4 +12,12 @@ int main() {
   if (i < 10) {
     i = 7;
   }
+
+
+  FILE* file = fopen("loop.expr.cpp", "r");
+  char buff[1500];
+
+  cout << fgets(buff, 1500, file) << endl;
+
+  fclose(file);
 }
