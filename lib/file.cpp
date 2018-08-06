@@ -27,13 +27,8 @@ class File {
     char _nextChar = 0;
 };
 
+// Try to do this with a file buff later
 string File::Read(int numOfChars) {
-  // string entireFile;
-  // char readBuff[numOfChars];
-  // fgets(readBuff, numOfChars, this->file);
-
-  // return readBuff;
-
   string entireLine;
   int c = fgetc(this->file);
   int count = 0;
