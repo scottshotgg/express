@@ -13,9 +13,7 @@ func printStuff(int k) (int j) {
     onleave println("on leave", i)
   }
 
-  // It does not like having 'j' here instead of 0
-  // Need to declare the return var in the function
-  return 0
+  return j
 }
 
 println("me first")
