@@ -5,16 +5,16 @@ defer println("im actually at the end")
 
 func printStuff(int k) (int j) {
   for i := 0, i < k, i++ {
+    // onexit runs the function when the program exits
     onexit println("on exit", i)
 
     // `defer` is the a macro for `onreturn` in functions
     defer println("on return", i)
 
+    // onleave runs the function when the current scope is left
     onleave println("on leave", i)
   }
 
-  // It does not like having 'j' here instead of 0
-  // Need to declare the return var in the function
   return 0
 }
 
