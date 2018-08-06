@@ -30,9 +30,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _DOuORuLQrp = {};
-    _DOuORuLQrp["something"] = "else";
-    return _DOuORuLQrp;
+    var _XpglhUvVjQ = {};
+    _XpglhUvVjQ["something"] = "else";
+    return _XpglhUvVjQ;
   }
 }
 

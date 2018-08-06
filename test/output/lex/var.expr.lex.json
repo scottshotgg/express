@@ -41,6 +41,13 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",

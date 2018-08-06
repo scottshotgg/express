@@ -24,7 +24,7 @@ int main() {
     File readFile = Open("../defer.cpp", "rw");
 
     File writeFile = Open("defer_copy.cpp", "w");
-    writeFile.WriteLine(readFile.ReadLine());
+    writeFile.Write(readFile.Read(10));
     writeFile.Close();
     readFile.Close();
 }

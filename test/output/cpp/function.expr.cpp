@@ -30,15 +30,15 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _DOuORuLQrp = {};
-    _DOuORuLQrp["something"] = "else";
-    return _DOuORuLQrp;
+    var _XpglhUvVjQ = {};
+    _XpglhUvVjQ["something"] = "else";
+    return _XpglhUvVjQ;
   }
 }
 
 int main() {
-  var _ZiLuGINkfJ = {};
-  _ZiLuGINkfJ["another"] = "object";
+  var _ymijXqKSBp = {};
+  _ymijXqKSBp["another"] = "object";
 
-  increment(_ZiLuGINkfJ);
+  increment(_ymijXqKSBp);
 }

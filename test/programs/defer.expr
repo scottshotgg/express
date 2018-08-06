@@ -11,11 +11,11 @@ func printStuff(int k) (int j) {
     // `onreturn` runs the function when the return keyword is fired
     onreturn println("on return", i)
 
-    // `defer` is a macro for `onreturn` in functions
-    defer println("defer", i)
-
     // `onleave` runs the function when the current scope is left
     onleave println("on leave", i)
+
+    // `defer` is a macro for `onreturn` in functions
+    defer println("defer", i)
   }
 
   return 0

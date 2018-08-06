@@ -5,40 +5,78 @@ using namespace std;
 
 class File {
   public:
-    // std::string Open(string filepath);
-    std::string Read(int numChars);
+    void Close();
+
+    std::string Read(int);
     std::string ReadLine();
+
+    void Write(string);
+    void WriteLine(string);
+
+    File() {}
     File(FILE* fp) : file(fp) {}
 
   private:
-    int readPointer = 0;
     FILE* file = nullptr;
+    int readPointer = 0;
+    
+    // Assume that files are ascii encoded by default
+    string _charset = "ascii";
+    char _lastChar = 0;
+    char _currentChar = 0;
+    char _nextChar = 0;
 };
 
-// string file::Read() {
+string File::Read(int numOfChars) {
+  // string entireFile;
+  // char readBuff[numOfChars];
+  // fgets(readBuff, numOfChars, this->file);
 
-// }
+  // return readBuff;
 
-File Open(string filepath, string mode) {
-  return File{ fopen(filepath.c_str(), mode.c_str()) };
+  string entireLine;
+  int c = fgetc(this->file);
+  int count = 0;
+  
+  while(c != EOF && count < numOfChars) {
+    count++;
+    entireLine += c;
+    c = fgetc(this->file);
+  }
+
+  return entireLine;
 }
 
-// Try to do something like this
-// string File::ReadLine() {
-//   string entireLine;
-//   int buffAmount = 10;
-//   char readBuff[buffAmount];
-//   while(fgets(readBuff, buffAmount, file)) {
-//     cout << "\"" << readBuff << "\"" << endl;
-//     if (readBuff[9]) {
-//       return "something";
-//     }
+string File::ReadLine() {
+  string entireLine;
+  int c = fgetc(this->file);
 
-//     cout << "last char" << "\"" << readBuff[9] << "\"" << endl;
-//   }
+  while(c != EOF && c != '\n') {
+    entireLine += c;
+    c = fgetc(this->file);
+  }
 
-//   return entireLine;
-// }
+  return entireLine;
+}
+
+void File::Write(string text) {
+  // do something with the status?
+  fputs(text.c_str(), this->file);
+}
+
+void File::WriteLine(string text) {
+  Write(text + "\n");
+}
+
+// Need to put a status here
+void File::Close() { fclose(this->file); }
+
+File Open(string filepath, string mode) {
+  return File {
+    fopen(filepath.c_str(),
+    mode.c_str())
+  };
+}
 
 string ReadFile(string filepath) {
   FILE* file = fopen(filepath.c_str(), "r");
@@ -52,18 +90,20 @@ string ReadFile(string filepath) {
   while(fgets(readBuff, buffAmount, file)) {
       entireFile += readBuff;
   }
+  fclose(file);
 
   return entireFile;
 }
 
-void WriteFile(string filepath, string contents, bool writeOver) {
+void WriteFile(string filepath, string contents, bool overwrite) {
   FILE* file = fopen(filepath.c_str(), "w");
   if (file != nullptr) {
-    if (!writeOver) {
+    if (!overwrite) {
       // TODO: need to return an error or
       // something here
     }
   }
 
   fputs(contents.c_str(), file);
+  fclose(file);
 }
