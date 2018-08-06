@@ -15,7 +15,7 @@ func printStuff(int k) (int j) {
     onleave println("on leave", i)
   }
 
-  return 0
+  return j
 }
 
 println("me first")
