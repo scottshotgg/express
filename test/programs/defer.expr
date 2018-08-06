@@ -8,14 +8,17 @@ func printStuff(int k) (int j) {
     // `onexit` runs the function when the program exits
     onexit println("on exit", i)
 
-    // `defer` is the a macro for `onreturn` in functions
-    defer println("on return", i)
+    // `onreturn` runs the function when the return keyword is fired
+    onreturn println("on return", i)
+
+    // `defer` is a macro for `onreturn` in functions
+    defer println("defer", i)
 
     // `onleave` runs the function when the current scope is left
     onleave println("on leave", i)
   }
 
-  return j
+  return 0
 }
 
 println("me first")

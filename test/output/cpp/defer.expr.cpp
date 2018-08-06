@@ -26,20 +26,13 @@ int printStuff(int k) {
   }
 }
 
-var increment(var i) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-    var _DOuORuLQrp = {};
-    _DOuORuLQrp["something"] = "else";
-    return _DOuORuLQrp;
-  }
-}
-
 int main() {
-  int i = 8;
-  if (i < 10) {
-    defer onLeaveFuncs;
-    i = 7;
-  }
+  onExitFuncs.deferStack.push(
+      [=](...) { println("im actually at the end", ""); });
+
+  println("me first", "");
+
+  println(printStuff(3));
+  onExitFuncs.deferStack.push(
+      [=](...) { println("im actually at the start", ""); });
 }

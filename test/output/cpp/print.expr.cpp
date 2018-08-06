@@ -37,9 +37,36 @@ var increment(var i) {
 }
 
 int main() {
-  int i = 8;
-  if (i < 10) {
-    defer onLeaveFuncs;
-    i = 7;
-  }
+  var thingy = 7;
+
+  print("thingy =", thingy, "\n");
+
+  println(thingy);
+
+  println();
+  thingy = 69.69;
+
+  print("thingy =", thingy, "\n");
+
+  println(thingy);
+
+  println();
+  thingy = "woah woah woah";
+
+  print("thingy =", thingy, "\n");
+
+  println(thingy);
+
+  println();
+  thingy = false;
+
+  print("thingy =", thingy, "\n");
+
+  println(thingy);
+
+  println();
+  var thingyObject = {};
+  thingyObject["im_just_a"] = "DEAD BOY";
+
+  println(thingyObject);
 }

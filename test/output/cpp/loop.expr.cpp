@@ -1,10 +1,39 @@
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
+defer onExitFuncs;
+
+int printStuff(int k) {
+  defer onReturnFuncs;
+  {
+    defer onLeaveFuncs;
+
+    {
+      int i = 0;
+      while (i < k) {
+        {
+          defer onLeaveFuncs;
+          onExitFuncs.deferStack.push([=](...) { println("on exit", i); });
+          onReturnFuncs.deferStack.push([=](...) { println("on return", i); });
+          onReturnFuncs.deferStack.push([=](...) { println("defer", i); });
+          onLeaveFuncs.deferStack.push([=](...) { println("on leave", i); });
+        }
+        i += 1;
+      }
+    }
+    return 0;
+  }
+}
+
 var increment(var i) {
-  var _RqgWSYnuMV = {};
-  _RqgWSYnuMV["something"] = "else";
-  return _RqgWSYnuMV;
+  defer onReturnFuncs;
+  {
+    defer onLeaveFuncs;
+    var _DOuORuLQrp = {};
+    _DOuORuLQrp["something"] = "else";
+    return _DOuORuLQrp;
+  }
 }
 
 int main() {
@@ -14,6 +43,7 @@ int main() {
     int i = 1;
     while (i < 10) {
       {
+        defer onLeaveFuncs;
         f = i;
         int h = 1;
       }
@@ -22,30 +52,32 @@ int main() {
   }
 
   {
-    int arrayBoi_1533097790[] = {1, 2, 4};
+    int arrayBoi_1533586727[] = {1, 2, 4};
     int i = 0;
-    int i_1533097790 = 0;
-    while (i_1533097790 < 3) {
+    int i_1533586727 = 0;
+    while (3) {
       {
-        i = i_1533097790;
+        defer onLeaveFuncs;
+        i = i_1533586727;
         f = i;
         int h = 1;
       }
-      i_1533097790 += 1;
+      i_1533586727 += 1;
     }
   }
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1533097790 = 0;
-    while (i_1533097790 < 8) {
+    int i_1533586727 = 0;
+    while (8) {
       {
-        i = countdown[i_1533097790];
+        defer onLeaveFuncs;
+        i = countdown[i_1533586727];
         f = i;
         int h = 1;
       }
-      i_1533097790 += 1;
+      i_1533586727 += 1;
     }
   }
 }

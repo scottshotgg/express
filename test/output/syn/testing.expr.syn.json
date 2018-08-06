@@ -132,60 +132,28 @@
 														"Type": "KEYWORD",
 														"Value": {
 															"Type": "keyword",
-															"String": "if"
+															"String": "defer"
 														}
 													},
 													{
-														"Type": "IDENT",
+														"ID": 1,
+														"Type": "FUNCTION",
 														"Value": {
-															"Type": "private",
-															"String": "arg1"
-														}
-													},
-													{
-														"Type": "L_THAN",
-														"Value": {
-															"Type": "lthan",
-															"String": "\u003c"
-														}
-													},
-													{
-														"Type": "IDENT",
-														"Value": {
-															"Type": "private",
-															"String": "k"
-														}
-													},
-													{
-														"Type": "BLOCK",
-														"Value": {
-															"Type": "BLOCK",
+															"Name": "println",
+															"Type": "function",
 															"True": [
 																{
-																	"ID": 9,
-																	"Type": "KEYWORD",
+																	"ID": 1,
+																	"Type": "GROUP",
 																	"Value": {
-																		"Type": "keyword",
-																		"String": "return"
-																	}
-																},
-																{
-																	"Type": "BLOCK",
-																	"Value": {
-																		"Type": "BLOCK",
+																		"Type": "GROUP",
 																		"True": [
 																			{
-																				"Type": "IDENT",
+																				"Type": "LITERAL",
 																				"Value": {
-																					"Type": "private",
-																					"String": "value"
-																				}
-																			},
-																			{
-																				"Type": "ASSIGN",
-																				"Value": {
-																					"Type": "set",
-																					"String": ":"
+																					"Type": "string",
+																					"True": "value: ",
+																					"String": "value: "
 																				}
 																			},
 																			{
@@ -198,7 +166,12 @@
 																		]
 																	}
 																}
-															]
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
 														}
 													}
 												]
@@ -277,8 +250,8 @@
 											"Type": "LITERAL",
 											"Value": {
 												"Type": "string",
-												"True": "waddup",
-												"String": "waddup"
+												"True": "hey its me",
+												"String": "hey its me"
 											}
 										}
 									]
@@ -290,6 +263,14 @@
 							"lambda": false,
 							"type": "call"
 						}
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "defer"
 					}
 				},
 				{
@@ -309,8 +290,39 @@
 											"Type": "LITERAL",
 											"Value": {
 												"Type": "string",
-												"True": "hey its me",
-												"String": "hey its me"
+												"True": "does this work",
+												"String": "does this work"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "someFunction",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 9
 											}
 										}
 									]
