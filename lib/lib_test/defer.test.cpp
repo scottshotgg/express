@@ -17,70 +17,14 @@
 // };
 
 int main() {
+    // TODO: need to test if ReadLine reads out the newline in golang
+    cout << ReadFile("../defer.cpp") << endl;
+    WriteFile("../defer_copy.cpp", ReadFile("../defer.cpp"), false);
 
-    // cout << ReadFile("../defer.cpp") << endl;
-    // WriteFile("../defer_copy.cpp", ReadFile("../defer.cpp"), false);
+    File readFile = Open("../defer.cpp", "rw");
 
-    File file = Open("../defer.cpp", "rw");
-    cout << file.ReadLine() << endl;
-    cout << file.ReadLine() << endl;
-    cout << file.ReadLine() << endl;
-//   defer deferFuncs;
-  
-
-//   std::cout << "start" << std::endl;
-//   // Express needs to take care of putting these in reverse order
-//   // and assigning random names to the functions
-
-//   // TODO: need to see about implementing function arguments
-//   deferFuncs.deferStack.push(([=](...){ println("hi", ""); }));
-
-//   for (int i = 0; i < 10; i++) {
-//     println("i:", i);
-//     deferFuncs.deferStack.push(([=](...){ println(i); /* println(i); */ }));
-//   }
+    File writeFile = Open("defer_copy.cpp", "w");
+    writeFile.WriteLine(readFile.ReadLine());
+    writeFile.Close();
+    readFile.Close();
 }
-
-/*
-#include <functional>
-#include <iostream>
-#include <string>
-#include <vector>
- 
-using namespace std;
- 
-void execute(const vector<function<void ()>>& fs)
-{
-    for (auto& f : fs)
-        f();
-}
- 
-void plain_old_func()
-{
-    cout << "I'm an old plain function" << endl;
-}
- 
-class functor
-{
-    public:
-        void operator()() const
-        {
-            cout << "I'm a functor" << endl;
-        }
-};
- 
-int main()
-{
-    vector<function<void ()>> x;
-    x.push_back(plain_old_func);
-     
-    functor functor_instance;
-    x.push_back(functor_instance);
-    x.push_back([] ()
-    {
-        cout << "HI, I'm a lambda expression" << endl;
-    });
-     
-    execute(x);
-}
-*/
