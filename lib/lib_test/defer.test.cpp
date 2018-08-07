@@ -18,13 +18,17 @@
 
 int main() {
     // TODO: need to test if ReadLine reads out the newline in golang
-    cout << ReadFile("../defer.cpp") << endl;
-    WriteFile("../defer_copy.cpp", ReadFile("../defer.cpp"), false);
+    // cout << ReadFile("../defer.cpp") << endl;
+    // WriteFile("../defer_copy.cpp", ReadFile("../defer.cpp"), false);
 
     File readFile = Open("../defer.cpp", "rw");
-
-    File writeFile = Open("defer_copy.cpp", "w");
-    writeFile.Write(readFile.Read(10));
-    writeFile.Close();
-    readFile.Close();
+    // cout << readFile.ReadNextChar() << endl;
+    cout << readFile.ReadLine() << endl;
+    // readFile.SeekToPosition(SEEK_END);
+    // cout << readFile.CurrentPosition() << endl;
+    // File writeFile = Open("defer_copy.cpp", "w");
+    // cout << readFile.ReadUntilNext('p') << endl;
+    // cout << readFile.ReadUntilNext('p') << endl;
+    // writeFile.Close();
+    // readFile.Close();
 }
