@@ -2,7 +2,7 @@
 
 func someFunction(int arg1) (var returnValue) {
   for k of [ 2, 4, 5, 9 ] {
-    defer println("value: ", k)
+    defer Println("value: ", k)
     /*if arg1 < k {
       return { value: k }
     }*/
@@ -11,7 +11,7 @@ func someFunction(int arg1) (var returnValue) {
   return { value: 1000 }
 }
 
-defer println("hey its me")
-defer println("does this work")
+defer Println("hey its me")
+defer Println("does this work")
 
 someFunction(9)

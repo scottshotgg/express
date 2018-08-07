@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 #include <libgen.h>
 
 using namespace std;
@@ -66,10 +65,12 @@ void File::Close() {
   fclose(this->file);
 }
 
+// TODO: could change this to use file._eof
 bool File::AtEOF() {
   return feof(this->file);
 }
 
+// TODO: could change this to use file._eol
 bool File::AtEOL() {
   bool eol = false;
   int c = fgetc(this->file);
@@ -82,6 +83,7 @@ bool File::AtEOL() {
   return eol;
 }
 
+// TODO: could change this to use the 
 int File::CurrentPosition() {
   return ftell(this->file);
 }

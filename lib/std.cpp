@@ -1,19 +1,15 @@
 #include <iostream>
 
-// FIXME: could probably speed this up by using a stringstream and or a different way to print
+// Empty Print function
+void Print() {}
 
-// Empty print function
-void print() {
-  //cout << "im in here print empty" << endl;
-}
-
-void print(char* data) {
-  //cout << "im in here char*" << endl;
+// Print function just for C strings
+void Print(char* data) {
   std::cout << data;
 }
 
-void print(bool data) {
-  //cout << "im in here print bool" << endl;
+// Print function to change bool types as actual "true" or "false" literal string values
+void Print(bool data) {
   if (data) {
     std::cout << "true";
   } else {
@@ -21,79 +17,42 @@ void print(bool data) {
   }
 }
 
-// template<> void print()
-
-// Base-case print function
-template <typename T>
-void print(T data) {
-  //cout << "im in here print T" << endl;
-  std::cout << data;
-}
-
-// template <> 
-// void print(std::string data){
-//   cout << "im in here string" << endl;
-//   std::cout << data;
-// }
-
-// template <> 
-// void print(char* data){
-//   cout << "im in here char*" << endl;
-//   std::cout << data;
-// }
-
-// Recursive print macro
-template <typename T, typename... Args>
-void print(T first, Args... args) {
-  //cout << "im in here print" << endl;
-  // if (sizeof...(Args) - 1) {
-  //cout << "im in here print" << endl;
-    print(first);
-    std::cout << " ";
-    print(args...);
-  // } else {
-  // //cout << "im in here print" << endl;
-  //   print(first);
-  // }
-}
-
-// Print for arrays
+// Print function for arrays
 // TODO: this might be moved to the `var` lib if vars are allowed to hold arrays
 template <typename T>
-void print(T rest[]) {
-  //cout << "im in here rest" << endl;
+void Print(T rest[]) {
   std::cout << "[ ";
   int length = (sizeof(*rest)/sizeof(*rest)) + 1;
   for (int i = 0; i < length; i++) {
-    print(rest[i]);
+    Print(rest[i]);
     std::cout << ", ";
   }
-  print(rest[length]);
+  Print(rest[length]);
   std::cout << " ]";
 }
 
-// template <> 
-// void print(std::string data){
+// Base-case Print function
+template <typename T>
+void Print(T data) {
+  std::cout << data;
+}
 
-// };
-
-// Recursive println macro
+// Recursive Print function
 template <typename T, typename... Args>
-void println(T first, Args... args) {
-  //cout << "im in here println" << endl;
-  print(first, args...);
+void Print(T first, Args... args) {
+    Print(first);
+    std::cout << " ";
+    Print(args...);
+}
+
+// Empty Println macro
+void Println() {
   std::cout << std::endl;
 }
 
-// Recursive println macro
-void println() {
-  //cout << "im in here println empty" << endl;
+// Recursive Println macro
+template <typename T, typename... Args>
+void Println(T first, Args... args) {
+  Print(first, args...);
   std::cout << std::endl;
 }
-
-// // Templated defer function
-// // template <typename T, typename T1, typename T2> -- // if we want void to return something
-// template <typename T, typename T1>
-// void defer(T1 (*f)(T2)) {
-//   deferFunc hey_its_me(nullptr, [](...){ T1() });
-// }

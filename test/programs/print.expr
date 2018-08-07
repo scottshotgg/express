@@ -1,31 +1,31 @@
 // This file is for testing print*
 
 //defer for i of [ 2, 4, 6, 8 ] {
-  //println(i)
+  //Println(i)
 //}
 
 //defer int i = 8
 
 var thingy = 7
-print("thingy =", thingy, "\n")
-println(thingy)
-println()
+Print("thingy =", thingy, "\n")
+Println(thingy)
+Println()
 
 thingy = 69.69
-print("thingy =", thingy, "\n")
-println(thingy)
-println()
+Print("thingy =", thingy, "\n")
+Println(thingy)
+Println()
 
 thingy = "woah woah woah"
-print("thingy =", thingy, "\n")
-println(thingy)
-println()
+Print("thingy =", thingy, "\n")
+Println(thingy)
+Println()
 
 thingy = false
-print("thingy =", thingy, "\n")
-println(thingy)
-println()
+Print("thingy =", thingy, "\n")
+Println(thingy)
+Println()
 
 // var types cannot hold objects atm
 thingyObject := { im_just_a: "DEAD BOY" }
-println(thingyObject)
+Println(thingyObject)
