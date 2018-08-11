@@ -8,8 +8,6 @@ struct Thing = {
   float anotherFielderino
 }
 
-float thinger = 0.0
-
 // Instantiate a struct variable
 something := Thing{}
 
