@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _lLVcINPwbo = {};
-    _lLVcINPwbo["something"] = "else";
-    return _lLVcINPwbo;
+    var _qJQUcfyiIs = {};
+    _qJQUcfyiIs["something"] = "else";
+    return _qJQUcfyiIs;
   }
 }
 

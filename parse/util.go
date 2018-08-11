@@ -271,21 +271,21 @@ func AccessTypeString(at AccessType) (st string) {
 	return
 }
 
-func getBaseForType(trueType, actingType string) (interface{}, error) {
+func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 	switch trueType {
 	case token.IntType:
 		return 0, nil
 
-	case token.StringType:
-		return "", nil
-
 	case token.BoolType:
 		return false, nil
+
+	case token.CharType:
+		return "", nil
 
 	case token.FloatType:
 		return 0.0, nil
 
-	case token.CharType:
+	case token.StringType:
 		return "", nil
 
 	case token.VarType:

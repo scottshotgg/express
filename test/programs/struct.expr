@@ -1,6 +1,6 @@
 // This is a file for testing structs
 
-// struct type definition
+// Define a struct
 struct Thing = {
   int fieldA
   string stringField
@@ -8,15 +8,22 @@ struct Thing = {
   float anotherFielderino
 }
 
-// struct type usage
-something := Thing {
-  fieldA: 9999
+float thinger = 0.0
+
+// Instantiate a struct variable
+something := Thing{}
+
+// Instantiate a struct variable with some initilizers
+something2 := Thing {
+  fieldA: 0xDECAF
+}
+
+something3 := Thing {
+  stringField: "woah its me"
 
   // You can declare local variables within structs however, 
   // unlike objects, they will not get carried out
   not_in_this_struct := "wtf dude"
 }
-
-something2 := Thing{}
 
 Print(something)

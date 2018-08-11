@@ -1465,7 +1465,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			//fmt.Println("another", p.NextToken)
 		} else {
 			p.meta.currentVariable.Name = p.CurrentToken.Value.String
-			baseValue, err := getBaseForType(VariableTypeString(p.meta.currentVariable.Type), p.CurrentToken.Value.Acting)
+			baseValue, err := getDefaultValueForType(VariableTypeString(p.meta.currentVariable.Type), p.CurrentToken.Value.Acting)
 			if err != nil {
 				return token.Value{}, err
 			}

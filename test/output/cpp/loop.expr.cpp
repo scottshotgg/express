@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _lLVcINPwbo = {};
-    _lLVcINPwbo["something"] = "else";
-    return _lLVcINPwbo;
+    var _qJQUcfyiIs = {};
+    _qJQUcfyiIs["something"] = "else";
+    return _qJQUcfyiIs;
   }
 }
 
@@ -53,32 +53,32 @@ int main() {
   }
 
   {
-    int arrayBoi_1534015483[] = {1, 2, 4};
+    int arrayBoi_1534017550[] = {1, 2, 4};
     int i = 0;
-    int i_1534015483 = 0;
+    int i_1534017550 = 0;
     while (3) {
       {
         defer onLeaveFuncs;
-        i = i_1534015483;
+        i = i_1534017550;
         f = i;
         int h = 1;
       }
-      i_1534015483 += 1;
+      i_1534017550 += 1;
     }
   }
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1534015483 = 0;
+    int i_1534017550 = 0;
     while (8) {
       {
         defer onLeaveFuncs;
-        i = countdown[i_1534015483];
+        i = countdown[i_1534017550];
         f = i;
         int h = 1;
       }
-      i_1534015483 += 1;
+      i_1534017550 += 1;
     }
   }
 }

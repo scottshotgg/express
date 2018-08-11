@@ -368,7 +368,11 @@ func translateObject(t token.Value) (string, error) {
 			continue
 
 		} else {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
+			if v.Type == token.FloatType && v.True.(float64) == 0 {
+				objectString += t.Name + fmt.Sprintf("[\"%s\"] = %f;\n", v.Name, float64(0.0))
+			} else {
+				objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
+			}
 		}
 	}
 
@@ -513,10 +517,17 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 	case "int":
 		fallthrough
-	case "float":
-		fallthrough
 	case "bool":
+		fallthrough
+	case "char":
 		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		return variableString, nil
+	case "float":
+		if t.True.(float64) == 0 {
+			variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%f", 0.0)}, " ") + ";\n"
+		} else {
+			variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		}
 		// //fmt.Println(thing)
 		// _, err = f.Write([]byte(thing))
 		// if err != nil {

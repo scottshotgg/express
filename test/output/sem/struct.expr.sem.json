@@ -18,7 +18,10 @@
 					"Name": "stringField",
 					"Type": "string",
 					"True": "",
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				},
 				{
 					"Name": "false_field",
@@ -42,40 +45,6 @@
 				{
 					"Name": "fieldA",
 					"Type": "int",
-					"True": 9999,
-					"AccessType": "private",
-					"Metadata": {
-						"assign": true
-					}
-				},
-				{
-					"Name": "stringField",
-					"Type": "string",
-					"True": "",
-					"AccessType": "private"
-				},
-				{
-					"Name": "false_field",
-					"Type": "bool",
-					"True": false,
-					"AccessType": "private"
-				},
-				{
-					"Name": "anotherFielderino",
-					"Type": "float",
-					"True": 0,
-					"AccessType": "private"
-				}
-			],
-			"AccessType": "private"
-		},
-		{
-			"Name": "something2",
-			"Type": "struct",
-			"True": [
-				{
-					"Name": "fieldA",
-					"Type": "int",
 					"True": 0,
 					"AccessType": "private",
 					"Metadata": {
@@ -86,7 +55,10 @@
 					"Name": "stringField",
 					"Type": "string",
 					"True": "",
-					"AccessType": "private"
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
 				},
 				{
 					"Name": "false_field",
@@ -107,6 +79,80 @@
 			}
 		},
 		{
+			"Name": "something2",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "fieldA",
+					"Type": "int",
+					"True": 912559,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "stringField",
+					"Type": "string",
+					"True": "",
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "false_field",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private"
+				},
+				{
+					"Name": "anotherFielderino",
+					"Type": "float",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "something3",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "fieldA",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "stringField",
+					"Type": "string",
+					"True": "woah its me",
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "false_field",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private"
+				},
+				{
+					"Name": "anotherFielderino",
+					"Type": "float",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
 			"Name": "Print",
 			"Type": "function",
 			"True": {
@@ -119,7 +165,7 @@
 								{
 									"Name": "fieldA",
 									"Type": "int",
-									"True": 9999,
+									"True": 0,
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true
@@ -129,7 +175,10 @@
 									"Name": "stringField",
 									"Type": "string",
 									"True": "",
-									"AccessType": "private"
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
 								},
 								{
 									"Name": "false_field",

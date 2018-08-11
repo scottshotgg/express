@@ -114,51 +114,7 @@
 					"Type": "BLOCK",
 					"Value": {
 						"Type": "BLOCK",
-						"True": [
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "fieldA"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "set",
-									"String": ":"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 9999
-								}
-							},
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "not_in_this_struct"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "init",
-									"String": ":="
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "wtf dude",
-									"String": "wtf dude"
-								}
-							}
-						]
+						"True": []
 					}
 				},
 				{
@@ -186,7 +142,103 @@
 					"Type": "BLOCK",
 					"Value": {
 						"Type": "BLOCK",
-						"True": []
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "fieldA"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 912559,
+									"String": "DECAF"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "something3"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Thing"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "stringField"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "woah its me",
+									"String": "woah its me"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "not_in_this_struct"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "wtf dude",
+									"String": "wtf dude"
+								}
+							}
+						]
 					}
 				},
 				{
