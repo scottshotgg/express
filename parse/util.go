@@ -2,7 +2,9 @@ package parse
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
+	"os"
 	"time"
 
 	"github.com/pkg/errors"
@@ -85,7 +87,8 @@ func (p *Parser) PopState() {
 
 // Shift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) Shift() {
-	p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	// p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	p.ProcessedTokens.Push(p.LastToken)
 	p.LastToken = p.CurrentToken
 	p.CurrentToken = p.NextToken
 
@@ -109,22 +112,57 @@ func (p *Parser) Shift() {
 
 // Unshift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) Unshift() {
+	fmt.Println("DECREMENTING INDEX", p.Index)
+	fmt.Println("last at index", p.source[p.Index-1])
+	fmt.Println("current at index", p.source[p.Index])
+	fmt.Println("next at index", p.source[p.Index+1])
+	// Decrement atleast one back
 	p.Index--
+	fmt.Println("AFTER decrement", p.Index)
+	fmt.Println("last at index", p.source[p.Index-1])
+	fmt.Println("current at index", p.source[p.Index])
+	fmt.Println("next at index", p.source[p.Index+1])
+
+	for p.Index-1 > 0 {
+		if p.source[p.Index-1].Type != token.Whitespace {
+			// p.ProcessedTokens = append(p.ProcessedTokens, p.source[p.Index])
+			break
+		}
+		p.Index--
+	}
+	fmt.Println("INDEX", p.Index)
+
 	p.NextToken = p.CurrentToken
 	p.CurrentToken = p.LastToken
-	p.LastToken = p.ProcessedTokens[len(p.ProcessedTokens)-1]
+
+	// p.ProcessedTokens should be changed to use a stack
+	// p.LastToken = p.ProcessedTokens[len(p.ProcessedTokens)-1]
+	poppedInterface, err := p.ProcessedTokens.Pop()
+	if err != nil {
+		fmt.Println("gots da pop error srry", err)
+		os.Exit(9)
+	}
+
+	poppedToken := token.Token{}
+	if poppedInterface != nil {
+		poppedToken = poppedInterface.(token.Token)
+	}
+
+	fmt.Println("POPPED TOKOEN p.LastToken", poppedToken)
+	p.LastToken = poppedToken
 }
 
 // ShiftWithWS operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) ShiftWithWS() {
+	// p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	p.ProcessedTokens.Push(p.LastToken)
 	p.LastToken = p.CurrentToken
-	p.CurrentToken = p.source[p.Index]
+	p.CurrentToken = p.NextToken
 
 	for {
 		if p.Index+1 < p.length {
-			p.Index++
-
 			p.NextToken = p.source[p.Index]
+			p.Index++
 			return
 		}
 
@@ -157,6 +195,8 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = FLOAT
 	case "BLOCK":
 		vt = OBJECT
+	case "struct":
+		vt = STRUCT
 	case "set":
 		vt = SET
 	case "array":
@@ -201,6 +241,8 @@ func VariableTypeString(vt VariableType) (st string) {
 		st = "set"
 	case OBJECT:
 		st = "object"
+	case STRUCT:
+		st = "struct"
 	case ARRAY:
 		st = "array"
 	case FUNCTION:

@@ -41,6 +41,10 @@ var (
 	semanticBlockMap = map[string]token.Value{}
 )
 
+func init() {
+	os.Setenv(parse.ExpressDebug, "true")
+}
+
 func TestSemantic(t *testing.T) {
 	fmt.Println("TestSemantic")
 

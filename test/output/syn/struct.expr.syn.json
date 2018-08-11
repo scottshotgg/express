@@ -1,0 +1,286 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "struct",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Thing"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "fieldA"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "string",
+									"String": "string"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "stringField"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "bool",
+									"String": "bool"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "false_field"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "float",
+									"String": "float"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "anotherFielderino"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "something"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Thing"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "fieldA"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 9999
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "not_in_this_struct"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "wtf dude",
+									"String": "wtf dude"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "progress"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "set",
+						"String": ":"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 0
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "something2"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "set",
+						"String": ":"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "hey its me",
+									"String": "hey its me"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "no its not",
+									"String": "no its not"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "fieldA"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "whatever you want",
+									"String": "whatever you want"
+								}
+							}
+						]
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Print",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "something"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				}
+			]
+		}
+	}
+]

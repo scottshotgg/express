@@ -139,7 +139,7 @@
 														"ID": 1,
 														"Type": "FUNCTION",
 														"Value": {
-															"Name": "println",
+															"Name": "Println",
 															"Type": "function",
 															"True": [
 																{
@@ -237,7 +237,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -277,7 +277,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{

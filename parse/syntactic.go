@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"fmt"
 	"os"
 	"reflect"
 	"strings"
@@ -348,7 +349,7 @@ func (p *Parser) ParseFunctionCall() token.Token {
 // ParseIdent parses an identifier
 func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 	if blockTokens == nil {
-		//fmt.Println("ERROR: blockTokens is nil")
+		fmt.Println("ERROR: blockTokens is nil")
 		os.Exit(5)
 	}
 
@@ -375,15 +376,52 @@ func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 		})
 
 		if i < len(identSplit)-1 {
-			*blockTokens = append(*blockTokens, token.TokenMap["."])
+			identTokens = append(identTokens, token.TokenMap["."])
 		}
 	}
 
-	//fmt.Println("LOOKING")
-	//fmt.Println("p.LastToken", p.LastToken)
-	//fmt.Println(p.CurrentToken)
-	//fmt.Println(p.NextToken)
-	if p.NextToken.Type == token.LParen {
+	// If we have an `ident` and then a brace (starting of a `block`)
+	if p.NextToken.Type == token.LBrace {
+		// Once we get here we need to determine if this is an `ident`
+		// and then an anonymous scope (i.e, `block`) or is this a `struct`
+
+		// Test this by unshifting and then shifting with whitespace
+		p.Unshift()
+		p.ShiftWithWS()
+
+		// If there is no newline separating the `ident` and `block`,
+		// then this is a `struct`
+		if p.NextToken.Value.Type != "newline" { // && p.NextToken.Value.Type != "BLOCK" {
+			if len(identTokens) != 1 {
+				// no return value here to give error?
+				fmt.Println("more than 1 ident token in struct declaration was not coded for")
+				os.Exit(9)
+			}
+
+			// // We don't want the whitespace to propogate down so
+			// // unshift again and then reshift what was there before
+			// p.Unshift()
+			// p.Shift()
+			// p.Shift()
+
+			// // TODO: we need to do something for declarations
+			// // identTokens[0].Type = token.Struct
+			// identTokens[0].Type = "STRUCT"
+			// identTokens[0].Value.Acting = identTokens[0].Value.String
+
+		} else {
+			// If theres a newline then put a separator
+			identTokens = append(identTokens, token.Token{
+				ID:   0,
+				Type: token.Separator,
+			})
+		}
+		// We don't want the whitespace to propogate down so
+		// unshift again and then reshift what was there before
+		p.Unshift()
+		p.Shift()
+
+	} else if p.NextToken.Type == token.LParen {
 		// Check if the last token was function
 		if p.LastToken.Type == token.Function {
 		} else {
@@ -404,7 +442,7 @@ func (p *Parser) ParseBlock() token.Token {
 		p.Shift()
 
 		current := p.CurrentToken
-		//fmt.Println("token", current)
+		fmt.Println("token", current)
 
 		switch current.Type {
 		// TODO: this needs to change to PRI_OP
@@ -677,6 +715,7 @@ func (p *Parser) ParseBlock() token.Token {
 				//fmt.Println("IMPLEMENT p.ParseFunctionCall")
 				blockTokens = append(blockTokens, p.ParseFunctionCall())
 			} else {
+				fmt.Println("parseIDENT")
 				p.ParseIdent(&blockTokens, p.CurrentToken)
 			}
 
@@ -727,7 +766,7 @@ func (p *Parser) ParseBlock() token.Token {
 			//fmt.Println("got nothing")
 
 		default:
-			//fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
+			fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
 			os.Exit(6)
 		}
 		//fmt.Println(current, p.NextToken)
@@ -753,6 +792,8 @@ func (p *Parser) ParseBlock() token.Token {
 
 // Syntactic begins the parsing process for a passes set of tokens
 func (p *Parser) Syntactic() ([]token.Token, error) {
+	fmt.Println("p.source", p.source)
+
 	block := p.ParseBlock()
 	//fmt.Println("parseBlock", block)
 

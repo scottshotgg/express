@@ -1,4 +1,5 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
@@ -14,10 +15,10 @@ int printStuff(int k) {
       while (i < k) {
         {
           defer onLeaveFuncs;
-          onExitFuncs.deferStack.push([=](...) { println("on exit", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("on return", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("defer", i); });
-          onLeaveFuncs.deferStack.push([=](...) { println("on leave", i); });
+          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
+          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
         }
         i += 1;
       }
@@ -30,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _XpglhUvVjQ = {};
-    _XpglhUvVjQ["something"] = "else";
-    return _XpglhUvVjQ;
+    var _VBbMCxwmNX = {};
+    _VBbMCxwmNX["something"] = "else";
+    return _VBbMCxwmNX;
   }
 }
 
@@ -42,21 +43,21 @@ var someFunction(int arg1) {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1533588450[] = {2, 4, 5, 9};
+      int arrayBoi_1534011440[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1533588450 = 0;
+      int k_1534011440 = 0;
       while (4) {
         {
           defer onLeaveFuncs;
-          k = arrayBoi_1533588450[k_1533588450];
-          onReturnFuncs.deferStack.push([=](...) { println("value: ", k); });
+          k = arrayBoi_1534011440[k_1534011440];
+          onReturnFuncs.deferStack.push([=](...) { Println("value: ", k); });
         }
-        k_1533588450 += 1;
+        k_1534011440 += 1;
       }
     }
-    var _mhBkjwmqMY = {};
-    _mhBkjwmqMY["value"] = 1000;
-    return _mhBkjwmqMY;
+    var _HBdbnxENOK = {};
+    _HBdbnxENOK["value"] = 1000;
+    return _HBdbnxENOK;
   }
 }
 

@@ -1,0 +1,139 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "Thing",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "fieldA",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "stringField",
+					"Type": "string",
+					"True": "",
+					"AccessType": "private"
+				},
+				{
+					"Name": "false_field",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private"
+				},
+				{
+					"Name": "anotherFielderino",
+					"Type": "float",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "public"
+		},
+		{
+			"Name": "something",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "fieldA",
+					"Type": "int",
+					"True": 9999,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "stringField",
+					"Type": "string",
+					"True": "",
+					"AccessType": "private"
+				},
+				{
+					"Name": "false_field",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private"
+				},
+				{
+					"Name": "anotherFielderino",
+					"Type": "float",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "progress",
+			"Type": "int",
+			"True": 0,
+			"AccessType": "private"
+		},
+		{
+			"Name": "something2",
+			"Type": "object",
+			"True": [],
+			"AccessType": "private"
+		},
+		{
+			"Name": "Print",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "something",
+							"Type": "struct",
+							"True": [
+								{
+									"Name": "fieldA",
+									"Type": "int",
+									"True": 9999,
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
+								},
+								{
+									"Name": "stringField",
+									"Type": "string",
+									"True": "",
+									"AccessType": "private"
+								},
+								{
+									"Name": "false_field",
+									"Type": "bool",
+									"True": false,
+									"AccessType": "private"
+								},
+								{
+									"Name": "anotherFielderino",
+									"Type": "float",
+									"True": 0,
+									"AccessType": "private"
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "something"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		}
+	]
+}

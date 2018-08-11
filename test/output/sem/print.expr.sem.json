@@ -9,7 +9,7 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "print",
+			"Name": "Print",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -46,7 +46,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -73,7 +73,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {},
@@ -97,7 +97,7 @@
 			}
 		},
 		{
-			"Name": "print",
+			"Name": "Print",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -135,7 +135,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -163,7 +163,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {},
@@ -187,7 +187,7 @@
 			}
 		},
 		{
-			"Name": "print",
+			"Name": "Print",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -225,7 +225,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -253,7 +253,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {},
@@ -277,7 +277,7 @@
 			}
 		},
 		{
-			"Name": "print",
+			"Name": "Print",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -315,7 +315,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -343,7 +343,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {},
@@ -370,7 +370,7 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {

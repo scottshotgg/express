@@ -1,4 +1,5 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
@@ -14,10 +15,10 @@ int printStuff(int k) {
       while (i < k) {
         {
           defer onLeaveFuncs;
-          onExitFuncs.deferStack.push([=](...) { println("on exit", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("on return", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("defer", i); });
-          onLeaveFuncs.deferStack.push([=](...) { println("on leave", i); });
+          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
+          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
         }
         i += 1;
       }
@@ -30,43 +31,43 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _XpglhUvVjQ = {};
-    _XpglhUvVjQ["something"] = "else";
-    return _XpglhUvVjQ;
+    var _VBbMCxwmNX = {};
+    _VBbMCxwmNX["something"] = "else";
+    return _VBbMCxwmNX;
   }
 }
 
 int main() {
   var thingy = 7;
 
-  print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "\n");
 
-  println(thingy);
+  Println(thingy);
 
-  println();
+  Println();
   thingy = 69.69;
 
-  print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "\n");
 
-  println(thingy);
+  Println(thingy);
 
-  println();
+  Println();
   thingy = "woah woah woah";
 
-  print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "\n");
 
-  println(thingy);
+  Println(thingy);
 
-  println();
+  Println();
   thingy = false;
 
-  print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "\n");
 
-  println(thingy);
+  Println(thingy);
 
-  println();
+  Println();
   var thingyObject = {};
   thingyObject["im_just_a"] = "DEAD BOY";
 
-  println(thingyObject);
+  Println(thingyObject);
 }

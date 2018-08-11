@@ -11,7 +11,7 @@ import (
 
 const (
 	// FIXME: see if we can change this in the binary as a compile time flag
-	expressDebug = "EXPR_DEBUG"
+	ExpressDebug = "EXPR_DEBUG"
 )
 
 var (
@@ -33,6 +33,7 @@ const (
 	ARRAY
 	GROUP
 	OBJECT // Use this for a hashmap
+	STRUCT
 	POINTER
 	FUNCTION
 	SET
@@ -67,10 +68,13 @@ type Parser struct {
 	// CurrentLexeme lex.Lexeme
 	// NextLexeme    lex.Lexeme
 
-	ProcessedTokens []token.Token
-	LastToken       token.Token
-	CurrentToken    token.Token
-	NextToken       token.Token
+	// FIXME: This should be a stack
+	// ProcessedTokens []token.Token
+	ProcessedTokens *Stack
+
+	LastToken    token.Token
+	CurrentToken token.Token
+	NextToken    token.Token
 
 	States []Parser
 }
@@ -84,7 +88,7 @@ type Parser struct {
 func init() {
 	// FIXME: for now just check 'true' for now
 	// If debug is not turned on, instantiate a logger that ignore those
-	if os.Getenv(expressDebug) == "true" {
+	if os.Getenv(ExpressDebug) == "true" {
 		logger, _ = zap.NewDevelopment()
 	} else {
 		logger, _ = zap.NewProduction()
@@ -338,6 +342,7 @@ func New(tokens []token.Token) *Parser {
 		length:           len(tokens),
 		meta:             NewMeta(),
 		IgnoreWhiteSpace: true,
+		ProcessedTokens:  NewStack(),
 	}
 	p.Shift()
 	return p

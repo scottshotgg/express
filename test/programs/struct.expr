@@ -1,0 +1,29 @@
+// This is a file for testing structs
+
+// struct type definition
+struct Thing = {
+  int fieldA
+  string stringField
+  bool false_field
+  float anotherFielderino
+}
+
+// struct type usage
+something := Thing {
+  fieldA: 9999
+
+  // This will not get carried over
+  not_in_this_struct := "wtf dude"
+}
+
+progress: 0
+
+// TODO: not working
+something2 := {
+  // FIXME: not getting syntax error on `LIT = LIT`
+  //"hey its me": "no its not"
+  //hey_its_me: "no its not"
+  fieldA: "whatever you want"
+}
+
+Print(something)

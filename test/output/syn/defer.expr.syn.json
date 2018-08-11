@@ -16,7 +16,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -197,7 +197,7 @@
 														"ID": 1,
 														"Type": "FUNCTION",
 														"Value": {
-															"Name": "println",
+															"Name": "Println",
 															"Type": "function",
 															"True": [
 																{
@@ -244,7 +244,7 @@
 														"ID": 1,
 														"Type": "FUNCTION",
 														"Value": {
-															"Name": "println",
+															"Name": "Println",
 															"Type": "function",
 															"True": [
 																{
@@ -284,14 +284,14 @@
 														"Type": "KEYWORD",
 														"Value": {
 															"Type": "keyword",
-															"String": "defer"
+															"String": "onleave"
 														}
 													},
 													{
 														"ID": 1,
 														"Type": "FUNCTION",
 														"Value": {
-															"Name": "println",
+															"Name": "Println",
 															"Type": "function",
 															"True": [
 																{
@@ -304,8 +304,8 @@
 																				"Type": "LITERAL",
 																				"Value": {
 																					"Type": "string",
-																					"True": "defer",
-																					"String": "defer"
+																					"True": "on leave",
+																					"String": "on leave"
 																				}
 																			},
 																			{
@@ -331,14 +331,14 @@
 														"Type": "KEYWORD",
 														"Value": {
 															"Type": "keyword",
-															"String": "onleave"
+															"String": "defer"
 														}
 													},
 													{
 														"ID": 1,
 														"Type": "FUNCTION",
 														"Value": {
-															"Name": "println",
+															"Name": "Println",
 															"Type": "function",
 															"True": [
 																{
@@ -351,8 +351,8 @@
 																				"Type": "LITERAL",
 																				"Value": {
 																					"Type": "string",
-																					"True": "on leave",
-																					"String": "on leave"
+																					"True": "defer",
+																					"String": "defer"
 																				}
 																			},
 																			{
@@ -406,7 +406,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -438,7 +438,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -501,7 +501,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "println",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{

@@ -7,11 +7,10 @@
 		}
 	},
 	{
-		"ID": 9,
-		"Type": "KEYWORD",
+		"Type": "TYPE",
 		"Value": {
-			"Type": "keyword",
-			"String": "func"
+			"Type": "struct",
+			"String": "struct"
 		}
 	},
 	{
@@ -24,14 +23,56 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "someFunction"
+			"String": "Thing"
 		}
 	},
 	{
-		"Type": "L_PAREN",
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
 		"Value": {
 			"Type": "op_3",
-			"String": "("
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -51,14 +92,14 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "arg1"
+			"String": "fieldA"
 		}
 	},
 	{
-		"Type": "R_PAREN",
+		"Type": "WS",
 		"Value": {
-			"Type": "op_3",
-			"String": ")"
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -69,305 +110,17 @@
 		}
 	},
 	{
-		"Type": "L_PAREN",
+		"Type": "WS",
 		"Value": {
-			"Type": "op_3",
-			"String": "("
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "var",
-			"String": "var"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "returnValue"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"ID": 9,
-		"Type": "KEYWORD",
-		"Value": {
-			"Type": "keyword",
-			"String": "for"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "k"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"ID": 9,
-		"Type": "KEYWORD",
-		"Value": {
-			"Type": "keyword",
-			"String": "of"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "L_BRACKET",
-		"Value": {
-			"Type": "op_3",
-			"String": "["
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 2
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 4
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 5
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 9
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "R_BRACKET",
-		"Value": {
-			"Type": "lthan",
-			"String": "]"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"ID": 9,
-		"Type": "KEYWORD",
-		"Value": {
-			"Type": "keyword",
-			"String": "defer"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Println"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
 			"Type": "string",
-			"True": "value: ",
-			"String": "value: "
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
+			"String": "string"
 		}
 	},
 	{
@@ -380,14 +133,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "k"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
+			"String": "stringField"
 		}
 	},
 	{
@@ -412,10 +158,10 @@
 		}
 	},
 	{
-		"Type": "WS",
+		"Type": "TYPE",
 		"Value": {
-			"Type": "space",
-			"String": " "
+			"Type": "bool",
+			"String": "bool"
 		}
 	},
 	{
@@ -423,6 +169,12 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "false_field"
 		}
 	},
 	{
@@ -444,6 +196,33 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "float",
+			"String": "float"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "anotherFielderino"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -468,10 +247,9 @@
 		}
 	},
 	{
-		"Type": "WS",
+		"Type": "IDENT",
 		"Value": {
-			"Type": "space",
-			"String": " "
+			"String": "something"
 		}
 	},
 	{
@@ -482,11 +260,30 @@
 		}
 	},
 	{
-		"ID": 9,
-		"Type": "KEYWORD",
+		"Type": "ASSIGN",
 		"Value": {
-			"Type": "keyword",
-			"String": "return"
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Thing"
 		}
 	},
 	{
@@ -506,6 +303,20 @@
 	{
 		"Type": "WS",
 		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
 			"Type": "space",
 			"String": " "
 		}
@@ -513,7 +324,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "value"
+			"String": "fieldA"
 		}
 	},
 	{
@@ -534,7 +345,21 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 1000
+			"True": 9999
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -545,46 +370,17 @@
 		}
 	},
 	{
-		"Type": "R_BRACE",
+		"Type": "WS",
 		"Value": {
-			"Type": "op_3",
-			"String": "}"
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
 		"Type": "WS",
 		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"ID": 9,
-		"Type": "KEYWORD",
-		"Value": {
-			"Type": "keyword",
-			"String": "defer"
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -597,14 +393,181 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "Println"
+			"String": "not_in_this_struct"
 		}
 	},
 	{
-		"Type": "L_PAREN",
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "wtf dude",
+			"String": "wtf dude"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "R_BRACE",
 		"Value": {
 			"Type": "op_3",
-			"String": "("
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "progress"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 0
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something2"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -616,10 +579,25 @@
 		}
 	},
 	{
-		"Type": "R_PAREN",
+		"Type": "ASSIGN",
 		"Value": {
-			"Type": "op_3",
-			"String": ")"
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "no its not",
+			"String": "no its not"
 		}
 	},
 	{
@@ -630,11 +608,24 @@
 		}
 	},
 	{
-		"ID": 9,
-		"Type": "KEYWORD",
+		"Type": "WS",
 		"Value": {
-			"Type": "keyword",
-			"String": "defer"
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -647,29 +638,43 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "Println"
+			"String": "fieldA"
 		}
 	},
 	{
-		"Type": "L_PAREN",
+		"Type": "ASSIGN",
 		"Value": {
-			"Type": "op_3",
-			"String": "("
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "does this work",
-			"String": "does this work"
+			"True": "whatever you want",
+			"String": "whatever you want"
 		}
 	},
 	{
-		"Type": "R_PAREN",
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "R_BRACE",
 		"Value": {
 			"Type": "op_3",
-			"String": ")"
+			"String": "}"
 		}
 	},
 	{
@@ -689,7 +694,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "someFunction"
+			"String": "Print"
 		}
 	},
 	{
@@ -700,10 +705,9 @@
 		}
 	},
 	{
-		"Type": "LITERAL",
+		"Type": "IDENT",
 		"Value": {
-			"Type": "int",
-			"True": 9
+			"String": "something"
 		}
 	},
 	{
@@ -711,6 +715,13 @@
 		"Value": {
 			"Type": "op_3",
 			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	}
 ]

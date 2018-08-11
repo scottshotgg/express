@@ -24,7 +24,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -426,7 +426,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -559,7 +559,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -679,7 +679,7 @@
 		"Type": "KEYWORD",
 		"Value": {
 			"Type": "keyword",
-			"String": "defer"
+			"String": "onleave"
 		}
 	},
 	{
@@ -692,7 +692,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -706,8 +706,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "defer",
-			"String": "defer"
+			"True": "on leave",
+			"String": "on leave"
 		}
 	},
 	{
@@ -812,7 +812,7 @@
 		"Type": "KEYWORD",
 		"Value": {
 			"Type": "keyword",
-			"String": "onleave"
+			"String": "defer"
 		}
 	},
 	{
@@ -825,7 +825,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -839,8 +839,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "on leave",
-			"String": "on leave"
+			"True": "defer",
+			"String": "defer"
 		}
 	},
 	{
@@ -979,7 +979,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -1021,7 +1021,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -1097,7 +1097,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{

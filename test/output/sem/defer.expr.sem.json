@@ -4,7 +4,7 @@
 		{
 			"Type": "KEYWORD",
 			"True": {
-				"Name": "println",
+				"Name": "Println",
 				"Type": "function",
 				"True": {
 					"args": {
@@ -50,7 +50,7 @@
 								{
 									"Type": "KEYWORD",
 									"True": {
-										"Name": "println",
+										"Name": "Println",
 										"Type": "function",
 										"True": {
 											"args": {
@@ -86,7 +86,7 @@
 								{
 									"Type": "KEYWORD",
 									"True": {
-										"Name": "println",
+										"Name": "Println",
 										"Type": "function",
 										"True": {
 											"args": {
@@ -122,43 +122,7 @@
 								{
 									"Type": "KEYWORD",
 									"True": {
-										"Name": "println",
-										"Type": "function",
-										"True": {
-											"args": {
-												"True": [
-													{
-														"Type": "string",
-														"True": "defer",
-														"String": "defer"
-													},
-													{
-														"Name": "i",
-														"Type": "int",
-														"True": 0,
-														"String": "0",
-														"AccessType": "private",
-														"Metadata": {
-															"refs": "i"
-														}
-													}
-												]
-											},
-											"body": {},
-											"returns": {}
-										},
-										"AccessType": "private",
-										"Metadata": {
-											"lambda": false,
-											"type": "call"
-										}
-									},
-									"String": "DEFER"
-								},
-								{
-									"Type": "KEYWORD",
-									"True": {
-										"Name": "println",
+										"Name": "Println",
 										"Type": "function",
 										"True": {
 											"args": {
@@ -190,6 +154,42 @@
 										}
 									},
 									"String": "ONLEAVE"
+								},
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "defer",
+														"String": "defer"
+													},
+													{
+														"Name": "i",
+														"Type": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"refs": "i"
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "DEFER"
 								}
 							],
 							"String": "i\u003ck",
@@ -296,7 +296,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -318,7 +318,7 @@
 			}
 		},
 		{
-			"Name": "println",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -359,7 +359,7 @@
 		{
 			"Type": "KEYWORD",
 			"True": {
-				"Name": "println",
+				"Name": "Println",
 				"Type": "function",
 				"True": {
 					"args": {

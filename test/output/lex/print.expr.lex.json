@@ -92,7 +92,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "print"
+			"String": "Print"
 		}
 	},
 	{
@@ -169,7 +169,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -202,7 +202,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -277,7 +277,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "print"
+			"String": "Print"
 		}
 	},
 	{
@@ -354,7 +354,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -387,7 +387,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -463,7 +463,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "print"
+			"String": "Print"
 		}
 	},
 	{
@@ -540,7 +540,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -573,7 +573,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -648,7 +648,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "print"
+			"String": "Print"
 		}
 	},
 	{
@@ -725,7 +725,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -758,7 +758,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{
@@ -889,7 +889,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "println"
+			"String": "Println"
 		}
 	},
 	{

@@ -1,4 +1,5 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
@@ -14,10 +15,10 @@ int printStuff(int k) {
       while (i < k) {
         {
           defer onLeaveFuncs;
-          onExitFuncs.deferStack.push([=](...) { println("on exit", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("on return", i); });
-          onReturnFuncs.deferStack.push([=](...) { println("defer", i); });
-          onLeaveFuncs.deferStack.push([=](...) { println("on leave", i); });
+          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
+          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
+          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
         }
         i += 1;
       }
@@ -28,11 +29,11 @@ int printStuff(int k) {
 
 int main() {
   onExitFuncs.deferStack.push(
-      [=](...) { println("im actually at the end", ""); });
+      [=](...) { Println("im actually at the end", ""); });
 
-  println("me first", "");
+  Println("me first", "");
 
-  println(printStuff(3));
+  Println(printStuff(3));
   onExitFuncs.deferStack.push(
-      [=](...) { println("im actually at the start", ""); });
+      [=](...) { Println("im actually at the start", ""); });
 }

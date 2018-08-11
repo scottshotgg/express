@@ -30,7 +30,8 @@ var (
 	insideLoop bool
 
 	// TODO: FIXME: this is causing functions to be compiled in every single file
-	functionStrings = ""
+	functionStrings = "\n"
+	structStrings   = "\n"
 
 	LibBase = ""
 
@@ -248,7 +249,7 @@ func translateFunctionDef(t token.Value) (string, error) {
 func translateArray(t token.Value) (string, error) {
 	arrayString := ""
 
-	fmt.Printf("%+v\n", t)
+	//fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.([]token.Token)
 	if !ok {
 		//fmt.Println("shit look at t")
@@ -374,6 +375,56 @@ func translateObject(t token.Value) (string, error) {
 	return objectString, nil
 }
 
+// TODO: make this more idiomatic later
+func translateStruct(t token.Value) (string, error) {
+	structString := ""
+	// If there is something in the metadata then it is referencing a struct
+	if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
+		// For now we are not supporting stuff inside the struct
+		structString = t.Metadata["refs"].(string) + " " + t.Name + " = {};\n"
+	} else {
+		structString = "struct " + t.Name + "{\n"
+
+		for _, v := range t.True.([]token.Value) {
+			// structValue := v.True
+			// if ref, ok := v.Metadata["refs"]; ok {
+			// 	structValue = ref
+			// }
+
+			// // FIXME: this is for nested structs, handle later
+			// // Will need to add struct/object nesting into objects;
+			// // should find a better (i.e, recursive) way to do this
+			// if v.Type == "struct" {
+			// 	// structString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, structValue)
+			// 	anotherStructString, err := translateStruct(v)
+			// 	if err != nil {
+			// 		return structString, err
+			// 	}
+			// 	structString += anotherStructString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
+
+			// } else if v.Type == "string" {
+			// 	structString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, structValue)
+
+			// } else if v.Type == "array" {
+			// 	// I am not supporting arrays for now, will have to debate how to
+			// 	// do this later. By definition, if structs are just map[string]<var>
+			// 	// and structs should be able to have keys with array values, then
+			// 	// <var> has to be able to containerize an array.
+			// 	// FIXME: the underlying C++ var could hold an array, but Express
+			// 	// could only allow its usage in arrays
+			// 	continue
+
+			// } else {
+			structString += v.Type + " " + v.Name + ";\n"
+			// }
+		}
+
+		structString += "};\n"
+	}
+
+	return structString, nil
+}
+
 func translateVariableStatement(t token.Value) (string, error) {
 	variableString := ""
 
@@ -420,6 +471,22 @@ func translateVariableStatement(t token.Value) (string, error) {
 			return "", err
 		}
 		return variableString + objectString, nil
+
+	case "struct":
+		// TODO: Just make structs essentially an object in the backend for now
+		// structString, err := translateStruct(t)
+		structString, err := translateObject(t)
+		if err != nil {
+			// TODO:
+			return "", err
+		}
+		// TODO: Just make structs essentially an object in the backend for now
+		// if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
+		// 	return variableString + structString, nil
+		// }
+		// structStrings += structString
+		// return variableString, nil
+		return variableString + structString, nil
 
 	case "array":
 		arrayString, err := translateArray(t)
@@ -474,7 +541,7 @@ func translateIf(t token.Value) (string, error) {
 	}
 
 	//fmt.Println("wtf")
-	fmt.Printf("t %+v\n", t)
+	//fmt.Printf("t %+v\n", t)
 
 	// _, err = f.Write([]byte(fmt.Sprintf("if (%s) ", t.String)))
 	// if err != nil {
@@ -702,7 +769,7 @@ func translateDefer(t token.Value) (string, error) {
 
 func translateKeyword(t token.Value) (string, error) {
 	if t.Type != token.Keyword {
-		return "", errors.New("not a keyword")
+		return "", errors.Errorf("not a keyword %+v", t)
 	}
 
 	switch t.String {
@@ -866,6 +933,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	extraLibs := []string{
 		"var.cpp",
 		"std.cpp",
+		"file.cpp",
 		"defer.cpp",
 	}
 
@@ -883,7 +951,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += "\n" + functionStrings + "\nint main() {" + blockString + "}\n"
+	f += "\n" + structStrings + "\n" + functionStrings + "\nint main() {" + blockString + "}\n"
 
 	return f, nil
 }
