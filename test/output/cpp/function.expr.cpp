@@ -31,15 +31,15 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _qJQUcfyiIs = {};
-    _qJQUcfyiIs["something"] = "else";
-    return _qJQUcfyiIs;
+    var _lzbEuRJxMe = {};
+    _lzbEuRJxMe["something"] = "else";
+    return _lzbEuRJxMe;
   }
 }
 
 int main() {
-  var _DbaBFxtKqK = {};
-  _DbaBFxtKqK["another"] = "object";
+  var _ftSJqGBoXv = {};
+  _ftSJqGBoXv["another"] = "object";
 
-  increment(_DbaBFxtKqK);
+  increment(_ftSJqGBoXv);
 }

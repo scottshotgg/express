@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _qJQUcfyiIs = {};
-    _qJQUcfyiIs["something"] = "else";
-    return _qJQUcfyiIs;
+    var _lzbEuRJxMe = {};
+    _lzbEuRJxMe["something"] = "else";
+    return _lzbEuRJxMe;
   }
 }
 
@@ -42,22 +42,22 @@ int main() {
   Thing["fieldA"] = 0;
   Thing["stringField"] = "";
   Thing["false_field"] = false;
-  Thing["anotherFielderino"] = 0;
+  Thing["anotherFielderino"] = 0.000000;
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
-  something["anotherFielderino"] = 0;
+  something["anotherFielderino"] = 0.000000;
   var something2 = {};
   something2["fieldA"] = 912559;
   something2["stringField"] = "";
   something2["false_field"] = false;
-  something2["anotherFielderino"] = 0;
+  something2["anotherFielderino"] = 0.000000;
   var something3 = {};
   something3["fieldA"] = 0;
   something3["stringField"] = "woah its me";
   something3["false_field"] = false;
-  something3["anotherFielderino"] = 0;
+  something3["anotherFielderino"] = 0.000000;
 
   Print(something);
 }
