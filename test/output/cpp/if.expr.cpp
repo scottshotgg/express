@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _VBbMCxwmNX = {};
-    _VBbMCxwmNX["something"] = "else";
-    return _VBbMCxwmNX;
+    var _daPURxxOeW = {};
+    _daPURxxOeW["something"] = "else";
+    return _daPURxxOeW;
   }
 }
 

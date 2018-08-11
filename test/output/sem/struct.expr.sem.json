@@ -78,7 +78,14 @@
 		{
 			"Name": "something2",
 			"Type": "object",
-			"True": [],
+			"True": [
+				{
+					"Name": "fieldA",
+					"Type": "string",
+					"True": "whatever you want",
+					"AccessType": "private"
+				}
+			],
 			"AccessType": "private"
 		},
 		{

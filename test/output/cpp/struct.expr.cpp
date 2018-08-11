@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _VBbMCxwmNX = {};
-    _VBbMCxwmNX["something"] = "else";
-    return _VBbMCxwmNX;
+    var _daPURxxOeW = {};
+    _daPURxxOeW["something"] = "else";
+    return _daPURxxOeW;
   }
 }
 
@@ -50,6 +50,7 @@ int main() {
   something["anotherFielderino"] = 0;
   int progress = 0;
   var something2 = {};
+  something2["fieldA"] = "whatever you want";
 
   Print(something);
 }

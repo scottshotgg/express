@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _VBbMCxwmNX = {};
-    _VBbMCxwmNX["something"] = "else";
-    return _VBbMCxwmNX;
+    var _daPURxxOeW = {};
+    _daPURxxOeW["something"] = "else";
+    return _daPURxxOeW;
   }
 }
 
@@ -43,21 +43,21 @@ var someFunction(int arg1) {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1534011440[] = {2, 4, 5, 9};
+      int arrayBoi_1534015361[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1534011440 = 0;
+      int k_1534015361 = 0;
       while (4) {
         {
           defer onLeaveFuncs;
-          k = arrayBoi_1534011440[k_1534011440];
+          k = arrayBoi_1534015361[k_1534015361];
           onReturnFuncs.deferStack.push([=](...) { Println("value: ", k); });
         }
-        k_1534011440 += 1;
+        k_1534015361 += 1;
       }
     }
-    var _HBdbnxENOK = {};
-    _HBdbnxENOK["value"] = 1000;
-    return _HBdbnxENOK;
+    var _uUWoBuEaHF = {};
+    _uUWoBuEaHF["value"] = 1000;
+    return _uUWoBuEaHF;
   }
 }
 

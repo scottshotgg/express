@@ -143,13 +143,13 @@ func TestAll(t *testing.T) {
 
 	wg := &sync.WaitGroup{}
 	for _, file := range files {
-		if !file.IsDir() {
+		filename := file.Name()
+		if !file.IsDir() && filename[0] != '.' {
 			// FIXME: for some reason the go funcs are fucking it up rn,
 			// probably a global or something
 			// wg.Add(1)
 			// go func(file os.FileInfo) {
 			// 	defer wg.Done()
-			filename := file.Name()
 			fmt.Println("file:", filename)
 			pathOfFile, err := filepath.Abs(testPrograms + filename)
 			if err != nil {

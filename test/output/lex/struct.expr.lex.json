@@ -522,6 +522,13 @@
 		}
 	},
 	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
 		"Type": "WS",
 		"Value": {
 			"Type": "space",
@@ -568,43 +575,6 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "hey its me",
-			"String": "hey its me"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "no its not",
-			"String": "no its not"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
 		}
 	},
 	{
