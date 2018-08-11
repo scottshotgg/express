@@ -12,7 +12,8 @@ struct Thing = {
 something := Thing {
   fieldA: 9999
 
-  // This will not get carried over
+  // You can declare local variables within structs however, 
+  // unlike objects, they will not get carried out
   not_in_this_struct := "wtf dude"
 }
 
