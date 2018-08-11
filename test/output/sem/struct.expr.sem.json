@@ -70,23 +70,41 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "progress",
-			"Type": "int",
-			"True": 0,
-			"AccessType": "private"
-		},
-		{
 			"Name": "something2",
-			"Type": "object",
+			"Type": "struct",
 			"True": [
 				{
 					"Name": "fieldA",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true
+					}
+				},
+				{
+					"Name": "stringField",
 					"Type": "string",
-					"True": "whatever you want",
+					"True": "",
+					"AccessType": "private"
+				},
+				{
+					"Name": "false_field",
+					"Type": "bool",
+					"True": false,
+					"AccessType": "private"
+				},
+				{
+					"Name": "anotherFielderino",
+					"Type": "float",
+					"True": 0,
 					"AccessType": "private"
 				}
 			],
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"refs": "Thing"
+			}
 		},
 		{
 			"Name": "Print",

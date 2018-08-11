@@ -165,27 +165,6 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "progress"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "set",
-						"String": ":"
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "int",
-						"True": 0
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
 						"String": "something2"
 					}
 				},
@@ -197,33 +176,17 @@
 					}
 				},
 				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Thing"
+					}
+				},
+				{
 					"Type": "BLOCK",
 					"Value": {
 						"Type": "BLOCK",
-						"True": [
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "fieldA"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "set",
-									"String": ":"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "whatever you want",
-									"String": "whatever you want"
-								}
-							}
-						]
+						"True": []
 					}
 				},
 				{

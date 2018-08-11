@@ -16,14 +16,6 @@ something := Thing {
   not_in_this_struct := "wtf dude"
 }
 
-progress: 0
-
-// TODO: not working
-something2 := {
-  // FIXME: not getting syntax error on `LIT = LIT`
-  //"hey its me": "no its not"
-  //hey_its_me: "no its not"
-  fieldA: "whatever you want"
-}
+something2 := Thing{}
 
 Print(something)

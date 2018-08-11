@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _daPURxxOeW = {};
-    _daPURxxOeW["something"] = "else";
-    return _daPURxxOeW;
+    var _lLVcINPwbo = {};
+    _lLVcINPwbo["something"] = "else";
+    return _lLVcINPwbo;
   }
 }
 
@@ -48,9 +48,11 @@ int main() {
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0;
-  int progress = 0;
   var something2 = {};
-  something2["fieldA"] = "whatever you want";
+  something2["fieldA"] = 0;
+  something2["stringField"] = "";
+  something2["false_field"] = false;
+  something2["anotherFielderino"] = 0;
 
   Print(something);
 }
