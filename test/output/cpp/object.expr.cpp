@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _lzbEuRJxMe = {};
-    _lzbEuRJxMe["something"] = "else";
-    return _lzbEuRJxMe;
+    var _hVZXpHISeH = {};
+    _hVZXpHISeH["something"] = "else";
+    return _hVZXpHISeH;
   }
 }
 
@@ -46,26 +46,26 @@ int main() {
   obj["hey"] = hey;
   var objs[] = {};
   {
-    var _jxwAPyYWeR = {};
-    _jxwAPyYWeR["another"] = "object";
-    objs[0] = _jxwAPyYWeR;
+    var _CjpHUMUwzU = {};
+    _CjpHUMUwzU["another"] = "object";
+    objs[0] = _CjpHUMUwzU;
   }
   {
-    var obj_mXOAbKEciH = {};
-    obj_mXOAbKEciH["something"] = "here";
+    var obj_NVmYBdKEkN = {};
+    obj_NVmYBdKEkN["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_mXOAbKEciH["hey"] = hey;
-    objs[1] = obj_mXOAbKEciH;
+    obj_NVmYBdKEkN["hey"] = hey;
+    objs[1] = obj_NVmYBdKEkN;
   }
   {
-    var obj_aeGroyPTHX = {};
-    obj_aeGroyPTHX["something"] = "here";
+    var obj_kdIodKiCus = {};
+    obj_kdIodKiCus["something"] = "here";
     var hey = {};
     hey["me"] = true;
     hey["anIntVariable"] = 69;
-    obj_aeGroyPTHX["hey"] = hey;
-    objs[2] = obj_aeGroyPTHX;
+    obj_kdIodKiCus["hey"] = hey;
+    objs[2] = obj_kdIodKiCus;
   }
 }

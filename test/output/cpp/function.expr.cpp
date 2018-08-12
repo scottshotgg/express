@@ -31,15 +31,10 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _lzbEuRJxMe = {};
-    _lzbEuRJxMe["something"] = "else";
-    return _lzbEuRJxMe;
+    var _hVZXpHISeH = {};
+    _hVZXpHISeH["something"] = "else";
+    return _hVZXpHISeH;
   }
 }
 
-int main() {
-  var _ftSJqGBoXv = {};
-  _ftSJqGBoXv["another"] = "object";
-
-  increment(_ftSJqGBoXv);
-}
+int main() {}

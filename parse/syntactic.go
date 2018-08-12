@@ -394,7 +394,7 @@ func (p *Parser) ParseIdent(blockTokens *[]token.Token, peek token.Token) {
 		if p.NextToken.Value.Type != "newline" { // && p.NextToken.Value.Type != "BLOCK" {
 			if len(identTokens) != 1 {
 				// no return value here to give error?
-				fmt.Println("more than 1 ident token in struct declaration was not coded for")
+				// fmt.Println("more than 1 ident token in struct declaration was not coded for")
 				os.Exit(9)
 			}
 
@@ -442,7 +442,7 @@ func (p *Parser) ParseBlock() token.Token {
 		p.Shift()
 
 		current := p.CurrentToken
-		fmt.Println("token", current)
+		// fmt.Println("token", current)
 
 		switch current.Type {
 		// TODO: this needs to change to PRI_OP
@@ -458,7 +458,8 @@ func (p *Parser) ParseBlock() token.Token {
 					blockTokens = append(blockTokens, t)
 				} else {
 					//fmt.Println("wtf happened here: ", current.Value.String+p.CurrentToken.Value.String)
-					os.Exit(9)
+					// os.Exit(9)
+					return token.Token{}
 				}
 			} else {
 				blockTokens = append(blockTokens, current)
@@ -715,7 +716,7 @@ func (p *Parser) ParseBlock() token.Token {
 				//fmt.Println("IMPLEMENT p.ParseFunctionCall")
 				blockTokens = append(blockTokens, p.ParseFunctionCall())
 			} else {
-				fmt.Println("parseIDENT")
+				// fmt.Println("parseIDENT")
 				p.ParseIdent(&blockTokens, p.CurrentToken)
 			}
 
@@ -766,7 +767,7 @@ func (p *Parser) ParseBlock() token.Token {
 			//fmt.Println("got nothing")
 
 		default:
-			fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
+			// fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
 			os.Exit(6)
 		}
 		//fmt.Println(current, p.NextToken)
@@ -792,7 +793,7 @@ func (p *Parser) ParseBlock() token.Token {
 
 // Syntactic begins the parsing process for a passes set of tokens
 func (p *Parser) Syntactic() ([]token.Token, error) {
-	fmt.Println("p.source", p.source)
+	// fmt.Println("p.source", p.source)
 
 	block := p.ParseBlock()
 	//fmt.Println("parseBlock", block)

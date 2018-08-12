@@ -368,39 +368,6 @@
 				}
 			],
 			"AccessType": "private"
-		},
-		{
-			"Name": "Println",
-			"Type": "function",
-			"True": {
-				"args": {
-					"True": [
-						{
-							"Name": "thingyObject",
-							"Type": "object",
-							"True": [
-								{
-									"Name": "im_just_a",
-									"Type": "string",
-									"True": "DEAD BOY",
-									"AccessType": "private"
-								}
-							],
-							"AccessType": "private",
-							"Metadata": {
-								"refs": "thingyObject"
-							}
-						}
-					]
-				},
-				"body": {},
-				"returns": {}
-			},
-			"AccessType": "private",
-			"Metadata": {
-				"lambda": false,
-				"type": "call"
-			}
 		}
 	]
 }

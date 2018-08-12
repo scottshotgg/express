@@ -1,0 +1,119 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "xi",
+			"Type": "int",
+			"True": 9,
+			"AccessType": "private"
+		},
+		{
+			"Name": "yi",
+			"Type": "int",
+			"True": 16,
+			"AccessType": "private"
+		},
+		{
+			"Name": "zi",
+			"Type": "int",
+			"True": 1,
+			"AccessType": "private"
+		},
+		{
+			"Name": "xf",
+			"Type": "float",
+			"True": 9.1,
+			"AccessType": "private"
+		},
+		{
+			"Name": "yf",
+			"Type": "float",
+			"True": 15.814285714285711,
+			"AccessType": "private"
+		},
+		{
+			"Name": "zf",
+			"Type": "float",
+			"True": -0.5099999999999998,
+			"AccessType": "private"
+		},
+		{
+			"Name": "xs",
+			"Type": "string",
+			"True": "stringitize me daddy",
+			"AccessType": "private"
+		},
+		{
+			"Name": "ys",
+			"Type": "string",
+			"True": "I bless the rains",
+			"AccessType": "private"
+		},
+		{
+			"Name": "zs",
+			"Type": "string",
+			"True": "I bless the rains down in Africa",
+			"AccessType": "private"
+		},
+		{
+			"Name": "xb",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private"
+		},
+		{
+			"Name": "yb",
+			"Type": "bool",
+			"True": false,
+			"AccessType": "private"
+		},
+		{
+			"Name": "zb",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private"
+		},
+		{
+			"Name": "xbv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": true,
+			"AccessType": "private"
+		},
+		{
+			"Name": "ybv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": false,
+			"AccessType": "private"
+		},
+		{
+			"Name": "zbv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": true,
+			"AccessType": "private"
+		},
+		{
+			"Name": "xsv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "its ",
+			"AccessType": "private"
+		},
+		{
+			"Name": "ysv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "me",
+			"AccessType": "private"
+		},
+		{
+			"Name": "zsv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "its me",
+			"AccessType": "private"
+		}
+	]
+}

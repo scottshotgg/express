@@ -131,7 +131,7 @@
 				{
 					"Name": "stringField",
 					"Type": "string",
-					"True": "woah its me",
+					"True": "chyah brah",
 					"AccessType": "private",
 					"Metadata": {
 						"assign": true
@@ -151,63 +151,6 @@
 				}
 			],
 			"AccessType": "private"
-		},
-		{
-			"Name": "Print",
-			"Type": "function",
-			"True": {
-				"args": {
-					"True": [
-						{
-							"Name": "something",
-							"Type": "struct",
-							"True": [
-								{
-									"Name": "fieldA",
-									"Type": "int",
-									"True": 0,
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true
-									}
-								},
-								{
-									"Name": "stringField",
-									"Type": "string",
-									"True": "",
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true
-									}
-								},
-								{
-									"Name": "false_field",
-									"Type": "bool",
-									"True": false,
-									"AccessType": "private"
-								},
-								{
-									"Name": "anotherFielderino",
-									"Type": "float",
-									"True": 0,
-									"AccessType": "private"
-								}
-							],
-							"AccessType": "private",
-							"Metadata": {
-								"refs": "something"
-							}
-						}
-					]
-				},
-				"body": {},
-				"returns": {}
-			},
-			"AccessType": "private",
-			"Metadata": {
-				"lambda": false,
-				"type": "call"
-			}
 		}
 	]
 }

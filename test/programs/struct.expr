@@ -11,13 +11,13 @@ struct Thing = {
 // Instantiate a struct variable
 something := Thing{}
 
-// Instantiate a struct variable with some initilizers
+// Instantiate a struct variable with some initializers
 something2 := Thing {
   fieldA: 0xDECAF
 }
 
 something3 := Thing {
-  stringField: "woah its me"
+  stringField: "chyah brah"
 
   // You can declare local variables within structs however, 
   // unlike objects, they will not get carried out

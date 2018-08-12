@@ -1,4 +1,4 @@
-// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
+// Copyright © 2018 NAME HERE scgaydos@gmail.com
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,4 @@ package main
 
 import "github.com/scottshotgg/express/cmd"
 
-func main() {
-	cmd.Execute()
-}
+func main() { cmd.Execute() }

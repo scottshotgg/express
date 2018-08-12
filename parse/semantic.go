@@ -17,99 +17,6 @@ var (
 	inObject       = false
 )
 
-// FIXME: move this to its own file
-func (p *Parser) LessThanOperands(left, right token.Value) (token.Value, error) {
-	// FIXME: this only works for ints right now
-	// Need to put a type on this
-
-	//fmt.Printf("LessThanOperands %+v %+v\n", left, right)
-
-	return token.Value{
-		True: left.True.(int) < right.True.(int),
-	}, nil
-}
-
-// TODO: add in * and / and <
-func (p *Parser) EvaluateBinaryOperation(left, right, op token.Value) (opToken token.Value, err error) {
-	//fmt.Println("EvaluateBinaryOperation")
-
-	switch op.Type {
-	// case "add":
-	// 	opToken, err = p.AddOperands(left, right)
-	// 	if err != nil {
-	// 		err = errors.New("Error adding operands")
-	// 	}
-
-	// case "sub":
-	// 	opToken, err = p.SubOperands(left, right)
-	// 	if err != nil {
-	// 		err = errors.New("Error subtracting operands")
-	// 	}
-
-	// case "mult":
-	// 	opToken, err = p.MultOperands(left, right)
-	// 	if err != nil {
-	// 		err = errors.New("Error multiplying operands")
-	// 	}
-
-	// case "div":
-	// 	opToken, err = p.DivOperands(left, right)
-	// 	if err != nil {
-	// 		err = errors.New("Error dividing operands")
-	// 	}
-
-	case "lthan":
-		//fmt.Println("lthan")
-		opToken, err = p.LessThanOperands(left, right)
-		if err != nil {
-			err = errors.New("Error evaluating boolean expression")
-			return
-		}
-
-	default:
-		err = errors.Errorf("Undefined operator; left: %+v right: %+v op: %+v", left, right, op)
-		return
-		//fmt.Println(err.Error())
-	}
-
-	// opToken.Name = op.Type + "Op"
-	// opToken.Type = "OP"
-	// opToken.OpMap = opMap
-	// opToken.True = opMap["eval"].(token.Value)
-	// opToken.String = left.String + op.String + right.String
-
-	opToken.Metadata = map[string]interface{}{
-		"eval":  opToken.True,
-		"type":  token.BoolType,
-		"left":  left,
-		"op":    op,
-		"right": right,
-		// "string": left.String + op.String + right.Stri fng,
-	}
-	// if opToken.Type == token.IntType {
-	// 	opToken.String = strconv.Itoa(opToken.True.(int))
-	// }
-
-	leftString := left.Name
-	if leftString == "" {
-		leftString = left.String
-	}
-
-	rightString := right.Name
-	if rightString == "" {
-		rightString = right.String
-	}
-
-	opToken.String = leftString + op.String + rightString
-
-	return
-}
-
-// // // EvaluateUnaryOperation ...
-// // // TODO: implement this stuff
-// // func (p *Parser) EvaluateUnaryOperation(left, op token.Value) { // (token.Value, error) {
-// // }
-
 func (p *Parser) GetFactor() (token.Value, error) {
 	//fmt.Println("GetFactor")
 	next := p.NextToken
@@ -163,7 +70,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		if variable.Type == FUNCTION {
 			functionOpType = "call"
 		} else if variable.Type == STRUCT {
-			fmt.Println("p.NextToken", p.NextToken)
+			//fmt.Println("p.NextToken", p.NextToken)
 
 			// If the next token is a block then parse a struct
 			if p.NextToken.Type == token.Block {
@@ -171,9 +78,9 @@ func (p *Parser) GetFactor() (token.Value, error) {
 				defer func() { inStruct = false }()
 
 				if len(p.NextToken.Value.True.([]token.Token)) > 0 {
-					fmt.Printf("variable %+v\n", variable)
-					fmt.Println("p.meta.currentScope", p.meta.currentVariable)
-					fmt.Println()
+					// fmt.Printf("variable %+v\n", variable)
+					// fmt.Println("p.meta.currentScope", p.meta.currentVariable)
+					// fmt.Println()
 
 					// if len(p.NextToken.Value.True.([]token.Token)) > 0 {
 					// 	os.Exit(9)
@@ -197,9 +104,9 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					if err != nil {
 						return token.Value{}, err
 					}
-					fmt.Println("block", block)
+					// fmt.Println("block", block)
 
-					fmt.Println("pa.meta.currentScope", pa.meta.currentScope)
+					// fmt.Println("pa.meta.currentScope", pa.meta.currentScope)
 
 					// For some reason I couldn't get the `currentScope` variable to work here
 					// valueBlock := []token.Value{}
@@ -212,11 +119,11 @@ func (p *Parser) GetFactor() (token.Value, error) {
 							}
 						}
 					}
-					fmt.Println()
-					fmt.Println("variable", variable)
-					fmt.Println("another", anotherVariable)
-					fmt.Println()
-					// anotherVariableTokens[0].True = 89
+					// fmt.Println()
+					// fmt.Println("variable", variable)
+					// fmt.Println("another", anotherVariable)
+					// fmt.Println()
+					// // anotherVariableTokens[0].True = 89
 
 					// For now just shift over the block
 					p.Shift()
@@ -240,9 +147,9 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 		// return p.GetExpression()
 		value = mapVariableToTokenValue(variable)
-		fmt.Println("p.CurrentToken.Value.String", refs)
+		// fmt.Println("p.CurrentToken.Value.String", refs)
 		value.Metadata["refs"] = refs
-		fmt.Println("value", value.Metadata)
+		// fmt.Println("value", value.Metadata)
 
 	// case token.Group:
 	// 	// //fmt.Println("getting group", next.Value)
@@ -389,7 +296,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 				return token.Value{}, err
 			}
 
-			fmt.Println("inside group expression", stmt)
+			// fmt.Println("inside group expression", stmt)
 
 			groupTokens = append(groupTokens, stmt)
 			value.True = groupTokens
@@ -513,6 +420,24 @@ func (p *Parser) GetFactor() (token.Value, error) {
 	// 	value.String = ""
 	// }
 
+	case token.PriOp:
+		p.Shift()
+		op := p.CurrentToken
+		value2, verr := p.GetTerm()
+		if verr != nil {
+			return token.Value{}, verr
+		}
+		fmt.Println("value2thing", value2)
+
+		value, err = p.EvaluateBinaryOperation(value, value2, op.Value)
+		if err != nil {
+			return token.Value{}, err
+		}
+		// FIXME: holy fuck haxorz
+		if value.Type == token.IntType {
+			value.String = ""
+		}
+
 	case token.Increment:
 		value, err = p.AddOperands(value, token.Value{
 			Type: token.IntType,
@@ -563,6 +488,25 @@ func (p *Parser) GetTerm() (token.Value, error) {
 		// 	if totalTerp.Type == token.IntType {
 		// 		totalTerp.String = strconv.Itoa(totalTerp.True.(int))
 		// 	}
+
+		case token.SecOp:
+			p.Shift()
+			fmt.Println("woah i got a secop")
+			op := p.CurrentToken
+			factor2, ferr := p.GetFactor()
+			if ferr != nil {
+				return token.Value{}, ferr
+			}
+			fmt.Println("factor2", factor2)
+
+			totalTerm, err = p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)
+			if err != nil {
+				return token.Value{}, err
+			}
+			// FIXME: holy fuck haxorz
+			if totalTerm.Type == token.IntType {
+				totalTerm.String = strconv.Itoa(totalTerm.True.(int))
+			}
 
 		// // TODO: need to fix this....
 		case token.LThan:
@@ -732,7 +676,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// os.Exit(9)
 				return token.Value{}, err
 			}
-			fmt.Println("p.meta.currentScope after", p.meta.currentScope)
+			// fmt.Println("p.meta.currentScope after", p.meta.currentScope)
 
 			if variable, ok := p.meta.GetVariable(currentName); ok {
 				// Map it over to a token for now
@@ -1408,7 +1352,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	//fmt.Println("GetStatement")
 	//fmt.Println("p.NextToken", p.NextToken)
 	// p.Shift()
-	fmt.Println("p.meta.currentVariable in GetStatement", p.meta.currentVariable)
+	// fmt.Println("p.meta.currentVariable in GetStatement", p.meta.currentVariable)
 	switch p.NextToken.Type {
 	case token.Type:
 		//fmt.Println("p.NextToken.Type", p.NextToken.Type)
@@ -1455,7 +1399,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		// FIXME: this seems kinda hacky, but w/e fix it later - GetFactor should defer it's judgement
 		if p.NextToken.Type == "ASSIGN" {
 			tv, err = p.GetExpression()
-			fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
+			// fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
 			if err != nil {
 				//fmt.Println("getExpressionErr", err)
 				// os.Exit(9)
@@ -1505,15 +1449,6 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		p.Shift()
 		// return token.Value{}, nil
 
-	case token.SecOp:
-		switch p.CurrentToken.Value.Type {
-		case "sub":
-			// TODO: need to do something here for negative expression
-
-		default:
-			return token.Value{}, errors.New("Unrecognized position for operator")
-		}
-
 	case token.Block:
 		//fmt.Println("blockboi")
 		p.Shift()
@@ -1550,9 +1485,8 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 	//fmt.Printf("CheckBlock %+v\n", p.CurrentToken)
 
 	p.Shift()
-	fmt.Printf("CheckBlock2 %+v\n", p.CurrentToken)
-	// Open up the block here
-	fmt.Println("\ncurrent", p.CurrentToken.Value)
+	// fmt.Printf("CheckBlock2 %+v\n", p.CurrentToken)
+	// logger.Debug("CheckBlock", zap.String("p.CurrentToken", fmt.Sprintf("%+v", p.CurrentToken)))
 	var tokensFromBlock = []token.Token{}
 	var ok bool
 	if p.CurrentToken.Value.True != nil {
@@ -1570,16 +1504,23 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 	blockTokens := []token.Value{}
 
 	for {
-		fmt.Println("pNew.NextToken", pNew.NextToken)
+		fmt.Println(pNew.NextToken)
+		// if reflect.DeepEqual(pNew.NextToken, token.Token{}) {
+		if pNew.Index > pNew.Length()-1 {
+			// //fmt.Println(p.meta.GetVariable("a"))
+			// p.meta.NewScopeFromScope(pNew.meta.currentScope)
+			// fmt.Println("blockTokens", blockTokens)
+
+			return token.Value{
+				Type: token.Block,
+				True: blockTokens,
+			}, nil
+		}
+
 		stmt, err := pNew.GetStatement()
-		fmt.Println("stmt, err", stmt, err)
 		if err != nil {
-			//fmt.Println()
-			//fmt.Println("err", err)
-			// os.Exit(9)
 			return token.Value{}, err
 		}
-		fmt.Println("p.meta.currentScope", p.meta.currentScope)
 
 		// This is by-passing the blank "{}" token that is
 		// produced from the comma somtimes; need to solve
@@ -1597,17 +1538,6 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 		// p.meta.NewVariable()
 		//fmt.Println("CheckBlock currentScope: ", pNew.meta.currentScope)
 		//fmt.Println()
-
-		if reflect.DeepEqual(pNew.NextToken, token.Token{}) {
-			// //fmt.Println(p.meta.GetVariable("a"))
-			// p.meta.NewScopeFromScope(pNew.meta.currentScope)
-			fmt.Println("blockTokens", blockTokens)
-
-			return token.Value{
-				Type: token.Block,
-				True: blockTokens,
-			}, nil
-		}
 	}
 }
 
@@ -1632,8 +1562,3 @@ func (p *Parser) Semantic() (token.Value, error) {
 
 	return block, nil
 }
-
-// TODO: start here
-// TODO: use next token
-// TODO: start very simply with the definition in documentation/notes_about_shit
-// TODO: VERY SIMPLE requirements parsing vars with the return architecture of semantic2
