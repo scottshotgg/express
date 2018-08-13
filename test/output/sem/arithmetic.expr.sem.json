@@ -46,7 +46,7 @@
 		{
 			"Name": "ys",
 			"Type": "string",
-			"True": "I bless the rains",
+			"True": "I bless the rains ",
 			"AccessType": "private"
 		},
 		{
@@ -95,14 +95,14 @@
 			"AccessType": "private"
 		},
 		{
-			"Name": "xsv",
+			"Name": "wsv",
 			"Type": "var",
 			"Acting": "string",
 			"True": "its ",
 			"AccessType": "private"
 		},
 		{
-			"Name": "ysv",
+			"Name": "xsv",
 			"Type": "var",
 			"Acting": "string",
 			"True": "me",
@@ -114,6 +114,32 @@
 			"Acting": "string",
 			"True": "its me",
 			"AccessType": "private"
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "xs",
+							"Type": "string",
+							"True": "stringitize me daddy",
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "xs"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		}
 	]
 }

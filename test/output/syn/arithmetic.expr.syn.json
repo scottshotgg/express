@@ -424,8 +424,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "string",
-						"True": "I bless the rains",
-						"String": "I bless the rains"
+						"True": "I bless the rains ",
+						"String": "I bless the rains "
 					}
 				},
 				{
@@ -467,8 +467,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "string",
-						"True": " down in Africa",
-						"String": " down in Africa"
+						"True": "down in Africa",
+						"String": "down in Africa"
 					}
 				},
 				{
@@ -713,7 +713,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "xsv"
+						"String": "wsv"
 					}
 				},
 				{
@@ -742,7 +742,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "ysv"
+						"String": "xsv"
 					}
 				},
 				{
@@ -785,7 +785,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "xsv"
+						"String": "wsv"
 					}
 				},
 				{
@@ -799,7 +799,61 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "ysv"
+						"String": "xsv"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "xs"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": []
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				}
 			]

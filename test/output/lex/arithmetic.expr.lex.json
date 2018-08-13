@@ -831,8 +831,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "I bless the rains",
-			"String": "I bless the rains"
+			"True": "I bless the rains ",
+			"String": "I bless the rains "
 		}
 	},
 	{
@@ -914,8 +914,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": " down in Africa",
-			"String": " down in Africa"
+			"True": "down in Africa",
+			"String": "down in Africa"
 		}
 	},
 	{
@@ -1438,7 +1438,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "xsv"
+			"String": "wsv"
 		}
 	},
 	{
@@ -1494,7 +1494,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "ysv"
+			"String": "xsv"
 		}
 	},
 	{
@@ -1577,7 +1577,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "xsv"
+			"String": "wsv"
 		}
 	},
 	{
@@ -1604,7 +1604,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "ysv"
+			"String": "xsv"
 		}
 	},
 	{
@@ -1612,6 +1612,73 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "xs"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
 		}
 	}
 ]

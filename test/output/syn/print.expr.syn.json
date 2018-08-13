@@ -574,6 +574,83 @@
 							"type": "call"
 						}
 					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "got_no"
+														}
+													},
+													{
+														"Type": "ASSIGN",
+														"Value": {
+															"Type": "set",
+															"String": ":"
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "string",
+															"True": "BLOOD IN MY VEINS",
+															"String": "BLOOD IN MY VEINS"
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": []
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
 				}
 			]
 		}

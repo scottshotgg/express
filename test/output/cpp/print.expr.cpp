@@ -31,9 +31,9 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _hVZXpHISeH = {};
-    _hVZXpHISeH["something"] = "else";
-    return _hVZXpHISeH;
+    var _RmmaeIcMxV = {};
+    _RmmaeIcMxV["something"] = "else";
+    return _RmmaeIcMxV;
   }
 }
 
@@ -68,4 +68,10 @@ int main() {
   Println();
   var thingyObject = {};
   thingyObject["im_just_a"] = "DEAD BOY";
+
+  Println(thingyObject);
+  var _nRobywRAHd = {};
+  _nRobywRAHd["got_no"] = "BLOOD IN MY VEINS";
+
+  Println(_nRobywRAHd);
 }

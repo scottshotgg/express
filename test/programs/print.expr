@@ -29,3 +29,5 @@ Println()
 // var types cannot hold objects atm
 thingyObject := { im_just_a: "DEAD BOY" }
 Println(thingyObject)
+Println({ got_no: "BLOOD IN MY VEINS" })
+Println()

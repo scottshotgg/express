@@ -5,6 +5,8 @@
 _[~] means the TODO may not happen_<br>
 _[=] means I am currently working on completing that TODO_<br><br>
 
+- [=] Make an install script
+- [=] Refactor build scripts
 - [=] Add a run command
   - [=] Binary goes in temp dir
   - [=] Runs the binary after compiling the code

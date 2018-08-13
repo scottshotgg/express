@@ -11,6 +11,10 @@ import (
 	"github.com/scottshotgg/express/token"
 )
 
+var (
+	DefinedTypes = map[string]token.Value{}
+)
+
 func (p *Parser) SaveState() {
 	pState := *p
 	meta := p.meta
@@ -146,6 +150,8 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 	case "function":
 		vt = FUNCTION
 
+		// TODO: need a map case here to get the custom struct types
+
 		// default:
 		// 	//fmt.Println(vtString)
 		// 	os.Exit(9)
@@ -211,6 +217,7 @@ func AccessTypeString(at AccessType) (st string) {
 	return
 }
 
+// Shouldn't this return a token.Value?
 func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 	switch trueType {
 	case token.IntType:
@@ -230,8 +237,6 @@ func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 
 	case token.VarType:
 		fallthrough
-	case token.StructType:
-		fallthrough
 	case token.ObjectType:
 		return map[string]interface{}{}, nil
 
@@ -240,12 +245,19 @@ func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 	// case token.ArrayType:
 	// 	return
 
+	case token.StructType:
+		// First we need to check the type map
+		value, ok := DefinedTypes[actingType]
+		fmt.Println("value, ok", value, ok)
+		// os.Exit(9)
+
+		return nil, nil
+
 	default:
 		// First we need to check the type map
-		// value, ok := GetType
+		// value, ok := DefinedTypes[]
 
-		var shit interface{}
-		return shit, errors.Errorf("Base not defined for type: %s %s", trueType, actingType)
+		return nil, errors.Errorf("Base not defined for type: %s %s", trueType, actingType)
 	}
 }
 

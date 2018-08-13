@@ -13,7 +13,7 @@ int main() {
   float yf = 15.814285714285711;
   float zf = -0.5099999999999998;
   std::string xs = "stringitize me daddy";
-  std::string ys = "I bless the rains";
+  std::string ys = "I bless the rains ";
   std::string zs = "I bless the rains down in Africa";
   bool xb = true;
   bool yb = false;
@@ -21,7 +21,9 @@ int main() {
   var xbv = true;
   var ybv = false;
   var zbv = true;
-  var xsv = "its ";
-  var ysv = "me";
+  var wsv = "its ";
+  var xsv = "me";
   var zsv = "its me";
+
+  Println(xs, "");
 }

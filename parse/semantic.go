@@ -2,6 +2,7 @@ package parse
 
 import (
 	"fmt"
+	"os"
 	"reflect"
 	"strconv"
 	"strings"
@@ -69,8 +70,13 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		refs := p.CurrentToken.Value.String
 		if variable.Type == FUNCTION {
 			functionOpType = "call"
+
+			p.Shift()
 		} else if variable.Type == STRUCT {
-			//fmt.Println("p.NextToken", p.NextToken)
+			// Here we need to get the default values from the type map
+
+			fmt.Println("p.NextToken", p.NextToken)
+			os.Exit(9)
 
 			// If the next token is a block then parse a struct
 			if p.NextToken.Type == token.Block {
@@ -141,6 +147,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 				inStruct = false
 			}
+			// FIXME: Should we not produce an error here?
 
 			p.Shift()
 		}
@@ -427,7 +434,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		if verr != nil {
 			return token.Value{}, verr
 		}
-		fmt.Println("value2thing", value2)
+		//fmt.Println("value2thing", value2)
 
 		value, err = p.EvaluateBinaryOperation(value, value2, op.Value)
 		if err != nil {
@@ -491,13 +498,13 @@ func (p *Parser) GetTerm() (token.Value, error) {
 
 		case token.SecOp:
 			p.Shift()
-			fmt.Println("woah i got a secop")
+			//fmt.Println("woah i got a secop")
 			op := p.CurrentToken
 			factor2, ferr := p.GetFactor()
 			if ferr != nil {
 				return token.Value{}, ferr
 			}
-			fmt.Println("factor2", factor2)
+			//fmt.Println("factor2", factor2)
 
 			totalTerm, err = p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)
 			if err != nil {
@@ -649,7 +656,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
-
+					// FIXME: wtf?
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
@@ -759,7 +766,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
-
+					// FIXME: wtf?
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
@@ -786,7 +793,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// os.Exit(9)
 				return token.Value{}, err
 			}
-			fmt.Println("p.meta.currentScope after", p.meta.currentScope)
+			//fmt.Println("p.meta.currentScope after", p.meta.currentScope)
 
 			if variable, ok := p.meta.GetVariable(currentName); ok {
 				// Map it over to a token for now
@@ -1372,7 +1379,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		//fmt.Println("ident", p.NextToken)
 		//fmt.Println("declaredMap", p.meta.currentScope)
 		if p.meta.currentVariable.Type == UNRECOGNIZED {
-			fmt.Println("i am here UNRECOGNIZED")
+			//fmt.Println("i am here UNRECOGNIZED")
 			// TODO: maybe we should just load the entire variable at this point
 			if variable, ok := p.meta.GetVariable(p.NextToken.Value.String); ok {
 				variable.Metadata["assign"] = true
@@ -1381,15 +1388,37 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				p.meta.currentVariable.Metadata = variable.Metadata
 			} else {
 				// If its unrecognized and we cant find it, it doesn't exist
-				fmt.Println("in the elser")
+				//fmt.Println("in the elser")
 				//fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
 				p.Shift()
 				expr, err := p.GetExpression()
 				//fmt.Printf("THIS IS THE EXPRESSION %+v %s\n", expr, err)
 				// return p.GetExpression()
-				fmt.Println("expr, err", expr, err)
+				//fmt.Println("expr, err", expr, err)
 				return expr, err
 			}
+			// TODO: make this more general later with the type map later
+		} else {
+
+			base, err := getDefaultValueForType(token.StructType, "thing")
+			if err != nil {
+				return token.Value{}, err
+			}
+
+			fmt.Println("woah we got a struct", base)
+			cv := *p.meta.currentVariable
+
+			// We've got that it's a struct, not we need to construct
+			// a new variable for the new struct instantiation
+
+			// Shift over this ident since we know that its a struct type
+			p.Shift()
+			fmt.Println("currentToken", p.CurrentToken, p.NextToken)
+
+			os.Exit(9)
+
+			// cv.Name
+			p.meta.currentVariable = &cv
 		}
 		//fmt.Println("ASSIGNMENT DECLARED TYPE", p.meta.currentVariable.Type)
 		p.Shift()
@@ -1504,7 +1533,7 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 	blockTokens := []token.Value{}
 
 	for {
-		fmt.Println(pNew.NextToken)
+		//fmt.Println(pNew.NextToken)
 		// if reflect.DeepEqual(pNew.NextToken, token.Token{}) {
 		if pNew.Index > pNew.Length()-1 {
 			// //fmt.Println(p.meta.GetVariable("a"))

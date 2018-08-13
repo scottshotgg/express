@@ -368,6 +368,67 @@
 				}
 			],
 			"AccessType": "private"
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingyObject",
+							"Type": "object",
+							"True": [
+								{
+									"Name": "im_just_a",
+									"Type": "string",
+									"True": "DEAD BOY",
+									"AccessType": "private"
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "thingyObject"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "BLOCK",
+							"True": [
+								{
+									"Name": "got_no",
+									"Type": "string",
+									"True": "BLOOD IN MY VEINS",
+									"AccessType": "private"
+								}
+							]
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		}
 	]
 }

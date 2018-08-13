@@ -1,7 +1,13 @@
 // This is a file for testing structs
 
+
+struct another = {
+  int woah
+}
+
 // Define a struct
 struct Thing = {
+  another yeah
   int fieldA
   string stringField
   bool false_field
