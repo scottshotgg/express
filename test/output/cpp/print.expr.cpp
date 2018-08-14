@@ -41,10 +41,16 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
+<<<<<<< HEAD
 
     var _xersmSsRmO = {};
     _xersmSsRmO["something"] = "else";
     return _xersmSsRmO;
+=======
+    var _zVjyJcdhMU = {};
+    _zVjyJcdhMU["something"] = "else";
+    return _zVjyJcdhMU;
+>>>>>>> does not work; committing code before click back
   }
 }
 
@@ -86,9 +92,16 @@ int main() {
   thingyObject["im_just_a"] = "DEAD BOY";
 
   Println(thingyObject);
+<<<<<<< HEAD
 
   var _BoiOPqEyrk = {};
   _BoiOPqEyrk["got_no"] = "BLOOD IN MY VEINS";
 
   Println(_BoiOPqEyrk);
+=======
+  var _AQrhrYWGQc = {};
+  _AQrhrYWGQc["got_no"] = "BLOOD IN MY VEINS";
+
+  Println(_AQrhrYWGQc);
+>>>>>>> does not work; committing code before click back
 }

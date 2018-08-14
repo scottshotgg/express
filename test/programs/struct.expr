@@ -1,7 +1,14 @@
 // This is a file for testing structs
 
+<<<<<<< HEAD
+=======
+boyz := "boyz"
+
+>>>>>>> does not work; committing code before click back
 struct another = {
   int woah
+  string yeah_its_me = "88" + boyz
+  //var template
 }
 
 another yeah

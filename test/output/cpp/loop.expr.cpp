@@ -41,10 +41,16 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
+<<<<<<< HEAD
 
     var _xersmSsRmO = {};
     _xersmSsRmO["something"] = "else";
     return _xersmSsRmO;
+=======
+    var _zVjyJcdhMU = {};
+    _zVjyJcdhMU["something"] = "else";
+    return _zVjyJcdhMU;
+>>>>>>> does not work; committing code before click back
   }
 }
 
@@ -67,6 +73,7 @@ int main() {
   }
 
   {
+<<<<<<< HEAD
     int arrayBoi_1534316912[] = {1, 2, 4};
     int i = 0;
     int i_1534316912 = 0;
@@ -76,11 +83,24 @@ int main() {
 
         i = i_1534316912;
 
+=======
+    int arrayBoi_1534206767[] = {1, 2, 4};
+    int i = 0;
+    int i_1534206767 = 0;
+    while (3) {
+      {
+        defer onLeaveFuncs;
+        i = i_1534206767;
+>>>>>>> does not work; committing code before click back
         f = i;
 
         int h = 1;
       }
+<<<<<<< HEAD
       i_1534316912 += 1;
+=======
+      i_1534206767 += 1;
+>>>>>>> does not work; committing code before click back
     }
   }
 
@@ -88,6 +108,7 @@ int main() {
 
   {
     int i = 0;
+<<<<<<< HEAD
     int i_1534316912 = 0;
     while (8) {
       {
@@ -95,11 +116,22 @@ int main() {
 
         i = countdown[i_1534316912];
 
+=======
+    int i_1534206767 = 0;
+    while (8) {
+      {
+        defer onLeaveFuncs;
+        i = countdown[i_1534206767];
+>>>>>>> does not work; committing code before click back
         f = i;
 
         int h = 1;
       }
+<<<<<<< HEAD
       i_1534316912 += 1;
+=======
+      i_1534206767 += 1;
+>>>>>>> does not work; committing code before click back
     }
   }
 }

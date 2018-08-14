@@ -51,13 +51,13 @@ var TypeMap = map[string]Token{
 			String: ObjectType,
 		},
 	},
-	StructType: Token{
-		Type: Type,
-		Value: Value{
-			Type:   StructType,
-			String: StructType,
-		},
-	},
+	// StructType: Token{
+	// 	Type: Type,
+	// 	Value: Value{
+	// 		Type:   StructType,
+	// 		String: StructType,
+	// 	},
+	// },
 	ArrayType: Token{
 		Type: Type,
 		Value: Value{

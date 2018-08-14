@@ -5,9 +5,54 @@
 			"Type": "BLOCK",
 			"True": [
 				{
-					"Type": "TYPE",
+					"ID": 9,
+					"Type": "KEYWORD",
 					"Value": {
-						"Type": "struct",
+						"Type": "keyword",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "another"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "woah"
+								}
+							}
+						]
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
 						"String": "struct"
 					}
 				},
@@ -87,6 +132,20 @@
 					"Value": {
 						"Type": "BLOCK",
 						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "another"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "yeah"
+								}
+							},
 							{
 								"Type": "TYPE",
 								"Value": {

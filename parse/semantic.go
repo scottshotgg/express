@@ -59,12 +59,21 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// 	// }
 		// }
 
-		//fmt.Println("holy shit gettin that var")
+		fmt.Println("holy shit gettin that var", p.meta.currentVariable)
 		variable, ok := p.meta.GetVariable(p.CurrentToken.Value.String)
-		//fmt.Println(variable, ok)
 		if !ok {
-			return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
+			// If the ident isn't a variable, maybe its a type
+			fmt.Println("DefinedTypes", DefinedTypes)
+			dv, ok := DefinedTypes[p.CurrentToken.Value.String]
+			if !ok {
+				p.Shift()
+				return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
+			}
+
+			variable = NewVariableFromTokenValue(dv)
 		}
+
+		// if variable.Type == STRUCT
 
 		refs := p.CurrentToken.Value.String
 		if variable.Type == FUNCTION {
@@ -1320,6 +1329,54 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		return tv, nil
 
+	case "struct":
+		// struct expects an ident (which becomes a type), assign,
+		// and then a block essentially an un-typed object
+
+		// Shift the struct out
+		p.Shift()
+
+		// If we didn't get an IDENT after the `struct` keyword
+		if p.NextToken.Type != token.Ident {
+			fmt.Println("wtf ident", p.NextToken)
+			return token.Value{}, errors.Errorf("Did not find IDENT after struct KEYWORD, found: %v", p.NextToken)
+		}
+
+		typename := p.NextToken.Value.String
+
+		// Add the ident to the type map as a type
+		dt, ok := DefinedTypes[typename]
+		if ok {
+			// TODO: this is an error, this means that we are trying to define
+			// a struct with an ident that is already defined as a type
+			return dt, errors.New("Type already defined: " + typename)
+		}
+
+		// Shift over the ident
+		p.Shift()
+
+		// Shift over the assignment operator for now;
+		// this does allow it not to be required
+		p.Shift()
+
+		// If there is not block afterwards then that means we have an error for now
+		if p.NextToken.Type != token.Block {
+			return token.Value{}, errors.Errorf("Did not find BLOCK after IDENT for struct, found: %v", p.NextToken)
+		}
+
+		dt, err = p.CheckBlock()
+		if err != nil {
+			return token.Value{}, err
+		}
+		dt.Type = "struct"
+
+		fmt.Println("typename, dt", typename, dt)
+		DefinedTypes[typename] = dt
+		fmt.Println("current", p.CurrentToken)
+		// p.Shift()
+		// fmt.Println("current2", p.CurrentToken)
+		return dt, nil
+
 	case "return":
 		p.Shift()
 
@@ -1392,15 +1449,39 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		//fmt.Println("idnet p.meta.currentVariable", p.meta.currentVariable)
 		//fmt.Println("ident", p.NextToken)
 		//fmt.Println("declaredMap", p.meta.currentScope)
-		if p.meta.currentVariable.Type == UNRECOGNIZED {
-			//fmt.Println("i am here UNRECOGNIZED")
-			// TODO: maybe we should just load the entire variable at this point
-			if variable, ok := p.meta.GetVariable(p.NextToken.Value.String); ok {
-				variable.Metadata["assign"] = true
-				//fmt.Println("FOUND THE VAR", p.NextToken.Value.String)
-				p.meta.currentVariable.Type = variable.Type
-				p.meta.currentVariable.Metadata = variable.Metadata
+
+		var dv token.Value
+		var ok bool
+
+		switch p.meta.currentVariable.Type {
+		case UNRECOGNIZED:
+			fmt.Println("i am here UNRECOGNIZED", p.NextToken)
+
+			// if we get in here with UNRECOGNIZED type, check if
+			// the current ident is actually a type specifier
+
+			// Add the ident to the type map as a type
+			dv, ok = DefinedTypes[p.NextToken.Value.String]
+			if !ok {
+				// TODO: maybe we should just load the entire variable at this point
+				variable, ok := p.meta.GetVariable(p.NextToken.Value.String)
+				if ok {
+					variable.Metadata["assign"] = true
+					//fmt.Println("FOUND THE VAR", p.NextToken.Value.String)
+					p.meta.currentVariable.Type = variable.Type
+					p.meta.currentVariable.Metadata = variable.Metadata
+				} else {
+
+					p.Shift()
+					expr, err := p.GetExpression()
+					fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
+					//fmt.Printf("THIS IS THE EXPRESSION %+v %s\n", expr, err)
+					// return p.GetExpression()
+					//fmt.Println("expr, err", expr, err)
+					return expr, err
+				}
 			} else {
+<<<<<<< HEAD
 				// If its unrecognized and we cant find it, it doesn't exist
 				//fmt.Println("in the elser")
 				//fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
@@ -1411,8 +1492,15 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				//fmt.Println("expr, err", expr, err)
 
 				return expr, err
+=======
+				p.meta.currentVariable.Type = variableTypeFromString("struct")
+>>>>>>> does not work; committing code before click back
 			}
+			fmt.Println("dv", dv)
+			// this will work for structs, but not arbitrary typedefs
+			fallthrough
 			// TODO: make this more general later with the type map later
+<<<<<<< HEAD
 		} else {
 			// *** struct declaration:
 			// At this point we know that we are defining a struct, and we should expect
@@ -1439,7 +1527,37 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			// // Shift over the assignment token
 			// p.Shift()
 
+=======
+		case STRUCT:
+			// if dv is still empty
+			var base interface{}
+			if reflect.DeepEqual(dv, token.Value{}) {
+				base, err = getDefaultValueForType(token.StructType, "thing")
+				if err != nil {
+					return token.Value{}, err
+				}
+
+				// FIXME: hacky - fixme pls ;_;
+				dv, ok = base.(token.Value)
+				if ok {
+					return token.Value{}, errors.Errorf("default value expected was a token, got: %v", base)
+				}
+			}
+
+			fmt.Println("woah we got a struct", dv, p.meta.currentVariable)
+
+			// We've got that it's a struct, not we need to construct
+			// a new variable for the new struct instantiation
+
+			// Shift over this ident since we know that its a struct type
+			p.Shift()
+			fmt.Println("currentToken", p.CurrentToken, p.NextToken)
+			p.meta.currentVariable = NewVariableFromTokenValue(dv)
+			p.meta.currentVariable.Name = p.NextToken.Value.String
+			return dv, nil
+>>>>>>> does not work; committing code before click back
 		}
+
 		//fmt.Println("ASSIGNMENT DECLARED TYPE", p.meta.currentVariable.Type)
 		p.Shift()
 		//fmt.Println(p.NextToken)
@@ -1456,6 +1574,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			//fmt.Println("TVTVTV", tv)
 			//fmt.Println("another", p.NextToken)
 		} else {
+			fmt.Println("i got here", p.meta.currentVariable)
 			p.meta.currentVariable.Name = p.CurrentToken.Value.String
 			actingTypeName := p.CurrentToken.Value.Acting
 			if p.meta.currentVariable.Type == STRUCT {
@@ -1500,6 +1619,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 	// FIXME: TODO: didn't wanna fix right now
 	case token.Keyword:
+		fmt.Println("i am here", p.NextToken.Value.String)
 		keyword, err := p.GetKeyword()
 		if err != nil {
 			return token.Value{}, err
@@ -1590,13 +1710,13 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 		// This is by-passing the blank "{}" token that is
 		// produced from the comma somtimes; need to solve
 		// it more elegantly
-		if reflect.DeepEqual(stmt, token.Value{}) {
-			// return token.Value{
-			// 	Type: token.Block,
-			// 	True: blockTokens,
-			// }, nil
-			return token.Value{}, errors.New("Could not get statement")
-		}
+		// if reflect.DeepEqual(stmt, token.Value{}) {
+		// 	// return token.Value{
+		// 	// 	Type: token.Block,
+		// 	// 	True: blockTokens,
+		// 	// }, nil
+		// 	return token.Value{}, errors.New("Could not get statement")
+		// }
 
 		blockTokens = append(blockTokens, stmt)
 

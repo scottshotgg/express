@@ -100,7 +100,11 @@
 					"AccessType": "private",
 					"Metadata": {
 						"assign": true,
+<<<<<<< HEAD
 						"refs": "i_1534316912"
+=======
+						"refs": "i_1534206767"
+>>>>>>> does not work; committing code before click back
 					}
 				},
 				{
@@ -122,10 +126,17 @@
 					"AccessType": "private"
 				}
 			],
+<<<<<<< HEAD
 			"String": "i_1534316912\u003c3",
 			"Metadata": {
 				"end": {
 					"Name": "i_1534316912",
+=======
+			"String": "i_1534206767\u003c3",
+			"Metadata": {
+				"end": {
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 3,
 					"String": "3",
@@ -133,7 +144,11 @@
 				},
 				"extraVars": [
 					{
+<<<<<<< HEAD
 						"Name": "arrayBoi_1534316912",
+=======
+						"Name": "arrayBoi_1534206767",
+>>>>>>> does not work; committing code before click back
 						"Type": "array",
 						"Acting": "int",
 						"True": [
@@ -178,14 +193,22 @@
 					}
 				],
 				"start": {
+<<<<<<< HEAD
 					"Name": "i_1534316912",
+=======
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 0,
 					"String": "0",
 					"AccessType": "private"
 				},
 				"step": {
+<<<<<<< HEAD
 					"Name": "i_1534316912",
+=======
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 1,
 					"String": "1",
@@ -280,7 +303,11 @@
 					"AccessType": "private",
 					"Metadata": {
 						"assign": true,
+<<<<<<< HEAD
 						"refs": "countdown[i_1534316912]"
+=======
+						"refs": "countdown[i_1534206767]"
+>>>>>>> does not work; committing code before click back
 					}
 				},
 				{
@@ -302,10 +329,17 @@
 					"AccessType": "private"
 				}
 			],
+<<<<<<< HEAD
 			"String": "i_1534316912\u003c8",
 			"Metadata": {
 				"end": {
 					"Name": "i_1534316912",
+=======
+			"String": "i_1534206767\u003c8",
+			"Metadata": {
+				"end": {
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 8,
 					"String": "8",
@@ -322,14 +356,22 @@
 					}
 				],
 				"start": {
+<<<<<<< HEAD
 					"Name": "i_1534316912",
+=======
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 0,
 					"String": "0",
 					"AccessType": "private"
 				},
 				"step": {
+<<<<<<< HEAD
 					"Name": "i_1534316912",
+=======
+					"Name": "i_1534206767",
+>>>>>>> does not work; committing code before click back
 					"Type": "int",
 					"True": 1,
 					"String": "1",
