@@ -4,11 +4,17 @@
     Put a demo proposal in for GraalVM and stuff
 -->
 
-Express is an extremely flexible language allowing both static and dynamic types (_`var`_ &mdash; think `JavaScript` or `Python`, except better) with an _extremely_ lite, dynamically embedded runtime within the executable allowing for typing to be as _weak_ or _strong_ (or 🦆) as required. By allowing the programmer to define the typing within the language, many different programming paradigms and methods of implementation can be expressed.<br>The runtime currently does dynamic typing and RAII lifetime management, however, in the future it will include a greenthread scheduler a la Go, atomization of operations, garbage collection, RTTI and reflection, SQLite3/GraphQL embedded databases, DOM instantiation and manipulation, and a few other ideas that are currently only conceptual. Most features will be optional and the programmer will be allowed to enable and disable at compile time and possibly runtime (if a JIT/AOT is supported).<br>The main influences in the languages design are: `C++`, `JavaScript`, `Go`, and (atleast _conceptually)_ `Rust`.
+Express is an extremely flexible language allowing both static and dynamic types (_`var`_; think `JavaScript` or `Python` &mdash; except better) with an _extremely_ lite, dynamically embedded runtime within the executable allowing for typing to be as _weak_ or _strong_ (or 🦆) as required. By allowing even the typing to be defined within the language, many different programming paradigms, architectures, and methods of implementation can be readily expressed.
 
-For binary production, programs are currently _transpiled_ to C++ and then LLVM is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via a flag (`--emit-cpp`).<br> At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
+The runtime currently does dynamic typing and RAII lifetime management, however, in the future it will include a greenthread scheduler a la Go, atomization of cross-thread operations, garbage collection, RTTI and (maybe) reflection, SQLite3/GraphQL embedded databases, DOM instantiation and manipulation, and a few other ideas that are currently only conceptual. Most features will be optional with the ability to easily enable and disable them at compile time and possibly runtime (if a JIT/AOT is supported &mdash; maybe using GraalVM).
+<br>
+The main influences in the languages design are: `C++`, `JavaScript`, `Go`, and (atleast _conceptually)_ `Rust`.
 
-Each stage of the compiler (lexer, syntax parser, semantics parser, and C++ transpiler) are currently all implemented in `Go` and may be converter to `Rust` later on, but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated with this repo after a reorganization of the file structure.
+For binary production, programs are currently _transpiled_ to C++ and then `clang` is subsequently invoked (along with `clang-format`) to produce the corresponding binary. There will also be a C++ program produced at compile time, which can be included in the output via the `--emit-cpp` flag.
+<br>
+At this time, transpiling is, _time-wise_, sufficiently more efficient than outputting LLVM tokens or building an intermediary using SSA/3AC. Later on, this will most likely be changed in favor of direct LLVM token production when features either become too much of a burden to implement and maintain in C++ or the transpiler development lags too much to adequently support forwarding the development of the language.
+
+Each stage of the compiler (lexer, syntax parser, semantics parser, and C++ transpiler) are currently all implemented in `Go` and may be converted to `C++` or `Rust` later on (when I feel like operating LLVM directly), but a `JavaScript` implementation in Node is also being developed simultaneously and will later on be consolidated with this repo after a reorganization of the file structure.
 <br>
 It is currently located at https://github.com/Swivelgames/Express/tree/alt/node
 
@@ -116,13 +122,15 @@ Proposal submission is **the** method to contribute your ideas and work into Exp
 
 ## Example Program
 
-_Apologies before we get started, but this does need to be updated when I have time as there are quite a few features missing in contrast to what is supported and even what is in `test/programs/`_.
-<br><br>
+_Apologies before we get started, but this does need to be updated when I have time as there are quite a few features missing in contrast to what is supported. Please take a look at the programs located in `test/programs/` for more examples_.
+<br>
+<br>
 In the program below, you will find a few examples of the allowed flexibilities and optional verbosity that allow the language to be so _Expressive_.
 <br>
 You can find the **full uncommented** version located in `test/programs/advanced.expr`.
 
-<br><br>
+<br>
+<br>
 
 ```html
 Let's Begin:
@@ -183,7 +191,7 @@ int zero = 0
     one := 1    // tabbed for visibility
 ```
 
-> _`Note`_: Type inference will _never_ produce a `var` or a `struct` type.<br> Logically speaking, the `var` type could be considered the ground state for any variable type and thus would always resolve as a possible type. Furthermore, if you are specifying to infer a variables type, it doesn't make much sense, functionally, to respond with a generic container.<br> On the other hand, `struct` is a a different issue. Structs and objects are very similar ideas, however, one is dynamic - `object`, and the other is not - `struct`. Thus, when assigning a `BLOCK` to a variable in Express, it will assume you do not want this to be a static `struct` type or else you would have declared it yourself at compile-time. However, this does not prevent you from declaring an `object` at compile-time or a `struct` at run-time using a type specification at declaration.
+> _`Note`_: Type inference will _never_ produce a `var` or a `struct` type.<br> Fundamentally, the `var` type could be considered _the_ ground state for any variable type and thus would always resolve as a possible type. Furthermore, if you are specifying to infer a variables type, it doesn't make much sense, functionally, to respond with a generic container.<br> On the other hand, `struct` is a different issue. Structs and objects are very similar ideas, however, one is dynamic - `object`, and the other is not - `struct`. Thus, when assigning a `BLOCK` to a variable in Express, it will assume you do not want this to be a static `struct` type or else you would have declared it yourself at compile-time. However, this does not prevent you from declaring an `object` at compile-time or a `struct` at run-time using a type specification at declaration.
 
 <br>
 

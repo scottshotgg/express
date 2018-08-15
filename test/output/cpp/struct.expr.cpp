@@ -42,9 +42,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _xersmSsRmO = {};
-    _xersmSsRmO["something"] = "else";
-    return _xersmSsRmO;
+    var _aXYFzYytAR = {};
+    _aXYFzYytAR["something"] = "else";
+    return _aXYFzYytAR;
   }
 }
 
@@ -61,18 +61,18 @@ int main() {
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_TMhpULflvj = {};
-  thing_TMhpULflvj["woah"] = 0;
-  Thing["thing"] = thing_TMhpULflvj;
+  var thing_bSbISRkTJV = {};
+  thing_bSbISRkTJV["woah"] = 0;
+  Thing["thing"] = thing_bSbISRkTJV;
 
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_NYellsMvYu = {};
-  thing_NYellsMvYu["woah"] = 0;
-  something["thing"] = thing_NYellsMvYu;
+  var thing_fyqTsdLyTn = {};
+  thing_fyqTsdLyTn["woah"] = 0;
+  something["thing"] = thing_fyqTsdLyTn;
 
   Println("something", something);
 
@@ -81,9 +81,9 @@ int main() {
   something2["stringField"] = "";
   something2["false_field"] = false;
   something2["anotherFielderino"] = 0.000000;
-  var thing_bhFBJWSCpq = {};
-  thing_bhFBJWSCpq["woah"] = 0;
-  something2["thing"] = thing_bhFBJWSCpq;
+  var thing_MmjuIBuUPb = {};
+  thing_MmjuIBuUPb["woah"] = 0;
+  something2["thing"] = thing_MmjuIBuUPb;
 
   Println("something2", something2);
 
@@ -92,7 +92,7 @@ int main() {
   something3["stringField"] = "chyah brah";
   something3["false_field"] = false;
   something3["anotherFielderino"] = 0.000000;
-  var thing_rGWINQjzRx = {};
-  thing_rGWINQjzRx["woah"] = 0;
-  something3["thing"] = thing_rGWINQjzRx;
+  var thing_aAXwBRorMn = {};
+  thing_aAXwBRorMn["woah"] = 0;
+  something3["thing"] = thing_aAXwBRorMn;
 }

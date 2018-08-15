@@ -42,9 +42,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _xersmSsRmO = {};
-    _xersmSsRmO["something"] = "else";
-    return _xersmSsRmO;
+    var _aXYFzYytAR = {};
+    _aXYFzYytAR["something"] = "else";
+    return _aXYFzYytAR;
   }
 }
 
