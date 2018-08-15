@@ -249,9 +249,12 @@ func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 		// First we need to check the type map
 		value, ok := DefinedTypes[actingType]
 		fmt.Println("value, ok", value, ok)
-		// os.Exit(9)
+		if !ok {
+			fmt.Println("typemap", DefinedTypes)
+			return nil, errors.Errorf("Couldn't find struct type in type map: %s", actingType)
+		}
 
-		return nil, nil
+		return value, nil
 
 	default:
 		// First we need to check the type map

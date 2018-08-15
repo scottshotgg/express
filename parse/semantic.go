@@ -2,7 +2,6 @@ package parse
 
 import (
 	"fmt"
-	"os"
 	"reflect"
 	"strconv"
 	"strings"
@@ -76,12 +75,15 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			// Here we need to get the default values from the type map
 
 			fmt.Println("p.NextToken", p.NextToken)
-			os.Exit(9)
+			// os.Exit(9)
 
 			// If the next token is a block then parse a struct
 			if p.NextToken.Type == token.Block {
 				inStruct = true
-				defer func() { inStruct = false }()
+				defer func(typename string) {
+					inStruct = false
+					value.Metadata["real"] = typename
+				}(p.CurrentToken.Value.String)
 
 				if len(p.NextToken.Value.True.([]token.Token)) > 0 {
 					// fmt.Printf("variable %+v\n", variable)
@@ -105,6 +107,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 						valuers = append(valuers, valuer)
 					}
 					anotherVariable.Value = valuers
+					anotherVariable.Metadata["real"] = p.CurrentToken.Value.String
 
 					block, err := pa.CheckBlock()
 					if err != nil {
@@ -120,6 +123,11 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					for _, variableValue := range block.True.([]token.Value) {
 						for i := 0; i < len(anotherVariableTokens); i++ {
 							if anotherVariableTokens[i].Name == variableValue.Name {
+								if anotherVariableTokens[i].True != variableValue.True {
+									variableValue.Metadata["default"] = false
+									// os.Exit(9)
+								}
+
 								anotherVariableTokens[i] = variableValue
 								break
 							}
@@ -656,7 +664,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
-					// FIXME: wtf?
+					// p.meta.currentVariable.Metadata["real"] = expr.String
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
@@ -668,10 +676,15 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			// }
 
 			p.meta.currentVariable.Value = expr.True
-			if ref, ok := expr.Metadata["refs"]; ok {
-				//fmt.Println("there was a ref")
-				p.meta.currentVariable.Metadata["refs"] = ref
+
+			// Copy over all of the metadata
+			for k, v := range expr.Metadata {
+				p.meta.currentVariable.Metadata[k] = v
 			}
+			// if ref, ok := expr.Metadata["refs"]; ok {
+			// 	//fmt.Println("there was a ref")
+			// 	p.meta.currentVariable.Metadata["refs"] = ref
+			// }
 			//fmt.Println("p.meta.currentVariable2", p.meta.currentVariable)
 
 			// TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
@@ -1356,6 +1369,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 // GetStatement ...
 func (p *Parser) GetStatement() (token.Value, error) {
+	var tv token.Value
 	//fmt.Println("GetStatement")
 	//fmt.Println("p.NextToken", p.NextToken)
 	// p.Shift()
@@ -1395,35 +1409,40 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				//fmt.Printf("THIS IS THE EXPRESSION %+v %s\n", expr, err)
 				// return p.GetExpression()
 				//fmt.Println("expr, err", expr, err)
+
 				return expr, err
 			}
 			// TODO: make this more general later with the type map later
 		} else {
+			// *** struct declaration:
+			// At this point we know that we are defining a struct, and we should expect
+			// that the default value will not be there; if it is then this is an errorr
 
-			base, err := getDefaultValueForType(token.StructType, "thing")
-			if err != nil {
-				return token.Value{}, err
+			if p.meta.currentVariable.Type == STRUCT {
+				fmt.Println("p.meta.currentVariable", p.meta.currentVariable, p.NextToken)
+				_, err := getDefaultValueForType(token.StructType, p.NextToken.Value.String)
+				if err == nil {
+					return token.Value{}, errors.Errorf("Type already declared: %s", p.NextToken.Value.String)
+				}
+
+				defer func(name string) {
+					DefinedTypes[name] = tv
+				}(p.NextToken.Value.String)
 			}
 
-			fmt.Println("woah we got a struct", base)
-			cv := *p.meta.currentVariable
+			// have the struct, the name of the new type, need to shift over the assignment
+			// operator and then collect the block
 
-			// We've got that it's a struct, not we need to construct
-			// a new variable for the new struct instantiation
+			// Shift the ident token over
+			// p.Shift()
 
-			// Shift over this ident since we know that its a struct type
-			p.Shift()
-			fmt.Println("currentToken", p.CurrentToken, p.NextToken)
+			// // Shift over the assignment token
+			// p.Shift()
 
-			os.Exit(9)
-
-			// cv.Name
-			p.meta.currentVariable = &cv
 		}
 		//fmt.Println("ASSIGNMENT DECLARED TYPE", p.meta.currentVariable.Type)
 		p.Shift()
 		//fmt.Println(p.NextToken)
-		var tv token.Value
 		var err error
 		// FIXME: this seems kinda hacky, but w/e fix it later - GetFactor should defer it's judgement
 		if p.NextToken.Type == "ASSIGN" {
@@ -1438,14 +1457,30 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			//fmt.Println("another", p.NextToken)
 		} else {
 			p.meta.currentVariable.Name = p.CurrentToken.Value.String
-			baseValue, err := getDefaultValueForType(VariableTypeString(p.meta.currentVariable.Type), p.CurrentToken.Value.Acting)
+			actingTypeName := p.CurrentToken.Value.Acting
+			if p.meta.currentVariable.Type == STRUCT {
+				p.meta.currentVariable.Name = p.NextToken.Value.String
+				// TODO: need to set the actual struct type here
+				// p.meta.currentVariable.ActingType = p.CurrentToken.Value.String
+				p.meta.currentVariable.Metadata["real"] = p.CurrentToken.Value.String
+				actingTypeName = p.CurrentToken.Value.String
+			}
+
+			baseValue, err := getDefaultValueForType(VariableTypeString(p.meta.currentVariable.Type), actingTypeName)
 			if err != nil {
 				return token.Value{}, err
 			}
+
 			if VariableTypeString(p.meta.currentVariable.Type) == "var" {
 				p.meta.currentVariable.ActingType = OBJECT
 			}
 
+			fmt.Println("typemap", DefinedTypes)
+			fmt.Println("baseValue", baseValue)
+			if p.meta.currentVariable.Type == STRUCT {
+				baseValue = baseValue.(token.Value).True
+				defer p.Shift()
+			}
 			p.meta.currentVariable.Value = baseValue
 			p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.AccessType)
 			// if it's still not set, just make it private because it's a literal or something
@@ -1460,6 +1495,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				return tv, err
 			}
 		}
+
 		return tv, nil
 
 	// FIXME: TODO: didn't wanna fix right now

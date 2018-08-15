@@ -4,6 +4,11 @@
 #include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
+std::map<std::string, var> structMap;
+var genStruct(std::string structName) {
+  var structValue = structMap[structName];
+  return structValue;
+}
 
 int printStuff(int k) {
   defer onReturnFuncs;
@@ -15,14 +20,19 @@ int printStuff(int k) {
       while (i < k) {
         {
           defer onLeaveFuncs;
+
           onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
+
           onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
+
           onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
+
           onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
         }
         i += 1;
       }
     }
+
     return 0;
   }
 }
@@ -31,13 +41,15 @@ var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
-    var _RmmaeIcMxV = {};
-    _RmmaeIcMxV["something"] = "else";
-    return _RmmaeIcMxV;
+
+    var _xersmSsRmO = {};
+    _xersmSsRmO["something"] = "else";
+    return _xersmSsRmO;
   }
 }
 
 int main() {
+
   int f = 0;
 
   {
@@ -45,7 +57,9 @@ int main() {
     while (i < 10) {
       {
         defer onLeaveFuncs;
+
         f = i;
+
         int h = 1;
       }
       i += 1;
@@ -53,32 +67,39 @@ int main() {
   }
 
   {
-    int arrayBoi_1534201937[] = {1, 2, 4};
+    int arrayBoi_1534316912[] = {1, 2, 4};
     int i = 0;
-    int i_1534201937 = 0;
+    int i_1534316912 = 0;
     while (3) {
       {
         defer onLeaveFuncs;
-        i = i_1534201937;
+
+        i = i_1534316912;
+
         f = i;
+
         int h = 1;
       }
-      i_1534201937 += 1;
+      i_1534316912 += 1;
     }
   }
+
   int countdown[] = {9, 8, 7, 5, 4, 3, 2, 1};
 
   {
     int i = 0;
-    int i_1534201937 = 0;
+    int i_1534316912 = 0;
     while (8) {
       {
         defer onLeaveFuncs;
-        i = countdown[i_1534201937];
+
+        i = countdown[i_1534316912];
+
         f = i;
+
         int h = 1;
       }
-      i_1534201937 += 1;
+      i_1534316912 += 1;
     }
   }
 }

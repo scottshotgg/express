@@ -2,6 +2,36 @@
 	"Type": "BLOCK",
 	"True": [
 		{
+			"Name": "another",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "woah",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "yeah",
+			"Type": "struct",
+			"True": [
+				{
+					"Name": "woah",
+					"Type": "int",
+					"True": 0,
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true,
+				"real": "another"
+			}
+		},
+		{
 			"Name": "Thing",
 			"Type": "struct",
 			"True": [
@@ -34,6 +64,23 @@
 					"Type": "float",
 					"True": 0,
 					"AccessType": "private"
+				},
+				{
+					"Name": "thing",
+					"Type": "struct",
+					"True": [
+						{
+							"Name": "woah",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					],
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"real": "another"
+					}
 				}
 			],
 			"AccessType": "public"
@@ -71,11 +118,109 @@
 					"Type": "float",
 					"True": 0,
 					"AccessType": "private"
+				},
+				{
+					"Name": "thing",
+					"Type": "struct",
+					"True": [
+						{
+							"Name": "woah",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					],
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"real": "another"
+					}
 				}
 			],
 			"AccessType": "private",
 			"Metadata": {
+				"real": "Thing",
 				"refs": "Thing"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "something",
+							"String": "something"
+						},
+						{
+							"Name": "something",
+							"Type": "struct",
+							"True": [
+								{
+									"Name": "fieldA",
+									"Type": "int",
+									"True": 0,
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
+								},
+								{
+									"Name": "stringField",
+									"Type": "string",
+									"True": "",
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
+								},
+								{
+									"Name": "false_field",
+									"Type": "bool",
+									"True": false,
+									"AccessType": "private"
+								},
+								{
+									"Name": "anotherFielderino",
+									"Type": "float",
+									"True": 0,
+									"AccessType": "private"
+								},
+								{
+									"Name": "thing",
+									"Type": "struct",
+									"True": [
+										{
+											"Name": "woah",
+											"Type": "int",
+											"True": 0,
+											"AccessType": "private"
+										}
+									],
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"real": "another"
+									}
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"real": "Thing",
+								"refs": "something"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
 			}
 		},
 		{
@@ -88,7 +233,8 @@
 					"True": 912559,
 					"AccessType": "private",
 					"Metadata": {
-						"assign": true
+						"assign": true,
+						"default": false
 					}
 				},
 				{
@@ -111,9 +257,110 @@
 					"Type": "float",
 					"True": 0,
 					"AccessType": "private"
+				},
+				{
+					"Name": "thing",
+					"Type": "struct",
+					"True": [
+						{
+							"Name": "woah",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					],
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"real": "another"
+					}
 				}
 			],
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"real": "Thing"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "something2",
+							"String": "something2"
+						},
+						{
+							"Name": "something2",
+							"Type": "struct",
+							"True": [
+								{
+									"Name": "fieldA",
+									"Type": "int",
+									"True": 912559,
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"default": false
+									}
+								},
+								{
+									"Name": "stringField",
+									"Type": "string",
+									"True": "",
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
+								},
+								{
+									"Name": "false_field",
+									"Type": "bool",
+									"True": false,
+									"AccessType": "private"
+								},
+								{
+									"Name": "anotherFielderino",
+									"Type": "float",
+									"True": 0,
+									"AccessType": "private"
+								},
+								{
+									"Name": "thing",
+									"Type": "struct",
+									"True": [
+										{
+											"Name": "woah",
+											"Type": "int",
+											"True": 0,
+											"AccessType": "private"
+										}
+									],
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"real": "another"
+									}
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"real": "Thing",
+								"refs": "something2"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		},
 		{
 			"Name": "something3",
@@ -134,7 +381,8 @@
 					"True": "chyah brah",
 					"AccessType": "private",
 					"Metadata": {
-						"assign": true
+						"assign": true,
+						"default": false
 					}
 				},
 				{
@@ -148,9 +396,29 @@
 					"Type": "float",
 					"True": 0,
 					"AccessType": "private"
+				},
+				{
+					"Name": "thing",
+					"Type": "struct",
+					"True": [
+						{
+							"Name": "woah",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					],
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"real": "another"
+					}
 				}
 			],
-			"AccessType": "private"
+			"AccessType": "private",
+			"Metadata": {
+				"real": "Thing"
+			}
 		}
 	]
 }

@@ -23,6 +23,156 @@
 	{
 		"Type": "IDENT",
 		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "int",
+			"String": "int"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "woah"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "yeah"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "struct",
+			"String": "struct"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
 			"String": "Thing"
 		}
 	},
@@ -226,6 +376,46 @@
 		}
 	},
 	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "thing"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"Type": "R_BRACE",
 		"Value": {
 			"Type": "op_3",
@@ -298,6 +488,61 @@
 		"Value": {
 			"Type": "op_3",
 			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "something",
+			"String": "something"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
 		}
 	},
 	{
@@ -429,6 +674,61 @@
 		"Value": {
 			"Type": "op_3",
 			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "something2",
+			"String": "something2"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something2"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
 		}
 	},
 	{
@@ -668,16 +968,9 @@
 		}
 	},
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "Print"
+			"String": "Println"
 		}
 	},
 	{
@@ -688,9 +981,31 @@
 		}
 	},
 	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "something3",
+			"String": "something3"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "something"
+			"String": "something3"
 		}
 	},
 	{
@@ -698,6 +1013,20 @@
 		"Value": {
 			"Type": "op_3",
 			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{

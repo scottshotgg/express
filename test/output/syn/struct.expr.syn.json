@@ -14,6 +14,63 @@
 				{
 					"Type": "IDENT",
 					"Value": {
+						"Type": "private",
+						"String": "another"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "woah"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "another"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "yeah"
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "struct",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
 						"Type": "public",
 						"String": "Thing"
 					}
@@ -85,6 +142,20 @@
 									"Type": "private",
 									"String": "anotherFielderino"
 								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "another"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "thing"
+								}
 							}
 						]
 					}
@@ -115,6 +186,45 @@
 					"Value": {
 						"Type": "BLOCK",
 						"True": []
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "something",
+												"String": "something"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "something"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				},
 				{
@@ -166,6 +276,45 @@
 								}
 							}
 						]
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "something2",
+												"String": "something2"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "something2"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				},
 				{
@@ -245,7 +394,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "Print",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -255,10 +404,18 @@
 									"Type": "GROUP",
 									"True": [
 										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "something3",
+												"String": "something3"
+											}
+										},
+										{
 											"Type": "IDENT",
 											"Value": {
 												"Type": "private",
-												"String": "something"
+												"String": "something3"
 											}
 										}
 									]

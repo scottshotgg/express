@@ -134,7 +134,7 @@ func translateFunctionCall(t token.Value) (string, error) {
 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
 				//fmt.Println("NAME_BYTES", arg.Name)
 
-				objectString, err := translateObject(arg)
+				objectString, err := translateObject(arg, "")
 				if err != nil {
 					return "", err
 				}
@@ -291,7 +291,7 @@ func translateArray(t token.Value) (string, error) {
 			v.Value.Name = v.Value.Name + "_" + RandStringBytesMaskImprSrc(10)
 			//fmt.Println("NAME_BYTES", v.Value.Name)
 			// }
-			objectString, err := translateObject(v.Value)
+			objectString, err := translateObject(v.Value, "")
 			if err != nil {
 				return "", err
 			}
@@ -337,8 +337,14 @@ func translateArray(t token.Value) (string, error) {
 
 // FIXME: just use var for now, but later we will try to not use var
 // FIXME: ideally we want to store this in a "symbol map" with the defaults already there
-func translateObject(t token.Value) (string, error) {
-	objectString := "var " + t.Name + " = {};\n"
+func translateObject(t token.Value, objName string) (string, error) {
+
+	tName := t.Name
+	if objName != "" {
+		tName = objName
+	}
+
+	objectString := "var " + tName + " = {};\n"
 
 	for _, v := range t.True.([]token.Value) {
 		objectValue := v.True
@@ -346,17 +352,40 @@ func translateObject(t token.Value) (string, error) {
 			objectValue = ref
 		}
 
+		// if checkDefault {
+		// 	// Checking for a "default" flag means we set it to false; kinda confusing
+		// 	_, ok := v.Metadata["default"]
+		// 	if !ok {
+		// 		continue
+		// 	}
+		// }
+
 		// //fmt.Println("k, v", k, v)
-		if v.Type == "object" {
+		if v.Type == "object" || v.Type == "struct" {
 			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, objectValue)
-			anotherObjectString, err := translateObject(v)
+			vName := v.Name + "_" + RandStringBytesMaskImprSrc(10)
+			anotherObjectString, err := translateObject(v, vName)
 			if err != nil {
 				return objectString, err
 			}
-			objectString += anotherObjectString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
+			objectString += anotherObjectString + tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
 
 		} else if v.Type == "string" {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
+			objectString += tName + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
+
+			// If its a struct, create an object that will generate the struct for us
+			// } else if v.Type == "struct" {
+			// 	// anotherObjectString, err := translateObject(v)
+			// 	// if err != nil {
+			// 	// 	return objectString, err
+			// 	// }
+			// 	objectString += t.Name + "[\"" + v.Name + "\"] = genStruct(\"" + v.Metadata["real"].(string) + "\");\n"
+			// 	objstr, err := translateObject(t, true)
+			// 	if err != nil {
+			// 		return "", err
+			// 	}
+
+			// 	objectString += objstr
 
 		} else if v.Type == "array" {
 			// I am not supporting arrays for now, will have to debate how to
@@ -369,9 +398,9 @@ func translateObject(t token.Value) (string, error) {
 
 		} else {
 			if v.Type == token.FloatType && v.True.(float64) == 0 {
-				objectString += t.Name + fmt.Sprintf("[\"%s\"] = %f;\n", v.Name, float64(0.0))
+				objectString += tName + fmt.Sprintf("[\"%s\"] = %f;\n", v.Name, float64(0.0))
 			} else {
-				objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
+				objectString += tName + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
 			}
 		}
 	}
@@ -381,52 +410,17 @@ func translateObject(t token.Value) (string, error) {
 
 // TODO: make this more idiomatic later
 func translateStruct(t token.Value) (string, error) {
-	structString := ""
-	// If there is something in the metadata then it is referencing a struct
-	if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
-		// For now we are not supporting stuff inside the struct
-		structString = t.Metadata["refs"].(string) + " " + t.Name + " = {};\n"
-	} else {
-		structString = "struct " + t.Name + "{\n"
-
-		for _, v := range t.True.([]token.Value) {
-			// structValue := v.True
-			// if ref, ok := v.Metadata["refs"]; ok {
-			// 	structValue = ref
-			// }
-
-			// // FIXME: this is for nested structs, handle later
-			// // Will need to add struct/object nesting into objects;
-			// // should find a better (i.e, recursive) way to do this
-			// if v.Type == "struct" {
-			// 	// structString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, structValue)
-			// 	anotherStructString, err := translateStruct(v)
-			// 	if err != nil {
-			// 		return structString, err
-			// 	}
-			// 	structString += anotherStructString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
-
-			// } else if v.Type == "string" {
-			// 	structString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, structValue)
-
-			// } else if v.Type == "array" {
-			// 	// I am not supporting arrays for now, will have to debate how to
-			// 	// do this later. By definition, if structs are just map[string]<var>
-			// 	// and structs should be able to have keys with array values, then
-			// 	// <var> has to be able to containerize an array.
-			// 	// FIXME: the underlying C++ var could hold an array, but Express
-			// 	// could only allow its usage in arrays
-			// 	continue
-
-			// } else {
-			structString += v.Type + " " + v.Name + ";\n"
-			// }
-		}
-
-		structString += "};\n"
+	// call translateObject to get the object foot print
+	// put that object into the map
+	structDef, err := translateObject(t, "")
+	if err != nil {
+		return "", err
 	}
+	// structDef += "structMap[\"" + t.Name + "\"] = " + t.Name + ";\n"
+	// structDef := "var " + t.Name + " = genStruct(\"" + t.Metadata["real"].(string) + "\");\n"
 
-	return structString, nil
+	return structDef, nil
+	// return "var " + t.Name + " = genStruct(\"" + t.Acting + "\");\n", nil
 }
 
 func translateVariableStatement(t token.Value) (string, error) {
@@ -469,7 +463,7 @@ func translateVariableStatement(t token.Value) (string, error) {
 		return variableString, nil
 
 	case "object":
-		objectString, err := translateObject(t)
+		objectString, err := translateObject(t, "")
 		if err != nil {
 			// TODO:
 			return "", err
@@ -477,19 +471,42 @@ func translateVariableStatement(t token.Value) (string, error) {
 		return variableString + objectString, nil
 
 	case "struct":
-		// TODO: Just make structs essentially an object in the backend for now
-		// structString, err := translateStruct(t)
-		structString, err := translateObject(t)
+		// real := t.Metadata["real"]
+		var structString string
+		var err error
+
+		// struct declaration has no 'real' type
+		// if real == nil {
+		structString, err = translateStruct(t)
+		// fmt.Println("structString", structString)
 		if err != nil {
-			// TODO:
 			return "", err
 		}
-		// TODO: Just make structs essentially an object in the backend for now
-		// if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
-		// 	return variableString + structString, nil
+		// } else {
+		// 	// TODO: Just make structs essentially an object in the backend for now
+		// 	// structString, err = translateObject(t)
+		// 	// fmt.Println("structString2", structString)
+		// 	// if err != nil {
+		// 	// 	// TODO:
+		// 	// 	return "", err
+		// 	// }
+
+		// 	// This was how I was doing the genStruct usage with the above in an if
+		// 	structString = "var " + t.Name + " = genStruct(\"" + t.Metadata["real"].(string) + "\");\n"
+		// 	objstr, err := translateObject(t, true)
+		// 	if err != nil {
+		// 		return "", err
+		// 	}
+
+		// 	structString += objstr
+
+		// 	// TODO: Just make structs essentially an object in the backend for now
+		// 	// if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
+		// 	// 	return variableString + structString, nil
+		// 	// }
+		// 	// structStrings += structString
+		// 	// return variableString, nil
 		// }
-		// structStrings += structString
-		// return variableString, nil
 		return variableString + structString, nil
 
 	case "array":
@@ -822,7 +839,7 @@ func translateReturn(t token.Value) (string, error) {
 		returnValue.Name = returnValue.Name + "_" + RandStringBytesMaskImprSrc(10)
 		//fmt.Println("NAME_BYTES", returnValue.Name)
 
-		objectString, err := translateObject(returnValue)
+		objectString, err := translateObject(returnValue, "")
 		if err != nil {
 			return "", err
 		}
@@ -857,6 +874,7 @@ func translateBlock(tv token.Value) (string, error) {
 
 	for _, t := range insideBlock {
 		//fmt.Println("insideBlock t", t)
+		blockString += "\n"
 
 		variableString, err := translateVariableStatement(t)
 		if err != nil {
@@ -903,6 +921,19 @@ func translateBlock(tv token.Value) (string, error) {
 	}
 
 	return blockString, nil
+}
+
+func genStructFactory() string {
+	// structFactory :=
+	return `
+		std::map<std::string, var> structMap;
+		var genStruct(std::string structName) {
+			var structValue = structMap[structName];
+			return structValue;
+		}
+		`
+
+	// return structFactory
 }
 
 func (p *Parser) Transpile(block token.Value) (string, error) {
@@ -962,7 +993,10 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += "\n" + structStrings + "\n" + functionStrings + "\nint main() {" + blockString + "}\n"
+	f += genStructFactory() + "\n" +
+		structStrings + "\n" +
+		functionStrings + "\nint main() {" +
+		blockString + "}\n"
 
 	return f, nil
 }

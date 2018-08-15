@@ -73,6 +73,19 @@ public:
     }
   }
 
+  // var(const var &value) {
+  //   type = value.Type();
+
+  //   switch (type) {
+  //     // Not sure how to deal with this for now
+  //     // case pointerType:
+
+  //     case intType:
+  //       int* dr = new int(*(int*)value.Value());
+  //   }
+
+  // }
+
   var(void) : type(objectType), data(new map<string, var>) {}
   var(void *value) : type(pointerType), data(value) {}
 
@@ -158,10 +171,7 @@ public:
 
   varType Type(void) const { return type; }
 
-  void *Value(void) const {
-    // //printf("value\n");
-    return data;
-  }
+  void *Value(void) const { return data; }
 
   var &operator[](string attribute) {
     if (type == objectType) {
