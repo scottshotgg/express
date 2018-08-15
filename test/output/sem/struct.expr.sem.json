@@ -419,6 +419,87 @@
 			"Metadata": {
 				"real": "Thing"
 			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "something3",
+							"String": "something3"
+						},
+						{
+							"Name": "something3",
+							"Type": "struct",
+							"True": [
+								{
+									"Name": "fieldA",
+									"Type": "int",
+									"True": 0,
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true
+									}
+								},
+								{
+									"Name": "stringField",
+									"Type": "string",
+									"True": "chyah brah",
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"default": false
+									}
+								},
+								{
+									"Name": "false_field",
+									"Type": "bool",
+									"True": false,
+									"AccessType": "private"
+								},
+								{
+									"Name": "anotherFielderino",
+									"Type": "float",
+									"True": 0,
+									"AccessType": "private"
+								},
+								{
+									"Name": "thing",
+									"Type": "struct",
+									"True": [
+										{
+											"Name": "woah",
+											"Type": "int",
+											"True": 0,
+											"AccessType": "private"
+										}
+									],
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"real": "another"
+									}
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"real": "Thing",
+								"refs": "something3"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		}
 	]
 }

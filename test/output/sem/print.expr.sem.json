@@ -429,6 +429,20 @@
 				"lambda": false,
 				"type": "call"
 			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		}
 	]
 }

@@ -832,29 +832,6 @@
 							"type": "call"
 						}
 					}
-				},
-				{
-					"ID": 1,
-					"Type": "FUNCTION",
-					"Value": {
-						"Name": "Println",
-						"Type": "function",
-						"True": [
-							{
-								"ID": 1,
-								"Type": "GROUP",
-								"Value": {
-									"Type": "GROUP",
-									"True": []
-								}
-							}
-						],
-						"AccessType": "public",
-						"Metadata": {
-							"lambda": false,
-							"type": "call"
-						}
-					}
 				}
 			]
 		}

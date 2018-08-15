@@ -386,6 +386,43 @@ func translateObject(t token.Value, objName string) (string, error) {
 			// 	}
 
 			// 	objectString += objstr
+		} else if v.Type == "var" {
+			// vType := v.Type
+			// v.Type = v.Acting
+			// v.Acting = vType
+			// varStmt, err := translateVariableStatement(v)
+			// if err != nil {
+			// 	return "", err
+			// }
+
+			// objectString += strings.Join(
+			// 	[]string{tName, "[\"" + v.Name + "\"] =", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+			// ) + "\n"
+			var varStmt string
+			var err error
+			vName := v.Name
+			vType := v.Type
+
+			v.Type = v.Acting
+			v.Acting = vType
+			fmt.Println("i be here m8", v)
+			if v.Type == "object" || v.Type == "struct" {
+				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
+				varStmt, err = translateObject(v, vName)
+				varStmt += tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
+			} else if v.Type == "var" {
+				fmt.Println("wtf still got var after switching acting and type")
+				os.Exit(9)
+			} else {
+				varStmt, err = translateVariableStatement(v)
+				if err != nil {
+					return "", err
+				}
+			}
+
+			objectString += strings.Join(
+				[]string{vType, vName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+			) + "\n"
 
 		} else if v.Type == "array" {
 			// I am not supporting arrays for now, will have to debate how to
@@ -442,24 +479,29 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 	switch t.Type {
 	case "var":
-		// int abc = 5;
-		// Any zyx = Any{ "int", &abc };
-		// varName := t.Name + strconv.Itoa(int(r.Uint32()))
-		// variableString +=
-		sprintfVar := "%v"
-		if t.Acting == "string" {
-			sprintfVar = "\"%v\""
-		}
-		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf(sprintfVar, t.True)}, " ") + ";\n"
+		var varStmt string
+		var err error
+		tName := t.Name
 
-		// variableString += strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
-		// variableString += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
-		// // //fmt.Println(thing)
-		// // _, err = f.Write([]byte(thing))
-		// // if err != nil {
-		// // 	//fmt.Println("error writing to file")
-		// // 	os.Exit(9)
-		// // }
+		t.Type = t.Acting
+		t.Acting = tType
+		if t.Type != "object" && t.Type != "struct" {
+			tName = t.Name + "_" + RandStringBytesMaskImprSrc(10)
+			varStmt, err = translateObject(t, tName)
+		} else if t.Type == "var" {
+			fmt.Println("wtf still got var after switching acting and type")
+			os.Exit(9)
+		} else {
+			varStmt, err = translateVariableStatement(t)
+			if err != nil {
+				return "", err
+			}
+		}
+
+		variableString += strings.Join(
+			[]string{tType, tName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+		) + "\n"
+
 		return variableString, nil
 
 	case "object":
@@ -678,7 +720,7 @@ func translateLoop(t token.Value) (string, error) {
 	loopString += fmt.Sprintf("int %s=%d;\nwhile (%s) {\n",
 		t.Metadata["start"].(token.Value).Name,
 		t.Metadata["start"].(token.Value).True.(int),
-		t.Metadata["end"].(token.Value).String,
+		t.String,
 	)
 	// //fmt.Println("loop", loop)
 	// _, err = f.Write([]byte(loop))

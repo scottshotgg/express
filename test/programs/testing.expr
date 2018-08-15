@@ -2,16 +2,73 @@
 
 func someFunction(int arg1) (var returnValue) {
   for k of [ 2, 4, 5, 9 ] {
-    defer Println("value: ", k)
-    /*if arg1 < k {
+    defer Println("value of k: ", k)
+    if arg1 < k {
       return { value: k }
-    }*/
+    }
   }
 
-  return { value: 1000 }
+  return { something: 0 }
 }
 
 defer Println("hey its me")
 defer Println("does this work")
 
-someFunction(9)
+Println("return value", someFunction(7))
+Println()
+Println()
+Println("return value", someFunction(9))
+
+struct Engine = {
+  float Displacement = 2.4
+  string Type = "v6"
+  int HP = 235
+  string OilType = "5w-20"
+  var Warnings
+}
+
+var things = {
+  thingy := 0
+}
+
+struct Car = {
+  string Type = "car"
+  bool New
+  int numOfWheels = 4
+  engine := Engine {
+    HP: 199
+    Warnings: {
+      bool lowOil
+      bool lowGas
+      bool highTemp
+      bool lowTirePressure
+      bool antique
+    }
+  }
+}
+
+oldCar := Car {
+  Type: "car"
+  New: false
+  numOfWheels: 4
+  engine: Engine{
+    HP: 160
+    Warnings: {
+      antique: true
+    }
+  }
+}
+
+
+Println("Default Value for Car struct", Car{})
+/*
+*/
+
+// this splatters out a shit ton of text, needs to actually print the variable
+// This will have to be done somehow by creating a local variable and then sending
+// that into the function
+/*
+Println("Values for Car struct", Car{
+  Type = "truck"
+})
+*/

@@ -152,8 +152,8 @@
 																				"Type": "LITERAL",
 																				"Value": {
 																					"Type": "string",
-																					"True": "value: ",
-																					"String": "value: "
+																					"True": "value of k: ",
+																					"String": "value of k: "
 																				}
 																			},
 																			{
@@ -172,6 +172,80 @@
 																"lambda": false,
 																"type": "call"
 															}
+														}
+													},
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "if"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "arg1"
+														}
+													},
+													{
+														"Type": "L_THAN",
+														"Value": {
+															"Type": "lthan",
+															"String": "\u003c"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "k"
+														}
+													},
+													{
+														"Type": "BLOCK",
+														"Value": {
+															"Type": "BLOCK",
+															"True": [
+																{
+																	"ID": 9,
+																	"Type": "KEYWORD",
+																	"Value": {
+																		"Type": "keyword",
+																		"String": "return"
+																	}
+																},
+																{
+																	"Type": "BLOCK",
+																	"Value": {
+																		"Type": "BLOCK",
+																		"True": [
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "value"
+																				}
+																			},
+																			{
+																				"Type": "ASSIGN",
+																				"Value": {
+																					"Type": "set",
+																					"String": ":"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "k"
+																				}
+																			}
+																		]
+																	}
+																}
+															]
 														}
 													}
 												]
@@ -194,7 +268,7 @@
 														"Type": "IDENT",
 														"Value": {
 															"Type": "private",
-															"String": "value"
+															"String": "something"
 														}
 													},
 													{
@@ -208,7 +282,7 @@
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 1000
+															"True": 0
 														}
 													}
 												]
@@ -309,7 +383,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "someFunction",
+						"Name": "Println",
 						"Type": "function",
 						"True": [
 							{
@@ -321,8 +395,830 @@
 										{
 											"Type": "LITERAL",
 											"Value": {
+												"Type": "string",
+												"True": "return value",
+												"String": "return value"
+											}
+										},
+										{
+											"ID": 1,
+											"Type": "FUNCTION",
+											"Value": {
+												"Name": "someFunction",
+												"Type": "function",
+												"True": [
+													{
+														"ID": 1,
+														"Type": "GROUP",
+														"Value": {
+															"Type": "GROUP",
+															"True": [
+																{
+																	"Type": "LITERAL",
+																	"Value": {
+																		"Type": "int",
+																		"True": 7
+																	}
+																}
+															]
+														}
+													}
+												],
+												"AccessType": "public",
+												"Metadata": {
+													"lambda": false,
+													"type": "call"
+												}
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": []
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": []
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "return value",
+												"String": "return value"
+											}
+										},
+										{
+											"ID": 1,
+											"Type": "FUNCTION",
+											"Value": {
+												"Name": "someFunction",
+												"Type": "function",
+												"True": [
+													{
+														"ID": 1,
+														"Type": "GROUP",
+														"Value": {
+															"Type": "GROUP",
+															"True": [
+																{
+																	"Type": "LITERAL",
+																	"Value": {
+																		"Type": "int",
+																		"True": 9
+																	}
+																}
+															]
+														}
+													}
+												],
+												"AccessType": "public",
+												"Metadata": {
+													"lambda": false,
+													"type": "call"
+												}
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "struct",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Engine"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "float",
+									"String": "float"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Displacement"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "float",
+									"True": 2.4
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "string",
+									"String": "string"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Type"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "v6",
+									"String": "v6"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "HP"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 235
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "string",
+									"String": "string"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "OilType"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "5w-20",
+									"String": "5w-20"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "var",
+									"String": "var"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Warnings"
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "var",
+						"String": "var"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "things"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "thingy"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 0
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "struct",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Car"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "string",
+									"String": "string"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Type"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "car",
+									"String": "car"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "bool",
+									"String": "bool"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "New"
+								}
+							},
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "int",
+									"String": "int"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "numOfWheels"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "assign",
+									"String": "="
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 4
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "engine"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "init",
+									"String": ":="
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Engine"
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "HP"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
 												"Type": "int",
-												"True": 9
+												"True": 199
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "Warnings"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "TYPE",
+														"Value": {
+															"Type": "bool",
+															"String": "bool"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "lowOil"
+														}
+													},
+													{
+														"Type": "TYPE",
+														"Value": {
+															"Type": "bool",
+															"String": "bool"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "lowGas"
+														}
+													},
+													{
+														"Type": "TYPE",
+														"Value": {
+															"Type": "bool",
+															"String": "bool"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "highTemp"
+														}
+													},
+													{
+														"Type": "TYPE",
+														"Value": {
+															"Type": "bool",
+															"String": "bool"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "lowTirePressure"
+														}
+													},
+													{
+														"Type": "TYPE",
+														"Value": {
+															"Type": "bool",
+															"String": "bool"
+														}
+													},
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "antique"
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "oldCar"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "public",
+						"String": "Car"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Type"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "string",
+									"True": "car",
+									"String": "car"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "New"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "bool",
+									"True": false
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "numOfWheels"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "LITERAL",
+								"Value": {
+									"Type": "int",
+									"True": 4
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "engine"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "public",
+									"String": "Engine"
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "HP"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 160
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "Warnings"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"Type": "IDENT",
+														"Value": {
+															"Type": "private",
+															"String": "antique"
+														}
+													},
+													{
+														"Type": "ASSIGN",
+														"Value": {
+															"Type": "set",
+															"String": ":"
+														}
+													},
+													{
+														"Type": "LITERAL",
+														"Value": {
+															"Type": "bool",
+															"True": true
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "Default Value for Car struct",
+												"String": "Default Value for Car struct"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "Car"
+											}
+										},
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": []
 											}
 										}
 									]

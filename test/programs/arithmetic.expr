@@ -31,6 +31,3 @@ var xsv = "me"
 var zsv = wsv + xsv
 
 Println(xs)
-
-// Why do I need this
-Println()

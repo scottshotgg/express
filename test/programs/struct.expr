@@ -33,5 +33,3 @@ something3 := Thing {
   not_in_this_struct := "wtf dude"
 }
 Println("something3", something3)
-
-
