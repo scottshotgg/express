@@ -42,9 +42,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _aXYFzYytAR = {};
-    _aXYFzYytAR["something"] = "else";
-    return _aXYFzYytAR;
+    var _OfjbvSDgfb = {};
+    _OfjbvSDgfb["something"] = "else";
+    return _OfjbvSDgfb;
   }
 }
 
@@ -52,33 +52,33 @@ int main() {
 
   var obj = {};
   obj["something"] = "here";
-  var hey_pWLaIextde = {};
-  hey_pWLaIextde["me"] = true;
-  hey_pWLaIextde["anIntVariable"] = 69;
-  obj["hey"] = hey_pWLaIextde;
+  var hey_DBQPWjcLGf = {};
+  hey_DBQPWjcLGf["me"] = true;
+  hey_DBQPWjcLGf["anIntVariable"] = 69;
+  obj["hey"] = hey_DBQPWjcLGf;
 
   var objs[] = {};
   {
-    var _EUdvkgyRqM = {};
-    _EUdvkgyRqM["another"] = "object";
-    objs[0] = _EUdvkgyRqM;
+    var _PHZhPGNrur = {};
+    _PHZhPGNrur["another"] = "object";
+    objs[0] = _PHZhPGNrur;
   }
   {
-    var obj_YhYjzolAqA = {};
-    obj_YhYjzolAqA["something"] = "here";
-    var hey_IXLLHiteZM = {};
-    hey_IXLLHiteZM["me"] = true;
-    hey_IXLLHiteZM["anIntVariable"] = 69;
-    obj_YhYjzolAqA["hey"] = hey_IXLLHiteZM;
-    objs[1] = obj_YhYjzolAqA;
+    var obj_LMzKFfAFZn = {};
+    obj_LMzKFfAFZn["something"] = "here";
+    var hey_zJcufPhZMh = {};
+    hey_zJcufPhZMh["me"] = true;
+    hey_zJcufPhZMh["anIntVariable"] = 69;
+    obj_LMzKFfAFZn["hey"] = hey_zJcufPhZMh;
+    objs[1] = obj_LMzKFfAFZn;
   }
   {
-    var obj_GIdIVUvFdq = {};
-    obj_GIdIVUvFdq["something"] = "here";
-    var hey_TZWaPFeSli = {};
-    hey_TZWaPFeSli["me"] = true;
-    hey_TZWaPFeSli["anIntVariable"] = 69;
-    obj_GIdIVUvFdq["hey"] = hey_TZWaPFeSli;
-    objs[2] = obj_GIdIVUvFdq;
+    var obj_pgWwIuxvLe = {};
+    obj_pgWwIuxvLe["something"] = "here";
+    var hey_NMvgxCfGok = {};
+    hey_NMvgxCfGok["me"] = true;
+    hey_NMvgxCfGok["anIntVariable"] = 69;
+    obj_pgWwIuxvLe["hey"] = hey_NMvgxCfGok;
+    objs[2] = obj_pgWwIuxvLe;
   }
 }

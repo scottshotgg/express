@@ -42,10 +42,16 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _aXYFzYytAR = {};
-    _aXYFzYytAR["something"] = "else";
-    return _aXYFzYytAR;
+    var _OfjbvSDgfb = {};
+    _OfjbvSDgfb["something"] = "else";
+    return _OfjbvSDgfb;
   }
 }
 
-int main() {}
+int main() {
+
+  var _RyiWyUruxv = {};
+  _RyiWyUruxv["another"] = "object";
+
+  increment(_RyiWyUruxv);
+}

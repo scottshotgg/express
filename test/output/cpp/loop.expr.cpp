@@ -42,9 +42,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _aXYFzYytAR = {};
-    _aXYFzYytAR["something"] = "else";
-    return _aXYFzYytAR;
+    var _OfjbvSDgfb = {};
+    _OfjbvSDgfb["something"] = "else";
+    return _OfjbvSDgfb;
   }
 }
 
@@ -67,20 +67,20 @@ int main() {
   }
 
   {
-    int arrayBoi_1534319544[] = {1, 2, 4};
+    int arrayBoi_1534341371[] = {1, 2, 4};
     int i = 0;
-    int i_1534319544 = 0;
-    while (3) {
+    int i_1534341371 = 0;
+    while (i_1534341371 < 3) {
       {
         defer onLeaveFuncs;
 
-        i = i_1534319544;
+        i = i_1534341371;
 
         f = i;
 
         int h = 1;
       }
-      i_1534319544 += 1;
+      i_1534341371 += 1;
     }
   }
 
@@ -88,18 +88,18 @@ int main() {
 
   {
     int i = 0;
-    int i_1534319544 = 0;
-    while (8) {
+    int i_1534341371 = 0;
+    while (i_1534341371 < 8) {
       {
         defer onLeaveFuncs;
 
-        i = countdown[i_1534319544];
+        i = countdown[i_1534341371];
 
         f = i;
 
         int h = 1;
       }
-      i_1534319544 += 1;
+      i_1534341371 += 1;
     }
   }
 }

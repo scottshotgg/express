@@ -42,9 +42,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _aXYFzYytAR = {};
-    _aXYFzYytAR["something"] = "else";
-    return _aXYFzYytAR;
+    var _OfjbvSDgfb = {};
+    _OfjbvSDgfb["something"] = "else";
+    return _OfjbvSDgfb;
   }
 }
 
@@ -87,8 +87,10 @@ int main() {
 
   Println(thingyObject);
 
-  var _RSxPrShNeV = {};
-  _RSxPrShNeV["got_no"] = "BLOOD IN MY VEINS";
+  var _JmaEnxorSp = {};
+  _JmaEnxorSp["got_no"] = "BLOOD IN MY VEINS";
 
-  Println(_RSxPrShNeV);
+  Println(_JmaEnxorSp);
+
+  Println();
 }
