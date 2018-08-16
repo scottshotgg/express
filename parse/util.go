@@ -236,11 +236,10 @@ func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 		return "", nil
 
 	case token.VarType:
-		return []token.Value{}, nil
-		// fallthrough
+		fallthrough
 
 	case token.ObjectType:
-		return map[string]interface{}{}, nil
+		return []token.Value{}, nil
 
 	// case token.FunctionType:
 

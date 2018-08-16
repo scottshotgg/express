@@ -16,14 +16,14 @@ var someFunction(int arg1) {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1534363714[] = {2, 4, 5, 9};
+      int arrayBoi_1534449547[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1534363714 = 0;
-      while (k_1534363714 < 4) {
+      int k_1534449547 = 0;
+      while (k_1534449547 < 4) {
         {
           defer onLeaveFuncs;
 
-          k = arrayBoi_1534363714[k_1534363714];
+          k = arrayBoi_1534449547[k_1534449547];
 
           onReturnFuncs.deferStack.push(
               [=](...) { Println("value of k: ", k); });
@@ -31,26 +31,22 @@ var someFunction(int arg1) {
           if (arg1 < k) {
             defer onLeaveFuncs;
 
-            var _QVVCHDyEUS = {};
-            _QVVCHDyEUS["value"] = k;
-            return _QVVCHDyEUS;
+            var _YjietuaNMQ = {};
+            _YjietuaNMQ["value"] = k;
+            return _YjietuaNMQ;
           }
         }
-        k_1534363714 += 1;
+        k_1534449547 += 1;
       }
     }
 
-    var _rWEbDxcJRM = {};
-    _rWEbDxcJRM["something"] = 0;
-    return _rWEbDxcJRM;
+    var _WcVEbJHMZV = {};
+    _WcVEbJHMZV["something"] = 0;
+    return _WcVEbJHMZV;
   }
 }
 
 int main() {
-
-  onExitFuncs.deferStack.push([=](...) { Println("hey its me", ""); });
-
-  onExitFuncs.deferStack.push([=](...) { Println("does this work", ""); });
 
   Println("return value", someFunction(7));
 
@@ -65,44 +61,53 @@ int main() {
   Engine["Type"] = "v6";
   Engine["HP"] = 235;
   Engine["OilType"] = "5w-20";
-  var Warnings_SKiJOQueIf = {};
-  Engine["Warnings"] = Warnings_SKiJOQueIf;
+  var Warnings_CakKkSLHGM = {};
+  Engine["Warnings"] = Warnings_CakKkSLHGM;
 
   var things = {};
   things["thingy"] = 0;
+
+  var normalWarnings = {};
+  normalWarnings["lowOil"] = false;
+  normalWarnings["lowGas"] = false;
+  normalWarnings["highTemp"] = false;
+  normalWarnings["lowTirePressure"] = false;
 
   var Car = {};
   Car["Type"] = "car";
   Car["New"] = false;
   Car["numOfWheels"] = 4;
-  var engine_ynlFZpOWZK = {};
-  engine_ynlFZpOWZK["Displacement"] = 2.4;
-  engine_ynlFZpOWZK["Type"] = "v6";
-  engine_ynlFZpOWZK["HP"] = 199;
-  engine_ynlFZpOWZK["OilType"] = "5w-20";
-  var Warnings_mYzneOcdqz = {};
-  Warnings_mYzneOcdqz["lowOil"] = false;
-  Warnings_mYzneOcdqz["lowGas"] = false;
-  Warnings_mYzneOcdqz["highTemp"] = false;
-  Warnings_mYzneOcdqz["lowTirePressure"] = false;
-  Warnings_mYzneOcdqz["antique"] = false;
-  engine_ynlFZpOWZK["Warnings"] = Warnings_mYzneOcdqz;
+  var engine_EnaMwfxewN = {};
+  engine_EnaMwfxewN["Displacement"] = 2.4;
+  engine_EnaMwfxewN["Type"] = "v6";
+  engine_EnaMwfxewN["HP"] = 199;
+  engine_EnaMwfxewN["OilType"] = "5w-20";
+  var Warnings_oYUaoJnHNt = {};
+  Warnings_oYUaoJnHNt["lowOil"] = false;
+  Warnings_oYUaoJnHNt["lowGas"] = false;
+  Warnings_oYUaoJnHNt["highTemp"] = false;
+  Warnings_oYUaoJnHNt["lowTirePressure"] = false;
+  engine_EnaMwfxewN["Warnings"] = Warnings_oYUaoJnHNt;
+  Car["engine"] = engine_EnaMwfxewN;
 
-  Car["engine"] = engine_ynlFZpOWZK;
+  var oldWarnings = {};
+  oldWarnings["antique"] = true;
 
   var oldCar = {};
   oldCar["Type"] = "car";
   oldCar["New"] = false;
   oldCar["numOfWheels"] = 4;
-  var engine_KJbwFwgDZI = {};
-  engine_KJbwFwgDZI["Displacement"] = 2.4;
-  engine_KJbwFwgDZI["Type"] = "v6";
-  engine_KJbwFwgDZI["HP"] = 160;
-  engine_KJbwFwgDZI["OilType"] = "5w-20";
-  var Warnings_hYxbSDxWgx = {};
-  engine_KJbwFwgDZI["Warnings"] = Warnings_hYxbSDxWgx;
+  var engine_BcdNATmDgE = {};
+  engine_BcdNATmDgE["Displacement"] = 2.4;
+  engine_BcdNATmDgE["Type"] = "v6";
+  engine_BcdNATmDgE["HP"] = 160;
+  engine_BcdNATmDgE["OilType"] = "5w-20";
+  var Warnings_DCmULscuZt = {};
+  Warnings_DCmULscuZt["antique"] = true;
+  engine_BcdNATmDgE["Warnings"] = Warnings_DCmULscuZt;
+  oldCar["engine"] = engine_BcdNATmDgE;
 
-  oldCar["engine"] = engine_KJbwFwgDZI;
+  Println("Most cars:", Car);
 
-  Println("Default Value for Car struct", Car);
+  Println("Old cars:", oldCar);
 }

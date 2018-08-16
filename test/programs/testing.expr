@@ -11,9 +11,6 @@ func someFunction(int arg1) (var returnValue) {
   return { something: 0 }
 }
 
-defer Println("hey its me")
-defer Println("does this work")
-
 Println("return value", someFunction(7))
 Println()
 Println()
@@ -24,48 +21,62 @@ struct Engine = {
   string Type = "v6"
   int HP = 235
   string OilType = "5w-20"
-  var Warnings
+  object Warnings
 }
 
 var things = {
   thingy := 0
 }
 
+// declaring as `var` causes 
+// "wtf still got var after switching acting and type"
+object normalWarnings = {
+  bool lowOil
+  bool lowGas
+  bool highTemp
+  bool lowTirePressure
+}
+
 struct Car = {
+  //var id
   string Type = "car"
   bool New
   int numOfWheels = 4
   engine := Engine {
     HP: 199
-    Warnings: {
-      bool lowOil
-      bool lowGas
-      bool highTemp
-      bool lowTirePressure
-      bool antique
-    }
+    Warnings: normalWarnings
   }
 }
 
+oldWarnings := {
+  antique: true
+}
+
+// FIXME: this does not work
+//something := someFunction(7)
+//Println(something)
+
+// FIXME: assinging anything but an object to a var causes it to
+// go away...?
 oldCar := Car {
+  //id: "hey"
   Type: "car"
   New: false
   numOfWheels: 4
   engine: Engine{
     HP: 160
-    Warnings: {
-      antique: true
-    }
+    Warnings: oldWarnings
+    // FIXME: this does not work right now
+    // Warnings: someFunction(7)
   }
 }
 
+Println("Most cars:", Car)
+Println("Old cars:" oldCar)
 
-Println("Default Value for Car struct", Car{})
-/*
-*/
-
-// this splatters out a shit ton of text, needs to actually print the variable
-// This will have to be done somehow by creating a local variable and then sending
+// FIXME: this splatters out a shit ton of text, needs to
+// actually print the variable. This will have to be done
+// somehow by creating a local variable and then sending
 // that into the function
 /*
 Println("Values for Car struct", Car{

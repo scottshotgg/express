@@ -2,7 +2,6 @@ package parse
 
 import (
 	"fmt"
-	"os"
 	"reflect"
 	"strconv"
 	"strings"
@@ -71,6 +70,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			// If we did not find it as a variable, look in the DefinedTypes map
 			value2, ok := DefinedTypes[p.CurrentToken.Value.String]
 			if !ok {
+				fmt.Println()
+				fmt.Println("p.meta.currentScope", p.meta.currentScope)
 				return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
 			}
 
@@ -83,13 +84,14 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			functionOpType = "call"
 
 			p.Shift()
+
+			// This is a struct declaration
 		} else if variable.Type == STRUCT {
 			// Here we need to get the default values from the type map
 
 			fmt.Println("p.NextToken", p.NextToken)
 			// os.Exit(9)
 
-			// If the next token is a block then parse a struct
 			if p.NextToken.Type == token.Block {
 				inStruct = true
 				defer func(typename string) {
@@ -111,6 +113,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					// Need to make a new scope from the vars inside of the struct
 					// pa := New(p.NextToken.Value.True.([]token.Token))
 					pa := New([]token.Token{p.NextToken})
+					// This gives scoping to the inside of the struct
+					pa.meta.NewScopeFromScope(p.meta.currentScope)
 
 					// Unpack all the values from the struct
 					valuers := []token.Value{}
@@ -169,7 +173,10 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 				inStruct = false
 			}
-			// FIXME: Should we not produce an error here?
+			// TODO: fix this
+			// else {
+			// 	return token.Value{}, errors.Errorf("Inaccurate assignment to type, need literal %s", p.NextToken.Type)
+			// }
 
 			p.Shift()
 		}
@@ -615,7 +622,20 @@ func (p *Parser) GetExpression() (token.Value, error) {
 	// Will have to experiment on where to put this
 	// Might need to put this in factor
 	case token.Block:
-		//fmt.Println("found a block")
+		fmt.Println("found a block")
+		fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
+
+		// TODO: Don't know if we need this if we prelod the object values, kinda hacky
+		if p.meta.currentVariable.Type == VAR || p.meta.currentVariable.Type == OBJECT {
+			inObject = true
+			inStruct = false
+		} else if p.meta.currentVariable.Type == STRUCT {
+			inObject = false
+			inStruct = true
+		}
+
+		fmt.Println("inObject, inStruct", inObject, inStruct)
+
 		block, err := p.CheckBlock()
 		if err != nil {
 			//fmt.Println("waddup blockboi", err)
@@ -678,7 +698,6 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// 	//fmt.Println("wtf am i doing here", p.meta.currentVariable)
 				// 	os.Exit(9)
 				// }
-
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
 				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
@@ -735,6 +754,10 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			// If we are not in a struct, then allow the set operator to also set the type
 			// However, if we are in a struct, then it should only be allowed to set the value
 			// within the bounds of the type, typing-attribute, and language defined type-degrades
+			fmt.Println("inStruct", inStruct)
+
+			// FIXME: we are erroring when declaring a struct that contains an object
+			// we need to track the location
 			if !inStruct {
 				p.meta.currentVariable.Type = SET
 			}
@@ -792,6 +815,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 						fmt.Println("shit", p.LastToken, value2)
 						fmt.Println("shit", p.CurrentToken, value2)
 						fmt.Println("shit", p.NextToken, value2)
+						fmt.Println("shits and stuff", DefinedTypes)
 						return token.Value{}, errors.Errorf("variable still UNRECOGNIZED: %+v", p.meta.currentVariable)
 					}
 
@@ -819,7 +843,6 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
 					fmt.Println("expr2", expr, p.meta.currentVariable)
-					os.Exit(9)
 					return token.Value{}, errors.Errorf("No implicit type casting as of now: p.meta.currentVariable.Type - %s, expr.Type - %s", VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 				}
 			}
