@@ -935,10 +935,39 @@
 					}
 				},
 				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "var",
+						"String": "var"
+					}
+				},
+				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "oldWarnings"
+						"String": "name"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "hey this is an id",
+						"String": "hey this is an id"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "something"
 					}
 				},
 				{
@@ -949,32 +978,34 @@
 					}
 				},
 				{
-					"Type": "BLOCK",
+					"ID": 1,
+					"Type": "FUNCTION",
 					"Value": {
-						"Type": "BLOCK",
+						"Name": "someFunction",
+						"Type": "function",
 						"True": [
 							{
-								"Type": "IDENT",
+								"ID": 1,
+								"Type": "GROUP",
 								"Value": {
-									"Type": "private",
-									"String": "antique"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "set",
-									"String": ":"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "bool",
-									"True": true
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 7
+											}
+										}
+									]
 								}
 							}
-						]
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				},
 				{
@@ -1112,27 +1143,6 @@
 											"Value": {
 												"Type": "int",
 												"True": 160
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "public",
-												"String": "Warnings"
-											}
-										},
-										{
-											"Type": "ASSIGN",
-											"Value": {
-												"Type": "set",
-												"String": ":"
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "private",
-												"String": "oldWarnings"
 											}
 										}
 									]

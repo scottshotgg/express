@@ -2,6 +2,7 @@ package parse
 
 import (
 	"fmt"
+	"os"
 	"reflect"
 	"strconv"
 	"strings"
@@ -25,8 +26,6 @@ func (p *Parser) GetFactor() (token.Value, error) {
 	value := token.Value{
 		Metadata: map[string]interface{}{},
 	}
-
-	var err error
 
 	switch p.NextToken.Type {
 	case token.Literal:
@@ -82,6 +81,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		refs := p.CurrentToken.Value.String
 		if variable.Type == FUNCTION {
 			functionOpType = "call"
+			// FIXME: here we need to look up the return value
+			fmt.Println("I AM A CALL", variable)
 
 			p.Shift()
 
@@ -325,6 +326,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			} else {
 				//fmt.Println("FUNCTION OP TYPE", functionOpType)
 				stmt, err = pa.GetExpression()
+				fmt.Println("I AM A FUNTION CALL", stmt)
 			}
 			if err != nil {
 				//fmt.Println("Error: could not parse expression inside group")
@@ -343,7 +345,6 @@ func (p *Parser) GetFactor() (token.Value, error) {
 	case token.Function:
 		next := p.NextToken
 		md := next.Value.Metadata["type"]
-		//fmt.Println("md", md)
 
 		// Unpack tokens from function into new parser
 		// Unpack tokens from each in True into a new parser
@@ -657,8 +658,17 @@ func (p *Parser) GetExpression() (token.Value, error) {
 		case "init":
 			if p.meta.currentVariable.Type != UNRECOGNIZED {
 				return token.Value{}, errors.New("Type specification with init is not valid: " + p.meta.currentVariable.Name)
+			} else if p.meta.currentVariable.Type == FUNCTION {
+				fmt.Println("function", p.meta.currentVariable)
+				//p.meta.currentVariable.Type =
+			} else {
+				p.meta.currentVariable.Type = SET
 			}
-			p.meta.currentVariable.Type = SET
+
+			// if p.meta.currentVariable.Name == "something" {
+			// 	fmt.Println("something:", p.meta.currentVariable)
+			// 	os.Exit(9)
+			// }
 			fallthrough
 
 		case "assign":
@@ -673,6 +683,12 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				return token.Value{}, err
 			}
 			fmt.Printf("expr in assign %+v\n", expr)
+
+			if expr.Type == token.FunctionType {
+				fmt.Println("thing", p.CurrentToken)
+				fmt.Println("someFunction", p.NextToken)
+				os.Exit(9)
+			}
 
 			if p.meta.currentVariable.Type == UNRECOGNIZED && !inStruct && !inObject {
 				variable, ok := p.meta.GetVariable(p.NextToken.Value.String)
@@ -703,8 +719,16 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
+				// FIXME: wtf is this for?
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
 					// p.meta.currentVariable.Metadata["real"] = expr.String
+				} else if expr.Type == token.FunctionType {
+					fmt.Println("FUNCTION", expr)
+
+					fmt.Println("scope", p.meta.currentScope)
+
+					os.Exit(9)
+
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
@@ -833,12 +857,21 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// }
 
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
+
 			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
 				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
 					// FIXME: wtf?
+					// p.meta.currentVariable.Metadata["real"] = expr.String
+
+				} else if expr.Type == token.FunctionType {
+					fmt.Println("FUNCTION", expr)
+
+					fmt.Println("scope", p.meta.currentScope)
+					os.Exit(9)
+
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
@@ -1325,38 +1358,18 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 				return token.Value{}, err
 			}
 		}
-
-		//fmt.Println("groupExpr2, err", groupExpr2, err)
-		//fmt.Println("p.LastToken", p.LastToken)
-		//fmt.Println("CURRENT TOKEN", p.CurrentToken)
-		//fmt.Println("p.NextToken", p.NextToken)
-		// p.Unshift()
-		// //fmt.Println("groupExpr2, err", groupExpr2, err)
-		// //fmt.Println("p.LastToken", p.LastToken)
-		// //fmt.Println("CURRENT TOKEN", p.CurrentToken)
-		// //fmt.Println("p.NextToken", p.NextToken)
-		// p.Shift()
-		// p.Shift()
 		p.Shift()
-		//fmt.Println("p.LastToken", p.LastToken)
-		//fmt.Println("CURRENT TOKEN", p.CurrentToken)
-		//fmt.Println("p.NextToken", p.NextToken)
-		// os.Exit(9)
-		// //fmt.Println("groupExpr2, err", groupExpr2, err)
-		// //fmt.Println("p.LastToken", p.LastToken)
-		// //fmt.Println("CURRENT TOKEN", p.CurrentToken)
-		// //fmt.Println("p.NextToken", p.NextToken)
 
+		// FIXME: need to ensure that the function returns are what the function header says
 		blockToken, err := p.CheckBlock()
 		if err != nil {
 			return token.Value{}, err
 		}
-		//fmt.Println("blockToken, err", blockToken, err)
-
-		// bodyTokens := body.True.([]token.Value)
-		// //fmt.Println("bodyTokens", bodyTokens)
 
 		functionOpType = ""
+
+		// FIXME: We need to add this to the current scope under a "functions" key so that we can check it
+		// during function usage
 		tv := token.Value{
 			Name:       p.meta.currentVariable.Name,
 			AccessType: token.PrivateAccessType,
@@ -1372,11 +1385,8 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 			},
 		}
 
-		//fmt.Println("tv and stuff", tv)
 		// FIXME: fix this later
 		tv.AccessType = "private"
-		//fmt.Println(p.meta.DeclareVariableFromTokenValue(tv))
-		//fmt.Println("currentScope again", p.meta.currentScope)
 
 		return tv, nil
 

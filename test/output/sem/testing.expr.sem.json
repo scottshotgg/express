@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1534449547[k_1534449547]"
+										"refs": "arrayBoi_1534557084[k_1534557084]"
 									}
 								},
 								{
@@ -128,10 +128,10 @@
 									}
 								}
 							],
-							"String": "k_1534449547\u003c4",
+							"String": "k_1534557084\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1534449547",
+									"Name": "k_1534557084",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -139,7 +139,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1534449547",
+										"Name": "arrayBoi_1534557084",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -192,14 +192,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1534449547",
+									"Name": "k_1534557084",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1534449547",
+									"Name": "k_1534557084",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -556,6 +556,13 @@
 			"AccessType": "public"
 		},
 		{
+			"Name": "name",
+			"Type": "var",
+			"Acting": "string",
+			"True": "hey this is an id",
+			"AccessType": "private"
+		},
+		{
 			"Name": "oldWarnings",
 			"Type": "object",
 			"True": [
@@ -567,6 +574,28 @@
 				}
 			],
 			"AccessType": "private"
+		},
+		{
+			"Name": "something",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "int",
+							"True": 7,
+							"String": "7"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
 		},
 		{
 			"Name": "oldCar",

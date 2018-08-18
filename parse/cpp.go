@@ -483,16 +483,20 @@ func translateVariableStatement(t token.Value) (string, error) {
 		var err error
 		tName := t.Name
 
+		tType = t.Type
 		t.Type = t.Acting
 		t.Acting = tType
+		fmt.Println("t.Type", t.Type)
+		fmt.Println("t.Acting", t.Acting)
 		if t.Type != "object" && t.Type != "struct" {
 			tName = t.Name + "_" + RandStringBytesMaskImprSrc(10)
-			varStmt, err = translateObject(t, tName)
+			varStmt, err = translateVariableStatement(t)
 		} else if t.Type == "var" {
 			fmt.Println("wtf still got var after switching acting and type")
 			os.Exit(9)
 		} else {
-			varStmt, err = translateVariableStatement(t)
+			fmt.Println("else", t.Type, t.Acting)
+			varStmt, err = translateObject(t, tName)
 			if err != nil {
 				return "", err
 			}
