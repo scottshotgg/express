@@ -13,5 +13,4 @@ func increment(object i) (object j) {
 //objs := [ { another: "object" } ]
 
 // Function call example
-increment({ another: "object" }
-)
+increment({ another: "object" })

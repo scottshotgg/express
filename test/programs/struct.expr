@@ -1,0 +1,35 @@
+// This is a file for testing structs
+
+struct another = {
+  int woah
+}
+
+another yeah
+
+// Define a struct
+struct Thing = {
+  int fieldA
+  string stringField
+  bool false_field
+  float anotherFielderino
+  another thing
+}
+
+// Instantiate a struct variable
+something := Thing{}
+Println("something", something)
+
+// Instantiate a struct variable with some initializers
+something2 := Thing {
+  fieldA: 0xDECAF
+}
+Println("something2", something2)
+
+something3 := Thing {
+  stringField: "chyah brah"
+
+  // You can declare local variables within structs however, 
+  // unlike objects, they will not get carried out
+  not_in_this_struct := "wtf dude"
+}
+Println("something3", something3)

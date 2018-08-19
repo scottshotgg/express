@@ -1,0 +1,33 @@
+// This is a file for testing operations
+
+// int operations
+int xi = 8 - 2 + 3
+int yi = 8 * 4 / 2
+int zi = 9 - 4 * 2
+
+// float operations
+float xf = 8.1 - 2.1 + 3.1
+float yf = 8.1 * 4.1 / 2.1
+float zf = 8.1 - 4.1 * 2.1
+
+// string operations
+string xs = "stringitize" + " me " + "daddy"
+string ys = "I bless the rains "
+string zs = ys + "down in Africa"
+
+// bool operations
+xb := true + false
+yb := false + false
+zb := true + true
+
+// operations between vars are also supported
+var xbv = true + true
+var ybv = false + false
+var zbv = xbv + ybv
+
+var wsv = "its "
+var xsv = "me"
+//var ysv = " l"
+var zsv = wsv + xsv
+
+Println(xs)

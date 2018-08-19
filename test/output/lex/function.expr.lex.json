@@ -320,13 +320,6 @@
 		}
 	},
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "R_PAREN",
 		"Value": {
 			"Type": "op_3",

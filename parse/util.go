@@ -2,72 +2,18 @@ package parse
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
+	"os"
 	"time"
 
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/express/token"
 )
 
-// // CollectTokens appends an array of tokens passed in to the EndTokens attribute of Meta
-// func (m *Meta) CollectTokens(tokens []token.Token) {
-// 	m.LastCollectedToken = tokens[len(tokens)-1]
-// 	m.EndTokens = append(m.EndTokens, tokens...)
-// }
-
-// // CollectToken appends a single token to the EndTokens attribute of Meta
-// func (m *Meta) CollectToken(token token.Token) {
-// 	m.LastCollectedToken = token
-// 	m.EndTokens = append(m.EndTokens, token)
-// }
-
-// // RemoveLastCollectedToken removes the last token put into EndTokens
-// func (m *Meta) RemoveLastCollectedToken() {
-// 	m.LastCollectedToken = m.EndTokens[len(m.EndTokens)-1]
-// 	m.EndTokens = m.EndTokens[:len(m.EndTokens)-1]
-// }
-
-// // PopLastCollectedToken removes the last token put into EndTokens
-// func (m *Meta) PopLastCollectedToken() token.Token {
-// 	m.LastCollectedToken = m.EndTokens[len(m.EndTokens)-2]
-// 	m.EndTokens = m.EndTokens[:len(m.EndTokens)-1]
-
-// 	return m.EndTokens[len(m.EndTokens)-1]
-// }
-
-// // CollectCurrentToken appends the token held in the CurrentToken attribute to the EndTokens array
-// func (m *Meta) CollectCurrentToken() {
-// 	m.CollectToken(m.CurrentToken)
-// }
-
-// // CollectLastToken appends the token held in the LastToken attribute to the EndTokens array
-// func (m *Meta) CollectLastToken() {
-// 	m.CollectToken(m.LastToken)
-// }
-
-// // GetLastToken returns the LastToken attribute
-// func (m *Meta) GetLastToken() token.Token {
-// 	return m.LastToken
-// }
-
-// // PeekLastCollectedToken returns the last token appended to the EndTokens array
-// func (m *Meta) PeekLastCollectedToken() token.Token {
-// 	return m.LastCollectedToken
-// }
-
-// // GetCurrentToken returns the CurrentToken attribute
-// func (m *Meta) GetCurrentToken() token.Token {
-// 	return m.CurrentToken
-// }
-
-// // PeekTokenAtIndex returns the token at that ParseIndex if valid
-// func (m *Meta) PeekTokenAtIndex(index int) (token.Token, error) {
-// 	if index > -1 && index < p.Length {
-// 		return p.source[index], nil
-// 	}
-
-// 	return token.Token{}, errors.New("Current parseIndex outside of token range")
-// }
+var (
+	DefinedTypes = map[string]token.Value{}
+)
 
 func (p *Parser) SaveState() {
 	pState := *p
@@ -85,7 +31,8 @@ func (p *Parser) PopState() {
 
 // Shift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) Shift() {
-	p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	// p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	p.ProcessedTokens.Push(p.LastToken)
 	p.LastToken = p.CurrentToken
 	p.CurrentToken = p.NextToken
 
@@ -109,22 +56,57 @@ func (p *Parser) Shift() {
 
 // Unshift operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) Unshift() {
+	// fmt.Println("DECREMENTING INDEX", p.Index)
+	// fmt.Println("last at index", p.source[p.Index-1])
+	// fmt.Println("current at index", p.source[p.Index])
+	// fmt.Println("next at index", p.source[p.Index+1])
+	// Decrement atleast one back
 	p.Index--
+	// fmt.Println("AFTER decrement", p.Index)
+	// fmt.Println("last at index", p.source[p.Index-1])
+	// fmt.Println("current at index", p.source[p.Index])
+	// fmt.Println("next at index", p.source[p.Index+1])
+
+	for p.Index-1 > 0 {
+		if p.source[p.Index-1].Type != token.Whitespace {
+			// p.ProcessedTokens = append(p.ProcessedTokens, p.source[p.Index])
+			break
+		}
+		p.Index--
+	}
+	// fmt.Println("INDEX", p.Index)
+
 	p.NextToken = p.CurrentToken
 	p.CurrentToken = p.LastToken
-	p.LastToken = p.ProcessedTokens[len(p.ProcessedTokens)-1]
+
+	// p.ProcessedTokens should be changed to use a stack
+	// p.LastToken = p.ProcessedTokens[len(p.ProcessedTokens)-1]
+	poppedInterface, err := p.ProcessedTokens.Pop()
+	if err != nil {
+		fmt.Println("gots da pop error srry", err)
+		os.Exit(9)
+	}
+
+	poppedToken := token.Token{}
+	if poppedInterface != nil {
+		poppedToken = poppedInterface.(token.Token)
+	}
+
+	// fmt.Println("POPPED TOKOEN p.LastToken", poppedToken)
+	p.LastToken = poppedToken
 }
 
 // ShiftWithWS operates the parses like a 3-bit (3 token) SIPO shift register consuming the tokens until the end of the line
 func (p *Parser) ShiftWithWS() {
+	// p.ProcessedTokens = append(p.ProcessedTokens, p.LastToken)
+	p.ProcessedTokens.Push(p.LastToken)
 	p.LastToken = p.CurrentToken
-	p.CurrentToken = p.source[p.Index]
+	p.CurrentToken = p.NextToken
 
 	for {
 		if p.Index+1 < p.length {
-			p.Index++
-
 			p.NextToken = p.source[p.Index]
+			p.Index++
 			return
 		}
 
@@ -157,6 +139,8 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = FLOAT
 	case "BLOCK":
 		vt = OBJECT
+	case "struct":
+		vt = STRUCT
 	case "set":
 		vt = SET
 	case "array":
@@ -165,6 +149,8 @@ func variableTypeFromString(vtString string) (vt VariableType) {
 		vt = OBJECT
 	case "function":
 		vt = FUNCTION
+
+		// TODO: need a map case here to get the custom struct types
 
 		// default:
 		// 	//fmt.Println(vtString)
@@ -201,6 +187,8 @@ func VariableTypeString(vt VariableType) (st string) {
 		st = "set"
 	case OBJECT:
 		st = "object"
+	case STRUCT:
+		st = "struct"
 	case ARRAY:
 		st = "array"
 	case FUNCTION:
@@ -229,38 +217,51 @@ func AccessTypeString(at AccessType) (st string) {
 	return
 }
 
-func getBaseForType(trueType, actingType string) (interface{}, error) {
+// Shouldn't this return a token.Value?
+func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 	switch trueType {
 	case token.IntType:
 		return 0, nil
 
-	case token.StringType:
-		return "", nil
-
 	case token.BoolType:
 		return false, nil
-
-	case token.FloatType:
-		return 0.0, nil
 
 	case token.CharType:
 		return "", nil
 
+	case token.FloatType:
+		return 0.0, nil
+
+	case token.StringType:
+		return "", nil
+
 	case token.VarType:
 		fallthrough
-	case token.StructType:
-		fallthrough
+
 	case token.ObjectType:
-		return map[string]interface{}{}, nil
+		return []token.Value{}, nil
 
 	// case token.FunctionType:
 
 	// case token.ArrayType:
 	// 	return
 
+	case token.StructType:
+		// First we need to check the type map
+		value, ok := DefinedTypes[actingType]
+		fmt.Println("value, ok", value, ok)
+		if !ok {
+			fmt.Println("typemap", DefinedTypes)
+			return nil, errors.Errorf("Couldn't find struct type in type map: %s", actingType)
+		}
+
+		return value, nil
+
 	default:
-		var shit interface{}
-		return shit, errors.Errorf("Base not defined for type: %s %s", trueType, actingType)
+		// First we need to check the type map
+		// value, ok := DefinedTypes[]
+
+		return nil, errors.Errorf("Base not defined for type: %s %s", trueType, actingType)
 	}
 }
 

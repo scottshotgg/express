@@ -1,0 +1,50 @@
+// This is a file for testing HTML dom parsing and manipulation
+
+myWebsite :=
+  <html>
+    <title>Some Shit</title>
+    <body>
+      some body of stuff here
+    </body>
+  </html>
+
+myWebsiteStruct := {
+  html: {
+    title: {
+      innerText: "Some Shit"
+    }
+    body: {
+      innerText: "some body of stuff here"
+    }
+  }
+}
+
+// -------
+
+myWebsite :=
+  <html>
+    <title>Some Shit</title>
+    <body>
+      <h1>some body of stuff here</h1>
+      <a href="never_gonna_give_you_up.mp4">
+        ~~ click here for a free IPAD ~~
+      </a>
+    </body>
+  </html>
+
+myWebsiteStruct := {
+  html: {
+    title: {
+      innerText: "Some Shit"
+    }
+    body: {
+      innerText: ~~ click here for a free IPAD ~~
+      h1: {
+        innerText: "some body of stuff here"
+      }
+      a: {
+        href: "never_gonna_give_you_up.mp4"
+      }
+    }
+  }
+}

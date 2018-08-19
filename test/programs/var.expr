@@ -1,10 +1,11 @@
 // This file is for testing `var` types
 
 // Tests without operations
-var hi_my_type_is ="what"
+var hi_my_type_is = "what"
 hi_my_type_is = 666
 hi_my_type_is = true
 hi_my_type_is = 2.71828
+//hi_my_type_is = [ 6, 7, 8, 9 ]
 
 /* Leave objects for later
 hi_my_type_is = {

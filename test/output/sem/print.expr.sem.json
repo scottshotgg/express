@@ -1,0 +1,448 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "thingy",
+			"Type": "var",
+			"Acting": "int",
+			"True": 7,
+			"AccessType": "private"
+		},
+		{
+			"Name": "Print",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "thingy =",
+							"String": "thingy ="
+						},
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "int",
+							"True": 7,
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "thingy"
+							}
+						},
+						{
+							"Type": "string",
+							"True": "\\n",
+							"String": "\\n"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "int",
+							"True": 7,
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "thingy"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "thingy",
+			"Type": "var",
+			"Acting": "float",
+			"True": 69.69,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "Print",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "thingy =",
+							"String": "thingy ="
+						},
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "float",
+							"True": 69.69,
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						},
+						{
+							"Type": "string",
+							"True": "\\n",
+							"String": "\\n"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "float",
+							"True": 69.69,
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "thingy",
+			"Type": "var",
+			"Acting": "string",
+			"True": "woah woah woah",
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "Print",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "thingy =",
+							"String": "thingy ="
+						},
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "string",
+							"True": "woah woah woah",
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						},
+						{
+							"Type": "string",
+							"True": "\\n",
+							"String": "\\n"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "string",
+							"True": "woah woah woah",
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "thingy",
+			"Type": "var",
+			"Acting": "bool",
+			"True": false,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true
+			}
+		},
+		{
+			"Name": "Print",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "thingy =",
+							"String": "thingy ="
+						},
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "bool",
+							"True": false,
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						},
+						{
+							"Type": "string",
+							"True": "\\n",
+							"String": "\\n"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingy",
+							"Type": "var",
+							"Acting": "bool",
+							"True": false,
+							"AccessType": "private",
+							"Metadata": {
+								"assign": true,
+								"refs": "thingy"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "thingyObject",
+			"Type": "object",
+			"True": [
+				{
+					"Name": "im_just_a",
+					"Type": "string",
+					"True": "DEAD BOY",
+					"AccessType": "private"
+				}
+			],
+			"AccessType": "private"
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "thingyObject",
+							"Type": "object",
+							"True": [
+								{
+									"Name": "im_just_a",
+									"Type": "string",
+									"True": "DEAD BOY",
+									"AccessType": "private"
+								}
+							],
+							"AccessType": "private",
+							"Metadata": {
+								"refs": "thingyObject"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "BLOCK",
+							"True": [
+								{
+									"Name": "got_no",
+									"Type": "string",
+									"True": "BLOOD IN MY VEINS",
+									"AccessType": "private"
+								}
+							]
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		}
+	]
+}

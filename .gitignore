@@ -1,1 +1,2 @@
 libc/glibc
+*.DS_Store*

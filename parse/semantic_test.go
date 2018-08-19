@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"sync"
 	"testing"
 
 	"github.com/pkg/errors"
@@ -40,6 +39,10 @@ var (
 
 	semanticBlockMap = map[string]token.Value{}
 )
+
+func init() {
+	os.Setenv(parse.ExpressDebug, "true")
+}
 
 func TestSemantic(t *testing.T) {
 	fmt.Println("TestSemantic")
@@ -90,6 +93,87 @@ func TestSemantic(t *testing.T) {
 	fmt.Println()
 }
 
+func compileExpressProgram(filename string) error {
+	fmt.Println("file:", filename)
+	pathOfFile, err := filepath.Abs(testPrograms + filename)
+	if err != nil {
+		return err
+	}
+	fmt.Println(pathOfFile)
+
+	var lexTokens []token.Token
+	lexTokens, err = lexFile(pathOfFile, filename)
+	if err != nil {
+		return err
+	}
+
+	pathOfFile, err = filepath.Abs(testPrograms + filename)
+	if err != nil {
+		return err
+	}
+	fmt.Println(pathOfFile)
+
+	syntacticTokens, err := syntacticParseFile(filename, lexTokens)
+	if err != nil {
+		return err
+	}
+
+	semanticTokens, err := semanticParseFile(filename, syntacticTokens)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("semanticTokens", semanticTokens)
+
+	err = cppTranspile(filename, semanticTokens)
+	if err != nil {
+		return err
+	}
+
+	_, err = exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
+	if err != nil {
+		return err
+	}
+
+	_, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var singleFile string = "testing.expr"
+
+func TestRunSingle(t *testing.T) {
+	TestSingle(t)
+
+	filepath := testBin + singleFile + ".exe"
+
+	// Run the code
+	output, err := exec.Command(filepath).CombinedOutput()
+	fmt.Println("Output:", string(output))
+	if err != nil {
+		t.Error(err)
+		t.Fail()
+	}
+}
+
+func TestSingle(t *testing.T) {
+	var err error
+	parse.LibBase, err = filepath.Abs("../lib/")
+	if err != nil {
+		t.Error(err)
+		t.Fail()
+	}
+
+	err = compileExpressProgram(singleFile)
+	if err != nil {
+		t.Error(err)
+		t.Fail()
+	}
+}
+
 // TODO: this needs to print out a summary of what passed, what stages failed, etc
 func TestAll(t *testing.T) {
 	// ls ../test/programs directory
@@ -106,115 +190,50 @@ func TestAll(t *testing.T) {
 	var err error
 	parse.LibBase, err = filepath.Abs("../lib/")
 	if err != nil {
-		os.Exit(9)
+		t.Error(err)
 	}
 
 	files, err := ioutil.ReadDir(testPrograms)
 	if err != nil {
-		fmt.Println("ReadDirErr", err)
-		t.Fail()
-		return
+		t.Error(err)
 	}
 	if len(files) == 0 {
-		// TODO: make a printout or something here
+		fmt.Println("No files to test in:", testPrograms)
 		return
 	}
 
 	err = os.RemoveAll(testBin)
 	if err != nil {
-		// TODO:
-		fmt.Println("err removing", err)
+		t.Error(err)
 		t.Fail()
-		return
 	}
 
 	// FIXME: w/e just use these permissions for now
 	err = os.Mkdir(testBin, 0777)
 	if err != nil {
-		// TODO:
-		fmt.Println("err creating", err)
+		t.Error(err)
 		t.Fail()
-		return
 	}
 
-	wg := &sync.WaitGroup{}
+	// wg := &sync.WaitGroup{}
 	for _, file := range files {
-		if !file.IsDir() {
+		filename := file.Name()
+		if !file.IsDir() && filename[0] != '.' {
 			// FIXME: for some reason the go funcs are fucking it up rn,
 			// probably a global or something
 			// wg.Add(1)
 			// go func(file os.FileInfo) {
 			// 	defer wg.Done()
-			filename := file.Name()
-			fmt.Println("file:", filename)
-			pathOfFile, err := filepath.Abs(testPrograms + filename)
+			err = compileExpressProgram(filename)
 			if err != nil {
-				fmt.Println("AbsErr", err)
-				// TODO: make this more individual later
-				return
-			}
-			fmt.Println(pathOfFile)
-
-			var lexTokens []token.Token
-			lexTokens, err = lexFile(pathOfFile, filename)
-			if err != nil {
-				fmt.Println("lexFileErr", err)
-				os.Exit(9)
-				return
-			}
-
-			pathOfFile, err = filepath.Abs(testPrograms + filename)
-			if err != nil {
-				fmt.Println("AbsErr", err)
-				// TODO: make this more individual later
-				os.Exit(9)
-				return
-			}
-			fmt.Println(pathOfFile)
-
-			syntacticTokens, err := syntacticParseFile(filename, lexTokens)
-			if err != nil {
-				fmt.Println("syntacticParseFileErr", err)
-				os.Exit(9)
-				return
-			}
-
-			semanticTokens, err := semanticParseFile(filename, syntacticTokens)
-			if err != nil {
-				fmt.Println("lexFileErr", err)
-				os.Exit(9)
-				return
-			}
-
-			fmt.Println("semanticTokens", semanticTokens)
-
-			err = cppTranspile(filename, semanticTokens)
-			if err != nil {
-				// TODO:
-				os.Exit(9)
-				return
-			}
-
-			output, err := exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
-			if err != nil {
-				// TODO:
-				fmt.Println("err compile", err, string(output))
-				os.Exit(9)
-				return
-			}
-
-			output, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
-			if err != nil {
-				// TODO:
-				fmt.Println("err compile", err, string(output))
-				os.Exit(9)
+				t.Error(err)
 			}
 
 			// }(file)
 		}
 	}
 
-	wg.Wait()
+	// wg.Wait()
 
 	fmt.Println("Finished!")
 }

@@ -1,0 +1,66 @@
+// This is a file for testing structs
+
+/*
+  struct aiocb
+  {
+    int aio_fildes;
+    int aio_lio_opcode;
+    int aio_reqprio;
+    volatile void *aio_buf;
+    size_t aio_nbytes;
+    struct sigevent aio_sigevent;
+    struct aiocb *__next_prio;
+    int __abs_prio;
+    int __policy;
+    int __error_code;
+    __ssize_t __return_value;
+    __off64_t aio_offset;
+    char __glibc_reserved[32];
+  };
+*/
+
+/*
+  Asynchronous input/output callback structure taken
+  directly from glibc's `aio.h` with modified variable
+  name to reflect the idiomatic naming scheme in Express.
+*/
+struct AIOCB {
+  int      FileDescriptor
+  int      LIOOpcode
+  int      RequestPriority
+  void*    Buffer
+  int      NumberOfBytes
+  SigEvent Event
+
+  AIOCB* nextPriority
+  int    absPriority
+  int    policy
+  int    errorCode
+  int    returnValue
+  int    offset
+
+  char   glibcReserved[32]
+}
+
+/*
+  // struct tags and attributes might be used like this
+
+  #[def_source="aio.h"]
+  struct AIOCB {
+    int FileDescriptor  `c:"aio_fildes"`
+    int LibraryOpcode   `c:"aio_lio_opcode"`
+    int RequestPriority `c:"aio_reqprio"`
+    void* Buffer        `c:"aio_buf"`
+    size NumberOfBytes   `c:"aio_nbytes"`
+    SigEvent Event      `c:"aio_sigevent"`
+
+    AIOCB* nextPriority `c:"__next_prio"`
+    int absPriority     `c:"__abs_prio"`
+    int policy          `c:"__policy"`
+    int errorCode       `c:"__error_code"`
+    int returnValue     `c:"__return_value"`
+    int offset          `c:"aio_offset"`
+
+    char glibcReserved[32]  `c:"__glibc_reserved"`
+  }
+*/

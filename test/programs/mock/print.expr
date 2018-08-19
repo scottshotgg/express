@@ -1,4 +1,4 @@
 // This file is used for tesing the print and println functions
 
 // Print an integer
-print(1)
+Print(1)

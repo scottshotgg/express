@@ -1,0 +1,535 @@
+[
+	{
+		"Type": "BLOCK",
+		"Value": {
+			"Type": "BLOCK",
+			"True": [
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "defer"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "im actually at the end",
+												"String": "im actually at the end"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "printStuff",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "k"
+											}
+										}
+									]
+								}
+							},
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "TYPE",
+											"Value": {
+												"Type": "int",
+												"String": "int"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "j"
+											}
+										}
+									]
+								}
+							},
+							{
+								"Type": "BLOCK",
+								"Value": {
+									"Type": "BLOCK",
+									"True": [
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "for"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "i"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "init",
+												"String": ":="
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 0
+											}
+										},
+										{
+											"Type": "SEPARATOR",
+											"Value": {
+												"Type": "comma",
+												"String": ","
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "i"
+											}
+										},
+										{
+											"Type": "L_THAN",
+											"Value": {
+												"Type": "lthan",
+												"String": "\u003c"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "k"
+											}
+										},
+										{
+											"Type": "SEPARATOR",
+											"Value": {
+												"Type": "comma",
+												"String": ","
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "i"
+											}
+										},
+										{
+											"Type": "INCREMENT",
+											"Value": {
+												"Type": "increment",
+												"String": "++"
+											}
+										},
+										{
+											"Type": "BLOCK",
+											"Value": {
+												"Type": "BLOCK",
+												"True": [
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "onexit"
+														}
+													},
+													{
+														"ID": 1,
+														"Type": "FUNCTION",
+														"Value": {
+															"Name": "Println",
+															"Type": "function",
+															"True": [
+																{
+																	"ID": 1,
+																	"Type": "GROUP",
+																	"Value": {
+																		"Type": "GROUP",
+																		"True": [
+																			{
+																				"Type": "LITERAL",
+																				"Value": {
+																					"Type": "string",
+																					"True": "on exit",
+																					"String": "on exit"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "i"
+																				}
+																			}
+																		]
+																	}
+																}
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
+														}
+													},
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "onreturn"
+														}
+													},
+													{
+														"ID": 1,
+														"Type": "FUNCTION",
+														"Value": {
+															"Name": "Println",
+															"Type": "function",
+															"True": [
+																{
+																	"ID": 1,
+																	"Type": "GROUP",
+																	"Value": {
+																		"Type": "GROUP",
+																		"True": [
+																			{
+																				"Type": "LITERAL",
+																				"Value": {
+																					"Type": "string",
+																					"True": "on return",
+																					"String": "on return"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "i"
+																				}
+																			}
+																		]
+																	}
+																}
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
+														}
+													},
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "onleave"
+														}
+													},
+													{
+														"ID": 1,
+														"Type": "FUNCTION",
+														"Value": {
+															"Name": "Println",
+															"Type": "function",
+															"True": [
+																{
+																	"ID": 1,
+																	"Type": "GROUP",
+																	"Value": {
+																		"Type": "GROUP",
+																		"True": [
+																			{
+																				"Type": "LITERAL",
+																				"Value": {
+																					"Type": "string",
+																					"True": "on leave",
+																					"String": "on leave"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "i"
+																				}
+																			}
+																		]
+																	}
+																}
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
+														}
+													},
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
+															"String": "defer"
+														}
+													},
+													{
+														"ID": 1,
+														"Type": "FUNCTION",
+														"Value": {
+															"Name": "Println",
+															"Type": "function",
+															"True": [
+																{
+																	"ID": 1,
+																	"Type": "GROUP",
+																	"Value": {
+																		"Type": "GROUP",
+																		"True": [
+																			{
+																				"Type": "LITERAL",
+																				"Value": {
+																					"Type": "string",
+																					"True": "defer",
+																					"String": "defer"
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "i"
+																				}
+																			}
+																		]
+																	}
+																}
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
+														}
+													}
+												]
+											}
+										},
+										{
+											"ID": 9,
+											"Type": "KEYWORD",
+											"Value": {
+												"Type": "keyword",
+												"String": "return"
+											}
+										},
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "int",
+												"True": 0
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "def"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "me first",
+												"String": "me first"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"ID": 1,
+											"Type": "FUNCTION",
+											"Value": {
+												"Name": "printStuff",
+												"Type": "function",
+												"True": [
+													{
+														"ID": 1,
+														"Type": "GROUP",
+														"Value": {
+															"Type": "GROUP",
+															"True": [
+																{
+																	"Type": "LITERAL",
+																	"Value": {
+																		"Type": "int",
+																		"True": 3
+																	}
+																}
+															]
+														}
+													}
+												],
+												"AccessType": "public",
+												"Metadata": {
+													"lambda": false,
+													"type": "call"
+												}
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "defer"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "im actually at the start",
+												"String": "im actually at the start"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				}
+			]
+		}
+	}
+]

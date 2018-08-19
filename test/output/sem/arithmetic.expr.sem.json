@@ -1,0 +1,607 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Name": "xi",
+			"Type": "int",
+			"True": 9,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": 9,
+				"left": {
+					"Type": "int",
+					"True": 6,
+					"String": "6",
+					"Metadata": {
+						"eval": 6,
+						"left": {
+							"Type": "int",
+							"True": 8,
+							"String": "8"
+						},
+						"op": {
+							"Type": "sub",
+							"String": "-"
+						},
+						"right": {
+							"Type": "int",
+							"True": 2,
+							"String": "2"
+						},
+						"type": "bool"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "int",
+					"True": 3,
+					"String": "3"
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "yi",
+			"Type": "int",
+			"True": 16,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": 16,
+				"left": {
+					"Type": "int",
+					"True": 8,
+					"String": "8"
+				},
+				"op": {
+					"Type": "mult",
+					"String": "*"
+				},
+				"right": {
+					"Type": "int",
+					"True": 2,
+					"String": "2",
+					"Metadata": {
+						"eval": 2,
+						"left": {
+							"Type": "int",
+							"True": 4,
+							"String": "4"
+						},
+						"op": {
+							"Type": "div",
+							"String": "/"
+						},
+						"right": {
+							"Type": "int",
+							"True": 2,
+							"String": "2"
+						},
+						"type": "bool"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "zi",
+			"Type": "int",
+			"True": 1,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": 1,
+				"left": {
+					"Type": "int",
+					"True": 9,
+					"String": "9"
+				},
+				"op": {
+					"Type": "sub",
+					"String": "-"
+				},
+				"right": {
+					"Type": "int",
+					"True": 8,
+					"Metadata": {
+						"eval": 8,
+						"left": {
+							"Type": "int",
+							"True": 4,
+							"String": "4"
+						},
+						"op": {
+							"Type": "mult",
+							"String": "*"
+						},
+						"right": {
+							"Type": "int",
+							"True": 2,
+							"String": "2"
+						},
+						"type": "bool"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "xf",
+			"Type": "float",
+			"True": 9.1,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": 9.1,
+				"left": {
+					"Type": "float",
+					"True": 6,
+					"String": "-",
+					"Metadata": {
+						"eval": 6,
+						"left": {
+							"Type": "float",
+							"True": 8.1
+						},
+						"op": {
+							"Type": "sub",
+							"String": "-"
+						},
+						"right": {
+							"Type": "float",
+							"True": 2.1
+						},
+						"type": "bool"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "float",
+					"True": 3.1
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "yf",
+			"Type": "float",
+			"True": 15.814285714285711,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": 15.814285714285711,
+				"left": {
+					"Type": "float",
+					"True": 8.1
+				},
+				"op": {
+					"Type": "mult",
+					"String": "*"
+				},
+				"right": {
+					"Type": "float",
+					"True": 1.952380952380952,
+					"String": "/",
+					"Metadata": {
+						"eval": 1.952380952380952,
+						"left": {
+							"Type": "float",
+							"True": 4.1
+						},
+						"op": {
+							"Type": "div",
+							"String": "/"
+						},
+						"right": {
+							"Type": "float",
+							"True": 2.1
+						},
+						"type": "bool"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "zf",
+			"Type": "float",
+			"True": -0.5099999999999998,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": -0.5099999999999998,
+				"left": {
+					"Type": "float",
+					"True": 8.1
+				},
+				"op": {
+					"Type": "sub",
+					"String": "-"
+				},
+				"right": {
+					"Type": "float",
+					"True": 8.61,
+					"String": "*",
+					"Metadata": {
+						"eval": 8.61,
+						"left": {
+							"Type": "float",
+							"True": 4.1
+						},
+						"op": {
+							"Type": "mult",
+							"String": "*"
+						},
+						"right": {
+							"Type": "float",
+							"True": 2.1
+						},
+						"type": "bool"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "xs",
+			"Type": "string",
+			"True": "stringitize me daddy",
+			"AccessType": "private",
+			"Metadata": {
+				"eval": "stringitize me daddy",
+				"left": {
+					"Type": "string",
+					"True": "stringitize me ",
+					"String": "stringitize+ me ",
+					"Metadata": {
+						"eval": "stringitize me ",
+						"left": {
+							"Type": "string",
+							"True": "stringitize",
+							"String": "stringitize"
+						},
+						"op": {
+							"Type": "add",
+							"String": "+"
+						},
+						"right": {
+							"Type": "string",
+							"True": " me ",
+							"String": " me "
+						},
+						"type": "bool"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "string",
+					"True": "daddy",
+					"String": "daddy"
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "ys",
+			"Type": "string",
+			"True": "I bless the rains ",
+			"AccessType": "private"
+		},
+		{
+			"Name": "zs",
+			"Type": "string",
+			"True": "I bless the rains down in Africa",
+			"AccessType": "private",
+			"Metadata": {
+				"eval": "I bless the rains down in Africa",
+				"left": {
+					"Name": "ys",
+					"Type": "string",
+					"True": "I bless the rains ",
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "ys"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "string",
+					"True": "down in Africa",
+					"String": "down in Africa"
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "xb",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": true,
+				"left": {
+					"Type": "bool",
+					"True": true
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "bool",
+					"True": false
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "yb",
+			"Type": "bool",
+			"True": false,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": false,
+				"left": {
+					"Type": "bool",
+					"True": false
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "bool",
+					"True": false
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "zb",
+			"Type": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": true,
+				"left": {
+					"Type": "bool",
+					"True": true
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "bool",
+					"True": true
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "xbv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": true,
+				"left": {
+					"Type": "bool",
+					"True": true
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "bool",
+					"True": true
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "ybv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": false,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": false,
+				"left": {
+					"Type": "bool",
+					"True": false
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "bool",
+					"True": false
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "zbv",
+			"Type": "var",
+			"Acting": "bool",
+			"True": true,
+			"AccessType": "private",
+			"Metadata": {
+				"eval": true,
+				"left": {
+					"Name": "xbv",
+					"Type": "var",
+					"Acting": "bool",
+					"True": true,
+					"AccessType": "private",
+					"Metadata": {
+						"eval": true,
+						"left": {
+							"Type": "bool",
+							"True": true
+						},
+						"op": {
+							"Type": "add",
+							"String": "+"
+						},
+						"refs": "xbv",
+						"right": {
+							"Type": "bool",
+							"True": true
+						},
+						"type": "bool"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Name": "ybv",
+					"Type": "var",
+					"Acting": "bool",
+					"True": false,
+					"AccessType": "private",
+					"Metadata": {
+						"eval": false,
+						"left": {
+							"Type": "bool",
+							"True": false
+						},
+						"op": {
+							"Type": "add",
+							"String": "+"
+						},
+						"refs": "ybv",
+						"right": {
+							"Type": "bool",
+							"True": false
+						},
+						"type": "bool"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "wsv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "its ",
+			"AccessType": "private"
+		},
+		{
+			"Name": "xsv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "me",
+			"AccessType": "private"
+		},
+		{
+			"Name": "zsv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "its me",
+			"AccessType": "private",
+			"Metadata": {
+				"eval": "its me",
+				"left": {
+					"Name": "wsv",
+					"Type": "var",
+					"Acting": "string",
+					"True": "its ",
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "wsv"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Name": "xsv",
+					"Type": "var",
+					"Acting": "string",
+					"True": "me",
+					"AccessType": "private",
+					"Metadata": {
+						"refs": "xsv"
+					}
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "xs",
+							"Type": "string",
+							"True": "stringitize me daddy",
+							"AccessType": "private",
+							"Metadata": {
+								"eval": "stringitize me daddy",
+								"left": {
+									"Type": "string",
+									"True": "stringitize me ",
+									"String": "stringitize+ me ",
+									"Metadata": {
+										"eval": "stringitize me ",
+										"left": {
+											"Type": "string",
+											"True": "stringitize",
+											"String": "stringitize"
+										},
+										"op": {
+											"Type": "add",
+											"String": "+"
+										},
+										"right": {
+											"Type": "string",
+											"True": " me ",
+											"String": " me "
+										},
+										"type": "bool"
+									}
+								},
+								"op": {
+									"Type": "add",
+									"String": "+"
+								},
+								"refs": "xs",
+								"right": {
+									"Type": "string",
+									"True": "daddy",
+									"String": "daddy"
+								},
+								"type": "bool"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		}
+	]
+}

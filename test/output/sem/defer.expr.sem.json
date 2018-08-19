@@ -1,0 +1,386 @@
+{
+	"Type": "BLOCK",
+	"True": [
+		{
+			"Type": "KEYWORD",
+			"True": {
+				"Name": "Println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "im actually at the end",
+								"String": "im actually at the end"
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
+			},
+			"String": "DEFER"
+		},
+		{
+			"Name": "printStuff",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "k",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				},
+				"body": {
+					"Type": "BLOCK",
+					"True": [
+						{
+							"Type": "for",
+							"True": [
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "on exit",
+														"String": "on exit"
+													},
+													{
+														"Name": "i",
+														"Type": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"refs": "i"
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "ONEXIT"
+								},
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "on return",
+														"String": "on return"
+													},
+													{
+														"Name": "i",
+														"Type": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"refs": "i"
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "ONRETURN"
+								},
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "on leave",
+														"String": "on leave"
+													},
+													{
+														"Name": "i",
+														"Type": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"refs": "i"
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "ONLEAVE"
+								},
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "defer",
+														"String": "defer"
+													},
+													{
+														"Name": "i",
+														"Type": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"refs": "i"
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "DEFER"
+								}
+							],
+							"String": "i\u003ck",
+							"Metadata": {
+								"end": {
+									"Name": "k",
+									"Type": "int",
+									"Acting": "int",
+									"True": 0,
+									"String": "i\u003ck",
+									"AccessType": "private",
+									"Metadata": {
+										"eval": false,
+										"left": {
+											"Name": "i",
+											"Type": "int",
+											"True": 0,
+											"AccessType": "private",
+											"Metadata": {
+												"refs": "i"
+											}
+										},
+										"op": {
+											"Type": "lthan",
+											"String": "\u003c"
+										},
+										"right": {
+											"Name": "k",
+											"Type": "int",
+											"Acting": "int",
+											"True": 0,
+											"AccessType": "private",
+											"Metadata": {
+												"refs": "k"
+											}
+										},
+										"type": "bool"
+									}
+								},
+								"eval": false,
+								"left": {
+									"Name": "i",
+									"Type": "int",
+									"True": 0,
+									"AccessType": "private",
+									"Metadata": {
+										"refs": "i"
+									}
+								},
+								"op": {
+									"Type": "lthan",
+									"String": "\u003c"
+								},
+								"right": {
+									"Name": "k",
+									"Type": "int",
+									"Acting": "int",
+									"True": 0,
+									"AccessType": "private",
+									"Metadata": {
+										"refs": "k"
+									}
+								},
+								"start": {
+									"Name": "i",
+									"Type": "int",
+									"True": 0,
+									"AccessType": "private"
+								},
+								"step": {
+									"Type": "int",
+									"True": 1,
+									"String": "1"
+								},
+								"type": "bool"
+							}
+						},
+						{
+							"Type": "KEYWORD",
+							"True": {
+								"Type": "int",
+								"True": 0,
+								"String": "0"
+							},
+							"String": "RETURN"
+						}
+					]
+				},
+				"returns": {
+					"True": [
+						{
+							"Name": "j",
+							"Type": "int",
+							"True": 0,
+							"AccessType": "private"
+						}
+					]
+				}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "def"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Type": "string",
+							"True": "me first",
+							"String": "me first"
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "printStuff",
+							"Type": "function",
+							"True": {
+								"args": {
+									"True": [
+										{
+											"Type": "int",
+											"True": 3,
+											"String": "3"
+										}
+									]
+								},
+								"body": {},
+								"returns": {}
+							},
+							"AccessType": "private",
+							"Metadata": {
+								"lambda": false,
+								"type": "call"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Type": "KEYWORD",
+			"True": {
+				"Name": "Println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "im actually at the start",
+								"String": "im actually at the start"
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
+			},
+			"String": "DEFER"
+		}
+	]
+}

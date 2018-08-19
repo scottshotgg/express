@@ -30,7 +30,8 @@ var (
 	insideLoop bool
 
 	// TODO: FIXME: this is causing functions to be compiled in every single file
-	functionStrings = ""
+	functionStrings = "\n"
+	structStrings   = "\n"
 
 	LibBase = ""
 
@@ -133,7 +134,7 @@ func translateFunctionCall(t token.Value) (string, error) {
 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
 				//fmt.Println("NAME_BYTES", arg.Name)
 
-				objectString, err := translateObject(arg)
+				objectString, err := translateObject(arg, "")
 				if err != nil {
 					return "", err
 				}
@@ -248,7 +249,7 @@ func translateFunctionDef(t token.Value) (string, error) {
 func translateArray(t token.Value) (string, error) {
 	arrayString := ""
 
-	fmt.Printf("%+v\n", t)
+	//fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.([]token.Token)
 	if !ok {
 		//fmt.Println("shit look at t")
@@ -290,7 +291,7 @@ func translateArray(t token.Value) (string, error) {
 			v.Value.Name = v.Value.Name + "_" + RandStringBytesMaskImprSrc(10)
 			//fmt.Println("NAME_BYTES", v.Value.Name)
 			// }
-			objectString, err := translateObject(v.Value)
+			objectString, err := translateObject(v.Value, "")
 			if err != nil {
 				return "", err
 			}
@@ -336,8 +337,14 @@ func translateArray(t token.Value) (string, error) {
 
 // FIXME: just use var for now, but later we will try to not use var
 // FIXME: ideally we want to store this in a "symbol map" with the defaults already there
-func translateObject(t token.Value) (string, error) {
-	objectString := "var " + t.Name + " = {};\n"
+func translateObject(t token.Value, objName string) (string, error) {
+
+	tName := t.Name
+	if objName != "" {
+		tName = objName
+	}
+
+	objectString := "var " + tName + " = {};\n"
 
 	for _, v := range t.True.([]token.Value) {
 		objectValue := v.True
@@ -345,17 +352,77 @@ func translateObject(t token.Value) (string, error) {
 			objectValue = ref
 		}
 
+		// if checkDefault {
+		// 	// Checking for a "default" flag means we set it to false; kinda confusing
+		// 	_, ok := v.Metadata["default"]
+		// 	if !ok {
+		// 		continue
+		// 	}
+		// }
+
 		// //fmt.Println("k, v", k, v)
-		if v.Type == "object" {
+		if v.Type == "object" || v.Type == "struct" {
 			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, objectValue)
-			anotherObjectString, err := translateObject(v)
+			vName := v.Name + "_" + RandStringBytesMaskImprSrc(10)
+			anotherObjectString, err := translateObject(v, vName)
 			if err != nil {
 				return objectString, err
 			}
-			objectString += anotherObjectString + t.Name + "[\"" + v.Name + "\"] = " + v.Name + ";\n"
+			objectString += anotherObjectString + tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
 
 		} else if v.Type == "string" {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
+			objectString += tName + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
+
+			// If its a struct, create an object that will generate the struct for us
+			// } else if v.Type == "struct" {
+			// 	// anotherObjectString, err := translateObject(v)
+			// 	// if err != nil {
+			// 	// 	return objectString, err
+			// 	// }
+			// 	objectString += t.Name + "[\"" + v.Name + "\"] = genStruct(\"" + v.Metadata["real"].(string) + "\");\n"
+			// 	objstr, err := translateObject(t, true)
+			// 	if err != nil {
+			// 		return "", err
+			// 	}
+
+			// 	objectString += objstr
+		} else if v.Type == "var" {
+			// vType := v.Type
+			// v.Type = v.Acting
+			// v.Acting = vType
+			// varStmt, err := translateVariableStatement(v)
+			// if err != nil {
+			// 	return "", err
+			// }
+
+			// objectString += strings.Join(
+			// 	[]string{tName, "[\"" + v.Name + "\"] =", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+			// ) + "\n"
+			var varStmt string
+			var err error
+			vName := v.Name
+			vType := v.Type
+
+			v.Type = v.Acting
+			v.Acting = vType
+			fmt.Println("i be here m8", v)
+			if v.Type == "object" || v.Type == "struct" {
+				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
+				varStmt, err = translateObject(v, vName)
+				varStmt += tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
+			} else if v.Type == "var" {
+				fmt.Println("wtf still got var after switching acting and type")
+				os.Exit(9)
+			} else {
+				varStmt, err = translateVariableStatement(v)
+				if err != nil {
+					return "", err
+				}
+			}
+
+			objectString += strings.Join(
+				[]string{vType, vName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+			) + "\n"
 
 		} else if v.Type == "array" {
 			// I am not supporting arrays for now, will have to debate how to
@@ -367,11 +434,30 @@ func translateObject(t token.Value) (string, error) {
 			continue
 
 		} else {
-			objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
+			if v.Type == token.FloatType && v.True.(float64) == 0 {
+				objectString += tName + fmt.Sprintf("[\"%s\"] = %f;\n", v.Name, float64(0.0))
+			} else {
+				objectString += tName + fmt.Sprintf("[\"%s\"] = %v;\n", v.Name, objectValue)
+			}
 		}
 	}
 
 	return objectString, nil
+}
+
+// TODO: make this more idiomatic later
+func translateStruct(t token.Value) (string, error) {
+	// call translateObject to get the object foot print
+	// put that object into the map
+	structDef, err := translateObject(t, "")
+	if err != nil {
+		return "", err
+	}
+	// structDef += "structMap[\"" + t.Name + "\"] = " + t.Name + ";\n"
+	// structDef := "var " + t.Name + " = genStruct(\"" + t.Metadata["real"].(string) + "\");\n"
+
+	return structDef, nil
+	// return "var " + t.Name + " = genStruct(\"" + t.Acting + "\");\n", nil
 }
 
 func translateVariableStatement(t token.Value) (string, error) {
@@ -393,33 +479,81 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 	switch t.Type {
 	case "var":
-		// int abc = 5;
-		// Any zyx = Any{ "int", &abc };
-		// varName := t.Name + strconv.Itoa(int(r.Uint32()))
-		// variableString +=
-		sprintfVar := "%v"
-		if t.Acting == "string" {
-			sprintfVar = "\"%v\""
-		}
-		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf(sprintfVar, t.True)}, " ") + ";\n"
+		var varStmt string
+		var err error
+		tName := t.Name
 
-		// variableString += strings.Join([]string{t.Acting, varName, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
-		// variableString += "Any " + t.Name + " = Any{ \"" + t.Acting + "\", &" + varName + " };\n"
-		// // //fmt.Println(thing)
-		// // _, err = f.Write([]byte(thing))
-		// // if err != nil {
-		// // 	//fmt.Println("error writing to file")
-		// // 	os.Exit(9)
-		// // }
+		tType = t.Type
+		t.Type = t.Acting
+		t.Acting = tType
+		fmt.Println("t.Type", t.Type)
+		fmt.Println("t.Acting", t.Acting)
+		if t.Type != "object" && t.Type != "struct" {
+			tName = t.Name + "_" + RandStringBytesMaskImprSrc(10)
+			varStmt, err = translateVariableStatement(t)
+		} else if t.Type == "var" {
+			fmt.Println("wtf still got var after switching acting and type")
+			os.Exit(9)
+		} else {
+			fmt.Println("else", t.Type, t.Acting)
+			varStmt, err = translateObject(t, tName)
+			if err != nil {
+				return "", err
+			}
+		}
+
+		variableString += strings.Join(
+			[]string{tType, tName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
+		) + "\n"
+
 		return variableString, nil
 
 	case "object":
-		objectString, err := translateObject(t)
+		objectString, err := translateObject(t, "")
 		if err != nil {
 			// TODO:
 			return "", err
 		}
 		return variableString + objectString, nil
+
+	case "struct":
+		// real := t.Metadata["real"]
+		var structString string
+		var err error
+
+		// struct declaration has no 'real' type
+		// if real == nil {
+		structString, err = translateStruct(t)
+		// fmt.Println("structString", structString)
+		if err != nil {
+			return "", err
+		}
+		// } else {
+		// 	// TODO: Just make structs essentially an object in the backend for now
+		// 	// structString, err = translateObject(t)
+		// 	// fmt.Println("structString2", structString)
+		// 	// if err != nil {
+		// 	// 	// TODO:
+		// 	// 	return "", err
+		// 	// }
+
+		// 	// This was how I was doing the genStruct usage with the above in an if
+		// 	structString = "var " + t.Name + " = genStruct(\"" + t.Metadata["real"].(string) + "\");\n"
+		// 	objstr, err := translateObject(t, true)
+		// 	if err != nil {
+		// 		return "", err
+		// 	}
+
+		// 	structString += objstr
+
+		// 	// TODO: Just make structs essentially an object in the backend for now
+		// 	// if t.Metadata["refs"] != nil && t.Metadata["refs"] != "" {
+		// 	// 	return variableString + structString, nil
+		// 	// }
+		// 	// structStrings += structString
+		// 	// return variableString, nil
+		// }
+		return variableString + structString, nil
 
 	case "array":
 		arrayString, err := translateArray(t)
@@ -446,10 +580,17 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 	case "int":
 		fallthrough
-	case "float":
-		fallthrough
 	case "bool":
+		fallthrough
+	case "char":
 		variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		return variableString, nil
+	case "float":
+		if t.True.(float64) == 0 {
+			variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%f", 0.0)}, " ") + ";\n"
+		} else {
+			variableString += strings.Join([]string{tType, t.Name, "=", fmt.Sprintf("%v", t.True)}, " ") + ";\n"
+		}
 		// //fmt.Println(thing)
 		// _, err = f.Write([]byte(thing))
 		// if err != nil {
@@ -474,7 +615,7 @@ func translateIf(t token.Value) (string, error) {
 	}
 
 	//fmt.Println("wtf")
-	fmt.Printf("t %+v\n", t)
+	//fmt.Printf("t %+v\n", t)
 
 	// _, err = f.Write([]byte(fmt.Sprintf("if (%s) ", t.String)))
 	// if err != nil {
@@ -583,7 +724,7 @@ func translateLoop(t token.Value) (string, error) {
 	loopString += fmt.Sprintf("int %s=%d;\nwhile (%s) {\n",
 		t.Metadata["start"].(token.Value).Name,
 		t.Metadata["start"].(token.Value).True.(int),
-		t.Metadata["end"].(token.Value).String,
+		t.String,
 	)
 	// //fmt.Println("loop", loop)
 	// _, err = f.Write([]byte(loop))
@@ -702,7 +843,7 @@ func translateDefer(t token.Value) (string, error) {
 
 func translateKeyword(t token.Value) (string, error) {
 	if t.Type != token.Keyword {
-		return "", errors.New("not a keyword")
+		return "", errors.Errorf("not a keyword %+v", t)
 	}
 
 	switch t.String {
@@ -744,7 +885,7 @@ func translateReturn(t token.Value) (string, error) {
 		returnValue.Name = returnValue.Name + "_" + RandStringBytesMaskImprSrc(10)
 		//fmt.Println("NAME_BYTES", returnValue.Name)
 
-		objectString, err := translateObject(returnValue)
+		objectString, err := translateObject(returnValue, "")
 		if err != nil {
 			return "", err
 		}
@@ -779,6 +920,7 @@ func translateBlock(tv token.Value) (string, error) {
 
 	for _, t := range insideBlock {
 		//fmt.Println("insideBlock t", t)
+		blockString += "\n"
 
 		variableString, err := translateVariableStatement(t)
 		if err != nil {
@@ -827,6 +969,19 @@ func translateBlock(tv token.Value) (string, error) {
 	return blockString, nil
 }
 
+func genStructFactory() string {
+	// structFactory :=
+	return `
+		std::map<std::string, var> structMap;
+		var genStruct(std::string structName) {
+			var structValue = structMap[structName];
+			return structValue;
+		}
+		`
+
+	// return structFactory
+}
+
 func (p *Parser) Transpile(block token.Value) (string, error) {
 	//fmt.Println("yo waddup")
 
@@ -866,6 +1021,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	extraLibs := []string{
 		"var.cpp",
 		"std.cpp",
+		"file.cpp",
 		"defer.cpp",
 	}
 
@@ -883,7 +1039,10 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 		return "", err
 	}
 
-	f += "\n" + functionStrings + "\nint main() {" + blockString + "}\n"
+	f += genStructFactory() + "\n" +
+		structStrings + "\n" +
+		functionStrings + "\nint main() {" +
+		blockString + "}\n"
 
 	return f, nil
 }

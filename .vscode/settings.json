@@ -62,6 +62,8 @@
     "stack": "cpp",
     "deque": "cpp",
     "condition_variable": "cpp",
-    "mutex": "cpp"
+    "mutex": "cpp",
+    "cfenv": "cpp",
+    "thread": "cpp"
   }
 }
