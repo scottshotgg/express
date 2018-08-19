@@ -332,6 +332,104 @@
 		"Type": "KEYWORD",
 		"Value": {
 			"Type": "keyword",
+			"String": "onleave"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "value of k: ",
+			"String": "value of k: "
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "k"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"ID": 9,
+		"Type": "KEYWORD",
+		"Value": {
+			"Type": "keyword",
 			"String": "defer"
 		}
 	},
@@ -929,6 +1027,21 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
+		}
+	},
+	{
+		"ID": 9,
+		"Type": "KEYWORD",
+		"Value": {
+			"Type": "keyword",
+			"String": "onexit"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
 		}
 	},
 	{
@@ -2304,17 +2417,11 @@
 		}
 	},
 	{
-		"Type": "WS",
+		"ID": 9,
+		"Type": "KEYWORD",
 		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "TYPE",
-		"Value": {
-			"Type": "string",
-			"String": "string"
+			"Type": "keyword",
+			"String": "defer"
 		}
 	},
 	{
@@ -2327,36 +2434,56 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "name"
+			"String": "Println"
 		}
 	},
 	{
-		"Type": "WS",
+		"Type": "L_PAREN",
 		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
+			"Type": "op_3",
+			"String": "("
 		}
 	},
 	{
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "hey this is an id",
-			"String": "hey this is an id"
+			"True": "Most cars:",
+			"String": "Most cars:"
+		}
+	},
+	{
+		"Type": "SEPARATOR",
+		"Value": {
+			"Type": "comma",
+			"String": ","
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Car"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -2496,6 +2623,62 @@
 		}
 	},
 	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "string",
+			"String": "string"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "name"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "string",
+			"True": "hey this is an id",
+			"String": "hey this is an id"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"Type": "IDENT",
 		"Value": {
 			"String": "oldCar"
@@ -2591,9 +2774,11 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "name"
+			"Type": "string",
+			"True": "hey this is an id",
+			"String": "hey this is an id"
 		}
 	},
 	{
@@ -3021,61 +3206,6 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Println"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "Most cars:",
-			"String": "Most cars:"
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Car"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
 		}
 	},
 	{

@@ -37,7 +37,8 @@ var (
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
-	Use:   "build",
+	Use: "build",
+	// TODO: fix this
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -164,13 +165,14 @@ to quickly create a Cobra application.`,
 
 		cpp, err := pNew.Transpile(semanticTokens)
 		if err != nil {
-			os.Exit(9)
+			fmt.Println("error:", err.Error())
+			return
 		}
 
 		cppFilename := filename + ".cpp"
 		if !viper.GetBool("emit-cpp") && !viper.GetBool("emit-all") {
 			tempDir := os.TempDir()
-			cppFilename = tempDir + cppFilename
+			cppFilename = tempDir + "/" + cppFilename
 		}
 
 		f, err := os.Create(cppFilename)
@@ -193,7 +195,7 @@ to quickly create a Cobra application.`,
 
 		outputFileName = filenameNoExt + ".exe"
 		if run {
-			outputFileName = os.TempDir() + outputFileName
+			outputFileName = os.TempDir() + "/" + outputFileName
 		}
 		// FIXME: write this to a temp dir/file using Go and then move it if we need it
 		output, err := exec.Command("clang++", "-std=gnu++2a", cppFilename, "-o", outputFileName).CombinedOutput()

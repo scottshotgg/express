@@ -85,7 +85,8 @@ func Execute() {
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "express",
+	Use: "express",
+	// TODO: fix this
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -95,7 +96,10 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("you gotta type `build` or `run` after this")
+		fmt.Println("this will print out a help screen soon™")
+	},
 }
 
 func writeTokensJSONToFile(tokensJSON []byte, pathOfFile string) error {

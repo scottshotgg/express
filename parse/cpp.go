@@ -477,6 +477,7 @@ func translateObject(t token.Value, objName string) (string, error) {
 			// 	}
 			// }
 
+			varStmt += tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
 			objectString += strings.Join(
 				[]string{vType, vName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
 			) + "\n"

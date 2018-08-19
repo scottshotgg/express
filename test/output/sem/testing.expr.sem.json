@@ -29,8 +29,47 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1534710374[k_1534710374]"
+										"refs": "arrayBoi_1534716692[k_1534716692]"
 									}
+								},
+								{
+									"Type": "KEYWORD",
+									"True": {
+										"Name": "Println",
+										"Type": "function",
+										"True": {
+											"args": {
+												"True": [
+													{
+														"Type": "string",
+														"True": "value of k: ",
+														"String": "value of k: "
+													},
+													{
+														"Name": "k",
+														"Type": "int",
+														"Acting": "int",
+														"True": 0,
+														"String": "0",
+														"AccessType": "private",
+														"Metadata": {
+															"length": 3,
+															"refs": "k",
+															"vector": false
+														}
+													}
+												]
+											},
+											"body": {},
+											"returns": {}
+										},
+										"AccessType": "private",
+										"Metadata": {
+											"lambda": false,
+											"type": "call"
+										}
+									},
+									"String": "ONLEAVE"
 								},
 								{
 									"Type": "KEYWORD",
@@ -128,10 +167,10 @@
 									}
 								}
 							],
-							"String": "k_1534710374\u003c4",
+							"String": "k_1534716692\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1534710374",
+									"Name": "k_1534716692",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -139,7 +178,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1534710374",
+										"Name": "arrayBoi_1534716692",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -192,14 +231,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1534710374",
+									"Name": "k_1534716692",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1534710374",
+									"Name": "k_1534716692",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -314,48 +353,52 @@
 			}
 		},
 		{
-			"Name": "Println",
-			"Type": "function",
+			"Type": "KEYWORD",
 			"True": {
-				"args": {
-					"True": [
-						{
-							"Type": "string",
-							"True": "return value",
-							"String": "return value"
-						},
-						{
-							"Name": "someFunction",
-							"Type": "function",
-							"True": {
-								"args": {
-									"True": [
-										{
-											"Type": "int",
-											"True": 9,
-											"String": "9"
-										}
-									]
-								},
-								"body": {},
-								"returns": {}
+				"Name": "Println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "return value",
+								"String": "return value"
 							},
-							"AccessType": "private",
-							"Metadata": {
-								"lambda": false,
-								"type": "call"
+							{
+								"Name": "someFunction",
+								"Type": "function",
+								"True": {
+									"args": {
+										"True": [
+											{
+												"Type": "int",
+												"True": 9,
+												"String": "9"
+											}
+										]
+									},
+									"body": {},
+									"returns": {}
+								},
+								"AccessType": "private",
+								"Metadata": {
+									"lambda": false,
+									"type": "call"
+								}
 							}
-						}
-					]
+						]
+					},
+					"body": {},
+					"returns": {}
 				},
-				"body": {},
-				"returns": {}
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
 			},
-			"AccessType": "private",
-			"Metadata": {
-				"lambda": false,
-				"type": "call"
-			}
+			"String": "ONEXIT"
 		},
 		{
 			"Name": "Engine",
@@ -460,8 +503,7 @@
 					"True": [],
 					"AccessType": "private",
 					"Metadata": {
-						"assign": true,
-						"refs": "name"
+						"assign": true
 					}
 				},
 				{
@@ -570,10 +612,152 @@
 			"AccessType": "public"
 		},
 		{
-			"Name": "name",
-			"Type": "string",
-			"True": "hey this is an id",
-			"AccessType": "private"
+			"Type": "KEYWORD",
+			"True": {
+				"Name": "Println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "Most cars:",
+								"String": "Most cars:"
+							},
+							{
+								"Name": "Car",
+								"Type": "struct",
+								"True": [
+									{
+										"Name": "id",
+										"Type": "var",
+										"Acting": "object",
+										"True": [],
+										"AccessType": "private",
+										"Metadata": {
+											"assign": true
+										}
+									},
+									{
+										"Name": "Type",
+										"Type": "string",
+										"True": "car",
+										"AccessType": "public",
+										"Metadata": {
+											"assign": true
+										}
+									},
+									{
+										"Name": "New",
+										"Type": "bool",
+										"True": false,
+										"AccessType": "private",
+										"Metadata": {
+											"assign": true
+										}
+									},
+									{
+										"Name": "numOfWheels",
+										"Type": "int",
+										"True": 4,
+										"AccessType": "private",
+										"Metadata": {
+											"assign": true
+										}
+									},
+									{
+										"Name": "engine",
+										"Type": "struct",
+										"True": [
+											{
+												"Name": "Displacement",
+												"Type": "float",
+												"True": 2.4,
+												"AccessType": "public"
+											},
+											{
+												"Name": "Type",
+												"Type": "string",
+												"True": "v6",
+												"AccessType": "public"
+											},
+											{
+												"Name": "HP",
+												"Type": "int",
+												"True": 199,
+												"AccessType": "public",
+												"Metadata": {
+													"assign": true,
+													"default": false
+												}
+											},
+											{
+												"Name": "OilType",
+												"Type": "string",
+												"True": "5w-20",
+												"AccessType": "public"
+											},
+											{
+												"Name": "Warnings",
+												"Type": "var",
+												"Acting": "object",
+												"True": [
+													{
+														"Name": "lowOil",
+														"Type": "bool",
+														"True": false,
+														"AccessType": "private"
+													},
+													{
+														"Name": "lowGas",
+														"Type": "bool",
+														"True": false,
+														"AccessType": "private"
+													},
+													{
+														"Name": "highTemp",
+														"Type": "bool",
+														"True": false,
+														"AccessType": "private"
+													},
+													{
+														"Name": "lowTirePressure",
+														"Type": "bool",
+														"True": false,
+														"AccessType": "private"
+													}
+												],
+												"AccessType": "public",
+												"Metadata": {
+													"assign": true,
+													"refs": "normalWarnings"
+												}
+											}
+										],
+										"AccessType": "private",
+										"Metadata": {
+											"assign": true,
+											"real": "Engine"
+										}
+									}
+								],
+								"AccessType": "public",
+								"Metadata": {
+									"refs": "Car"
+								}
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
+			},
+			"String": "DEFER"
 		},
 		{
 			"Name": "something",
@@ -660,6 +844,12 @@
 			}
 		},
 		{
+			"Name": "name",
+			"Type": "string",
+			"True": "hey this is an id",
+			"AccessType": "private"
+		},
+		{
 			"Name": "oldCar",
 			"Type": "struct",
 			"True": [
@@ -670,8 +860,7 @@
 					"True": "hey this is an id",
 					"AccessType": "private",
 					"Metadata": {
-						"assign": true,
-						"refs": "name"
+						"assign": true
 					}
 				},
 				{
@@ -788,152 +977,6 @@
 					"True": [
 						{
 							"Type": "string",
-							"True": "Most cars:",
-							"String": "Most cars:"
-						},
-						{
-							"Name": "Car",
-							"Type": "struct",
-							"True": [
-								{
-									"Name": "id",
-									"Type": "var",
-									"Acting": "object",
-									"True": [],
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true,
-										"refs": "name"
-									}
-								},
-								{
-									"Name": "Type",
-									"Type": "string",
-									"True": "car",
-									"AccessType": "public",
-									"Metadata": {
-										"assign": true
-									}
-								},
-								{
-									"Name": "New",
-									"Type": "bool",
-									"True": false,
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true
-									}
-								},
-								{
-									"Name": "numOfWheels",
-									"Type": "int",
-									"True": 4,
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true
-									}
-								},
-								{
-									"Name": "engine",
-									"Type": "struct",
-									"True": [
-										{
-											"Name": "Displacement",
-											"Type": "float",
-											"True": 2.4,
-											"AccessType": "public"
-										},
-										{
-											"Name": "Type",
-											"Type": "string",
-											"True": "v6",
-											"AccessType": "public"
-										},
-										{
-											"Name": "HP",
-											"Type": "int",
-											"True": 199,
-											"AccessType": "public",
-											"Metadata": {
-												"assign": true,
-												"default": false
-											}
-										},
-										{
-											"Name": "OilType",
-											"Type": "string",
-											"True": "5w-20",
-											"AccessType": "public"
-										},
-										{
-											"Name": "Warnings",
-											"Type": "var",
-											"Acting": "object",
-											"True": [
-												{
-													"Name": "lowOil",
-													"Type": "bool",
-													"True": false,
-													"AccessType": "private"
-												},
-												{
-													"Name": "lowGas",
-													"Type": "bool",
-													"True": false,
-													"AccessType": "private"
-												},
-												{
-													"Name": "highTemp",
-													"Type": "bool",
-													"True": false,
-													"AccessType": "private"
-												},
-												{
-													"Name": "lowTirePressure",
-													"Type": "bool",
-													"True": false,
-													"AccessType": "private"
-												}
-											],
-											"AccessType": "public",
-											"Metadata": {
-												"assign": true,
-												"refs": "normalWarnings"
-											}
-										}
-									],
-									"AccessType": "private",
-									"Metadata": {
-										"assign": true,
-										"real": "Engine"
-									}
-								}
-							],
-							"AccessType": "public",
-							"Metadata": {
-								"real": "Car",
-								"refs": "Car"
-							}
-						}
-					]
-				},
-				"body": {},
-				"returns": {}
-			},
-			"AccessType": "private",
-			"Metadata": {
-				"lambda": false,
-				"type": "call"
-			}
-		},
-		{
-			"Name": "Println",
-			"Type": "function",
-			"True": {
-				"args": {
-					"True": [
-						{
-							"Type": "string",
 							"True": "Old cars:",
 							"String": "Old cars:"
 						},
@@ -948,8 +991,7 @@
 									"True": "hey this is an id",
 									"AccessType": "private",
 									"Metadata": {
-										"assign": true,
-										"refs": "name"
+										"assign": true
 									}
 								},
 								{

@@ -1,7 +1,7 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -41,9 +41,9 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _VUegFoEXjc = {};
-    _VUegFoEXjc["something"] = "else";
-    return _VUegFoEXjc;
+    var _qagxBYLiDh = {};
+    _qagxBYLiDh["something"] = "else";
+    return _qagxBYLiDh;
   }
 }
 var someFunction(int arg1) {
@@ -52,14 +52,17 @@ var someFunction(int arg1) {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1534710374[] = {2, 4, 5, 9};
+      int arrayBoi_1534716692[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1534710374 = 0;
-      while (k_1534710374 < 4) {
+      int k_1534716692 = 0;
+      while (k_1534716692 < 4) {
         {
           defer onLeaveFuncs;
 
-          k = arrayBoi_1534710374[k_1534710374];
+          k = arrayBoi_1534716692[k_1534716692];
+
+          onLeaveFuncs.deferStack.push(
+              [=](...) { Println("value of k: ", k); });
 
           onReturnFuncs.deferStack.push(
               [=](...) { Println("value of k: ", k); });
@@ -67,18 +70,18 @@ var someFunction(int arg1) {
           if (arg1 < k) {
             defer onLeaveFuncs;
 
-            var _gxXjofqyMw = {};
-            _gxXjofqyMw["value"] = k;
-            return _gxXjofqyMw;
+            var _sDUCvSBOxr = {};
+            _sDUCvSBOxr["value"] = k;
+            return _sDUCvSBOxr;
           }
         }
-        k_1534710374 += 1;
+        k_1534716692 += 1;
       }
     }
 
-    var _UziPfMRtSs = {};
-    _UziPfMRtSs["something"] = 0;
-    return _UziPfMRtSs;
+    var _vyOxdbQnLP = {};
+    _vyOxdbQnLP["something"] = 0;
+    return _vyOxdbQnLP;
   }
 }
 int main() {

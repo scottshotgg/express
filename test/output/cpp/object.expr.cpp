@@ -1,7 +1,7 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -41,42 +41,42 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _VUegFoEXjc = {};
-    _VUegFoEXjc["something"] = "else";
-    return _VUegFoEXjc;
+    var _qagxBYLiDh = {};
+    _qagxBYLiDh["something"] = "else";
+    return _qagxBYLiDh;
   }
 }
 int main() {
 
   var obj = {};
   obj["something"] = "here";
-  var hey_GYuhEgiEGH = {};
-  hey_GYuhEgiEGH["me"] = true;
-  hey_GYuhEgiEGH["anIntVariable"] = 69;
-  obj["hey"] = hey_GYuhEgiEGH;
+  var hey_MWRhdCXbLD = {};
+  hey_MWRhdCXbLD["me"] = true;
+  hey_MWRhdCXbLD["anIntVariable"] = 69;
+  obj["hey"] = hey_MWRhdCXbLD;
 
   var objs[] = {};
   {
-    var _qNGsqmcFXe = {};
-    _qNGsqmcFXe["another"] = "object";
-    objs[0] = _qNGsqmcFXe;
+    var _SlgnjaZCSz = {};
+    _SlgnjaZCSz["another"] = "object";
+    objs[0] = _SlgnjaZCSz;
   }
   {
-    var obj_aiuBFmnyKS = {};
-    obj_aiuBFmnyKS["something"] = "here";
-    var hey_nfPhRwGNqK = {};
-    hey_nfPhRwGNqK["me"] = true;
-    hey_nfPhRwGNqK["anIntVariable"] = 69;
-    obj_aiuBFmnyKS["hey"] = hey_nfPhRwGNqK;
-    objs[1] = obj_aiuBFmnyKS;
+    var obj_LQRzzXFAVG = {};
+    obj_LQRzzXFAVG["something"] = "here";
+    var hey_DKOdVKXUee = {};
+    hey_DKOdVKXUee["me"] = true;
+    hey_DKOdVKXUee["anIntVariable"] = 69;
+    obj_LQRzzXFAVG["hey"] = hey_DKOdVKXUee;
+    objs[1] = obj_LQRzzXFAVG;
   }
   {
-    var obj_kOZRcoZEdG = {};
-    obj_kOZRcoZEdG["something"] = "here";
-    var hey_UEiGTwudmG = {};
-    hey_UEiGTwudmG["me"] = true;
-    hey_UEiGTwudmG["anIntVariable"] = 69;
-    obj_kOZRcoZEdG["hey"] = hey_UEiGTwudmG;
-    objs[2] = obj_kOZRcoZEdG;
+    var obj_ONfdLtrXJT = {};
+    obj_ONfdLtrXJT["something"] = "here";
+    var hey_dEAYwTJvqr = {};
+    hey_dEAYwTJvqr["me"] = true;
+    hey_dEAYwTJvqr["anIntVariable"] = 69;
+    obj_ONfdLtrXJT["hey"] = hey_dEAYwTJvqr;
+    objs[2] = obj_ONfdLtrXJT;
   }
 }

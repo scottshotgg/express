@@ -3,6 +3,7 @@
 // FIXME: cannot declare functions without args or returns
 func someFunction(int arg1) (object returnValue) {
   for k of [ 2, 4, 5, 9 ] {
+    onleave Println("value of k: ", k)
     defer Println("value of k: ", k)
     if arg1 < k {
       return { value: k }
@@ -15,7 +16,7 @@ func someFunction(int arg1) (object returnValue) {
 Println("return value", someFunction(7))
 Println()
 Println()
-Println("return value", someFunction(9))
+onexit Println("return value", someFunction(9))
 
 struct Engine = {
   float Displacement = 2.4
@@ -46,8 +47,8 @@ struct Car = {
     Warnings: normalWarnings
   }
 }
+defer Println("Most cars:", Car)
 
-string name = "hey this is an id"
 
 /*oldWarnings := {
   antique: true
@@ -56,8 +57,9 @@ string name = "hey this is an id"
 something := someFunction(7)
 Println(something)
 
+string name = "hey this is an id"
 oldCar := Car {
-  id: name
+  id: "hey this is an id"
   Type: "car"
   New: false
   numOfWheels: 4
@@ -69,7 +71,6 @@ oldCar := Car {
   }
 }
 
-Println("Most cars:", Car)
 Println("Old cars:" oldCar)
 
 // FIXME: this splatters out a shit ton of text, needs to

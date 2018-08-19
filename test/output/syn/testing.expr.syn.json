@@ -132,6 +132,53 @@
 														"Type": "KEYWORD",
 														"Value": {
 															"Type": "keyword",
+															"String": "onleave"
+														}
+													},
+													{
+														"ID": 1,
+														"Type": "FUNCTION",
+														"Value": {
+															"Name": "Println",
+															"Type": "function",
+															"True": [
+																{
+																	"ID": 1,
+																	"Type": "GROUP",
+																	"Value": {
+																		"Type": "GROUP",
+																		"True": [
+																			{
+																				"Type": "LITERAL",
+																				"Value": {
+																					"Type": "string",
+																					"True": "value of k: ",
+																					"String": "value of k: "
+																				}
+																			},
+																			{
+																				"Type": "IDENT",
+																				"Value": {
+																					"Type": "private",
+																					"String": "k"
+																				}
+																			}
+																		]
+																	}
+																}
+															],
+															"AccessType": "public",
+															"Metadata": {
+																"lambda": false,
+																"type": "call"
+															}
+														}
+													},
+													{
+														"ID": 9,
+														"Type": "KEYWORD",
+														"Value": {
+															"Type": "keyword",
 															"String": "defer"
 														}
 													},
@@ -406,6 +453,14 @@
 							"lambda": false,
 							"type": "call"
 						}
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "onexit"
 					}
 				},
 				{
@@ -949,32 +1004,50 @@
 					}
 				},
 				{
-					"Type": "TYPE",
+					"ID": 9,
+					"Type": "KEYWORD",
 					"Value": {
-						"Type": "string",
-						"String": "string"
+						"Type": "keyword",
+						"String": "defer"
 					}
 				},
 				{
-					"Type": "IDENT",
+					"ID": 1,
+					"Type": "FUNCTION",
 					"Value": {
-						"Type": "private",
-						"String": "name"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "string",
-						"True": "hey this is an id",
-						"String": "hey this is an id"
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "Most cars:",
+												"String": "Most cars:"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "Car"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				},
 				{
@@ -1054,6 +1127,35 @@
 					}
 				},
 				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "string",
+						"String": "string"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "name"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "hey this is an id",
+						"String": "hey this is an id"
+					}
+				},
+				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
@@ -1094,10 +1196,11 @@
 								}
 							},
 							{
-								"Type": "IDENT",
+								"Type": "LITERAL",
 								"Value": {
-									"Type": "private",
-									"String": "name"
+									"Type": "string",
+									"True": "hey this is an id",
+									"String": "hey this is an id"
 								}
 							},
 							{
@@ -1236,45 +1339,6 @@
 								}
 							}
 						]
-					}
-				},
-				{
-					"ID": 1,
-					"Type": "FUNCTION",
-					"Value": {
-						"Name": "Println",
-						"Type": "function",
-						"True": [
-							{
-								"ID": 1,
-								"Type": "GROUP",
-								"Value": {
-									"Type": "GROUP",
-									"True": [
-										{
-											"Type": "LITERAL",
-											"Value": {
-												"Type": "string",
-												"True": "Most cars:",
-												"String": "Most cars:"
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "public",
-												"String": "Car"
-											}
-										}
-									]
-								}
-							}
-						],
-						"AccessType": "public",
-						"Metadata": {
-							"lambda": false,
-							"type": "call"
-						}
 					}
 				},
 				{
