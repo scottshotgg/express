@@ -81,8 +81,15 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		refs := p.CurrentToken.Value.String
 		if variable.Type == FUNCTION {
 			functionOpType = "call"
-			// FIXME: here we need to look up the return value
+			// FIXME: here we need to look up the return value and make sure it matches
+			// FIXME: make sure the args match
+
+			// fmt.Println(p.meta.GetVariable())
+
 			fmt.Println("I AM A CALL", variable)
+			fmt.Println("last2", p.LastToken)
+			fmt.Println("current2", p.CurrentToken)
+			fmt.Println("next2", p.NextToken)
 
 			p.Shift()
 
@@ -326,7 +333,11 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			} else {
 				//fmt.Println("FUNCTION OP TYPE", functionOpType)
 				stmt, err = pa.GetExpression()
-				fmt.Println("I AM A FUNTION CALL", stmt)
+				fmt.Println(p.meta.currentVariable)
+				fmt.Println("last", p.LastToken)
+				fmt.Println("current", p.CurrentToken)
+				fmt.Println("next", p.NextToken)
+				fmt.Println("I AM A FUNCTION CALL", stmt)
 			}
 			if err != nil {
 				//fmt.Println("Error: could not parse expression inside group")
@@ -684,6 +695,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			}
 			fmt.Printf("expr in assign %+v\n", expr)
 
+			// TODO: this is where we need to take care of comparing the function return type to the variable
 			if expr.Type == token.FunctionType {
 				fmt.Println("thing", p.CurrentToken)
 				fmt.Println("someFunction", p.NextToken)
