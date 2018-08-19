@@ -60,6 +60,8 @@
     "cstdint": "cpp",
     "__functional_03": "cpp",
     "stack": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "condition_variable": "cpp",
+    "mutex": "cpp"
   }
 }

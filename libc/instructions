@@ -1,0 +1,5 @@
+thoughts:
+
+Create a map from Express type to C/C++ type
+Use this when parsing the libc files and change out the type
+  This way we can regen it later when we support more types
