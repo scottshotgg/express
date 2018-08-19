@@ -36,18 +36,16 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 int main() {
 
   var thingy = 7;
@@ -87,10 +85,10 @@ int main() {
 
   Println(thingyObject);
 
-  var _JmaEnxorSp = {};
-  _JmaEnxorSp["got_no"] = "BLOOD IN MY VEINS";
+  var _TZnofPZXcE = {};
+  _TZnofPZXcE["got_no"] = "BLOOD IN MY VEINS";
 
-  Println(_JmaEnxorSp);
+  Println(_TZnofPZXcE);
 
   Println();
 }

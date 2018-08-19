@@ -36,7 +36,6 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 int main() {
 
   onExitFuncs.deferStack.push(

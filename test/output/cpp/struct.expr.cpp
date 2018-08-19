@@ -36,18 +36,16 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 int main() {
 
   var another = {};
@@ -61,18 +59,18 @@ int main() {
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_iBJvCQVvuK = {};
-  thing_iBJvCQVvuK["woah"] = 0;
-  Thing["thing"] = thing_iBJvCQVvuK;
+  var thing_iLeSuAOfdg = {};
+  thing_iLeSuAOfdg["woah"] = 0;
+  Thing["thing"] = thing_iLeSuAOfdg;
 
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_jqwwkiUlbG = {};
-  thing_jqwwkiUlbG["woah"] = 0;
-  something["thing"] = thing_jqwwkiUlbG;
+  var thing_dJALjDjijI = {};
+  thing_dJALjDjijI["woah"] = 0;
+  something["thing"] = thing_dJALjDjijI;
 
   Println("something", something);
 
@@ -81,9 +79,9 @@ int main() {
   something2["stringField"] = "";
   something2["false_field"] = false;
   something2["anotherFielderino"] = 0.000000;
-  var thing_ogJtsMFzxw = {};
-  thing_ogJtsMFzxw["woah"] = 0;
-  something2["thing"] = thing_ogJtsMFzxw;
+  var thing_BAReiIuZQj = {};
+  thing_BAReiIuZQj["woah"] = 0;
+  something2["thing"] = thing_BAReiIuZQj;
 
   Println("something2", something2);
 
@@ -92,9 +90,9 @@ int main() {
   something3["stringField"] = "chyah brah";
   something3["false_field"] = false;
   something3["anotherFielderino"] = 0.000000;
-  var thing_UBClBzODIK = {};
-  thing_UBClBzODIK["woah"] = 0;
-  something3["thing"] = thing_UBClBzODIK;
+  var thing_qdgKDiefgN = {};
+  thing_qdgKDiefgN["woah"] = 0;
+  something3["thing"] = thing_qdgKDiefgN;
 
   Println("something3", something3);
 }

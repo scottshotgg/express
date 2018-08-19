@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1534557084[k_1534557084]"
+										"refs": "arrayBoi_1534710374[k_1534710374]"
 									}
 								},
 								{
@@ -128,10 +128,10 @@
 									}
 								}
 							],
-							"String": "k_1534557084\u003c4",
+							"String": "k_1534710374\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1534557084",
+									"Name": "k_1534710374",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -139,7 +139,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1534557084",
+										"Name": "arrayBoi_1534710374",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -192,14 +192,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1534557084",
+									"Name": "k_1534710374",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1534557084",
+									"Name": "k_1534710374",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -228,8 +228,7 @@
 					"True": [
 						{
 							"Name": "returnValue",
-							"Type": "var",
-							"Acting": "object",
+							"Type": "object",
 							"True": [],
 							"AccessType": "private"
 						}
@@ -391,12 +390,14 @@
 				},
 				{
 					"Name": "Warnings",
-					"Type": "object",
+					"Type": "var",
+					"Acting": "object",
 					"True": [],
 					"AccessType": "private",
 					"Metadata": {
 						"assign": true,
-						"refs": "oldWarnings"
+						"from_func": true,
+						"refs": "something"
 					}
 				}
 			],
@@ -418,7 +419,8 @@
 		},
 		{
 			"Name": "normalWarnings",
-			"Type": "object",
+			"Type": "var",
+			"Acting": "object",
 			"True": [
 				{
 					"Name": "lowOil",
@@ -451,6 +453,17 @@
 			"Name": "Car",
 			"Type": "struct",
 			"True": [
+				{
+					"Name": "id",
+					"Type": "var",
+					"Acting": "object",
+					"True": [],
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "name"
+					}
+				},
 				{
 					"Name": "Type",
 					"Type": "string",
@@ -512,7 +525,8 @@
 						},
 						{
 							"Name": "Warnings",
-							"Type": "object",
+							"Type": "var",
+							"Acting": "object",
 							"True": [
 								{
 									"Name": "lowOil",
@@ -557,34 +571,82 @@
 		},
 		{
 			"Name": "name",
-			"Type": "var",
-			"Acting": "string",
+			"Type": "string",
 			"True": "hey this is an id",
 			"AccessType": "private"
 		},
 		{
-			"Name": "oldWarnings",
+			"Name": "something",
 			"Type": "object",
-			"True": [
-				{
-					"Name": "antique",
-					"Type": "bool",
-					"True": true,
-					"AccessType": "private"
+			"True": {
+				"Name": "someFunction",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "int",
+								"True": 7,
+								"String": "7"
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"from_func": true,
+					"lambda": false,
+					"type": "call"
 				}
-			],
-			"AccessType": "private"
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"from_func": true,
+				"lambda": false,
+				"type": "call"
+			}
 		},
 		{
-			"Name": "something",
+			"Name": "Println",
 			"Type": "function",
 			"True": {
 				"args": {
 					"True": [
 						{
-							"Type": "int",
-							"True": 7,
-							"String": "7"
+							"Name": "something",
+							"Type": "object",
+							"True": {
+								"Name": "someFunction",
+								"Type": "function",
+								"True": {
+									"args": {
+										"True": [
+											{
+												"Type": "int",
+												"True": 7,
+												"String": "7"
+											}
+										]
+									},
+									"body": {},
+									"returns": {}
+								},
+								"AccessType": "private",
+								"Metadata": {
+									"from_func": true,
+									"lambda": false,
+									"type": "call"
+								}
+							},
+							"AccessType": "private",
+							"Metadata": {
+								"from_func": true,
+								"lambda": false,
+								"refs": "something",
+								"type": "call"
+							}
 						}
 					]
 				},
@@ -601,6 +663,17 @@
 			"Name": "oldCar",
 			"Type": "struct",
 			"True": [
+				{
+					"Name": "id",
+					"Type": "var",
+					"Acting": "string",
+					"True": "hey this is an id",
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "name"
+					}
+				},
 				{
 					"Name": "Type",
 					"Type": "string",
@@ -662,19 +735,36 @@
 						},
 						{
 							"Name": "Warnings",
-							"Type": "object",
-							"True": [
-								{
-									"Name": "antique",
-									"Type": "bool",
-									"True": true,
-									"AccessType": "private"
+							"Type": "var",
+							"Acting": "object",
+							"True": {
+								"Name": "someFunction",
+								"Type": "function",
+								"True": {
+									"args": {
+										"True": [
+											{
+												"Type": "int",
+												"True": 7,
+												"String": "7"
+											}
+										]
+									},
+									"body": {},
+									"returns": {}
+								},
+								"AccessType": "private",
+								"Metadata": {
+									"from_func": true,
+									"lambda": false,
+									"type": "call"
 								}
-							],
+							},
 							"AccessType": "public",
 							"Metadata": {
 								"assign": true,
-								"refs": "oldWarnings"
+								"from_func": true,
+								"refs": "something"
 							}
 						}
 					],
@@ -705,6 +795,17 @@
 							"Name": "Car",
 							"Type": "struct",
 							"True": [
+								{
+									"Name": "id",
+									"Type": "var",
+									"Acting": "object",
+									"True": [],
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"refs": "name"
+									}
+								},
 								{
 									"Name": "Type",
 									"Type": "string",
@@ -766,7 +867,8 @@
 										},
 										{
 											"Name": "Warnings",
-											"Type": "object",
+											"Type": "var",
+											"Acting": "object",
 											"True": [
 												{
 													"Name": "lowOil",
@@ -840,6 +942,17 @@
 							"Type": "struct",
 							"True": [
 								{
+									"Name": "id",
+									"Type": "var",
+									"Acting": "string",
+									"True": "hey this is an id",
+									"AccessType": "private",
+									"Metadata": {
+										"assign": true,
+										"refs": "name"
+									}
+								},
+								{
 									"Name": "Type",
 									"Type": "string",
 									"True": "car",
@@ -900,19 +1013,36 @@
 										},
 										{
 											"Name": "Warnings",
-											"Type": "object",
-											"True": [
-												{
-													"Name": "antique",
-													"Type": "bool",
-													"True": true,
-													"AccessType": "private"
+											"Type": "var",
+											"Acting": "object",
+											"True": {
+												"Name": "someFunction",
+												"Type": "function",
+												"True": {
+													"args": {
+														"True": [
+															{
+																"Type": "int",
+																"True": 7,
+																"String": "7"
+															}
+														]
+													},
+													"body": {},
+													"returns": {}
+												},
+												"AccessType": "private",
+												"Metadata": {
+													"from_func": true,
+													"lambda": false,
+													"type": "call"
 												}
-											],
+											},
 											"AccessType": "public",
 											"Metadata": {
 												"assign": true,
-												"refs": "oldWarnings"
+												"from_func": true,
+												"refs": "something"
 											}
 										}
 									],

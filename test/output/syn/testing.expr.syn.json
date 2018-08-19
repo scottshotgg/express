@@ -43,8 +43,8 @@
 										{
 											"Type": "TYPE",
 											"Value": {
-												"Type": "var",
-												"String": "var"
+												"Type": "object",
+												"String": "object"
 											}
 										},
 										{
@@ -614,8 +614,8 @@
 							{
 								"Type": "TYPE",
 								"Value": {
-									"Type": "object",
-									"String": "object"
+									"Type": "var",
+									"String": "var"
 								}
 							},
 							{
@@ -681,8 +681,8 @@
 				{
 					"Type": "TYPE",
 					"Value": {
-						"Type": "object",
-						"String": "object"
+						"Type": "var",
+						"String": "var"
 					}
 				},
 				{
@@ -789,6 +789,20 @@
 					"Value": {
 						"Type": "BLOCK",
 						"True": [
+							{
+								"Type": "TYPE",
+								"Value": {
+									"Type": "var",
+									"String": "var"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "id"
+								}
+							},
 							{
 								"Type": "TYPE",
 								"Value": {
@@ -937,8 +951,8 @@
 				{
 					"Type": "TYPE",
 					"Value": {
-						"Type": "var",
-						"String": "var"
+						"Type": "string",
+						"String": "string"
 					}
 				},
 				{
@@ -1009,6 +1023,37 @@
 					}
 				},
 				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "something"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
@@ -1034,6 +1079,27 @@
 					"Value": {
 						"Type": "BLOCK",
 						"True": [
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "id"
+								}
+							},
+							{
+								"Type": "ASSIGN",
+								"Value": {
+									"Type": "set",
+									"String": ":"
+								}
+							},
+							{
+								"Type": "IDENT",
+								"Value": {
+									"Type": "private",
+									"String": "name"
+								}
+							},
 							{
 								"Type": "IDENT",
 								"Value": {
@@ -1143,6 +1209,27 @@
 											"Value": {
 												"Type": "int",
 												"True": 160
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "public",
+												"String": "Warnings"
+											}
+										},
+										{
+											"Type": "ASSIGN",
+											"Value": {
+												"Type": "set",
+												"String": ":"
+											}
+										},
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "something"
 											}
 										}
 									]

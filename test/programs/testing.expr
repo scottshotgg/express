@@ -1,7 +1,7 @@
 // This file is a testing scratchpad for generic testing scenarios
 
 // FIXME: cannot declare functions without args or returns
-func someFunction(int arg1) (var returnValue) {
+func someFunction(int arg1) (object returnValue) {
   for k of [ 2, 4, 5, 9 ] {
     defer Println("value of k: ", k)
     if arg1 < k {
@@ -22,16 +22,14 @@ struct Engine = {
   string Type = "v6"
   int HP = 235
   string OilType = "5w-20"
-  object Warnings
+  var Warnings
 }
 
 var things = {
   thingy := 0
 }
 
-// FIXME: declaring as `var` causes an error in transpiler:
-// "wtf still got var after switching acting and type"
-object normalWarnings = {
+var normalWarnings = {
   bool lowOil
   bool lowGas
   bool highTemp
@@ -39,7 +37,7 @@ object normalWarnings = {
 }
 
 struct Car = {
-  //var id
+  var id
   string Type = "car"
   bool New
   int numOfWheels = 4
@@ -49,28 +47,25 @@ struct Car = {
   }
 }
 
-var name = "hey this is an id"
+string name = "hey this is an id"
 
 /*oldWarnings := {
   antique: true
 }*/
 
-// FIXME: this does not work
 something := someFunction(7)
-//Println(something)
+Println(something)
 
-// FIXME: assinging anything but an object to a var causes it to
-// go away...?
 oldCar := Car {
-  //id: name
+  id: name
   Type: "car"
   New: false
   numOfWheels: 4
   engine: Engine{
     HP: 160
     //Warnings: oldWarnings
-    // FIXME: this does not work right now
     //Warnings: someFunction(7)
+    Warnings: something
   }
 }
 

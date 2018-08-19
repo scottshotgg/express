@@ -36,18 +36,16 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 int main() {
 
   int i = 8;

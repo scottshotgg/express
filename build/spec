@@ -1,0 +1,4 @@
+#! /bin/bash
+
+# get the arch from the command line
+# build

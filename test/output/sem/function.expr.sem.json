@@ -10,7 +10,7 @@
 						{
 							"Name": "i",
 							"Type": "object",
-							"True": {},
+							"True": [],
 							"AccessType": "private"
 						}
 					]
@@ -40,7 +40,7 @@
 						{
 							"Name": "j",
 							"Type": "object",
-							"True": {},
+							"True": [],
 							"AccessType": "private"
 						}
 					]

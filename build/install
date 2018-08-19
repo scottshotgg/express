@@ -1,0 +1,6 @@
+#!bin/bash
+
+# get the arch
+arch=$(uname -m)
+
+# TODO: do a switch case here, copy the built one, etc, too lazy rn

@@ -91,7 +91,7 @@
   branch = "master"
   name = "github.com/spf13/jwalterweatherman"
   packages = ["."]
-  revision = "7c0cea34c8ece3fbeb2b27ab9b59511d360fb394"
+  revision = "14d3d4c518341bea657dd8a226f5121c0ff8c9f2"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -134,7 +134,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "98c5dad5d1a0e8a73845ecc8897d0bd56586511d"
+  revision = "1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -158,6 +158,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8baccc43214c7d2068925b7f366a66e7aa508bcd3529bf19ecdf5ae828ad1033"
+  inputs-digest = "cd559e98277f29a0f743b053d065868202087b92c901fd05b98175af702e0481"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -36,18 +36,16 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 int main() {
 
   int f = 0;
@@ -67,20 +65,20 @@ int main() {
   }
 
   {
-    int arrayBoi_1534341371[] = {1, 2, 4};
+    int arrayBoi_1534710369[] = {1, 2, 4};
     int i = 0;
-    int i_1534341371 = 0;
-    while (i_1534341371 < 3) {
+    int i_1534710369 = 0;
+    while (i_1534710369 < 3) {
       {
         defer onLeaveFuncs;
 
-        i = i_1534341371;
+        i = i_1534710369;
 
         f = i;
 
         int h = 1;
       }
-      i_1534341371 += 1;
+      i_1534710369 += 1;
     }
   }
 
@@ -88,18 +86,18 @@ int main() {
 
   {
     int i = 0;
-    int i_1534341371 = 0;
-    while (i_1534341371 < 8) {
+    int i_1534710369 = 0;
+    while (i_1534710369 < 8) {
       {
         defer onLeaveFuncs;
 
-        i = countdown[i_1534341371];
+        i = countdown[i_1534710369];
 
         f = i;
 
         int h = 1;
       }
-      i_1534341371 += 1;
+      i_1534710369 += 1;
     }
   }
 }

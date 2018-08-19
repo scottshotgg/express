@@ -28,6 +28,15 @@ const (
 	PUBLIC
 )
 
+type Variable struct {
+	Name       string
+	Type       VariableType
+	ActingType VariableType
+	Value      interface{}
+	AccessType AccessType
+	Metadata   map[string]interface{}
+}
+
 func NewVariable(name string, value interface{}, variableType VariableType) *Variable {
 	return &Variable{
 		Name:       name,
@@ -52,12 +61,3 @@ func NewVariableFromTokenValue(tv token.Value) *Variable {
 }
 
 func (v *Variable) SetAccessType(at AccessType) { v.AccessType = at }
-
-type Variable struct {
-	Name       string
-	Type       VariableType
-	ActingType VariableType
-	Value      interface{}
-	AccessType AccessType
-	Metadata   map[string]interface{}
-}

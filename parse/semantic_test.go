@@ -143,7 +143,7 @@ func compileExpressProgram(filename string) error {
 	return nil
 }
 
-var singleFile string = "testing.expr"
+var singleFile string = "var.expr"
 
 func TestRunSingle(t *testing.T) {
 	TestSingle(t)

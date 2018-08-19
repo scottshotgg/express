@@ -80,6 +80,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 		refs := p.CurrentToken.Value.String
 		if variable.Type == FUNCTION {
+			// p.meta.currentVariable.Metadata["from_func"] = true
 			functionOpType = "call"
 			// FIXME: here we need to look up the return value and make sure it matches
 			// FIXME: make sure the args match
@@ -354,8 +355,10 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// os.Exit(9)
 
 	case token.Function:
+		fmt.Println("wtf i am here")
 		next := p.NextToken
 		md := next.Value.Metadata["type"]
+		fmt.Println(next)
 
 		// Unpack tokens from function into new parser
 		// Unpack tokens from each in True into a new parser
@@ -399,7 +402,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			}
 
 			returnsUnpacked := unpackedFunctionTokens[1]
-			//fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
+			// fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
 
 			bodyUnpacked := unpackedFunctionTokens[2]
 			//fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
@@ -439,6 +442,13 @@ func (p *Parser) GetFactor() (token.Value, error) {
 				"type":   md.(string),
 			},
 		}
+
+		if md == "def" {
+			p.meta.DeclareVariableFromTokenValue(value)
+		}
+
+		fmt.Println("woah water fack")
+		fmt.Println(p.meta.GetVariable("someFunction"))
 
 	default:
 		//fmt.Println("last2", p.LastToken)
@@ -697,9 +707,27 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 			// TODO: this is where we need to take care of comparing the function return type to the variable
 			if expr.Type == token.FunctionType {
-				fmt.Println("thing", p.CurrentToken)
-				fmt.Println("someFunction", p.NextToken)
-				os.Exit(9)
+				// p.meta.currentVariable.Metadata["from_func"] = true
+				fmt.Println("currentVar", p.meta.currentVariable)
+
+				// fmt.Println(p.meta.GetVariable("someFunction"))
+
+				// we are going to need to deal with different things here:
+				//	can variables be assigned to a function such that:
+				//	something := someFunc
+				//	we also need to deal with allowing function definitions here
+				//	but for now we will only do calls
+
+				// funcT, ok := p.meta.GetVariable(expr.Name)
+				// if !ok {
+				// 	return token.Value{}, errors.New("Could not find function")
+				// }
+
+				// fmt.Println("expr", expr)
+				// expr = mapVariableToTokenValue(funcT)
+				// fmt.Println("expr after", expr)
+				// os.Exit(9)
+
 			}
 
 			if p.meta.currentVariable.Type == UNRECOGNIZED && !inStruct && !inObject {
@@ -726,9 +754,40 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// 	//fmt.Println("wtf am i doing here", p.meta.currentVariable)
 				// 	os.Exit(9)
 				// }
-				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
+				if expr.Type == token.FunctionType {
+
+					fmt.Println("thing", p.CurrentToken)
+					fmt.Println("someFunction")
+					funcT, ok := p.meta.GetVariable("someFunction")
+					if !ok {
+						// TODO: we couldn't find the function
+					}
+
+					fmt.Println(p.meta.currentVariable)
+					fmt.Println("returns", funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
+
+					p.meta.currentVariable.Type = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
+					p.meta.currentVariable.ActingType = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Acting)
+
+					fmt.Println("butts", p.meta.currentVariable)
+
+				} else {
+
+					p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
+
+				}
 			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
-				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+
+				fmt.Println("woah its me", expr.Type, expr.Acting, p.meta.currentVariable.Type, p.meta.currentVariable.ActingType)
+				if expr.Type != "var" {
+					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+
+				} else if expr.Acting != "var" {
+					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Acting)
+
+				} else {
+					return token.Value{}, errors.Errorf("Not sure how to assert variable type; p.meta.currentVariable: %v\nexpr: %v", p.meta.currentVariable, expr)
+				}
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				// FIXME: wtf is this for?
@@ -752,7 +811,21 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			// 	//fmt.Printf("wtf typerooni: %+v\n", p.meta.currentVariable)
 			// }
 
-			p.meta.currentVariable.Value = expr.True
+			if expr.Type == token.FunctionType {
+				// Need to change this to an array of token or something so that cpp knows what to do
+				p.meta.currentVariable.Value = expr
+				// Try to use 'refs' here later
+
+				// FIXME: this def needs to happen elsewhere
+				// newVar := *p.meta.currentVariable
+				// newVar.Metadata["from_func"] = true
+				// p.meta.currentVariable = &newVar
+				expr.Metadata["from_func"] = true
+
+				// p.meta.currentVariable.Metadata["refs"] =
+			} else {
+				p.meta.currentVariable.Value = expr.True
+			}
 
 			// Copy over all of the metadata
 			for k, v := range expr.Metadata {
@@ -871,7 +944,14 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 
 			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
-				p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+				// The acting type should never be `var` so assert the acting type from the expression
+				if expr.Type != "var" {
+					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+				} else if expr.Acting != "var" {
+					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Acting)
+				} else {
+					return token.Value{}, errors.New("wtf")
+				}
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
@@ -879,10 +959,21 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					// p.meta.currentVariable.Metadata["real"] = expr.String
 
 				} else if expr.Type == token.FunctionType {
-					fmt.Println("FUNCTION", expr)
 
-					fmt.Println("scope", p.meta.currentScope)
-					os.Exit(9)
+					fmt.Println("thing", p.CurrentToken)
+					fmt.Println("someFunction")
+					funcT, ok := p.meta.GetVariable("someFunction")
+					if !ok {
+						// TODO: we couldn't find the function
+					}
+
+					fmt.Println(p.meta.currentVariable)
+					fmt.Println("returns", funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
+
+					p.meta.currentVariable.Type = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
+					p.meta.currentVariable.ActingType = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Acting)
+
+					fmt.Println("butts2", p.meta.currentVariable)
 
 				} else if expr.Type != token.ArrayType {
 					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
@@ -899,6 +990,10 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			if ref, ok := expr.Metadata["refs"]; ok {
 				//fmt.Println("there was a ref")
 				p.meta.currentVariable.Metadata["refs"] = ref
+			}
+			if fromFunc, ok := expr.Metadata["from_func"]; ok {
+				//fmt.Println("there was a ref")
+				p.meta.currentVariable.Metadata["from_func"] = fromFunc
 			}
 			//fmt.Println("p.meta.currentVariable2", p.meta.currentVariable)
 
@@ -1312,6 +1407,8 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		// Check for returns (statement/group)
 		// Check for block
 
+		fmt.Println("wtf this name", p.meta.currentVariable)
+
 		functionOpType = "declaration"
 		// Shift away the "func" keyword
 		p.Shift()
@@ -1377,6 +1474,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		if err != nil {
 			return token.Value{}, err
 		}
+		// p.PopState()
 
 		functionOpType = ""
 
@@ -1399,6 +1497,8 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		// FIXME: fix this later
 		tv.AccessType = "private"
+
+		p.meta.DeclareVariableFromTokenValue(tv)
 
 		return tv, nil
 

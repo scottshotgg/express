@@ -36,22 +36,20 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 int main() {
 
-  var _RyiWyUruxv = {};
-  _RyiWyUruxv["another"] = "object";
+  var _MaiHkkqwjE = {};
+  _MaiHkkqwjE["another"] = "object";
 
-  increment(_RyiWyUruxv);
+  increment(_MaiHkkqwjE);
 }

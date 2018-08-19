@@ -36,32 +36,30 @@ int printStuff(int k) {
     return 0;
   }
 }
-
 var increment(var i) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
-    var _OfjbvSDgfb = {};
-    _OfjbvSDgfb["something"] = "else";
-    return _OfjbvSDgfb;
+    var _VUegFoEXjc = {};
+    _VUegFoEXjc["something"] = "else";
+    return _VUegFoEXjc;
   }
 }
-
 var someFunction(int arg1) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1534341376[] = {2, 4, 5, 9};
+      int arrayBoi_1534710374[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1534341376 = 0;
-      while (k_1534341376 < 4) {
+      int k_1534710374 = 0;
+      while (k_1534710374 < 4) {
         {
           defer onLeaveFuncs;
 
-          k = arrayBoi_1534341376[k_1534341376];
+          k = arrayBoi_1534710374[k_1534710374];
 
           onReturnFuncs.deferStack.push(
               [=](...) { Println("value of k: ", k); });
@@ -69,21 +67,20 @@ var someFunction(int arg1) {
           if (arg1 < k) {
             defer onLeaveFuncs;
 
-            var _lhwgZYwoSI = {};
-            _lhwgZYwoSI["value"] = k;
-            return _lhwgZYwoSI;
+            var _gxXjofqyMw = {};
+            _gxXjofqyMw["value"] = k;
+            return _gxXjofqyMw;
           }
         }
-        k_1534341376 += 1;
+        k_1534710374 += 1;
       }
     }
 
-    var _hBTzACTzhA = {};
-    _hBTzACTzhA["something"] = 0;
-    return _hBTzACTzhA;
+    var _UziPfMRtSs = {};
+    _UziPfMRtSs["something"] = 0;
+    return _UziPfMRtSs;
   }
 }
-
 int main() {
 
   var hi_my_type_is = "what";

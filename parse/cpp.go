@@ -344,21 +344,65 @@ func translateObject(t token.Value, objName string) (string, error) {
 		tName = objName
 	}
 
+	fmt.Println("metadata", t.Metadata)
+	fmt.Println("i am here", t)
+	if _, ok := t.Metadata["from_func"]; ok {
+		asserted, ok := t.True.(token.Value)
+		if ok {
+			funcCall, err := translateFunctionCall(asserted)
+			if err != nil {
+				return "", err
+			}
+
+			// might have to make a custom tName
+			// [1:] to shave off the newline: remove if it causes problems
+			return "var " + tName + " = " + funcCall[1:], nil
+		}
+	}
+
 	objectString := "var " + tName + " = {};\n"
 
 	for _, v := range t.True.([]token.Value) {
 		objectValue := v.True
-		if ref, ok := v.Metadata["refs"]; ok {
-			objectValue = ref
-		}
 
-		// if checkDefault {
-		// 	// Checking for a "default" flag means we set it to false; kinda confusing
-		// 	_, ok := v.Metadata["default"]
-		// 	if !ok {
-		// 		continue
-		// 	}
-		// }
+		var fromFuncOk bool
+		_, ok := v.True.([]token.Value)
+		if !ok {
+			ref, ok := v.Metadata["refs"]
+			if ok {
+				objectValue = ref
+			}
+
+			fmt.Println("metadata", v.Metadata)
+			_, fromFuncOk = v.Metadata["from_func"]
+			if ok && objectValue != ref {
+				// if objectValue == ref {
+				// 	// objectString += vName + " = " + ref.(string) + ";\n"
+				// 	if v.Type == "string":
+				// 	objectString += tName + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
+
+				// 	continue
+				// }
+
+				fmt.Println("toks", v.True)
+				fmt.Println("v", v)
+				asserted, ok := v.True.(token.Value)
+				if ok {
+					funcCall, err := translateFunctionCall(asserted)
+					if err != nil {
+						return "", err
+					}
+
+					fmt.Println("translateVa")
+					fmt.Println(translateVariableStatement(v))
+
+					// might have to make a custom tName
+					// [1:] to shave off the newline: remove if it causes problems
+					objectString += tName + " = " + funcCall[1:]
+					continue
+				}
+			}
+		}
 
 		// //fmt.Println("k, v", k, v)
 		if v.Type == "object" || v.Type == "struct" {
@@ -386,7 +430,7 @@ func translateObject(t token.Value, objName string) (string, error) {
 			// 	}
 
 			// 	objectString += objstr
-		} else if v.Type == "var" {
+		} else if v.Type == "var" && !fromFuncOk {
 			// vType := v.Type
 			// v.Type = v.Acting
 			// v.Acting = vType
@@ -405,6 +449,7 @@ func translateObject(t token.Value, objName string) (string, error) {
 
 			v.Type = v.Acting
 			v.Acting = vType
+
 			fmt.Println("i be here m8", v)
 			if v.Type == "object" || v.Type == "struct" {
 				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
@@ -414,15 +459,29 @@ func translateObject(t token.Value, objName string) (string, error) {
 				fmt.Println("wtf still got var after switching acting and type")
 				os.Exit(9)
 			} else {
+				fmt.Println("something something", v)
+				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
 				varStmt, err = translateVariableStatement(v)
 				if err != nil {
 					return "", err
 				}
+				fmt.Println("var statement m8", varStmt)
 			}
+
+			// _, ok := v.Metadata["assign"]
+			// if ok {
+			// 	_, ok = v.True.([]token.Value)
+			// 	fmt.Println("v, ok", v.Name, ok)
+			// 	if !ok {
+			// 		vType = ""
+			// 	}
+			// }
 
 			objectString += strings.Join(
 				[]string{vType, vName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
 			) + "\n"
+			fmt.Println("again var statement m8", objectString)
+			fmt.Println("v", v)
 
 		} else if v.Type == "array" {
 			// I am not supporting arrays for now, will have to debate how to
@@ -475,10 +534,24 @@ func translateVariableStatement(t token.Value) (string, error) {
 		tType = ""
 	}
 
-	//fmt.Println("translating shit")
+	fmt.Println("metadata", t.Metadata)
+	if _, ok := t.Metadata["from_func"]; ok {
+		funcCall, err := translateFunctionCall(t.True.(token.Value))
+		if err != nil {
+			return "", err
+		}
+
+		// might have to make a custom tName
+		// [1:] to shave off the newline: remove if it causes problems
+		if tType == "object" {
+			tType = "var"
+		}
+		return tType + " " + t.Name + " = " + funcCall[1:], nil
+	}
 
 	switch t.Type {
 	case "var":
+		fmt.Println("around the world", t)
 		var varStmt string
 		var err error
 		tName := t.Name
@@ -488,24 +561,34 @@ func translateVariableStatement(t token.Value) (string, error) {
 		t.Acting = tType
 		fmt.Println("t.Type", t.Type)
 		fmt.Println("t.Acting", t.Acting)
-		if t.Type != "object" && t.Type != "struct" {
+
+		if t.Type == "object" || t.Type == "struct" {
 			tName = t.Name + "_" + RandStringBytesMaskImprSrc(10)
-			varStmt, err = translateVariableStatement(t)
+			varStmt, err = translateObject(t, tName)
 		} else if t.Type == "var" {
 			fmt.Println("wtf still got var after switching acting and type")
 			os.Exit(9)
 		} else {
 			fmt.Println("else", t.Type, t.Acting)
-			varStmt, err = translateObject(t, tName)
+			varStmt, err = translateVariableStatement(t)
 			if err != nil {
 				return "", err
+			}
+		}
+
+		_, ok := t.Metadata["assign"]
+		if ok {
+			_, ok = t.True.([]token.Value)
+			fmt.Println("t, ok", t.Name, ok)
+			if !ok {
+				tType = ""
 			}
 		}
 
 		variableString += strings.Join(
 			[]string{tType, tName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
 		) + "\n"
-
+		fmt.Println("variableString", variableString)
 		return variableString, nil
 
 	case "object":
@@ -922,44 +1005,46 @@ func translateBlock(tv token.Value) (string, error) {
 		//fmt.Println("insideBlock t", t)
 		blockString += "\n"
 
-		variableString, err := translateVariableStatement(t)
-		if err != nil {
-			//fmt.Println("i am here translateVariableStatement", err)
-			loopString, err := translateLoop(t)
-			if err != nil {
-				//fmt.Println("loop translation err", err)
-				ifString, err := translateIf(t)
+		var resultString string
+		var err error
+
+		switch t.Type {
+		case "for":
+			resultString, err = translateLoop(t)
+
+		case "if":
+			resultString, err = translateIf(t)
+
+		case "function":
+			switch t.Metadata["type"] {
+			case "call":
+				resultString, err = translateFunctionCall(t)
+
+			case "def":
+				var functionString string
+				functionString, err = translateFunctionDef(t)
 				if err != nil {
-					// TODO:
-					//fmt.Println("if translate err", err)
-					functionString, err := translateFunctionDef(t)
-					if err != nil {
-						//fmt.Println("function def translate err", err)
-						functionCallString, err := translateFunctionCall(t)
-						if err != nil {
-							//fmt.Println("function def translate err", err)
-							keywordString, err := translateKeyword(t)
-							if err != nil {
-								//fmt.Println("keyword translate err", err)
-								return "", err
-							}
-							blockString += keywordString
-							continue
-						}
-						blockString += functionCallString
-						continue
-					}
-					functionStrings += functionString + "\n"
-					continue
+					return "", err
 				}
-				blockString += ifString
+				functionStrings += functionString
 				continue
+
+			default:
+				return "", errors.Errorf("Not a function type: %s", t.Metadata["type"])
 			}
-			blockString += loopString
-			continue
+
+		default:
+			resultString, err = translateKeyword(t)
+			if err != nil {
+				resultString, err = translateVariableStatement(t)
+			}
 		}
-		blockString += variableString
-		continue
+
+		if err != nil {
+			return "", err
+		}
+
+		blockString += resultString
 	}
 
 	if blockDepth != 1 {

@@ -78,8 +78,8 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "var",
-			"String": "var"
+			"Type": "object",
+			"String": "object"
 		}
 	},
 	{
@@ -1364,8 +1364,8 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "object",
-			"String": "object"
+			"Type": "var",
+			"String": "var"
 		}
 	},
 	{
@@ -1550,8 +1550,8 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "object",
-			"String": "object"
+			"Type": "var",
+			"String": "var"
 		}
 	},
 	{
@@ -1854,6 +1854,33 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "var",
+			"String": "var"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "id"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -2286,8 +2313,8 @@
 	{
 		"Type": "TYPE",
 		"Value": {
-			"Type": "var",
-			"String": "var"
+			"Type": "string",
+			"String": "string"
 		}
 	},
 	{
@@ -2429,6 +2456,39 @@
 		}
 	},
 	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Println"
+		}
+	},
+	{
+		"Type": "L_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": "("
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something"
+		}
+	},
+	{
+		"Type": "R_PAREN",
+		"Value": {
+			"Type": "op_3",
+			"String": ")"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -2508,6 +2568,39 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "id"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "name"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -2853,6 +2946,39 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "Warnings"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "something"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
