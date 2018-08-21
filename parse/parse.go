@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"github.com/pkg/errors"
 	"github.com/scottshotgg/express/lex"
 	"github.com/scottshotgg/express/token"
 )
@@ -62,13 +63,13 @@ func New(tokens []token.Token) *Parser {
 func (p *Parser) Parse() (token.Value, error) {
 	syntacticTokens, err := p.Syntactic()
 	if err != nil {
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.Syntactic()")
 	}
 
 	pNew := New(syntacticTokens)
 	semanticToken, err := pNew.Semantic()
 	if err != nil {
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "pNew.Semantic()")
 	}
 
 	return semanticToken, nil

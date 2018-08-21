@@ -49,7 +49,6 @@ struct Car = {
 }
 defer Println("Most cars:", Car)
 
-
 /*oldWarnings := {
   antique: true
 }*/

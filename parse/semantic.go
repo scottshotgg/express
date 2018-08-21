@@ -136,7 +136,7 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 					block, err := pa.CheckBlock()
 					if err != nil {
-						return token.Value{}, err
+						return token.Value{}, errors.Wrap(err, "pa.CheckBlock()")
 					}
 					// fmt.Println("block", block)
 
@@ -160,29 +160,16 @@ func (p *Parser) GetFactor() (token.Value, error) {
 							}
 						}
 					}
-					// fmt.Println()
-					// fmt.Println("variable", variable)
-					// fmt.Println("another", anotherVariable)
-					// fmt.Println()
-					// // anotherVariableTokens[0].True = 89
 
 					// For now just shift over the block
 					p.Shift()
-					value = mapVariableToTokenValue(&anotherVariable)
-					return value, nil
-					// fmt.Println("value", value)
-					// os.Exit(9)
 
-					// fmt.Println("anotherVariable", anotherVariable)
-					// os.Exit(9)
+					return mapVariableToTokenValue(&anotherVariable), nil
 				}
-				// else {
-				// 	return token.Value{}, errors.New("struct without initialization does not fulfill rhs")
-				// }
 
 				inStruct = false
 			}
-			// TODO: fix this
+			// FIXME: fix this
 			// else {
 			// 	return token.Value{}, errors.Errorf("Inaccurate assignment to type, need literal %s", p.NextToken.Type)
 			// }
@@ -190,46 +177,21 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			p.Shift()
 		}
 
-		// return p.GetExpression()
 		value = mapVariableToTokenValue(variable)
-		// fmt.Println("p.CurrentToken.Value.String", refs)
 		value.Metadata["refs"] = refs
-		// fmt.Println("value", value.Metadata)
-
-	// case token.Group:
-	// 	// //fmt.Println("getting group", next.Value)
-	// 	// groupContents, ok := next.Value.True.([]token.Token)
-	// 	// //fmt.Println("groupContents, ok", groupContents, ok)
-
-	// 	// for _, groupee := range groupContents {
-	// 	// 	//fmt.Println("groupee", groupee)
-	// 	// }
-
-	// 	// os.Exit(9)
-
-	// 	value = next.Value
-
-	// // case "":
-	// // 	//fmt.Println("we at the end?")
-	// // 	os.Exit(8)
 
 	case token.Array:
-		//fmt.Println("ayy rayy")
 		arrayContents, ok := next.Value.True.([]token.Token)
 		if !ok {
-			//fmt.Println("wtf no arrray stuffs", next)
-			// os.Exit(9)
-			return token.Value{}, err
+			return token.Value{}, errors.New("token.Array: next.Value.True.([]token.Token)")
 		}
-		//fmt.Println("current", p.CurrentToken)
-		//fmt.Println("next", next.Value)
 
 		var arrayContentsExpressions []token.Token
 		for _, piece := range arrayContents {
 			//fmt.Println("expression1", piece)
 			expr, err := p.ParseExpression(piece)
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.ParseExpression()")
 			}
 			arrayContentsExpressions = append(arrayContentsExpressions, token.Token{
 				ID:    0,
@@ -244,16 +206,13 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			"length": len(arrayContents) - 1,
 			"vector": false,
 		}
-		// p.meta.currentVariable.Metadata["vector"] = false
-		// //fmt.Println("metadata", p.meta.currentVariable.Metadata["length"])
-		// arrayType := VariableTypeString(p.meta.currentVariable.ActingType)
+
 		arrayType := arrayContentsExpressions[0].Value.Type
 		if arrayType == "BLOCK" {
 			arrayType = "object"
 		}
 
 		if len(arrayContents) > 0 {
-			//fmt.Println("arrayType", arrayType)
 			for i, arrayValue := range arrayContentsExpressions {
 
 				if arrayValue.Value.Type == "BLOCK" {
@@ -261,19 +220,12 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					arrayContentsExpressions[i].Value.Type = "object"
 				}
 
-				// //fmt.Println("arrayType", arrayType, arrayValue.Value.Type)
-				//fmt.Println("arrayType.Value.Type", arrayValue.Value.Type)
 				if arrayValue.Value.Type != arrayType {
 					arrayType = ""
 					break
 				}
 			}
 		}
-
-		// if p.meta.currentVariable.Type == SET {
-		// 	p.meta.currentVariable.Type = ARRAY
-		// 	p.meta.currentVariable.ActingType =
-		// }
 
 		if arrayType == "" {
 			// TODO: we need to figure out what to do here ...
@@ -288,40 +240,19 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			//fmt.Println("hi its me the variable type", arrayType, VariableTypeString(p.meta.currentVariable.ActingType))
 			return token.Value{}, errors.New("Error: array elements are of different type than type declaration")
 		}
-		// actingType := VariableTypeString(p.meta.currentVariable.ActingType)
-		// if arrayValue.Value.Type != arrayType {
-		// 	//fmt.Println("NOT EQUAL", arrayValue.Value.Type, arrayType)
-		// }
 
 		p.meta.currentVariable.Value = arrayContentsExpressions
-
-		//fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
 		value = mapVariableToTokenValue(p.meta.currentVariable)
-		//fmt.Printf("next: %+v\n", p.meta.currentVariable)
-		//fmt.Printf("value: %+v\n", value)
-		//fmt.Println("value", value)
+
 		p.Shift()
 
 	case token.Group:
 		// Do something here to get the statements
-		//fmt.Println("grouperooni")
 		groupContents, ok := next.Value.True.([]token.Token)
 		// FIXME:
 		if !ok {
-			//fmt.Println("wtf no group stuffs", next)
-			// os.Exit(9)
-			return token.Value{}, err
+			return token.Value{}, errors.New("token.Group: next.Value.True.([]token.Token)")
 		}
-		//fmt.Println("current", p.CurrentToken)
-		//fmt.Println("next", next.Value)
-		//fmt.Println("groupContents", groupContents)
-
-		// // var groupContentsExpressions []token.Token
-		// for _, piece := range groupContents {
-		// 	//fmt.Println("expression1", piece)
-		// 	//fmt.Println(p.ParseExpression(p.NextToken))
-		// 	os.Exit(9)
-		// }
 
 		groupTokens := []token.Value{}
 		pa := New(groupContents)
@@ -329,30 +260,20 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		for pa.NextToken.Type != "" {
 			var stmt token.Value
 			if functionOpType == "def" {
-				//fmt.Println("FUCKTION OP TYPE", functionOpType)
 				stmt, err = pa.GetStatement()
+				if err != nil {
+					return token.Value{}, errors.Wrap(err, "pa.GetStatement()")
+				}
 			} else {
-				//fmt.Println("FUNCTION OP TYPE", functionOpType)
 				stmt, err = pa.GetExpression()
-				fmt.Println(p.meta.currentVariable)
-				fmt.Println("last", p.LastToken)
-				fmt.Println("current", p.CurrentToken)
-				fmt.Println("next", p.NextToken)
-				fmt.Println("I AM A FUNCTION CALL", stmt)
+				if err != nil {
+					return token.Value{}, errors.Wrap(err, "pa.GetExpression()")
+				}
 			}
-			if err != nil {
-				//fmt.Println("Error: could not parse expression inside group")
-				//fmt.Println(err.Error())
-				return token.Value{}, err
-			}
-
-			// fmt.Println("inside group expression", stmt)
 
 			groupTokens = append(groupTokens, stmt)
 			value.True = groupTokens
 		}
-
-		// os.Exit(9)
 
 	case token.Function:
 		fmt.Println("wtf i am here")
@@ -363,27 +284,19 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// Unpack tokens from function into new parser
 		// Unpack tokens from each in True into a new parser
 		// parse group then group, then block
+		// FIXME: asserition ok check ???
 		unpackedFunctionTokens := p.NextToken.Value.True.([]token.Token)
-		// functionTokens := []token.Value{}
-		//fmt.Printf("unpackedFunctionTokens %+v\n", unpackedFunctionTokens)
-		// args
-		// returns
-		// body
-		//fmt.Println()
+		// FIXME: size check???
 		argsUnpacked := unpackedFunctionTokens[0]
-		//fmt.Printf("argsUnpacked %+v\n\n", argsUnpacked)
 
 		functionOpType = p.NextToken.Value.Metadata["type"].(string)
 		pa := New([]token.Token{argsUnpacked})
 		pa.meta.NewScopeFromScope(p.meta.currentScope)
 		argExpr, err := pa.GetExpression()
 		if err != nil {
-			//fmt.Println("Error: could not parse expression inside group2")
-			//fmt.Println(err.Error())
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "pa.GetExpression()")
 		}
 
-		//fmt.Println("argExpr", argExpr)
 		p.Shift()
 
 		var returnExpr, block token.Value
@@ -397,34 +310,27 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			for _, arg := range argExpr.True.([]token.Value) {
 				err = p.meta.DeclareVariableFromTokenValue(arg)
 				if err != nil {
-					return token.Value{}, err
+					return token.Value{}, errors.Wrap(err, "p.meta.DeclareVariableFromTokenValue(arg)")
 				}
 			}
 
+			// TODO: need to fix this stuff to actually check if those are valid indexes
 			returnsUnpacked := unpackedFunctionTokens[1]
-			// fmt.Printf("returnsUnpacked %+v\n\n", returnsUnpacked)
-
 			bodyUnpacked := unpackedFunctionTokens[2]
-			//fmt.Printf("bodyUnpacked %+v\n\n", bodyUnpacked)
 
 			pa = New([]token.Token{returnsUnpacked})
 			pa.meta.NewScopeFromScope(p.meta.currentScope)
 			returnExpr, err = pa.GetExpression()
 			if err != nil {
-				//fmt.Println("Error: could not parse expression inside group3")
-				//fmt.Println(err.Error())
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "pa.GetExpression()")
 			}
 
 			pa = New([]token.Token{bodyUnpacked})
 			pa.meta.NewScopeFromScope(p.meta.currentScope)
 			block, err = pa.CheckBlock()
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "pa.CheckBlock()")
 			}
-			//fmt.Println("last after block", p.LastToken)
-			//fmt.Println("current after block", p.CurrentToken)
-			//fmt.Println("Next after block", p.NextToken)
 		}
 
 		functionOpType = ""
@@ -444,17 +350,14 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		}
 
 		if md == "def" {
-			p.meta.DeclareVariableFromTokenValue(value)
+			err = p.meta.DeclareVariableFromTokenValue(value)
+			if err != nil {
+				return token.Value{}, errors.Wrap(err, "p.meta.DeclareVariableFromTokenValue(value)")
+			}
 		}
 
-		fmt.Println("woah water fack")
-		fmt.Println(p.meta.GetVariable("someFunction"))
-
 	default:
-		//fmt.Println("last2", p.LastToken)
-		//fmt.Println("current2", p.CurrentToken)
-		//fmt.Println("next2", p.NextToken)
-		return token.Value{}, errors.Errorf("default %+v", p.NextToken)
+		return token.Value{}, errors.Errorf("Invalid token placement: %+v", p.NextToken)
 	}
 	//fmt.Println("value thing again", value)
 
@@ -481,15 +384,14 @@ func (p *Parser) GetFactor() (token.Value, error) {
 	case token.PriOp:
 		p.Shift()
 		op := p.CurrentToken
-		value2, verr := p.GetTerm()
-		if verr != nil {
-			return token.Value{}, verr
+		value2, err := p.GetTerm()
+		if err != nil {
+			return token.Value{}, errors.Wrap(err, "p.GetTerm()")
 		}
-		//fmt.Println("value2thing", value2)
 
 		value, err = p.EvaluateBinaryOperation(value, value2, op.Value)
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.EvaluateBinaryOperation(value, value2, op.Value)")
 		}
 		// FIXME: holy fuck haxorz
 		if value.Type == token.IntType {
@@ -502,28 +404,19 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			True: 1,
 		})
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.AddOperands(value, ...)")
 		}
-		// p.Shift()`
 	}
 
-	// FIXME: holy fuck haxorz
-	// if value.Type == token.IntType {
-	// 	value.String = next.Value.String
-	// }
-	//fmt.Println("returning", value)
 	return value, nil
 }
 
 // GetTerm ...
 func (p *Parser) GetTerm() (token.Value, error) {
-	//fmt.Println("GetTerm")
-
 	totalTerm, err := p.GetFactor()
 	if err != nil {
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.GetFactor()")
 	}
-	//fmt.Println("totalTERM", totalTerm)
 
 	for {
 		switch p.NextToken.Type {
@@ -549,17 +442,14 @@ func (p *Parser) GetTerm() (token.Value, error) {
 
 		case token.SecOp:
 			p.Shift()
-			//fmt.Println("woah i got a secop")
-			op := p.CurrentToken
-			factor2, ferr := p.GetFactor()
-			if ferr != nil {
-				return token.Value{}, ferr
-			}
-			//fmt.Println("factor2", factor2)
-
-			totalTerm, err = p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)
+			factor2, err := p.GetFactor()
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.GetFactor()")
+			}
+
+			totalTerm, err = p.EvaluateBinaryOperation(totalTerm, factor2, p.CurrentToken.Value)
+			if err != nil {
+				return token.Value{}, errors.Wrap(err, "p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)")
 			}
 			// FIXME: holy fuck haxorz
 			if totalTerm.Type == token.IntType {
@@ -568,20 +458,16 @@ func (p *Parser) GetTerm() (token.Value, error) {
 
 		// // TODO: need to fix this....
 		case token.LThan:
-			//fmt.Println("in the lthan")
-			// ident := p.LastToken
-			// nextTokenOpString := p.NextToken.Value.String
 			p.Shift()
 			op := p.CurrentToken
-			factor2, ferr := p.GetTerm()
-			if ferr != nil {
-				return token.Value{}, ferr
+			factor2, err := p.GetTerm()
+			if err != nil {
+				return token.Value{}, errors.Wrap(err, "p.GetTerm()")
 			}
-			//fmt.Println("lthan totalTerm", totalTerm)
-			//fmt.Println("lthan factor2", factor2)
+
 			totalTermEval, err := p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.EvaluateBinaryOperation(totalTerm, factor2, op.Value)")
 			}
 			//fmt.Println("things totalTermEval", totalTermEval)
 			// FIXME: holy fuck haxorz
@@ -589,10 +475,7 @@ func (p *Parser) GetTerm() (token.Value, error) {
 			// TODO: should use totalTerm.String here
 			//fmt.Printf("factor2before %+v\n", factor2)
 			factor2.String = totalTermEval.String
-			// }
-			//fmt.Printf("totalTerm %+v\n", totalTerm)
-			//fmt.Printf("totalTermEval %+v\n", totalTermEval)
-			//fmt.Println("factor2", factor2)
+
 			factor2.Metadata = totalTermEval.Metadata
 			return factor2, nil
 
@@ -609,37 +492,27 @@ func (p *Parser) GetTerm() (token.Value, error) {
 			if totalTerm.Type == token.IntType {
 				totalTerm.String = strconv.Itoa(totalTerm.True.(int))
 			}
-			//fmt.Println("i am here", p.NextToken)
-			//fmt.Println("totalTerm", totalTerm)
+
 			return totalTerm, nil
 		}
 	}
 }
 
 func (p *Parser) ParseExpression(tok token.Token) (token.Value, error) {
-	// Kinda hacky, but it works so w/e for now; its 0300 and idc
-	// but its always 0300 :^)
 	pa := New([]token.Token{
 		tok,
 	})
 	pa.meta.NewScopeFromScope(p.meta.currentScope)
 	expression, err := pa.GetExpression()
 	if err != nil {
-		//fmt.Println("Error: could not parse expression inside array")
-		//fmt.Println(err.Error())
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "pa.GetExpression()")
 	}
-
-	//fmt.Println("insidexpression", expression)
 
 	return expression, nil
 }
 
 // GetExpression ...
 func (p *Parser) GetExpression() (token.Value, error) {
-	//fmt.Println("GetExpression")
-	//fmt.Printf("p.NextToken %+v\n", p.NextToken)
-
 	switch p.NextToken.Type {
 	// Will have to experiment on where to put this
 	// Might need to put this in factor
@@ -660,8 +533,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 		block, err := p.CheckBlock()
 		if err != nil {
-			//fmt.Println("waddup blockboi", err)
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 		}
 		return block, nil
 
@@ -680,53 +552,30 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			if p.meta.currentVariable.Type != UNRECOGNIZED {
 				return token.Value{}, errors.New("Type specification with init is not valid: " + p.meta.currentVariable.Name)
 			} else if p.meta.currentVariable.Type == FUNCTION {
+				// FIXME: what is this supposed to do???
 				fmt.Println("function", p.meta.currentVariable)
 				//p.meta.currentVariable.Type =
 			} else {
 				p.meta.currentVariable.Type = SET
 			}
 
-			// if p.meta.currentVariable.Name == "something" {
-			// 	fmt.Println("something:", p.meta.currentVariable)
-			// 	os.Exit(9)
-			// }
 			fallthrough
 
 		case "assign":
 			if p.meta.currentVariable.Type == UNRECOGNIZED {
-				return token.Value{}, errors.New("Undefined reference to variable")
+				return token.Value{}, errors.New("Undefined reference to variable: " + p.meta.currentVariable.Name)
 			}
 
 			p.Shift()
 			//fmt.Println("shifted", p.NextToken)
 			expr, err := p.GetExpression()
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 			}
-			fmt.Printf("expr in assign %+v\n", expr)
 
+			// FIXME: wtf is this??
 			// TODO: this is where we need to take care of comparing the function return type to the variable
 			if expr.Type == token.FunctionType {
-				// p.meta.currentVariable.Metadata["from_func"] = true
-				fmt.Println("currentVar", p.meta.currentVariable)
-
-				// fmt.Println(p.meta.GetVariable("someFunction"))
-
-				// we are going to need to deal with different things here:
-				//	can variables be assigned to a function such that:
-				//	something := someFunc
-				//	we also need to deal with allowing function definitions here
-				//	but for now we will only do calls
-
-				// funcT, ok := p.meta.GetVariable(expr.Name)
-				// if !ok {
-				// 	return token.Value{}, errors.New("Could not find function")
-				// }
-
-				// fmt.Println("expr", expr)
-				// expr = mapVariableToTokenValue(funcT)
-				// fmt.Println("expr after", expr)
-				// os.Exit(9)
 
 			}
 
@@ -739,46 +588,28 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					// If we did not find it as a variable, look in the DefinedTypes map
 					value2, ok := DefinedTypes[p.NextToken.Value.String]
 					if !ok {
-						return token.Value{}, errors.Errorf("variable still UNRECOGNIZED: %+v", p.meta.currentVariable)
+						return token.Value{}, errors.Errorf("Type not found for variable: %+v", p.meta.currentVariable)
 					}
 
 					variable = NewVariableFromTokenValue(value2)
 					p.meta.currentVariable.Type = variable.Type
-					fmt.Println("variable2 from token", variable)
 				}
 			} else if p.meta.currentVariable.Type == SET {
-				// if variable, ok := p.meta.GetVariable(p.meta.currentVariable.Name); ok {
-				// 	//fmt.Println("variable", variable, "ok", ok)
-				// }
-				//  else {
-				// 	//fmt.Println("wtf am i doing here", p.meta.currentVariable)
-				// 	os.Exit(9)
-				// }
 				if expr.Type == token.FunctionType {
-
-					fmt.Println("thing", p.CurrentToken)
-					fmt.Println("someFunction")
 					funcT, ok := p.meta.GetVariable("someFunction")
 					if !ok {
-						// TODO: we couldn't find the function
+						// FIXME: something goes here???
 					}
 
-					fmt.Println(p.meta.currentVariable)
-					fmt.Println("returns", funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
-
+					// FIXME: check the type assertion on this ...
 					p.meta.currentVariable.Type = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
 					p.meta.currentVariable.ActingType = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Acting)
 
-					fmt.Println("butts", p.meta.currentVariable)
-
 				} else {
-
 					p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
-
 				}
-			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
 
-				fmt.Println("woah its me", expr.Type, expr.Acting, p.meta.currentVariable.Type, p.meta.currentVariable.ActingType)
+			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
 				if expr.Type != "var" {
 					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
 
@@ -786,30 +617,24 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Acting)
 
 				} else {
-					return token.Value{}, errors.Errorf("Not sure how to assert variable type; p.meta.currentVariable: %v\nexpr: %v", p.meta.currentVariable, expr)
+					return token.Value{}, errors.Errorf("Cannot derive variable type from expression; p.meta.currentVariable: %v expr: %v", p.meta.currentVariable, expr)
 				}
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				// FIXME: wtf is this for?
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
+					// FIXME: wtf is this for ??
 					// p.meta.currentVariable.Metadata["real"] = expr.String
 				} else if expr.Type == token.FunctionType {
-					fmt.Println("FUNCTION", expr)
 
-					fmt.Println("scope", p.meta.currentScope)
-
+					// FIXME: wtf ??
 					os.Exit(9)
 
 				} else if expr.Type != token.ArrayType {
-					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
-					fmt.Println("expr", expr)
 					return token.Value{}, errors.Errorf("No implicit type casting as of now: p.meta.currentVariable.Type - %s, expr.Type - %s", VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 				}
 			}
-			// else {
-			// 	//fmt.Printf("wtf typerooni: %+v\n", p.meta.currentVariable)
-			// }
 
 			if expr.Type == token.FunctionType {
 				// Need to change this to an array of token or something so that cpp knows what to do
@@ -817,12 +642,8 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				// Try to use 'refs' here later
 
 				// FIXME: this def needs to happen elsewhere
-				// newVar := *p.meta.currentVariable
-				// newVar.Metadata["from_func"] = true
-				// p.meta.currentVariable = &newVar
 				expr.Metadata["from_func"] = true
 
-				// p.meta.currentVariable.Metadata["refs"] =
 			} else {
 				p.meta.currentVariable.Value = expr.True
 			}
@@ -831,39 +652,29 @@ func (p *Parser) GetExpression() (token.Value, error) {
 			for k, v := range expr.Metadata {
 				p.meta.currentVariable.Metadata[k] = v
 			}
-			// if ref, ok := expr.Metadata["refs"]; ok {
-			// 	//fmt.Println("there was a ref")
-			// 	p.meta.currentVariable.Metadata["refs"] = ref
-			// }
-			//fmt.Println("p.meta.currentVariable2", p.meta.currentVariable)
 
 			// TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
 			currentName := p.meta.currentVariable.Name
 			err = p.meta.DeclareVariable()
 			if err != nil {
-				// TODO:
-				//fmt.Println("declareVariable error", err.Error())
-				// os.Exit(9)
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.meta.DeclareVariable()")
 			}
-			// fmt.Println("p.meta.currentScope after", p.meta.currentScope)
 
 			if variable, ok := p.meta.GetVariable(currentName); ok {
 				// Map it over to a token for now
 				return mapVariableToTokenValue(variable), nil
 			}
 
-			return token.Value{}, errors.New("Could not find variable: " + currentName)
+			return token.Value{}, errors.New("Undefined variable reference: " + currentName)
 
 		case "set":
 			if p.meta.currentVariable.Type != UNRECOGNIZED && !inStruct && !inObject {
-				return token.Value{}, errors.New("Type specification with set is not valid")
+				return token.Value{}, errors.New("Type specification with set is not valid: " + p.meta.currentVariable.Name)
 			}
 
 			// If we are not in a struct, then allow the set operator to also set the type
 			// However, if we are in a struct, then it should only be allowed to set the value
 			// within the bounds of the type, typing-attribute, and language defined type-degrades
-			fmt.Println("inStruct", inStruct)
 
 			// FIXME: we are erroring when declaring a struct that contains an object
 			// we need to track the location
@@ -871,44 +682,11 @@ func (p *Parser) GetExpression() (token.Value, error) {
 				p.meta.currentVariable.Type = SET
 			}
 
-			// if variable, ok := p.meta.currentScope[p.meta.currentVariable.Name]; ok {
-			// 	//fmt.Println("Error: Variable already declared in this scope", variable)
-			// 	return token.Value{}, errors.New("Error: Variable already declared in this scope")
-			// }
-
-			// // Old set stuff
-			// p.Shift()
-			// //fmt.Println("what do", p.NextToken)
-			// expr, err := p.GetExpression()
-			// if err != nil {
-			// 	return token.Value{}, err
-			// }
-			// //fmt.Printf("expr in set %+v\n", expr)
-
-			// p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
-			// p.meta.currentVariable.Value = expr.True
-			// p.meta.currentVariable.Metadata = expr.Metadata
-
-			// // TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
-			// currentName := p.meta.currentVariable.Name
-			// err = p.meta.DeclareVariable()
-			// if err != nil {
-			// 	// TODO:
-			// 	//fmt.Println("declareVariable error", err.Error())
-			// 	return token.Value{}, err
-			// }
-
-			// if variable, ok := p.meta.GetVariable(currentName); ok {
-			// 	// Map it over to a token for now
-			// 	return mapVariableToTokenValue(variable), nil
-			// }
-			// return token.Value{}, errors.New("Could not find variable: " + currentName)
-
 			p.Shift()
-			// //fmt.Println("what do", p.NextToken)
+
 			expr, err := p.GetExpression()
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 			}
 
 			if p.meta.currentVariable.Type == UNRECOGNIZED {
@@ -932,31 +710,25 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					p.meta.currentVariable.Type = variable.Type
 					fmt.Println("variable2 from token", variable)
 				}
-			} else if p.meta.currentVariable.Type == SET {
-				// if variable, ok := p.meta.GetVariable(p.meta.currentVariable.Name); ok {
-				// 	//fmt.Println("variable", variable, "ok", ok)
-				// }
-				//  else {
-				// 	//fmt.Println("wtf am i doing here", p.meta.currentVariable)
-				// 	os.Exit(9)
-				// }
 
+			} else if p.meta.currentVariable.Type == SET {
 				p.meta.currentVariable.Type = variableTypeFromString(expr.Type)
 
 			} else if p.meta.currentVariable.Type == variableTypeFromString("var") {
 				// The acting type should never be `var` so assert the acting type from the expression
 				if expr.Type != "var" {
 					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Type)
+
 				} else if expr.Acting != "var" {
 					p.meta.currentVariable.ActingType = variableTypeFromString(expr.Acting)
+
 				} else {
-					return token.Value{}, errors.New("wtf")
+					return token.Value{}, errors.Errorf("Cannot derive variable type from expression; p.meta.currentVariable: %v expr: %v", p.meta.currentVariable, expr)
 				}
 
 			} else if p.meta.currentVariable.Type != variableTypeFromString(expr.Type) {
 				if expr.Type == token.Block && p.meta.currentVariable.Type == STRUCT {
 					// FIXME: wtf?
-					// p.meta.currentVariable.Metadata["real"] = expr.String
 
 				} else if expr.Type == token.FunctionType {
 
@@ -964,70 +736,45 @@ func (p *Parser) GetExpression() (token.Value, error) {
 					fmt.Println("someFunction")
 					funcT, ok := p.meta.GetVariable("someFunction")
 					if !ok {
+						// FIXME: ???
 						// TODO: we couldn't find the function
 					}
-
-					fmt.Println(p.meta.currentVariable)
-					fmt.Println("returns", funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
 
 					p.meta.currentVariable.Type = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Type)
 					p.meta.currentVariable.ActingType = variableTypeFromString(funcT.Value.(map[string]token.Value)["returns"].True.([]token.Value)[0].Acting)
 
-					fmt.Println("butts2", p.meta.currentVariable)
-
 				} else if expr.Type != token.ArrayType {
-					//fmt.Println(VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 					// TODO: implicit type casting here
-					fmt.Println("expr2", expr, p.meta.currentVariable)
-					return token.Value{}, errors.Errorf("No implicit type casting as of now: p.meta.currentVariable.Type - %s, expr.Type - %s", VariableTypeString(p.meta.currentVariable.Type), expr.Type)
+					return token.Value{}, errors.Errorf("No implicit type casting as of now: name - %s, p.meta.currentVariable.Type - %s, expr.Type - %s", p.meta.currentVariable.Name, VariableTypeString(p.meta.currentVariable.Type), expr.Type)
 				}
 			}
-			// else {
-			// 	//fmt.Printf("wtf typerooni: %+v\n", p.meta.currentVariable)
-			// }
 
 			p.meta.currentVariable.Value = expr.True
 			if ref, ok := expr.Metadata["refs"]; ok {
-				//fmt.Println("there was a ref")
 				p.meta.currentVariable.Metadata["refs"] = ref
 			}
+
 			if fromFunc, ok := expr.Metadata["from_func"]; ok {
-				//fmt.Println("there was a ref")
 				p.meta.currentVariable.Metadata["from_func"] = fromFunc
 			}
-			//fmt.Println("p.meta.currentVariable2", p.meta.currentVariable)
 
 			// TODO: doing this to ensure that it is in the map and findable ... not sure if we need to or should
 			currentName := p.meta.currentVariable.Name
 			err = p.meta.DeclareVariable()
 			if err != nil {
-				// TODO:
-				//fmt.Println("declareVariable error", err.Error())
-				// os.Exit(9)
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.meta.DeclareVariable()")
 			}
-			//fmt.Println("p.meta.currentScope after", p.meta.currentScope)
 
 			if variable, ok := p.meta.GetVariable(currentName); ok {
 				// Map it over to a token for now
 				return mapVariableToTokenValue(variable), nil
 			}
 
-			return token.Value{}, errors.New("Could not find variable: " + currentName)
+			return token.Value{}, errors.New("Undefinded variable reference: " + currentName)
 		}
 
-	// case token.LThan:
-	// 	//fmt.Println("wtf")
-	// 	//fmt.Println("current", p.CurrentToken)
-	// 	//fmt.Println("next", p.NextToken)
-	// 	p.Shift()
-	// 	term, err := p.GetTerm()
-	// 	if err != nil {
-	// 		return token.Value{}, err
-	// 	}
-	// 	return term, nil
-
 	case token.Increment:
+		// FIXME: ???
 		//fmt.Println("woah increment brah")
 		// variable, ok := p.meta.GetVariable(p.meta.currentVariable.Name)
 		// if !ok {
@@ -1042,24 +789,25 @@ func (p *Parser) GetExpression() (token.Value, error) {
 		// 	return token.Value{}, err
 		// }
 		//fmt.Println("token.Increment", value)
-
 	default:
-		return p.GetTerm()
+		term, err := p.GetTerm()
+		if err != nil {
+			return term, errors.Wrap(err, "p.GetTerm()")
+		}
+
+		return term, nil
 	}
 
-	return token.Value{}, errors.Errorf("default %+v", p.NextToken)
+	return token.Value{}, errors.Errorf("Undefined behavior for token: %+v", p.NextToken)
 }
 
 func (p *Parser) ParsePrepositionFor() (token.Value, error) {
-	//fmt.Println("ParsePrepositionFor")
-
 	// 1. Always expect an ident after the `for` keyword
 	if p.NextToken.Type != token.Ident {
 		// TODO:
-		return token.Value{}, errors.Errorf("Ident not found after for: %+v", p.NextToken)
+		return token.Value{}, errors.Errorf("Ident not found after for token: %+v", p.NextToken)
 	}
 
-	//fmt.Printf("p.NextToken.Value %+v\n", p.NextToken.Value)
 	variableName := p.NextToken.Value.String
 	p.meta.currentVariable.Name = variableName
 	p.meta.currentVariable.Type = variableTypeFromString(token.SetType)
@@ -1094,20 +842,16 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 		extractKey, extractValue = true, true
 
 	default:
-		return token.Value{}, errors.Errorf("Preposition not found: %+v", p.NextToken)
+		return token.Value{}, errors.Errorf("Preposition not found after ident token: %+v", p.NextToken)
 	}
-
-	//fmt.Println("p.meta.currentVariable", p.meta.currentVariable)
-	//fmt.Println("extractKey, extractValue:", extractKey, extractValue)
 
 	// 5. Parse the `array` literal
 	p.Shift()
 	arrayExpr, err := p.GetExpression()
 	if err != nil {
 		// TODO:
-		return arrayExpr, err
+		return arrayExpr, errors.Wrap(err, "p.GetExpression()")
 	}
-	//fmt.Println("arrayExpr", arrayExpr)
 
 	p.meta.currentVariable.Type = variableTypeFromString(arrayExpr.Acting)
 	p.meta.currentVariable.ActingType = variableTypeFromString(arrayExpr.Acting)
@@ -1128,25 +872,22 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 	// currentVar := p.meta.currentVariable
 	err = p.meta.DeclareVariable()
 	if err != nil {
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.meta.DeclareVariable()")
 	}
 
 	// 6. Parse the body
 	// p.Shift()
 	body, err := p.CheckBlock()
 	if err != nil {
-		//fmt.Println("Could not check block")
-		return body, err
+		return body, errors.Wrap(err, "p.CheckBlock()")
 	}
-	//fmt.Println("body", body)
 
 	bodyTokens := body.True.([]token.Value)
-	//fmt.Println("bodyTokens", bodyTokens)
-
 	varName := variableName + "_" + strconv.FormatInt(int64(time.Now().Unix()), 10)
 
 	extraVars := []token.Value{}
 	if extractKey && extractValue {
+		// FIXME: ??
 		// TODO: make an object, put both things in it
 		// p.meta.currentVariable.Value = 0
 	} else if extractKey {
@@ -1179,9 +920,7 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 			},
 		}, bodyTokens...)
 	} else {
-		//fmt.Println("inside the value thing")
 		// // FIXME: check length here; try with 0 length array literal
-		// p.meta.currentVariable.Value = arrayValue[0].Value.True
 		if arrayExpr.Name == variableName {
 			arrayExpr.Name = "arrayBoi_" + strconv.FormatInt(int64(time.Now().Unix()), 10)
 			extraVars = append(extraVars, arrayExpr)
@@ -1275,40 +1014,29 @@ func (p *Parser) ParsePrepositionFor() (token.Value, error) {
 func (p *Parser) ParseStandardFor() (token.Value, error) {
 	stmt, err := p.GetStatement()
 	if err != nil {
-		// TODO:
-		// os.Exit(9)
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.GetStatement()")
 	}
 
 	expr, err := p.GetExpression()
 	if err != nil {
-		//fmt.Println("Error: Could not get expression")
-		// os.Exit(9)
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 	}
 
 	expr2, err := p.GetExpression()
 	if err != nil {
-		//fmt.Println("Error: Could not get expression2")
-		// os.Exit(9)
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 	}
-	//fmt.Println("stmt", stmt)
-	//fmt.Println("expr1", expr)
-	//fmt.Println("expr2", expr2)
-	// os.Exit(9)
 
 	step, err := p.SubOperands(expr2, stmt)
 	if err != nil {
-		//fmt.Println("Could not sub operands")
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.SubOperands(expr2, stmt)")
 	}
 
 	p.Shift()
+
 	body, err := p.CheckBlock()
 	if err != nil {
-		//fmt.Println("Could not check block")
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 	}
 
 	// TODO: don't know if we need to do this
@@ -1362,14 +1090,14 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 			t, err = p.ParsePrepositionFor()
 			if err != nil {
 				// TODO:
-				return t, err
+				return t, errors.Wrap(err, "p.ParsePrepositionFor()")
 			}
 		}
 		//fmt.Println("current map", p.meta.currentScope)
 		_, err = p.meta.ExitScope()
 		if err != nil {
 			// TODO:
-			return t, err
+			return t, errors.Wrap(err, "p.meta.ExitScope()")
 		}
 
 		return t, nil
@@ -1379,18 +1107,13 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		expr, err := p.GetExpression()
 		if err != nil {
 			//fmt.Println("Error: Could not get expresssion")
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 		}
 
 		block, err := p.CheckBlock()
 		if err != nil {
-			//fmt.Println("Error: Could not get block")
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 		}
-
-		//fmt.Printf("expr %+v\n", expr)
-		//fmt.Printf("block %+v\n", block)
-		//fmt.Printf("next555 %+v\n", p.NextToken)
 
 		expr.Metadata["check"] = expr.String
 
@@ -1436,7 +1159,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		// Get arguments
 		groupExpr, err := p.GetExpression()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 		}
 		groupExpr.Name = "args"
 		//fmt.Printf("groupExpr %+v, err %v\n", groupExpr, err)
@@ -1464,7 +1187,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		if p.NextToken.Type == token.Group {
 			groupExpr2, err = p.GetExpression()
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 			}
 		}
 		p.Shift()
@@ -1472,7 +1195,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		// FIXME: need to ensure that the function returns are what the function header says
 		blockToken, err := p.CheckBlock()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 		}
 		// p.PopState()
 
@@ -1507,7 +1230,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		returnExpr, err := p.GetExpression()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 		}
 		//fmt.Println("returnExpr", returnExpr)
 
@@ -1529,7 +1252,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 
 		deferExpr, err := p.GetStatement()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.GetStatement()")
 		}
 		//fmt.Println("deferExpr", deferExpr)
 
@@ -1541,9 +1264,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 		}, nil
 
 	default:
-		//fmt.Println("woah idk", p.NextToken)
-		// os.Exit(9)
-		return token.Value{}, err
+		return token.Value{}, errors.Errorf("Undefined keyword: %+v", p.NextToken.Value.String)
 	}
 
 	return token.Value{}, nil
@@ -1552,10 +1273,7 @@ func (p *Parser) GetKeyword() (token.Value, error) {
 // GetStatement ...
 func (p *Parser) GetStatement() (token.Value, error) {
 	var tv token.Value
-	//fmt.Println("GetStatement")
-	//fmt.Println("p.NextToken", p.NextToken)
-	// p.Shift()
-	// fmt.Println("p.meta.currentVariable in GetStatement", p.meta.currentVariable)
+
 	switch p.NextToken.Type {
 	case token.Type:
 		//fmt.Println("p.NextToken.Type", p.NextToken.Type)
@@ -1571,9 +1289,6 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 	// // TODO: will have to consider declarations too
 	case token.Ident:
-		//fmt.Println("idnet p.meta.currentVariable", p.meta.currentVariable)
-		//fmt.Println("ident", p.NextToken)
-		//fmt.Println("declaredMap", p.meta.currentScope)
 		if p.meta.currentVariable.Type == UNRECOGNIZED {
 			//fmt.Println("i am here UNRECOGNIZED")
 			// TODO: maybe we should just load the entire variable at this point
@@ -1583,16 +1298,14 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				p.meta.currentVariable.Type = variable.Type
 				p.meta.currentVariable.Metadata = variable.Metadata
 			} else {
-				// If its unrecognized and we cant find it, it doesn't exist
-				//fmt.Println("in the elser")
-				//fmt.Println("ASSIGNMENT DECLARED VALUE", m.DeclaredValue)
 				p.Shift()
-				expr, err := p.GetExpression()
-				//fmt.Printf("THIS IS THE EXPRESSION %+v %s\n", expr, err)
-				// return p.GetExpression()
-				//fmt.Println("expr, err", expr, err)
 
-				return expr, err
+				expr, err := p.GetExpression()
+				if err != nil {
+					return expr, errors.Wrap(err, "p.GetExpression()")
+				}
+
+				return expr, nil
 			}
 			// TODO: make this more general later with the type map later
 		} else {
@@ -1629,14 +1342,10 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		// FIXME: this seems kinda hacky, but w/e fix it later - GetFactor should defer it's judgement
 		if p.NextToken.Type == "ASSIGN" {
 			tv, err = p.GetExpression()
-			// fmt.Println("nofind THIS IS THE EXPRESSION", tv, err)
 			if err != nil {
-				//fmt.Println("getExpressionErr", err)
-				// os.Exit(9)
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "p.GetExpression()")
 			}
-			//fmt.Println("TVTVTV", tv)
-			//fmt.Println("another", p.NextToken)
+
 		} else {
 			p.meta.currentVariable.Name = p.CurrentToken.Value.String
 			actingTypeName := p.CurrentToken.Value.Acting
@@ -1650,7 +1359,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 			baseValue, err := getDefaultValueForType(VariableTypeString(p.meta.currentVariable.Type), actingTypeName)
 			if err != nil {
-				return token.Value{}, err
+				return token.Value{}, errors.Wrap(err, "getDefaultValueForType(VariableTypeString(p.meta.currentVariable.Type), actingTypeName)")
 			}
 
 			if VariableTypeString(p.meta.currentVariable.Type) == "var" {
@@ -1674,7 +1383,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			tv = mapVariableToTokenValue(p.meta.currentVariable)
 			err = p.meta.DeclareVariable()
 			if err != nil {
-				return tv, err
+				return tv, errors.Wrap(err, "p.meta.DeclareVariable()")
 			}
 		}
 
@@ -1684,14 +1393,12 @@ func (p *Parser) GetStatement() (token.Value, error) {
 	case token.Keyword:
 		keyword, err := p.GetKeyword()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.GetKeyword()")
 		}
 		// p.Shift()
 		return keyword, nil
 
 	case token.Separator:
-		// //fmt.Println("should we have gotten this here?")
-		// os.Exit(9)
 		// TODO: not sure if we should return something else here
 		p.Shift()
 		// return token.Value{}, nil
@@ -1701,27 +1408,27 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		p.Shift()
 		block, err := p.CheckBlock()
 		if err != nil {
-			//fmt.Println("waddup blockboi", err)
-			// os.Exit(9)
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 		}
+
 		p.Shift()
-		return block, err
+
+		return block, nil
 
 	case token.Function:
-		//fmt.Println("hey i found a function")
+		fv, err := p.GetExpression()
+		if err != nil {
+			return token.Value{}, errors.Wrap(err, "p.GetExpression()")
+		}
 
-		return p.GetExpression()
+		return fv, nil
 
 	case "":
-		//fmt.Println("im fuckin here")
+		// FIXME: ??
 		return token.Value{}, nil
 
 	default:
-		// TODO: this causes infinite loops when you cant parse
-		//fmt.Println("hey its me the default", p.NextToken)
-		// os.Exit(9)
-		return token.Value{}, err
+		return token.Value{}, errors.Errorf("Undefined behavior for token: %+v", p.NextToken)
 	}
 
 	return token.Value{}, nil
@@ -1729,11 +1436,8 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 // CheckBlock ...
 func (p *Parser) CheckBlock() (token.Value, error) {
-	//fmt.Printf("CheckBlock %+v\n", p.CurrentToken)
-
 	p.Shift()
-	// fmt.Printf("CheckBlock2 %+v\n", p.CurrentToken)
-	// logger.Debug("CheckBlock", zap.String("p.CurrentToken", fmt.Sprintf("%+v", p.CurrentToken)))
+
 	var tokensFromBlock = []token.Token{}
 	var ok bool
 	if p.CurrentToken.Value.True != nil {
@@ -1754,16 +1458,10 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 
 		stmt, err := pNew.GetStatement()
 		if err != nil {
-			return token.Value{}, err
+			return token.Value{}, errors.Wrap(err, "pNew.GetStatement()")
 		}
 
-		//fmt.Println(pNew.NextToken)
-		// if reflect.DeepEqual(pNew.NextToken, token.Token{}) {
 		if pNew.Index > pNew.Length()-1 && reflect.DeepEqual(stmt, token.Value{}) {
-			// //fmt.Println(p.meta.GetVariable("a"))
-			// p.meta.NewScopeFromScope(pNew.meta.currentScope)
-			// fmt.Println("blockTokens", blockTokens)
-
 			return token.Value{
 				Type: token.Block,
 				True: blockTokens,
@@ -1774,39 +1472,21 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 		// produced from the comma somtimes; need to solve
 		// it more elegantly
 		if reflect.DeepEqual(stmt, token.Value{}) {
-			// return token.Value{
-			// 	Type: token.Block,
-			// 	True: blockTokens,
-			// }, nil
+			// FIXME: fix error
 			return token.Value{}, errors.New("Could not get statement")
 		}
 
 		blockTokens = append(blockTokens, stmt)
-
-		// p.meta.NewVariable()
-		//fmt.Println("CheckBlock currentScope: ", pNew.meta.currentScope)
-		//fmt.Println()
 	}
 }
 
 // Semantic ...
 func (p *Parser) Semantic() (token.Value, error) {
-	// defer func() {
-	// 	for k, v := range p.meta.currentScope {
-	// 		logger.Debug("p.meta.currentScope", zap.String("scope", fmt.Sprintf("%+v", p.meta.currentScope)))
-	// 	}
-	// }()
-
 	block, err := p.CheckBlock()
 	if err != nil {
 		// TODO:
-		return token.Value{}, err
+		return token.Value{}, errors.Wrap(err, "p.CheckBlock()")
 	}
-	//fmt.Println("block", block)
-	//fmt.Println()
-
-	//fmt.Println("End currentScope: ", p.meta.currentScope)
-	//fmt.Println()
 
 	return block, nil
 }

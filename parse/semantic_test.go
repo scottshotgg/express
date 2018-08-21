@@ -97,47 +97,43 @@ func compileExpressProgram(filename string) error {
 	fmt.Println("file:", filename)
 	pathOfFile, err := filepath.Abs(testPrograms + filename)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "filepath.Abs(testPrograms + filename)")
 	}
-	fmt.Println(pathOfFile)
 
 	var lexTokens []token.Token
 	lexTokens, err = lexFile(pathOfFile, filename)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "lexFile(pathOfFile, filename)")
 	}
 
 	pathOfFile, err = filepath.Abs(testPrograms + filename)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "filepath.Abs(testPrograms + filename)")
 	}
-	fmt.Println(pathOfFile)
 
 	syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "syntacticParseFile(filename, lexTokens)")
 	}
 
 	semanticTokens, err := semanticParseFile(filename, syntacticTokens)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "semanticParseFile(filename, syntacticTokens)")
 	}
-
-	fmt.Println("semanticTokens", semanticTokens)
 
 	err = cppTranspile(filename, semanticTokens)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "cppTranspile(filename, semanticTokens)")
 	}
 
 	_, err = exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
 	if err != nil {
-		return err
+		return errors.Wrap(err, "exec.Command(\"clang-format\" ...")
 	}
 
 	_, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
 	if err != nil {
-		return err
+		return errors.Wrap(err, "exec.Command(\"clang++\" ...")
 	}
 
 	return nil
