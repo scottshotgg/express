@@ -18,3 +18,5 @@ These will show up in the TODO utility:
 - FIXME: build a more general compiler architecture instead of a specific compiler
 - FIXME: make a textmate2 plugin
 - FIXME: make a vscode plugin
+- TODO: read about how to actually generate object code/LLVM stuff
+- TODO: fix linter errors
