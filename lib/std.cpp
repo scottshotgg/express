@@ -7,7 +7,7 @@ void Print() {
   //cout << "im in here print empty" << endl;
 }
 
-void Print(char* data) {
+void Print(std::string data) {
   //cout << "im in here char*" << endl;
   std::cout << data;
 }
@@ -82,6 +82,12 @@ template <typename T, typename... Args>
 void Println(T first, Args... args) {
   //cout << "im in here println" << endl;
   Print(first, args...);
+  std::cout << std::endl;
+}
+
+template <typename T>
+void Println(T rest[]) {
+  Print(rest);
   std::cout << std::endl;
 }
 

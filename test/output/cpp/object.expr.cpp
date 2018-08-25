@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -10,73 +10,37 @@ var genStruct(std::string structName) {
   return structValue;
 }
 
-int printStuff(int k) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    {
-      int i = 0;
-      while (i < k) {
-        {
-          defer onLeaveFuncs;
-
-          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
-
-          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
-        }
-        i += 1;
-      }
-    }
-
-    return 0;
-  }
-}
-var increment(var i) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    var _qagxBYLiDh = {};
-    _qagxBYLiDh["something"] = "else";
-    return _qagxBYLiDh;
-  }
-}
 int main() {
 
   var obj = {};
   obj["something"] = "here";
-  var hey_MWRhdCXbLD = {};
-  hey_MWRhdCXbLD["me"] = true;
-  hey_MWRhdCXbLD["anIntVariable"] = 69;
-  obj["hey"] = hey_MWRhdCXbLD;
+  var hey_HhaFBNDrfE = {};
+  hey_HhaFBNDrfE["me"] = true;
+  hey_HhaFBNDrfE["anIntVariable"] = 69;
+  obj["hey"] = hey_HhaFBNDrfE;
 
   var objs[] = {};
   {
-    var _SlgnjaZCSz = {};
-    _SlgnjaZCSz["another"] = "object";
-    objs[0] = _SlgnjaZCSz;
+    var _GMbqGlCnIW = {};
+    _GMbqGlCnIW["another"] = "object";
+    objs[0] = _GMbqGlCnIW;
   }
   {
-    var obj_LQRzzXFAVG = {};
-    obj_LQRzzXFAVG["something"] = "here";
-    var hey_DKOdVKXUee = {};
-    hey_DKOdVKXUee["me"] = true;
-    hey_DKOdVKXUee["anIntVariable"] = 69;
-    obj_LQRzzXFAVG["hey"] = hey_DKOdVKXUee;
-    objs[1] = obj_LQRzzXFAVG;
+    var obj_UXgprvNahx = {};
+    obj_UXgprvNahx["something"] = "here";
+    var hey_YEXMGlANik = {};
+    hey_YEXMGlANik["me"] = true;
+    hey_YEXMGlANik["anIntVariable"] = 69;
+    obj_UXgprvNahx["hey"] = hey_YEXMGlANik;
+    objs[1] = obj_UXgprvNahx;
   }
   {
-    var obj_ONfdLtrXJT = {};
-    obj_ONfdLtrXJT["something"] = "here";
-    var hey_dEAYwTJvqr = {};
-    hey_dEAYwTJvqr["me"] = true;
-    hey_dEAYwTJvqr["anIntVariable"] = 69;
-    obj_ONfdLtrXJT["hey"] = hey_dEAYwTJvqr;
-    objs[2] = obj_ONfdLtrXJT;
+    var obj_dFLHnVnNmF = {};
+    obj_dFLHnVnNmF["something"] = "here";
+    var hey_XsWmqzUgsx = {};
+    hey_XsWmqzUgsx["me"] = true;
+    hey_XsWmqzUgsx["anIntVariable"] = 69;
+    obj_dFLHnVnNmF["hey"] = hey_XsWmqzUgsx;
+    objs[2] = obj_dFLHnVnNmF;
   }
 }

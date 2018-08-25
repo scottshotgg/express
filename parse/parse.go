@@ -35,7 +35,11 @@ type Parser struct {
 	CurrentToken token.Token
 	NextToken    token.Token
 
-	States []Parser
+	States          []Parser
+	FunctionStrings string
+	BlockDepth      int
+
+	DefinedTypes map[string]token.Value
 }
 
 func (p *Parser) Length() int { return p.length }
@@ -54,10 +58,32 @@ func New(tokens []token.Token) *Parser {
 		meta:             NewMeta(),
 		IgnoreWhiteSpace: true,
 		ProcessedTokens:  NewStack(),
+		DefinedTypes:     map[string]token.Value{},
 	}
 	p.InitLogger()
 	p.Shift()
 	return p
+}
+
+// Make this return an error
+func (p *Parser) New(tokens []token.Token) *Parser {
+	// err := InitLogger()
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	pp := &Parser{
+		// source:           append(append([]token.Token{token.TokenMap["{"]}, tokens...), token.TokenMap["}"]),
+		source:           tokens,
+		length:           len(tokens),
+		meta:             NewMeta(),
+		IgnoreWhiteSpace: true,
+		ProcessedTokens:  NewStack(),
+		DefinedTypes:     p.DefinedTypes,
+	}
+	pp.InitLogger()
+	pp.Shift()
+	return pp
 }
 
 func (p *Parser) Parse() (token.Value, error) {

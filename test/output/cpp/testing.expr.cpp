@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -10,56 +10,20 @@ var genStruct(std::string structName) {
   return structValue;
 }
 
-int printStuff(int k) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    {
-      int i = 0;
-      while (i < k) {
-        {
-          defer onLeaveFuncs;
-
-          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
-
-          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
-        }
-        i += 1;
-      }
-    }
-
-    return 0;
-  }
-}
-var increment(var i) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    var _qagxBYLiDh = {};
-    _qagxBYLiDh["something"] = "else";
-    return _qagxBYLiDh;
-  }
-}
 var someFunction(int arg1) {
   defer onReturnFuncs;
   {
     defer onLeaveFuncs;
 
     {
-      int arrayBoi_1534716692[] = {2, 4, 5, 9};
+      int arrayBoi_1535160066[] = {2, 4, 5, 9};
       int k = 0;
-      int k_1534716692 = 0;
-      while (k_1534716692 < 4) {
+      int k_1535160066 = 0;
+      while (k_1535160066 < 4) {
         {
           defer onLeaveFuncs;
 
-          k = arrayBoi_1534716692[k_1534716692];
+          k = arrayBoi_1535160066[k_1535160066];
 
           onLeaveFuncs.deferStack.push(
               [=](...) { Println("value of k: ", k); });
@@ -70,71 +34,77 @@ var someFunction(int arg1) {
           if (arg1 < k) {
             defer onLeaveFuncs;
 
-            var _sDUCvSBOxr = {};
-            _sDUCvSBOxr["value"] = k;
-            return _sDUCvSBOxr;
+            var _VbqVWpNekf = {};
+            _VbqVWpNekf["value"] = k;
+            return _VbqVWpNekf;
           }
         }
-        k_1534716692 += 1;
+        k_1535160066 += 1;
       }
     }
 
-    var _vyOxdbQnLP = {};
-    _vyOxdbQnLP["something"] = 0;
-    return _vyOxdbQnLP;
+    var _TiXjAxUAtI = {};
+    _TiXjAxUAtI["something"] = 0;
+    return _TiXjAxUAtI;
   }
 }
 int main() {
 
-  Println("return value", someFunction(7));
+  int someArgument = 7;
+
+  Println("return value", someFunction(someArgument));
 
   Println();
 
   Println();
 
   onExitFuncs.deferStack.push(
-      [=](...) { Println("return value", someFunction(9)); });
+      [=](...) { Println("return value", someFunction(someArgument)); });
+
+  someArgument = 9;
+
+  onExitFuncs.deferStack.push(
+      [=](...) { Println("return value", someFunction(someArgument)); });
 
   var Engine = {};
   Engine["Displacement"] = 2.4;
   Engine["Type"] = "v6";
   Engine["HP"] = 235;
   Engine["OilType"] = "5w-20";
-  var Warnings_ejeDMOLCMn = {};
-  Engine["Warnings"] = Warnings_ejeDMOLCMn;
-  Engine["Warnings"] = Warnings_ejeDMOLCMn;
+  var Warnings_rWokffsYOJ = Warnings_rWokffsYOJ;
+  Engine["Warnings"] = Warnings_rWokffsYOJ;
 
-  var things_jpfkbCBZTb = {};
-  things_jpfkbCBZTb["thingy"] = 0;
+  var things_gMuJjNwgwx = {};
+  things_gMuJjNwgwx["thingy"] = 0;
 
-  var normalWarnings_ttYBjTVCqJ = {};
-  normalWarnings_ttYBjTVCqJ["lowOil"] = false;
-  normalWarnings_ttYBjTVCqJ["lowGas"] = false;
-  normalWarnings_ttYBjTVCqJ["highTemp"] = false;
-  normalWarnings_ttYBjTVCqJ["lowTirePressure"] = false;
+  var normalWarnings_EsVBmBrxGg = {};
+  normalWarnings_EsVBmBrxGg["lowOil"] = false;
+  normalWarnings_EsVBmBrxGg["lowGas"] = false;
+  normalWarnings_EsVBmBrxGg["highTemp"] = false;
+  normalWarnings_EsVBmBrxGg["lowTirePressure"] = false;
 
   var Car = {};
-  var id_LWNrDgYnPP = {};
-  Car["id"] = id_LWNrDgYnPP;
-  Car["id"] = id_LWNrDgYnPP;
+  var id_CfIWAWaNfL = {};
+  Car["id"] = id_CfIWAWaNfL;
+  Car["id"] = id_CfIWAWaNfL;
 
   Car["Type"] = "car";
   Car["New"] = false;
   Car["numOfWheels"] = 4;
-  var engine_DFSjHaakAs = {};
-  engine_DFSjHaakAs["Displacement"] = 2.4;
-  engine_DFSjHaakAs["Type"] = "v6";
-  engine_DFSjHaakAs["HP"] = 199;
-  engine_DFSjHaakAs["OilType"] = "5w-20";
-  var Warnings_QUYNgADWin = {};
-  Warnings_QUYNgADWin["lowOil"] = false;
-  Warnings_QUYNgADWin["lowGas"] = false;
-  Warnings_QUYNgADWin["highTemp"] = false;
-  Warnings_QUYNgADWin["lowTirePressure"] = false;
-  engine_DFSjHaakAs["Warnings"] = Warnings_QUYNgADWin;
-  engine_DFSjHaakAs["Warnings"] = Warnings_QUYNgADWin;
+  var engine_eUirjRLQEW = {};
+  engine_eUirjRLQEW["Displacement"] = 2.4;
+  engine_eUirjRLQEW["Type"] = "v6";
+  engine_eUirjRLQEW["HP"] = 199;
+  engine_eUirjRLQEW["OilType"] = "5w-20";
+  var Warnings_bsKADBtrMH = {};
+  Warnings_bsKADBtrMH["lowOil"] = false;
+  Warnings_bsKADBtrMH["lowGas"] = false;
+  Warnings_bsKADBtrMH["highTemp"] = false;
+  Warnings_bsKADBtrMH["lowTirePressure"] = false;
+  engine_eUirjRLQEW["Warnings"] = Warnings_bsKADBtrMH;
+  engine_eUirjRLQEW["Warnings"] = Warnings_bsKADBtrMH;
 
-  Car["engine"] = engine_DFSjHaakAs;
+  Car["engine"] = engine_eUirjRLQEW;
 
   onExitFuncs.deferStack.push([=](...) { Println("Most cars:", Car); });
 
@@ -145,19 +115,19 @@ int main() {
   std::string name = "hey this is an id";
 
   var oldCar = {};
-  var id_KVLjHCkOUm = "hey this is an id";
-  oldCar["id"] = id_KVLjHCkOUm;
+  var id_yGcYxAqhxz = "hey this is an id";
+  oldCar["id"] = id_yGcYxAqhxz;
 
   oldCar["Type"] = "car";
   oldCar["New"] = false;
   oldCar["numOfWheels"] = 4;
-  var engine_vfWrQouKuT = {};
-  engine_vfWrQouKuT["Displacement"] = 2.4;
-  engine_vfWrQouKuT["Type"] = "v6";
-  engine_vfWrQouKuT["HP"] = 160;
-  engine_vfWrQouKuT["OilType"] = "5w-20";
-  engine_vfWrQouKuT["Warnings"] = something;
-  oldCar["engine"] = engine_vfWrQouKuT;
+  var engine_kFoqXmEsro = {};
+  engine_kFoqXmEsro["Displacement"] = 2.4;
+  engine_kFoqXmEsro["Type"] = "v6";
+  engine_kFoqXmEsro["HP"] = 160;
+  engine_kFoqXmEsro["OilType"] = "5w-20";
+  engine_kFoqXmEsro["Warnings"] = something;
+  oldCar["engine"] = engine_kFoqXmEsro;
 
   Println("Old cars:", oldCar);
 }

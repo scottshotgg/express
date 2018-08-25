@@ -347,6 +347,27 @@
 					}
 				},
 				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "someArgument"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 7
+					}
+				},
+				{
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
@@ -381,10 +402,10 @@
 															"Type": "GROUP",
 															"True": [
 																{
-																	"Type": "LITERAL",
+																	"Type": "IDENT",
 																	"Value": {
-																		"Type": "int",
-																		"True": 7
+																		"Type": "private",
+																		"String": "someArgument"
 																	}
 																}
 															]
@@ -498,10 +519,116 @@
 															"Type": "GROUP",
 															"True": [
 																{
-																	"Type": "LITERAL",
+																	"Type": "IDENT",
 																	"Value": {
-																		"Type": "int",
-																		"True": 9
+																		"Type": "private",
+																		"String": "someArgument"
+																	}
+																}
+															]
+														}
+													}
+												],
+												"AccessType": "public",
+												"Metadata": {
+													"lambda": false,
+													"type": "call"
+												}
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "someArgument"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "someArgument"
+					}
+				},
+				{
+					"Type": "SEC_OP",
+					"Value": {
+						"Type": "add",
+						"String": "+"
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 2
+					}
+				},
+				{
+					"ID": 9,
+					"Type": "KEYWORD",
+					"Value": {
+						"Type": "keyword",
+						"String": "onexit"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "LITERAL",
+											"Value": {
+												"Type": "string",
+												"True": "return value",
+												"String": "return value"
+											}
+										},
+										{
+											"ID": 1,
+											"Type": "FUNCTION",
+											"Value": {
+												"Name": "someFunction",
+												"Type": "function",
+												"True": [
+													{
+														"ID": 1,
+														"Type": "GROUP",
+														"Value": {
+															"Type": "GROUP",
+															"True": [
+																{
+																	"Type": "IDENT",
+																	"Value": {
+																		"Type": "private",
+																		"String": "someArgument"
 																	}
 																}
 															]

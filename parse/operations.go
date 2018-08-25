@@ -43,7 +43,7 @@ func (p *Parser) EvaluateBinaryOperation(left, right, op token.Value) (opToken t
 		}
 
 	default:
-		err = errors.Errorf("Undefined operator; left: %+v right: %+v op: %+v", left.True, right.True, op.String)
+		err = errors.Errorf("Undefined operator; left: %+v right: %+v op: %s", left.True, right.True, op.String)
 		return
 		//fmt.Println(err.Error())
 	}

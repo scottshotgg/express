@@ -29,7 +29,7 @@
 									"AccessType": "private",
 									"Metadata": {
 										"assign": true,
-										"refs": "arrayBoi_1534716692[k_1534716692]"
+										"refs": "arrayBoi_1535160066[k_1535160066]"
 									}
 								},
 								{
@@ -167,10 +167,10 @@
 									}
 								}
 							],
-							"String": "k_1534716692\u003c4",
+							"String": "k_1535160066\u003c4",
 							"Metadata": {
 								"end": {
-									"Name": "k_1534716692",
+									"Name": "k_1535160066",
 									"Type": "int",
 									"True": 4,
 									"String": "4",
@@ -178,7 +178,7 @@
 								},
 								"extraVars": [
 									{
-										"Name": "arrayBoi_1534716692",
+										"Name": "arrayBoi_1535160066",
 										"Type": "array",
 										"Acting": "int",
 										"True": [
@@ -231,14 +231,14 @@
 									}
 								],
 								"start": {
-									"Name": "k_1534716692",
+									"Name": "k_1535160066",
 									"Type": "int",
 									"True": 0,
 									"String": "0",
 									"AccessType": "private"
 								},
 								"step": {
-									"Name": "k_1534716692",
+									"Name": "k_1535160066",
 									"Type": "int",
 									"True": 1,
 									"String": "1",
@@ -281,6 +281,12 @@
 			}
 		},
 		{
+			"Name": "someArgument",
+			"Type": "int",
+			"True": 7,
+			"AccessType": "private"
+		},
+		{
 			"Name": "Println",
 			"Type": "function",
 			"True": {
@@ -298,9 +304,14 @@
 								"args": {
 									"True": [
 										{
+											"Name": "someArgument",
 											"Type": "int",
 											"True": 7,
-											"String": "7"
+											"String": "7",
+											"AccessType": "private",
+											"Metadata": {
+												"refs": "someArgument"
+											}
 										}
 									]
 								},
@@ -372,9 +383,119 @@
 									"args": {
 										"True": [
 											{
+												"Name": "someArgument",
+												"Type": "int",
+												"True": 7,
+												"String": "7",
+												"AccessType": "private",
+												"Metadata": {
+													"refs": "someArgument"
+												}
+											}
+										]
+									},
+									"body": {},
+									"returns": {}
+								},
+								"AccessType": "private",
+								"Metadata": {
+									"lambda": false,
+									"type": "call"
+								}
+							}
+						]
+					},
+					"body": {},
+					"returns": {}
+				},
+				"AccessType": "private",
+				"Metadata": {
+					"lambda": false,
+					"type": "call"
+				}
+			},
+			"String": "ONEXIT"
+		},
+		{
+			"Name": "someArgument",
+			"Type": "int",
+			"True": 9,
+			"AccessType": "private",
+			"Metadata": {
+				"assign": true,
+				"eval": 9,
+				"left": {
+					"Name": "someArgument",
+					"Type": "int",
+					"True": 7,
+					"AccessType": "private",
+					"Metadata": {
+						"assign": true,
+						"refs": "someArgument"
+					}
+				},
+				"op": {
+					"Type": "add",
+					"String": "+"
+				},
+				"right": {
+					"Type": "int",
+					"True": 2,
+					"String": "2"
+				},
+				"type": "bool"
+			}
+		},
+		{
+			"Type": "KEYWORD",
+			"True": {
+				"Name": "Println",
+				"Type": "function",
+				"True": {
+					"args": {
+						"True": [
+							{
+								"Type": "string",
+								"True": "return value",
+								"String": "return value"
+							},
+							{
+								"Name": "someFunction",
+								"Type": "function",
+								"True": {
+									"args": {
+										"True": [
+											{
+												"Name": "someArgument",
 												"Type": "int",
 												"True": 9,
-												"String": "9"
+												"String": "9",
+												"AccessType": "private",
+												"Metadata": {
+													"assign": true,
+													"eval": 9,
+													"left": {
+														"Name": "someArgument",
+														"Type": "int",
+														"True": 7,
+														"AccessType": "private",
+														"Metadata": {
+															"assign": true,
+															"refs": "someArgument"
+														}
+													},
+													"op": {
+														"Type": "add",
+														"String": "+"
+													},
+													"refs": "someArgument",
+													"right": {
+														"Type": "int",
+														"True": 2,
+														"String": "2"
+													},
+													"type": "bool"
+												}
 											}
 										]
 									},

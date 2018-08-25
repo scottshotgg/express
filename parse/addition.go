@@ -1,8 +1,6 @@
 package parse
 
 import (
-	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/pkg/errors"
@@ -15,7 +13,6 @@ func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
 	var valueToken token.Value
 	leftType := left.Type
 	rightType := right.Type
-	// fmt.Println("firsttime", left, right, leftType, rightType)
 
 	if leftType == rightType {
 		valueToken.Type = leftType
@@ -53,7 +50,7 @@ func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
 			var err error
 			valueToken, err = p.AddOperands(left, right)
 			if err != nil {
-				fmt.Println("ERROR", err)
+				return token.Value{}, errors.Wrap(err, "p.AddOperands")
 			}
 
 		case token.ObjectType:
@@ -65,12 +62,14 @@ func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
 					resultValue, err := p.AddOperands(value1, value2)
 					// resultValue.AccessType = value1.AccessType
 					// TODO: for some reason we couldnt access the `.True` of the map result
-					value2.True = resultValue.True
-					result[key] = value2
 					if err != nil {
 						// TODO: this means we could not add the operands, do something here later on: ideally we shouldnt get this
-						fmt.Println("ERROR:", err)
+						return token.Value{}, errors.Wrap(err, "p.AddOperands")
 					}
+
+					value2.True = resultValue.True
+					result[key] = value2
+
 				} else {
 					result[key] = value1
 				}
@@ -79,12 +78,9 @@ func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
 
 		case token.ArrayType:
 			valueToken.True = append(left.True.([]token.Value), right.True.([]token.Value)...)
-			fmt.Println("valueToken thingy", valueToken.True)
-			// valueToken.String
 
 		default:
-			fmt.Println("Type not declared for AddOperands", left, right, leftType, rightType)
-			os.Exit(9)
+			return token.Value{}, errors.Errorf("Type not declared for AddOperands %+v %+v %s %s", left, right, leftType, rightType)
 		}
 
 		return valueToken, nil
@@ -118,7 +114,5 @@ func (p *Parser) AddOperands(left, right token.Value) (token.Value, error) {
 	//			-> dump into object? // FIXME: TODO:
 	// }
 
-	err := errors.New("Could not perform AddOperand on operands")
-	fmt.Println(err, left, right, leftType, rightType)
-	return token.Value{}, err
+	return token.Value{}, errors.New("Could not perform AddOperand on operands")
 }

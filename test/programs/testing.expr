@@ -13,10 +13,15 @@ func someFunction(int arg1) (object returnValue) {
   return { something: 0 }
 }
 
-Println("return value", someFunction(7))
+someArgument := 7
+Println("return value", someFunction(someArgument))
 Println()
 Println()
-onexit Println("return value", someFunction(9))
+// FIXME: this is inadvertently setting the variable to 0
+// someArgument
+onexit Println("return value", someFunction(someArgument))
+someArgument = someArgument + 2
+onexit Println("return value", someFunction(someArgument))
 
 struct Engine = {
   float Displacement = 2.4
@@ -76,8 +81,5 @@ Println("Old cars:" oldCar)
 // actually print the variable. This will have to be done
 // somehow by creating a local variable and then sending
 // that into the function
-/*
-Println("Values for Car struct", Car{
-  Type = "truck"
-})
-*/
+
+

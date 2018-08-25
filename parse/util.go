@@ -249,9 +249,9 @@ func getDefaultValueForType(trueType, actingType string) (interface{}, error) {
 	case token.StructType:
 		// First we need to check the type map
 		value, ok := DefinedTypes[actingType]
-		fmt.Println("value, ok", value, ok)
+		//fmt.Println("value, ok", value, ok)
 		if !ok {
-			fmt.Println("typemap", DefinedTypes)
+			//fmt.Println("typemap", DefinedTypes)
 			return nil, errors.Errorf("Couldn't find struct type in type map: %s", actingType)
 		}
 

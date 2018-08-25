@@ -13,6 +13,8 @@ import (
 	"github.com/scottshotgg/express/lex"
 	"github.com/scottshotgg/express/parse"
 	"github.com/scottshotgg/express/token"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 const (
@@ -38,10 +40,55 @@ var (
 	semanticBlock token.Value
 
 	semanticBlockMap = map[string]token.Value{}
+
+	logger *zap.Logger
+	// sugar  *zap.SugaredLogger
+
+	zapConfig = zap.Config{
+		Level:    zap.NewAtomicLevelAt(zap.DebugLevel),
+		Encoding: "json",
+		EncoderConfig: zapcore.EncoderConfig{
+			TimeKey:        "time",
+			LevelKey:       "lvl",
+			NameKey:        "name",
+			CallerKey:      "call",
+			MessageKey:     "msg",
+			StacktraceKey:  "stack",
+			LineEnding:     zapcore.DefaultLineEnding,
+			EncodeLevel:    zapcore.CapitalLevelEncoder,
+			EncodeTime:     zapcore.EpochTimeEncoder,
+			EncodeDuration: zapcore.StringDurationEncoder,
+			EncodeCaller:   zapcore.FullCallerEncoder,
+			EncodeName:     zapcore.FullNameEncoder,
+		},
+		OutputPaths:      []string{"stderr"},
+		ErrorOutputPaths: []string{"stderr"},
+	}
 )
 
 func init() {
 	os.Setenv(parse.ExpressDebug, "true")
+	InitLogger()
+}
+
+func InitLogger() error {
+	// // FIXME: for now just check 'true' for now
+	// if os.Getenv("EXPR_DEBUG") == "true" {
+	// 	zapConfig.Development = true
+	// }
+
+	// var err error
+	// logger, err = zapConfig.Build()
+	// if err != nil {
+	// 	return err
+	// }
+
+	// // Use a sugared logger; slower but has print/f/ln which makes it more versatile and readable
+	// // sugar = logger.Sugar ()
+
+	logger, _ = zap.NewProduction()
+
+	return nil
 }
 
 func TestSemantic(t *testing.T) {
@@ -97,61 +144,68 @@ func compileExpressProgram(filename string) error {
 	fmt.Println("file:", filename)
 	pathOfFile, err := filepath.Abs(testPrograms + filename)
 	if err != nil {
-		return errors.Wrap(err, "filepath.Abs(testPrograms + filename)")
+		return err
 	}
 
-	var lexTokens []token.Token
-	lexTokens, err = lexFile(pathOfFile, filename)
+	lexTokens, err := lexFile(pathOfFile, filename)
 	if err != nil {
-		return errors.Wrap(err, "lexFile(pathOfFile, filename)")
-	}
-
-	pathOfFile, err = filepath.Abs(testPrograms + filename)
-	if err != nil {
-		return errors.Wrap(err, "filepath.Abs(testPrograms + filename)")
+		return err
 	}
 
 	syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 	if err != nil {
-		return errors.Wrap(err, "syntacticParseFile(filename, lexTokens)")
+		return err
 	}
 
 	semanticTokens, err := semanticParseFile(filename, syntacticTokens)
 	if err != nil {
-		return errors.Wrap(err, "semanticParseFile(filename, syntacticTokens)")
+		return err
 	}
 
 	err = cppTranspile(filename, semanticTokens)
 	if err != nil {
-		return errors.Wrap(err, "cppTranspile(filename, semanticTokens)")
+		return err
 	}
 
-	_, err = exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
+	var output []byte
+	output, err = exec.Command("clang-format", "-i", testCpp+filename+".cpp").CombinedOutput()
+	fmt.Println("clang-format output:", string(output))
 	if err != nil {
-		return errors.Wrap(err, "exec.Command(\"clang-format\" ...")
+		return err
 	}
 
-	_, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+	output, err = exec.Command("clang++", "-std=gnu++2a", testCpp+filename+".cpp", "-o", testBin+filename+".exe").CombinedOutput()
+	fmt.Println("clang++ output:", string(output))
 	if err != nil {
-		return errors.Wrap(err, "exec.Command(\"clang++\" ...")
+		return err
 	}
 
 	return nil
 }
 
-var singleFile string = "var.expr"
+var singleFile string = "array.expr"
 
 func TestRunSingle(t *testing.T) {
-	TestSingle(t)
-
-	filepath := testBin + singleFile + ".exe"
-
-	// Run the code
-	output, err := exec.Command(filepath).CombinedOutput()
-	fmt.Println("Output:", string(output))
+	var err error
+	parse.LibBase, err = filepath.Abs("../lib/")
 	if err != nil {
 		t.Error(err)
-		t.Fail()
+		t.FailNow()
+	}
+
+	err = compileExpressProgram(singleFile)
+	if err != nil {
+		// logger.Error("", zap.Error(err))
+		fmt.Printf("%+v\n", err)
+		t.FailNow()
+	}
+
+	// Run the code
+	output, err := exec.Command(testBin + singleFile + ".exe").CombinedOutput()
+	fmt.Println("Output:\n" + string(output))
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
 	}
 }
 
@@ -160,13 +214,13 @@ func TestSingle(t *testing.T) {
 	parse.LibBase, err = filepath.Abs("../lib/")
 	if err != nil {
 		t.Error(err)
-		t.Fail()
+		t.FailNow()
 	}
 
 	err = compileExpressProgram(singleFile)
 	if err != nil {
 		t.Error(err)
-		t.Fail()
+		t.FailNow()
 	}
 }
 
@@ -213,20 +267,21 @@ func TestAll(t *testing.T) {
 
 	// wg := &sync.WaitGroup{}
 	for _, file := range files {
+		// FIXME: for some reason the go funcs are fucking it up rn,
+		// probably a global or something
+		// wg.Add(1)
+		// go func(file os.FileInfo) {
+		// 	defer wg.Done()
 		filename := file.Name()
 		if !file.IsDir() && filename[0] != '.' {
-			// FIXME: for some reason the go funcs are fucking it up rn,
-			// probably a global or something
-			// wg.Add(1)
-			// go func(file os.FileInfo) {
-			// 	defer wg.Done()
-			err = compileExpressProgram(filename)
-			if err != nil {
-				t.Error(err)
-			}
-
-			// }(file)
+			t.Run(filename, func(t *testing.T) {
+				err = compileExpressProgram(filename)
+				if err != nil {
+					t.Fail()
+				}
+			})
 		}
+		// }(file)
 	}
 
 	// wg.Wait()

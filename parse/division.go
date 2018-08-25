@@ -2,7 +2,6 @@ package parse
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/pkg/errors"
@@ -11,7 +10,7 @@ import (
 
 // DivOperands returns the addition of two operands based on their type
 func (p *Parser) DivOperands(left, right token.Value) (token.Value, error) {
-	// fmt.Println("AddOperands")
+	// fmt.Println("DivOperands")
 	var valueToken token.Value
 	leftType := left.Type
 	rightType := right.Type
@@ -56,7 +55,7 @@ func (p *Parser) DivOperands(left, right token.Value) (token.Value, error) {
 			right.Type = right.Acting
 
 			var err error
-			valueToken, err = p.AddOperands(left, right)
+			valueToken, err = p.DivOperands(left, right)
 			if err != nil {
 				fmt.Println("ERROR", err)
 			}
@@ -67,15 +66,15 @@ func (p *Parser) DivOperands(left, right token.Value) (token.Value, error) {
 
 			for key, value1 := range left.True.(map[string]token.Value) {
 				if value2, ok := result[key]; ok {
-					resultValue, err := p.AddOperands(value1, value2)
+					resultValue, err := p.DivOperands(value1, value2)
 					// resultValue.AccessType = value1.AccessType
 					// TODO: for some reason we couldnt access the `.True` of the map result
+					// TODO: this means we could not add the operands, do something here later on: ideally we shouldnt get this
+					if err != nil {
+						return token.Value{}, errors.Wrap(err, "p.DivOperands")
+					}
 					value2.True = resultValue.True
 					result[key] = value2
-					if err != nil {
-						// TODO: this means we could not add the operands, do something here later on: ideally we shouldnt get this
-						fmt.Println("ERROR:", err)
-					}
 				} else {
 					result[key] = value1
 				}
@@ -84,12 +83,10 @@ func (p *Parser) DivOperands(left, right token.Value) (token.Value, error) {
 
 		case token.ArrayType:
 			valueToken.True = append(left.True.([]token.Value), right.True.([]token.Value)...)
-			fmt.Println("valueToken thingy", valueToken.True)
-			// valueToken.String
 
 		default:
-			fmt.Println("Type not declared for AddOperands", left, right, leftType, rightType)
-			os.Exit(9)
+			fmt.Println("Type not declared for DivOperands", left, right, leftType, rightType)
+
 		}
 
 		return valueToken, nil
@@ -123,7 +120,5 @@ func (p *Parser) DivOperands(left, right token.Value) (token.Value, error) {
 	//			-> dump into object? // FIXME: TODO:
 	// }
 
-	err := errors.New("Could not perform AddOperand on operands")
-	fmt.Println(err, left, right, leftType, rightType)
-	return token.Value{}, err
+	return token.Value{}, errors.New("Could not perform AddOperand on operands")
 }

@@ -20,14 +20,15 @@ xb := true + false
 yb := false + false
 zb := true + true
 
-// operations between vars are also supported
+// operations between dynamic types are also supported/defined
 var xbv = true + true
 var ybv = false + false
 var zbv = xbv + ybv
 
-var wsv = "its "
-var xsv = "me"
-//var ysv = " l"
-var zsv = wsv + xsv
+var xsv = "here comes "
+var ysv = "dat boiiii"
+var zsv = xsv + ysv
 
+Println(xs)
+Println(xs)
 Println(xs)

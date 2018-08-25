@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -10,42 +10,6 @@ var genStruct(std::string structName) {
   return structValue;
 }
 
-int printStuff(int k) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    {
-      int i = 0;
-      while (i < k) {
-        {
-          defer onLeaveFuncs;
-
-          onExitFuncs.deferStack.push([=](...) { Println("on exit", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("on return", i); });
-
-          onLeaveFuncs.deferStack.push([=](...) { Println("on leave", i); });
-
-          onReturnFuncs.deferStack.push([=](...) { Println("defer", i); });
-        }
-        i += 1;
-      }
-    }
-
-    return 0;
-  }
-}
-var increment(var i) {
-  defer onReturnFuncs;
-  {
-    defer onLeaveFuncs;
-
-    var _qagxBYLiDh = {};
-    _qagxBYLiDh["something"] = "else";
-    return _qagxBYLiDh;
-  }
-}
 int main() {
 
   var another = {};
@@ -59,18 +23,18 @@ int main() {
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_dVsONIWsfr = {};
-  thing_dVsONIWsfr["woah"] = 0;
-  Thing["thing"] = thing_dVsONIWsfr;
+  var thing_iBhKOFOZSD = {};
+  thing_iBhKOFOZSD["woah"] = 0;
+  Thing["thing"] = thing_iBhKOFOZSD;
 
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_ngVCsAxPaa = {};
-  thing_ngVCsAxPaa["woah"] = 0;
-  something["thing"] = thing_ngVCsAxPaa;
+  var thing_QjrDsiwBII = {};
+  thing_QjrDsiwBII["woah"] = 0;
+  something["thing"] = thing_QjrDsiwBII;
 
   Println("something", something);
 
@@ -79,9 +43,9 @@ int main() {
   something2["stringField"] = "";
   something2["false_field"] = false;
   something2["anotherFielderino"] = 0.000000;
-  var thing_LuaZIoXByb = {};
-  thing_LuaZIoXByb["woah"] = 0;
-  something2["thing"] = thing_LuaZIoXByb;
+  var thing_phPnKXCATQ = {};
+  thing_phPnKXCATQ["woah"] = 0;
+  something2["thing"] = thing_phPnKXCATQ;
 
   Println("something2", something2);
 
@@ -90,9 +54,9 @@ int main() {
   something3["stringField"] = "chyah brah";
   something3["false_field"] = false;
   something3["anotherFielderino"] = 0.000000;
-  var thing_MOUpxHoCjp = {};
-  thing_MOUpxHoCjp["woah"] = 0;
-  something3["thing"] = thing_MOUpxHoCjp;
+  var thing_MbtjuwJCci = {};
+  thing_MbtjuwJCci["woah"] = 0;
+  something3["thing"] = thing_MbtjuwJCci;
 
   Println("something3", something3);
 }

@@ -495,35 +495,35 @@
 			}
 		},
 		{
-			"Name": "wsv",
-			"Type": "var",
-			"Acting": "string",
-			"True": "its ",
-			"AccessType": "private"
-		},
-		{
 			"Name": "xsv",
 			"Type": "var",
 			"Acting": "string",
-			"True": "me",
+			"True": "here comes ",
+			"AccessType": "private"
+		},
+		{
+			"Name": "ysv",
+			"Type": "var",
+			"Acting": "string",
+			"True": "dat boiiii",
 			"AccessType": "private"
 		},
 		{
 			"Name": "zsv",
 			"Type": "var",
 			"Acting": "string",
-			"True": "its me",
+			"True": "here comes dat boiiii",
 			"AccessType": "private",
 			"Metadata": {
-				"eval": "its me",
+				"eval": "here comes dat boiiii",
 				"left": {
-					"Name": "wsv",
+					"Name": "xsv",
 					"Type": "var",
 					"Acting": "string",
-					"True": "its ",
+					"True": "here comes ",
 					"AccessType": "private",
 					"Metadata": {
-						"refs": "wsv"
+						"refs": "xsv"
 					}
 				},
 				"op": {
@@ -531,16 +531,136 @@
 					"String": "+"
 				},
 				"right": {
-					"Name": "xsv",
+					"Name": "ysv",
 					"Type": "var",
 					"Acting": "string",
-					"True": "me",
+					"True": "dat boiiii",
 					"AccessType": "private",
 					"Metadata": {
-						"refs": "xsv"
+						"refs": "ysv"
 					}
 				},
 				"type": "bool"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "xs",
+							"Type": "string",
+							"True": "stringitize me daddy",
+							"AccessType": "private",
+							"Metadata": {
+								"eval": "stringitize me daddy",
+								"left": {
+									"Type": "string",
+									"True": "stringitize me ",
+									"String": "stringitize+ me ",
+									"Metadata": {
+										"eval": "stringitize me ",
+										"left": {
+											"Type": "string",
+											"True": "stringitize",
+											"String": "stringitize"
+										},
+										"op": {
+											"Type": "add",
+											"String": "+"
+										},
+										"right": {
+											"Type": "string",
+											"True": " me ",
+											"String": " me "
+										},
+										"type": "bool"
+									}
+								},
+								"op": {
+									"Type": "add",
+									"String": "+"
+								},
+								"refs": "xs",
+								"right": {
+									"Type": "string",
+									"True": "daddy",
+									"String": "daddy"
+								},
+								"type": "bool"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
+			}
+		},
+		{
+			"Name": "Println",
+			"Type": "function",
+			"True": {
+				"args": {
+					"True": [
+						{
+							"Name": "xs",
+							"Type": "string",
+							"True": "stringitize me daddy",
+							"AccessType": "private",
+							"Metadata": {
+								"eval": "stringitize me daddy",
+								"left": {
+									"Type": "string",
+									"True": "stringitize me ",
+									"String": "stringitize+ me ",
+									"Metadata": {
+										"eval": "stringitize me ",
+										"left": {
+											"Type": "string",
+											"True": "stringitize",
+											"String": "stringitize"
+										},
+										"op": {
+											"Type": "add",
+											"String": "+"
+										},
+										"right": {
+											"Type": "string",
+											"True": " me ",
+											"String": " me "
+										},
+										"type": "bool"
+									}
+								},
+								"op": {
+									"Type": "add",
+									"String": "+"
+								},
+								"refs": "xs",
+								"right": {
+									"Type": "string",
+									"True": "daddy",
+									"String": "daddy"
+								},
+								"type": "bool"
+							}
+						}
+					]
+				},
+				"body": {},
+				"returns": {}
+			},
+			"AccessType": "private",
+			"Metadata": {
+				"lambda": false,
+				"type": "call"
 			}
 		},
 		{

@@ -18,5 +18,5 @@ int main() {
 
   hi_my_type_is = true;
 
-  hi_my_type_is = 2.71828;
+  hi_my_type_is = 69.69;
 }

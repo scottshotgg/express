@@ -30,119 +30,52 @@ var (
 	insideLoop bool
 
 	// TODO: FIXME: this is causing functions to be compiled in every single file
-	functionStrings = "\n"
-	structStrings   = "\n"
+	structStrings = "\n"
 
 	LibBase = ""
 
 	blockDepth = 0
-
-	// stdLibMap = map[string]func(t token.Value) string{
-	// 	"print": stdlib_Print,
-	// }
 )
 
-// func stdlib_Print(t) string {
-// 	printString +=
-
-// 	printString += t.Name + "("
-// 	argsInterface := trueValue["args"].True
-// 	if argsInterface != nil {
-// 		//fmt.Println("ARGSINTERFACE", argsInterface)
-
-// 		args, ok := argsInterface.([]token.Value)
-// 		//fmt.Println("ARGS", args)
-// 		if !ok {
-// 			//fmt.Println("shit look at args interface")
-// 			return "", errors.New("not ok")
-// 		}
-
-// 		// FIXME: change to standard for loop until the end and add commas
-// 		// everytime, w/e
-// 		for i, arg := range args {
-// 			if ref, ok := arg.Metadata["refs"]; ok {
-
-// 				functionString += ref.(string)
-// 				continue
-// 			}
-
-// 			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
-// 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
-// 				//fmt.Println("NAME_BYTES", arg.Name)
-
-// 				objectString, err := translateObject(arg)
-// 				if err != nil {
-// 					return "", err
-// 				}
-// 				functionString = objectString + functionString + arg.Name
-// 			} else if arg.Type == "function" {
-// 				innerFunctionCall, err := translateFunctionCall(arg)
-// 				if err != nil {
-// 					return "", nil
-// 				}
-// 				// Cut off the newline and semicolon that is on the end
-// 				functionString += innerFunctionCall[:len(innerFunctionCall)-2]
-// 			} else {
-// 				functionString += fmt.Sprintf("%+v", arg.True)
-// 			}
-
-// 			if i != len(args)-1 {
-// 				functionString += ","
-// 			}
-// 		}
-// 	}
-
-// 	return printString
-// }
-
-func translateFunctionCall(t token.Value) (string, error) {
+func (p *Parser) TranslateFunctionCall(t token.Value) (string, error) {
 	functionString := "\n"
 
-	// fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.(map[string]token.Value)
 	if !ok {
-		//fmt.Println("shit look at t")
-		return "", errors.New("not ok")
+		return "", errors.New("Could not assert value of function call")
 	}
-
-	// // Append the name of the function
-	// libFunc := stdLibMap[t.Name]
-	// if libFunc != nil {
-	// 	// Just modify t.Name here; not sure if this has any other effects
-	// 	return libFunc(t), nil
-	// }
 
 	functionString += t.Name + "("
 	argsInterface := trueValue["args"].True
 	if argsInterface != nil {
-		//fmt.Println("ARGSINTERFACE", argsInterface)
-
 		args, ok := argsInterface.([]token.Value)
-		//fmt.Println("ARGS", args)
 		if !ok {
-			//fmt.Println("shit look at args interface")
-			return "", errors.New("not ok")
+			return "", errors.New("Could not assert list of arguments in function call")
 		}
 
-		// FIXME: change to standard for loop until the end and add commas
+		// FIXME: change this loop to standard for loop until the end and add commas
 		// everytime, w/e
 		for i, arg := range args {
-			if ref, ok := arg.Metadata["refs"]; ok {
-				functionString += ref.(string)
+			ref, ok := arg.Metadata["refs"]
+			if ok {
+				assert, ok := ref.(string)
+				if !ok {
+					return "", errors.New("Could not assert `ref` from metadata")
+				}
+				functionString += assert
 
 			} else if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
 				arg.Name = arg.Name + "_" + RandStringBytesMaskImprSrc(10)
-				//fmt.Println("NAME_BYTES", arg.Name)
 
-				objectString, err := translateObject(arg, "")
+				objectString, err := p.TranslateObject(arg, "")
 				if err != nil {
 					return "", err
 				}
 				functionString = objectString + functionString + arg.Name
 			} else if arg.Type == "function" {
-				innerFunctionCall, err := translateFunctionCall(arg)
+				innerFunctionCall, err := p.TranslateFunctionCall(arg)
 				if err != nil {
-					return "", nil
+					return "", err
 				}
 				// Cut off the newline and semicolon that is on the end
 				functionString += innerFunctionCall[:len(innerFunctionCall)-2]
@@ -150,154 +83,181 @@ func translateFunctionCall(t token.Value) (string, error) {
 				// The extra `, ""` is a hack to get strings to work in the template
 				// functions in the C++ bindings
 
-				//fmt.Println("THISI SI TRUE", arg.True)
 				functionString += fmt.Sprintf("\"%+v\"", arg.True)
 			} else {
 				functionString += fmt.Sprintf("%+v", arg.True)
 			}
 
+			// Append a comma if this is not the last arg
 			if i != len(args)-1 {
 				functionString += ","
 			}
 		}
+
 		if len(args) == 1 && args[0].Type == "string" || args[0].Type == "char" {
 			functionString += ", \"\""
 		}
 	}
+
+	// Close the fucntion
 	functionString += ");\n"
 
 	return functionString, nil
 }
 
-func translateFunctionDef(t token.Value) (string, error) {
+func (p *Parser) TranslateFunctionDef(t token.Value) (string, error) {
 	functionString := "\n"
 
 	trueValue, ok := t.True.(map[string]token.Value)
 	if !ok {
-		//fmt.Println("shit look at t")
-		return "", errors.New("not ok")
+		return "", errors.New("Could not assert value of function definition")
 	}
 
-	// expectReturn := false
-	// TODO: only supporting void type for now
+	// FIXME: later on we need to create a `statement` structure that we can call .String() on that will create the C++ statement
+
+	// Parse the returns first since that is the first value of a C++ function
 	returnsInterface := trueValue["returns"].True
+
+	// If the function does not return anything, the equivalent C++ return type is `void`
 	if returnsInterface == nil {
 		functionString += "void "
+
+		// Otherwise figure out the return type
 	} else {
 		returns, ok := returnsInterface.([]token.Value)
 		if !ok {
 			return "", errors.Errorf("Could not assert `returns[0]` to token.Value: %+v", returns[0])
 		}
 		if len(returns) == 0 {
-			//fmt.Println("wtf no returns brah")
-			os.Exit(9)
+			return "", errors.New("Returns was non-nil, but len(returns) was 0")
 		}
-		// FIXME: gimp the returns to only be based on the first one for now
+		// FIXME: fix multi returns here; only use the first one for now
 		firstReturn := returns[0]
+
+		// Ensure that the return has a type
 		if firstReturn.Type == "" {
 			return "", errors.Errorf("No return type found on `returns[0]`: %+v", returns[0])
-		} else if firstReturn.Type == "BLOCK" || firstReturn.Type == "object" || firstReturn.Type == "var" {
+		}
+
+		// If we are returning a `BLOCK`, `object`, or `var` we need to use the equivalent C++ `var` type
+		if firstReturn.Type == "BLOCK" || firstReturn.Type == "object" || firstReturn.Type == "var" {
 			functionString += "var "
+
+			// Otherwise just return the type as all other Express types match C++ types right now
 		} else {
-			// expectReturn = true
 			functionString += firstReturn.Type + " "
 		}
 	}
 
 	// Append the name of the function
 	functionString += t.Name + "("
-	argsInterface := trueValue["args"].True
-	if argsInterface != nil {
-		//fmt.Println("ARGSINTERFACE", argsInterface)
 
+	// Parse the arguments
+	argsInterface := trueValue["args"].True
+
+	// If there are arguments then we need to check them
+	if argsInterface != nil {
 		args, ok := argsInterface.([]token.Value)
-		//fmt.Println("ARGS", args)
 		if !ok {
-			//fmt.Println("shit look at args interface")
-			return "", errors.New("not ok")
+			return "", errors.New("Could not assert value of arguments in function definition")
 		}
 
-		// FIXME: change to standard for loop until the end and add commas
+		// FIXME:  change this loop to standard for loop until the end and add commas
 		// everytime, w/e
 		for i, arg := range args {
+			// If the argument type is a `BLOCK`, `object`, or `var` type, then we need to use the equivalent C++ `var` type
 			if arg.Type == "BLOCK" || arg.Type == "object" || arg.Type == "var" {
 				functionString += "var " + arg.Name
+
+				// Otherwise the C++ arg type is the same as all other Express types match C++ types right now
 			} else {
 				functionString += arg.Type + " " + arg.Name
 			}
 
+			// Append a comma if this isn't the last argument
 			if i != len(args)-1 {
 				functionString += ","
 			}
 		}
 	}
+
+	// Close the function
 	functionString += ")"
 
-	//fmt.Println("trueValue", trueValue)
-
-	bodyString, err := translateBlock(trueValue["body"])
+	// Translate the body of the function
+	bodyString, err := p.TranslateBlock(trueValue["body"])
 	if err != nil {
-		// TODO:
 		return "", err
 	}
 
+	// Add the onreturn defer stack as the first declaration
 	functionString += "{\ndefer onReturnFuncs;\n" + bodyString + "}"
 
 	return functionString, nil
 }
 
-func translateArray(t token.Value) (string, error) {
+func (p *Parser) TranslateArray(t token.Value) (string, error) {
 	arrayString := ""
 
-	//fmt.Printf("%+v\n", t)
 	trueValue, ok := t.True.([]token.Token)
 	if !ok {
-		//fmt.Println("shit look at t")
-		//fmt.Println("trueValue", trueValue)
-		return "", errors.New("not ok")
+		return "", errors.New("Could not assert array value")
 	}
 
-	// assuming only single type arrays until I have time to do multi type arrays in C
+	// FIXME: assuming only single type arrays until I have time to do multi type arrays in C++
 	arrayType := t.Acting
 
-	// TODO: was lazy with the defers, need to fix
+	// TODO: was lazy, could do this with the defers, need to fix
 	if arrayType == "string" {
 		arrayType = "std::" + arrayType
 	} else if arrayType == "object" {
 		arrayType = "var"
 	}
 
+	// Start the array declaraion off
 	arrayString += arrayType + " " + t.Name + "[] = { "
 
+	// If is is a var then close the array
 	if arrayType == "var" {
 		arrayString += " };\n"
 	}
 
+	// Range over each index of the array
 	for i, v := range trueValue {
-
 		sprintString := "%v"
 		// FIXME: for some reason array composition using only one object variable causes
 		// each object to change when one does because of the pointers and stuff
-		// It's because the memory is not copied (i.e, constructor is not called) when putting the var into the
-		// map
-		if ref, ok := v.Value.Metadata["refs"]; v.Value.Type != "object" && ok {
+		// It's because the memory is not copied when putting the var into the map, so we need
+		// to create a copy constructor for the `var` type in the runtime,
+		// however I don't wanna deal with wrangling C++ memory shit right now brah so we gonna do da hackz0rz
+
+		ref, ok := v.Value.Metadata["refs"]
+
+		// If the Type is an object and if references a previously declared variable then set the value in the array
+		if v.Value.Type != "object" && ok {
 			arrayString += ref.(string)
+
+			// If the type is a string then we need to quote it
 		} else if v.Value.Type == "string" {
 			sprintString = "\"" + sprintString + "\""
 			arrayString += fmt.Sprintf(sprintString, v.Value.True)
+
+			// Again check if it is an object (I know... this is fucky, but im only one superhero, comrade ¯\_(ツ)_/¯)
 		} else if v.Value.Type == "object" {
-			// Assert a name for the object
-			// if v.Value.Name == "" {
+			// So if it's an object, instead of being able to copy it, we need to make a new `var` type in C++ so use a anonymized name for it
 			v.Value.Name = v.Value.Name + "_" + RandStringBytesMaskImprSrc(10)
-			//fmt.Println("NAME_BYTES", v.Value.Name)
-			// }
-			objectString, err := translateObject(v.Value, "")
+
+			// Translate the object
+			objectString, err := p.TranslateObject(v.Value, "")
 			if err != nil {
 				return "", err
 			}
 			arrayString += "{" + objectString
+			// Add it to the array
 			arrayString += fmt.Sprintf("%s[%d] = %s;\n}\n", t.Name, i, v.Value.Name)
 			continue
+
+			// Otherwise just add the value to the array
 		} else {
 			arrayString += fmt.Sprintf(sprintString, v.Value.True)
 		}
@@ -308,6 +268,7 @@ func translateArray(t token.Value) (string, error) {
 		}
 	}
 
+	// TODO: try to remember why this is here and working
 	if arrayType != "var" {
 		arrayString += " };\n"
 	}
@@ -315,86 +276,65 @@ func translateArray(t token.Value) (string, error) {
 	return arrayString, nil
 }
 
-// Old makeMap for map<string,var> initialization
-// func makeMap(t token.Value) string {
-// 	mapString := "map<string,var>{\n"
-// 	for _, v := range t.True.([]token.Value) {
-// 		// //fmt.Println("k, v", k, v)
-// 		if v.Type == "object" {
-// 			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, makeMap(v))
-// 		} else if v.Type == "string" {
-// 			mapString += fmt.Sprintf("{ \"%s\", \"%v\" },\n", v.Name, v.True)
-
-// 		} else if v.Type == "array" {
-// 			continue
-// 		} else {
-// 			mapString += fmt.Sprintf("{ \"%s\", %v },\n", v.Name, v.True)
-// 		}
-// 	}
-
-// 	return mapString + "}"
-// }
-
 // FIXME: just use var for now, but later we will try to not use var
 // FIXME: ideally we want to store this in a "symbol map" with the defaults already there
-func translateObject(t token.Value, objName string) (string, error) {
+func (p *Parser) TranslateObject(t token.Value, objName string) (string, error) {
 
+	// If the name of the object that was passed in was not empty, use that
+	// This is for passing an anonymized name into the p.Translate object
 	tName := t.Name
 	if objName != "" {
 		tName = objName
 	}
 
-	fmt.Println("metadata", t.Metadata)
-	fmt.Println("i am here", t)
-	if _, ok := t.Metadata["from_func"]; ok {
-		asserted, ok := t.True.(token.Value)
-		if ok {
-			funcCall, err := translateFunctionCall(asserted)
-			if err != nil {
-				return "", err
-			}
+	_, ok := t.Metadata["from_func"]
 
-			// might have to make a custom tName
-			// [1:] to shave off the newline: remove if it causes problems
-			return "var " + tName + " = " + funcCall[1:], nil
+	// If the object is being returned from a function
+	if ok {
+		asserted, ok := t.True.(token.Value)
+		// If we are able to assert the value
+		if !ok {
+			return "", errors.New("Could not assert value of object")
 		}
+
+		// p.Translate the function
+		funcCall, err := p.TranslateFunctionCall(asserted)
+		if err != nil {
+			return "", err
+		}
+
+		// might have to make a custom tName
+		// [1:] to shave off the newline from the translation: remove if it causes problems
+		return "var " + tName + " = " + funcCall[1:], nil
 	}
 
+	// Objects a the `var` type in the C++ runtime
 	objectString := "var " + tName + " = {};\n"
 
+	// Range over the statements inside the object
 	for _, v := range t.True.([]token.Value) {
 		objectValue := v.True
 
 		var fromFuncOk bool
+
 		_, ok := v.True.([]token.Value)
 		if !ok {
+			// If we can't assert the value, check if it references something; if it does set the value
 			ref, ok := v.Metadata["refs"]
 			if ok {
 				objectValue = ref
 			}
 
-			fmt.Println("metadata", v.Metadata)
+			// Check if this value is from a function; if it is, parse the function
 			_, fromFuncOk = v.Metadata["from_func"]
 			if ok && objectValue != ref {
-				// if objectValue == ref {
-				// 	// objectString += vName + " = " + ref.(string) + ";\n"
-				// 	if v.Type == "string":
-				// 	objectString += tName + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
-
-				// 	continue
-				// }
-
-				fmt.Println("toks", v.True)
-				fmt.Println("v", v)
 				asserted, ok := v.True.(token.Value)
 				if ok {
-					funcCall, err := translateFunctionCall(asserted)
+					// Translate the function call
+					funcCall, err := p.TranslateFunctionCall(asserted)
 					if err != nil {
 						return "", err
 					}
-
-					fmt.Println("translateVa")
-					fmt.Println(translateVariableStatement(v))
 
 					// might have to make a custom tName
 					// [1:] to shave off the newline: remove if it causes problems
@@ -404,87 +344,63 @@ func translateObject(t token.Value, objName string) (string, error) {
 			}
 		}
 
-		// //fmt.Println("k, v", k, v)
+		// If it is an object or a struct inside the object, we need to make anonymize the name and p.Translate it
 		if v.Type == "object" || v.Type == "struct" {
-			// objectString += t.Name + fmt.Sprintf("[\"%s\"] = %v;", v.Name, objectValue)
 			vName := v.Name + "_" + RandStringBytesMaskImprSrc(10)
-			anotherObjectString, err := translateObject(v, vName)
+			anotherObjectString, err := p.TranslateObject(v, vName)
 			if err != nil {
-				return objectString, err
+				return "", err
 			}
 			objectString += anotherObjectString + tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
 
+			// If it is a string, assign it normally
 		} else if v.Type == "string" {
 			objectString += tName + fmt.Sprintf("[\"%s\"] = \"%v\";\n", v.Name, objectValue)
 
-			// If its a struct, create an object that will generate the struct for us
-			// } else if v.Type == "struct" {
-			// 	// anotherObjectString, err := translateObject(v)
-			// 	// if err != nil {
-			// 	// 	return objectString, err
-			// 	// }
-			// 	objectString += t.Name + "[\"" + v.Name + "\"] = genStruct(\"" + v.Metadata["real"].(string) + "\");\n"
-			// 	objstr, err := translateObject(t, true)
-			// 	if err != nil {
-			// 		return "", err
-			// 	}
-
-			// 	objectString += objstr
+			// If it is a var that is not from a function, then we need to copy the contents - again, no copy constructor in the runtime yet
 		} else if v.Type == "var" && !fromFuncOk {
-			// vType := v.Type
-			// v.Type = v.Acting
-			// v.Acting = vType
-			// varStmt, err := translateVariableStatement(v)
-			// if err != nil {
-			// 	return "", err
-			// }
-
-			// objectString += strings.Join(
-			// 	[]string{tName, "[\"" + v.Name + "\"] =", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
-			// ) + "\n"
 			var varStmt string
 			var err error
+
+			// Switch the real and acting types of the var and then p.Translate it using the existing translation mechanisms
 			vName := v.Name
 			vType := v.Type
 
 			v.Type = v.Acting
 			v.Acting = vType
 
-			fmt.Println("i be here m8", v)
+			// If the var is an object or struct anonymize the name and p.Translate it
 			if v.Type == "object" || v.Type == "struct" {
 				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
-				varStmt, err = translateObject(v, vName)
+				varStmt, err = p.TranslateObject(v, vName)
 				varStmt += tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
+
+				// If the shadow (acting) type of the var is a var, then we have an error.
+				// The compiler MUST be able to identify the shadow type of any dynamic variable
+				// at compile time in order to provide predictable behavior at runtime.
 			} else if v.Type == "var" {
 				fmt.Println("wtf still got var after switching acting and type")
-				os.Exit(9)
+				return "", errors.Errorf("Dynamic variable must have a static shadow type: %v", v)
+
+				// Otherwise anonymize the name and just p.Translate the statement normally
 			} else {
-				fmt.Println("something something", v)
 				vName = v.Name + "_" + RandStringBytesMaskImprSrc(10)
-				varStmt, err = translateVariableStatement(v)
+				varStmt, err = p.TranslateVariableStatement(v)
 				if err != nil {
 					return "", err
 				}
-				fmt.Println("var statement m8", varStmt)
 			}
 
-			// _, ok := v.Metadata["assign"]
-			// if ok {
-			// 	_, ok = v.True.([]token.Value)
-			// 	fmt.Println("v, ok", v.Name, ok)
-			// 	if !ok {
-			// 		vType = ""
-			// 	}
-			// }
-
+			// After translating, assign it to the object
 			varStmt += tName + "[\"" + v.Name + "\"] = " + vName + ";\n"
 			objectString += strings.Join(
 				[]string{vType, vName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
 			) + "\n"
-			fmt.Println("again var statement m8", objectString)
-			fmt.Println("v", v)
 
+			// If the object key is an array type
 		} else if v.Type == "array" {
+			// TODO: think about this when it comes up; Javascript/Python supports this feature in their dynamic variables
+			// But we dont wanna be spewin memory everywhere and polluting the heap and destroying the ozone... wait wrong project
 			// I am not supporting arrays for now, will have to debate how to
 			// do this later. By definition, if objects are just map[string]<var>
 			// and objects should be able to have keys with array values, then
@@ -493,6 +409,8 @@ func translateObject(t token.Value, objName string) (string, error) {
 			// could only allow its usage in arrays
 			continue
 
+			// If it is a zero valued float type make sure it has 0.0 and not 0; this is because the
+			// runtime will initalize the variable's shadow type to be an int if we dont
 		} else {
 			if v.Type == token.FloatType && v.True.(float64) == 0 {
 				objectString += tName + fmt.Sprintf("[\"%s\"] = %f;\n", v.Name, float64(0.0))
@@ -506,10 +424,10 @@ func translateObject(t token.Value, objName string) (string, error) {
 }
 
 // TODO: make this more idiomatic later
-func translateStruct(t token.Value) (string, error) {
-	// call translateObject to get the object foot print
+func (p *Parser) TranslateStruct(t token.Value) (string, error) {
+	// call p.TranslateObject to get the object foot print
 	// put that object into the map
-	structDef, err := translateObject(t, "")
+	structDef, err := p.TranslateObject(t, "")
 	if err != nil {
 		return "", err
 	}
@@ -520,7 +438,7 @@ func translateStruct(t token.Value) (string, error) {
 	// return "var " + t.Name + " = genStruct(\"" + t.Acting + "\");\n", nil
 }
 
-func translateVariableStatement(t token.Value) (string, error) {
+func (p *Parser) TranslateVariableStatement(t token.Value) (string, error) {
 	variableString := ""
 
 	// if the token type is var make a var statement in C
@@ -537,7 +455,7 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 	fmt.Println("metadata", t.Metadata)
 	if _, ok := t.Metadata["from_func"]; ok {
-		funcCall, err := translateFunctionCall(t.True.(token.Value))
+		funcCall, err := p.TranslateFunctionCall(t.True.(token.Value))
 		if err != nil {
 			return "", err
 		}
@@ -565,13 +483,13 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 		if t.Type == "object" || t.Type == "struct" {
 			tName = t.Name + "_" + RandStringBytesMaskImprSrc(10)
-			varStmt, err = translateObject(t, tName)
+			varStmt, err = p.TranslateObject(t, tName)
 		} else if t.Type == "var" {
 			fmt.Println("wtf still got var after switching acting and type")
 			os.Exit(9)
 		} else {
 			fmt.Println("else", t.Type, t.Acting)
-			varStmt, err = translateVariableStatement(t)
+			varStmt, err = p.TranslateVariableStatement(t)
 			if err != nil {
 				return "", err
 			}
@@ -589,13 +507,11 @@ func translateVariableStatement(t token.Value) (string, error) {
 		variableString += strings.Join(
 			[]string{tType, tName, "=", strings.Join(strings.SplitAfter(varStmt, "=")[1:], "")}, " ",
 		) + "\n"
-		fmt.Println("variableString", variableString)
 		return variableString, nil
 
 	case "object":
-		objectString, err := translateObject(t, "")
+		objectString, err := p.TranslateObject(t, "")
 		if err != nil {
-			// TODO:
 			return "", err
 		}
 		return variableString + objectString, nil
@@ -607,14 +523,14 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 		// struct declaration has no 'real' type
 		// if real == nil {
-		structString, err = translateStruct(t)
+		structString, err = p.TranslateStruct(t)
 		// fmt.Println("structString", structString)
 		if err != nil {
 			return "", err
 		}
 		// } else {
 		// 	// TODO: Just make structs essentially an object in the backend for now
-		// 	// structString, err = translateObject(t)
+		// 	// structString, err = p.TranslateObject(t)
 		// 	// fmt.Println("structString2", structString)
 		// 	// if err != nil {
 		// 	// 	// TODO:
@@ -623,7 +539,7 @@ func translateVariableStatement(t token.Value) (string, error) {
 
 		// 	// This was how I was doing the genStruct usage with the above in an if
 		// 	structString = "var " + t.Name + " = genStruct(\"" + t.Metadata["real"].(string) + "\");\n"
-		// 	objstr, err := translateObject(t, true)
+		// 	objstr, err := p.TranslateObject(t, true)
 		// 	if err != nil {
 		// 		return "", err
 		// 	}
@@ -640,7 +556,7 @@ func translateVariableStatement(t token.Value) (string, error) {
 		return variableString + structString, nil
 
 	case "array":
-		arrayString, err := translateArray(t)
+		arrayString, err := p.TranslateArray(t)
 		if err != nil {
 			// TODO:
 			return "", err
@@ -691,7 +607,7 @@ func translateVariableStatement(t token.Value) (string, error) {
 	return "", errors.New("why am i here")
 }
 
-func translateIf(t token.Value) (string, error) {
+func (p *Parser) TranslateIf(t token.Value) (string, error) {
 	controlString := ""
 
 	if t.Type != token.If {
@@ -714,7 +630,7 @@ func translateIf(t token.Value) (string, error) {
 	// }
 	//fmt.Println("metadata", t.Metadata)
 
-	//fmt.Println("t.True in translateIf", t)
+	//fmt.Println("t.True in p.Translateif", t)
 	// evalString := ""
 	// var leftInterface, opInterface, rightInterface interface{}
 	// var left, op, right token.Value
@@ -737,7 +653,7 @@ func translateIf(t token.Value) (string, error) {
 	// right = rightInterface.(token.Value)
 	// evalString += right.String
 
-	blockString, err := translateBlock(token.Value{
+	blockString, err := p.TranslateBlock(token.Value{
 		Type: token.Block,
 		True: t.True,
 	})
@@ -751,7 +667,7 @@ func translateIf(t token.Value) (string, error) {
 	return controlString, nil
 }
 
-func translateLoop(t token.Value) (string, error) {
+func (p *Parser) TranslateLoop(t token.Value) (string, error) {
 	loopString := ""
 
 	// Turn on the loop var
@@ -785,7 +701,7 @@ func translateLoop(t token.Value) (string, error) {
 	if extraVarsInterface, ok := t.Metadata["extraVars"]; ok {
 		if extraVars, ok := extraVarsInterface.([]token.Value); ok {
 			for _, extraVar := range extraVars {
-				variableString, err := translateVariableStatement(extraVar)
+				variableString, err := p.TranslateVariableStatement(extraVar)
 				if err != nil {
 					return "", err
 				}
@@ -819,7 +735,7 @@ func translateLoop(t token.Value) (string, error) {
 	// f += loop
 
 	//fmt.Println("wtf is this")
-	blockString, err := translateBlock(token.Value{
+	blockString, err := p.TranslateBlock(token.Value{
 		Type: token.Block,
 		True: t.True,
 	})
@@ -842,7 +758,7 @@ func translateLoop(t token.Value) (string, error) {
 
 // FIXME: this will not work for lambda functions but we don't even have
 // that supported yet so idc
-func translateOnExit(t token.Value) (string, error) {
+func (p *Parser) TranslateOnExit(t token.Value) (string, error) {
 	// TODO: look into what is the best way to do defer: might have to change whether we use:
 	//		[=] - value
 	//		[&] - reference
@@ -854,7 +770,7 @@ func translateOnExit(t token.Value) (string, error) {
 		return "", errors.Errorf("wtf happened %+v", t)
 	}
 
-	functionCallString, err := translateFunctionCall(onExitValue)
+	functionCallString, err := p.TranslateFunctionCall(onExitValue)
 
 	onExitString += functionCallString + "});\n"
 	return onExitString, err
@@ -862,7 +778,7 @@ func translateOnExit(t token.Value) (string, error) {
 
 // FIXME: this will not work for lambda functions but we don't even have
 // that supported yet so idc
-func translateOnReturn(t token.Value) (string, error) {
+func (p *Parser) TranslateOnReturn(t token.Value) (string, error) {
 	// TODO: look into what is the best way to do defer: might have to change whether we use:
 	//		[=] - value
 	//		[&] - reference
@@ -874,7 +790,7 @@ func translateOnReturn(t token.Value) (string, error) {
 		return "", errors.Errorf("wtf happened %+v", t)
 	}
 
-	functionCallString, err := translateFunctionCall(onReturnValue)
+	functionCallString, err := p.TranslateFunctionCall(onReturnValue)
 
 	onReturnString += functionCallString + "});\n"
 	return onReturnString, err
@@ -882,7 +798,7 @@ func translateOnReturn(t token.Value) (string, error) {
 
 // FIXME: this will not work for lambda functions but we don't even have
 // that supported yet so idc
-func translateOnLeave(t token.Value) (string, error) {
+func (p *Parser) TranslateOnLeave(t token.Value) (string, error) {
 	// TODO: look into what is the best way to do defer: might have to change whether we use:
 	//		[=] - value
 	//		[&] - reference
@@ -894,7 +810,7 @@ func translateOnLeave(t token.Value) (string, error) {
 		return "", errors.Errorf("wtf happened %+v", t)
 	}
 
-	functionCallString, err := translateFunctionCall(onLeaveValue)
+	functionCallString, err := p.TranslateFunctionCall(onLeaveValue)
 
 	onLeaveString += functionCallString + "});\n"
 	return onLeaveString, err
@@ -902,7 +818,7 @@ func translateOnLeave(t token.Value) (string, error) {
 
 // FIXME: this will not work for lambda functions but we don't even have
 // that supported yet so idc
-func translateDefer(t token.Value) (string, error) {
+func (p *Parser) TranslateDefer(t token.Value) (string, error) {
 	// TODO: look into what is the best way to do defer: might have to change whether we use:
 	//		[=] - value
 	//		[&] - reference
@@ -919,39 +835,39 @@ func translateDefer(t token.Value) (string, error) {
 		return "", errors.Errorf("wtf happened %+v", t)
 	}
 
-	functionCallString, err := translateFunctionCall(deferValue)
+	functionCallString, err := p.TranslateFunctionCall(deferValue)
 
 	deferString += functionCallString + "});\n"
 	return deferString, err
 }
 
-func translateKeyword(t token.Value) (string, error) {
+func (p *Parser) TranslateKeyword(t token.Value) (string, error) {
 	if t.Type != token.Keyword {
 		return "", errors.Errorf("not a keyword %+v", t)
 	}
 
 	switch t.String {
 	case token.Return:
-		return translateReturn(t)
+		return p.TranslateReturn(t)
 
 	case token.OnExit:
-		return translateOnExit(t)
+		return p.TranslateOnExit(t)
 
 	case token.OnReturn:
-		return translateOnReturn(t)
+		return p.TranslateOnReturn(t)
 
 	case token.OnLeave:
-		return translateOnLeave(t)
+		return p.TranslateOnLeave(t)
 
 	case token.Defer:
-		return translateDefer(t)
+		return p.TranslateDefer(t)
 
 	default:
 		return "", errors.Errorf("idk wtf this is %+v", t)
 	}
 }
 
-func translateReturn(t token.Value) (string, error) {
+func (p *Parser) TranslateReturn(t token.Value) (string, error) {
 	returnString := "return "
 
 	returnValue, ok := t.True.(token.Value)
@@ -969,7 +885,7 @@ func translateReturn(t token.Value) (string, error) {
 		returnValue.Name = returnValue.Name + "_" + RandStringBytesMaskImprSrc(10)
 		//fmt.Println("NAME_BYTES", returnValue.Name)
 
-		objectString, err := translateObject(returnValue, "")
+		objectString, err := p.TranslateObject(returnValue, "")
 		if err != nil {
 			return "", err
 		}
@@ -982,7 +898,7 @@ func translateReturn(t token.Value) (string, error) {
 	return returnString, nil
 }
 
-func translateBlock(tv token.Value) (string, error) {
+func (p *Parser) TranslateBlock(tv token.Value) (string, error) {
 	blockDepth++
 	defer func() { blockDepth-- }()
 	// _, err = f.Write([]byte("{\n"))
@@ -1011,23 +927,23 @@ func translateBlock(tv token.Value) (string, error) {
 
 		switch t.Type {
 		case "for":
-			resultString, err = translateLoop(t)
+			resultString, err = p.TranslateLoop(t)
 
 		case "if":
-			resultString, err = translateIf(t)
+			resultString, err = p.TranslateIf(t)
 
 		case "function":
 			switch t.Metadata["type"] {
 			case "call":
-				resultString, err = translateFunctionCall(t)
+				resultString, err = p.TranslateFunctionCall(t)
 
 			case "def":
 				var functionString string
-				functionString, err = translateFunctionDef(t)
+				functionString, err = p.TranslateFunctionDef(t)
 				if err != nil {
 					return "", err
 				}
-				functionStrings += functionString
+				p.FunctionStrings += functionString
 				continue
 
 			default:
@@ -1035,9 +951,9 @@ func translateBlock(tv token.Value) (string, error) {
 			}
 
 		default:
-			resultString, err = translateKeyword(t)
+			resultString, err = p.TranslateKeyword(t)
 			if err != nil {
-				resultString, err = translateVariableStatement(t)
+				resultString, err = p.TranslateVariableStatement(t)
 			}
 		}
 
@@ -1055,6 +971,12 @@ func translateBlock(tv token.Value) (string, error) {
 	return blockString, nil
 }
 
+// genStructFactory was being used because in my head the grammar flow is:
+// BLOCK + name = object
+// object + name = struct (typed object)
+// And therefore you can envision structs as just a type-safe object factory,
+// like you have in JavaScript, but you don't have to use JavaSript...
+// and it is incorporated into the language as a static compile time check to ensure type-safety
 func genStructFactory() string {
 	// structFactory :=
 	return `
@@ -1068,6 +990,7 @@ func genStructFactory() string {
 	// return structFactory
 }
 
+// Transpile starts the process of generating C++ code
 func (p *Parser) Transpile(block token.Value) (string, error) {
 	//fmt.Println("yo waddup")
 
@@ -1090,6 +1013,8 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	// f+="#include <map>\n#include <string>\n"
 	// f+="struct Any { std::string type; void* data; };\n"
 	r = rand.New(rand.NewSource(time.Now().Unix()))
+
+	p.FunctionStrings = "\n"
 
 	var f string
 
@@ -1118,7 +1043,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 	f += "\n" + strings.Join(extraLibs, "\n")
 	f += "\ndefer onExitFuncs;"
 
-	blockString, err := translateBlock(block)
+	blockString, err := p.TranslateBlock(block)
 	if err != nil {
 		// TODO:
 		//fmt.Println("error getting block", err)
@@ -1127,7 +1052,7 @@ func (p *Parser) Transpile(block token.Value) (string, error) {
 
 	f += genStructFactory() + "\n" +
 		structStrings + "\n" +
-		functionStrings + "\nint main() {" +
+		p.FunctionStrings + "\nint main() {" +
 		blockString + "}\n"
 
 	return f, nil

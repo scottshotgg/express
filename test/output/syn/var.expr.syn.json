@@ -88,6 +88,13 @@
 						"Type": "assign",
 						"String": "="
 					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "float",
+						"True": 69.69
+					}
 				}
 			]
 		}

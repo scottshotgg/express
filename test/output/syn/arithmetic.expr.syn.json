@@ -713,35 +713,6 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "wsv"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "string",
-						"True": "its ",
-						"String": "its "
-					}
-				},
-				{
-					"Type": "TYPE",
-					"Value": {
-						"Type": "var",
-						"String": "var"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
 						"String": "xsv"
 					}
 				},
@@ -756,8 +727,37 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "string",
-						"True": "me",
-						"String": "me"
+						"True": "here comes ",
+						"String": "here comes "
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "var",
+						"String": "var"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "ysv"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "string",
+						"True": "dat boiiii",
+						"String": "dat boiiii"
 					}
 				},
 				{
@@ -785,7 +785,7 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "wsv"
+						"String": "xsv"
 					}
 				},
 				{
@@ -799,7 +799,69 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "xsv"
+						"String": "ysv"
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "xs"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
+					}
+				},
+				{
+					"ID": 1,
+					"Type": "FUNCTION",
+					"Value": {
+						"Name": "Println",
+						"Type": "function",
+						"True": [
+							{
+								"ID": 1,
+								"Type": "GROUP",
+								"Value": {
+									"Type": "GROUP",
+									"True": [
+										{
+											"Type": "IDENT",
+											"Value": {
+												"Type": "private",
+												"String": "xs"
+											}
+										}
+									]
+								}
+							}
+						],
+						"AccessType": "public",
+						"Metadata": {
+							"lambda": false,
+							"type": "call"
+						}
 					}
 				},
 				{

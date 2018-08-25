@@ -172,6 +172,13 @@
 		}
 	},
 	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "float",
+			"True": 69.69
+		}
+	},
+	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
