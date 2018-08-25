@@ -256,7 +256,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "Println"
+			"String": "Print"
 		}
 	},
 	{
@@ -272,26 +272,6 @@
 			"Type": "string",
 			"True": "benTen :=",
 			"String": "benTen :="
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "benTen"
 		}
 	},
 	{

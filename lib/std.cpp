@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 
 // FIXME: could probably speed this up by using a stringstream and or a different way to print
 
@@ -63,7 +64,7 @@ template <typename T>
 void Print(T rest[]) {
   //cout << "im in here rest" << endl;
   std::cout << "[ ";
-  int length = (sizeof(*rest)/sizeof(*rest)) + 1;
+  int length = sizeof(rest[0]) + 2;
   for (int i = 0; i < length; i++) {
     Print(rest[i]);
     std::cout << ", ";

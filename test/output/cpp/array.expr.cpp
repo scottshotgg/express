@@ -18,7 +18,7 @@ int main() {
 
   bool benTen[] = {true, bool2, bool1, false};
 
-  Println("benTen :=", benTen);
+  Print("benTen :=", "");
 
   Println(benTen);
 }

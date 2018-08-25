@@ -101,7 +101,7 @@
 					"ID": 1,
 					"Type": "FUNCTION",
 					"Value": {
-						"Name": "Println",
+						"Name": "Print",
 						"Type": "function",
 						"True": [
 							{
@@ -116,13 +116,6 @@
 												"Type": "string",
 												"True": "benTen :=",
 												"String": "benTen :="
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "private",
-												"String": "benTen"
 											}
 										}
 									]

@@ -6,5 +6,6 @@ bool2 := false
 benTen := [ true, bool2, bool1, false ]
 
 // FIXME: this prints out the address ... need to fixerino
-Println("benTen :=", benTen)
+//Println("benTen :=", benTen)
+Print("benTen :=")
 Println(benTen)

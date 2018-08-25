@@ -64,7 +64,7 @@
 			}
 		},
 		{
-			"Name": "Println",
+			"Name": "Print",
 			"Type": "function",
 			"True": {
 				"args": {
@@ -73,57 +73,6 @@
 							"Type": "string",
 							"True": "benTen :=",
 							"String": "benTen :="
-						},
-						{
-							"Name": "benTen",
-							"Type": "array",
-							"Acting": "bool",
-							"True": [
-								{
-									"Type": "LITERAL",
-									"Value": {
-										"Type": "bool",
-										"True": true
-									}
-								},
-								{
-									"Type": "LITERAL",
-									"Value": {
-										"Name": "bool2",
-										"Type": "bool",
-										"True": false,
-										"AccessType": "private",
-										"Metadata": {
-											"refs": "bool2"
-										}
-									}
-								},
-								{
-									"Type": "LITERAL",
-									"Value": {
-										"Name": "bool1",
-										"Type": "bool",
-										"True": true,
-										"AccessType": "private",
-										"Metadata": {
-											"refs": "bool1"
-										}
-									}
-								},
-								{
-									"Type": "LITERAL",
-									"Value": {
-										"Type": "bool",
-										"True": false
-									}
-								}
-							],
-							"AccessType": "private",
-							"Metadata": {
-								"length": 3,
-								"refs": "benTen",
-								"vector": false
-							}
 						}
 					]
 				},
