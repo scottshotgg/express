@@ -5,10 +5,10 @@
 			"Type": "BLOCK",
 			"True": [
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "private",
-						"String": "i"
+						"Type": "bool",
+						"True": false
 					}
 				},
 				{
@@ -21,15 +21,15 @@
 				{
 					"Type": "LITERAL",
 					"Value": {
-						"Type": "int",
-						"True": 10
+						"Type": "bool",
+						"True": false
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "private",
-						"String": "f"
+						"Type": "bool",
+						"True": false
 					}
 				},
 				{
@@ -40,10 +40,10 @@
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "private",
-						"String": "i"
+						"Type": "bool",
+						"True": false
 					}
 				}
 			]
