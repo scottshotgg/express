@@ -183,7 +183,7 @@ func compileExpressProgram(filename string) error {
 	return nil
 }
 
-var singleFile string = "struct.expr"
+var singleFile string = "declare_int_ref.expr"
 
 func TestRunSingle(t *testing.T) {
 	var err error

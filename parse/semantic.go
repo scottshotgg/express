@@ -1381,14 +1381,14 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			p.meta.NewScopeFromVariable(variable)
 			// Ensure that we exit this scope afterwards
 			defer p.meta.ExitScope()
-			// fmt.Println("reflecterooni4", reflect.ValueOf(variable.Value))
-			// value, ok := variable.Value.([]token.Value)
+			fmt.Println("reflecterooni4", reflect.ValueOf(variable.Value))
+			value, ok := variable.Value.([]token.Value)
 
-			// if !ok {
-			// 	for _, iv := range variable.Value.([]interface{}) {
-			// 		value = append(value, iv.(token.Value))
-			// 	}
-			// }
+			if !ok {
+				for _, iv := range variable.Value.([]interface{}) {
+					value = append(value, iv.(token.Value))
+				}
+			}
 
 			// if !ok {
 			// 	return token.Value{}, errors.New("Could not assert value of struct")

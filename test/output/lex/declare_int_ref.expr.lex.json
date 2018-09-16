@@ -1,8 +1,9 @@
 [
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "i"
+			"Type": "bool",
+			"True": false
 		}
 	},
 	{
@@ -36,8 +37,8 @@
 	{
 		"Type": "LITERAL",
 		"Value": {
-			"Type": "int",
-			"True": 10
+			"Type": "bool",
+			"True": false
 		}
 	},
 	{
@@ -48,9 +49,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "f"
+			"Type": "bool",
+			"True": false
 		}
 	},
 	{
@@ -82,16 +84,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "i"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
+			"Type": "bool",
+			"True": false
 		}
 	}
 ]
