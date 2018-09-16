@@ -311,8 +311,13 @@ func (p *Parser) TranslateObject(t token.Value, objName string) (string, error) 
 	// Objects a the `var` type in the C++ runtime
 	objectString := "var " + tName + " = {};\n"
 
+	tTrues, ok := t.True.([]token.Value)
+	if !ok {
+		return "", errors.New("Could not assert true value of object")
+	}
+
 	// Range over the statements inside the object
-	for _, v := range t.True.([]token.Value) {
+	for _, v := range tTrues {
 		objectValue := v.True
 
 		var fromFuncOk bool
@@ -602,9 +607,12 @@ func (p *Parser) TranslateVariableStatement(t token.Value) (string, error) {
 
 	default:
 		//fmt.Println("am i an error ???")
-		return "", errors.New("i am not nil")
+		// return "", errors.Errorf("i am not nil %+v", t)
+
+		// FIXME: This allowed us to compile when doing the accessor
+		// shit but is pretty much a silent error
+		return "", nil
 	}
-	return "", errors.New("why am i here")
 }
 
 func (p *Parser) TranslateIf(t token.Value) (string, error) {

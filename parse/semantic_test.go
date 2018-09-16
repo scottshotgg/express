@@ -183,7 +183,7 @@ func compileExpressProgram(filename string) error {
 	return nil
 }
 
-var singleFile string = "array.expr"
+var singleFile string = "struct.expr"
 
 func TestRunSingle(t *testing.T) {
 	var err error

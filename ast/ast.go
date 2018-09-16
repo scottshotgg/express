@@ -1,15 +1,57 @@
 package ast
 
-// // maybe iota out some types ASTNodeTypes
+type NodeType int
+type MetaType int
 
-// type Node interface {
-// 	// Type()
-// 	// Left() Node
-// 	// Right() Node
-// }
+const (
+	ProgramType NodeType = iota + 1
+	BlockType
+	StatementType
+	ExpressionType
 
-// type AddNode struct{}
+	AssignType
+	InitType
+	SetType
 
-// type SubNode struct{}
+	AddType
+	SubType
+	MultType
+	DivType
 
-// type NumberNode struct{}
+	IdentType
+	TypeType
+
+	IntMeta MetaType = iota + 1
+	StringMeta
+	BoolMeta
+	FloatMeta
+	TokenMeta
+)
+
+type Meta struct {
+	Type  MetaType
+	Value interface{}
+}
+
+type Pos struct {
+	Line   int
+	Column int
+}
+
+type Location struct {
+	Start *Pos
+	End   *Pos
+}
+
+type Nodes *[]*Node
+
+type Node interface {
+	TokenLiteral() string
+	// String() string
+
+	// Type() NodeType
+	// Nodes() Nodes
+	// Length() int
+	// Location() *Location
+	// Metadata() *map[string]Meta
+}

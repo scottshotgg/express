@@ -16,47 +16,23 @@ int main() {
   another["woah"] = 0;
 
   var yeah = {};
-  yeah["woah"] = 0;
+  yeah["woah"] = 8;
 
   var Thing = {};
   Thing["fieldA"] = 0;
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_iBhKOFOZSD = {};
-  thing_iBhKOFOZSD["woah"] = 0;
-  Thing["thing"] = thing_iBhKOFOZSD;
+  var thing_SZblKKEHly = {};
+  thing_SZblKKEHly["woah"] = 0;
+  Thing["thing"] = thing_SZblKKEHly;
 
   var something = {};
-  something["fieldA"] = 0;
+  something["fieldA"] = 666;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_QjrDsiwBII = {};
-  thing_QjrDsiwBII["woah"] = 0;
-  something["thing"] = thing_QjrDsiwBII;
-
-  Println("something", something);
-
-  var something2 = {};
-  something2["fieldA"] = 912559;
-  something2["stringField"] = "";
-  something2["false_field"] = false;
-  something2["anotherFielderino"] = 0.000000;
-  var thing_phPnKXCATQ = {};
-  thing_phPnKXCATQ["woah"] = 0;
-  something2["thing"] = thing_phPnKXCATQ;
-
-  Println("something2", something2);
-
-  var something3 = {};
-  something3["fieldA"] = 0;
-  something3["stringField"] = "chyah brah";
-  something3["false_field"] = false;
-  something3["anotherFielderino"] = 0.000000;
-  var thing_MbtjuwJCci = {};
-  thing_MbtjuwJCci["woah"] = 0;
-  something3["thing"] = thing_MbtjuwJCci;
-
-  Println("something3", something3);
+  var thing_OovnTVYvuv = {};
+  thing_OovnTVYvuv["woah"] = 0;
+  something["thing"] = thing_OovnTVYvuv;
 }

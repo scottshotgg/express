@@ -4,7 +4,10 @@ struct another = {
   int woah
 }
 
-another yeah
+//another yeah
+yeah := another{}
+
+yeah.woah = 8
 
 // Define a struct
 struct Thing = {
@@ -17,6 +20,13 @@ struct Thing = {
 
 // Instantiate a struct variable
 something := Thing{}
+
+something.fieldA = 666
+something.thing.woah = 666
+
+//int somet = 7
+/*
+
 Println("something", something)
 
 // Instantiate a struct variable with some initializers
@@ -33,3 +43,4 @@ something3 := Thing {
   not_in_this_struct := "wtf dude"
 }
 Println("something3", something3)
+*/

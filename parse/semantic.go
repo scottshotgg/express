@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"reflect"
@@ -62,20 +63,16 @@ func (p *Parser) GetFactor() (token.Value, error) {
 		// 	// }
 		// }
 
-		//fmt.Println("holy shit gettin that var")
+		//fmt.Println("wowzerz im gettin that var", p.meta.currentScope)
 		variable, ok := p.meta.GetVariable(p.CurrentToken.Value.String)
-		//fmt.Println(variable, ok)
 		if !ok {
 			// If we did not find it as a variable, look in the DefinedTypes map
 			value2, ok := DefinedTypes[p.CurrentToken.Value.String]
 			if !ok {
-				//fmt.Println()
-				//fmt.Println("p.meta.currentScope", p.meta.currentScope)
 				return token.Value{}, errors.New("Undefined variable reference " + p.CurrentToken.Value.String)
 			}
 
 			variable = NewVariableFromTokenValue(value2)
-			fmt.Println("variable from token", variable)
 		}
 
 		refs := p.CurrentToken.Value.String
@@ -85,28 +82,57 @@ func (p *Parser) GetFactor() (token.Value, error) {
 			// FIXME: here we need to look up the return value and make sure it matches
 			// FIXME: make sure the args match
 
-			// fmt.Println(p.meta.GetVariable())
-
-			fmt.Println("I AM A CALL", variable)
-			fmt.Println("last2", p.LastToken)
-			fmt.Println("current2", p.CurrentToken)
-			fmt.Println("next2", p.NextToken)
-
 			p.Shift()
 
 			// This is a struct declaration
 		} else if variable.Type == STRUCT {
 			// Here we need to get the default values from the type map
-
-			//fmt.Println("p.NextToken", p.NextToken)
-			// os.Exit(9)
-
 			if p.NextToken.Type == token.Block {
 				inStruct = true
 				defer func(typename string) {
 					inStruct = false
 					value.Metadata["real"] = typename
 				}(p.CurrentToken.Value.String)
+
+				/*
+					// // Need to make a deep copy function
+					// // Extract the body of the struct
+					// variableValue := variable.Value.([]token.Value)
+					// valuers := []token.Value{}
+					// for i := range variableValue {
+					// 	if variableValue[i].Type == "struct" {
+					// 		// Deep copy again here
+					// 	}
+					// 	fmt.Println("this is going on", variableValue[i])
+					// 	valuers = append(valuers, variableValue[i])
+					// }
+					// variable.Value = valuers
+				*/
+
+				deepJSON, err := json.Marshal(variable.Value)
+				if err != nil {
+					return token.Value{}, err
+				}
+
+				vValue := []token.Value{}
+				err = json.Unmarshal(deepJSON, &vValue)
+				if err != nil {
+					return token.Value{}, err
+				}
+
+				fmt.Println("reflecterooni", reflect.TypeOf(variable.Value))
+				// os.Exit(9)
+
+				fmt.Println("variable.Value", variable.Value)
+				fmt.Println("vValue", vValue)
+				fmt.Println("reflecterooni2", reflect.TypeOf(vValue))
+				variable.Value = vValue
+				fmt.Println("reflecterooni3", reflect.TypeOf(variable.Value))
+
+				thing := variable.Value.([]token.Value)
+				// Deep copy did work, no surprising, but something is fucked
+				fmt.Println("thing", thing)
+				// os.Exit(9)
 
 				if len(p.NextToken.Value.True.([]token.Token)) > 0 {
 					// fmt.Printf("variable %+v\n", variable)
@@ -116,8 +142,6 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					// if len(p.NextToken.Value.True.([]token.Token)) > 0 {
 					// 	os.Exit(9)
 					// }
-					anotherVariable := *variable
-					anotherVariable.Name = p.meta.currentVariable.Name
 
 					// Need to make a new scope from the vars inside of the struct
 					// pa := New(p.NextToken.Value.True.([]token.Token))
@@ -126,36 +150,30 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					pa.meta.NewScopeFromScope(p.meta.currentScope)
 
 					// Unpack all the values from the struct
-					valuers := []token.Value{}
-					for _, valuer := range anotherVariable.Value.([]token.Value) {
-						pa.meta.DeclareVariableFromTokenValue(valuer)
-						valuers = append(valuers, valuer)
-					}
-					anotherVariable.Value = valuers
-					anotherVariable.Metadata["real"] = p.CurrentToken.Value.String
+					variable.Metadata["real"] = p.CurrentToken.Value.String
 
 					block, err := pa.CheckBlock()
 					if err != nil {
 						return token.Value{}, err
 					}
-					// fmt.Println("block", block)
-
-					// fmt.Println("pa.meta.currentScope", pa.meta.currentScope)
 
 					// For some reason I couldn't get the `currentScope` variable to work here
 					// valueBlock := []token.Value{}
-					anotherVariableTokens := anotherVariable.Value.([]token.Value)
+					variableTokens, ok := variable.Value.([]token.Value)
+					if !ok {
+						return token.Value{}, errors.New("Could not assert value of struct during initialization")
+					}
+
 					for _, variableValue := range block.True.([]token.Value) {
-						for i := 0; i < len(anotherVariableTokens); i++ {
-							if anotherVariableTokens[i].Name == variableValue.Name {
-								if anotherVariableTokens[i].Type != "var" && anotherVariableTokens[i].Type != "object" && anotherVariableTokens[i].Type != "struct" {
-									if anotherVariableTokens[i].True != variableValue.True {
+						for i := 0; i < len(variableTokens); i++ {
+							if variableTokens[i].Name == variableValue.Name {
+								if variableTokens[i].Type != "var" && variableTokens[i].Type != "object" && variableTokens[i].Type != "struct" {
+									if variableTokens[i].True != variableValue.True {
 										variableValue.Metadata["default"] = false
-										// os.Exit(9)
 									}
 								}
 
-								anotherVariableTokens[i] = variableValue
+								variableTokens[i] = variableValue
 								break
 							}
 						}
@@ -164,10 +182,13 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					// For now just shift over the block
 					p.Shift()
 
-					return mapVariableToTokenValue(&anotherVariable), nil
+					return mapVariableToTokenValue(variable), nil
 				}
 
 				inStruct = false
+			} else if p.NextToken.Type == token.Accessor {
+				fmt.Println("WOAH I MADE IT")
+				os.Exit(9)
 			}
 			// FIXME: fix this
 			// else {
@@ -1341,11 +1362,81 @@ func (p *Parser) GetStatement() (token.Value, error) {
 		//fmt.Println(p.NextToken)
 		var err error
 		// FIXME: this seems kinda hacky, but w/e fix it later - GetFactor should defer it's judgement
-		if p.NextToken.Type == "ASSIGN" {
+		if p.NextToken.Type == token.Assign {
 			tv, err = p.GetExpression()
 			if err != nil {
 				return token.Value{}, err
 			}
+
+			// Since we know we are in a struct, when we recieve an accessor
+			// operator, we need to apply the assignment to the struct property
+		} else if p.NextToken.Type == token.Accessor {
+			structName := p.CurrentToken.Value.String
+			variable, ok := p.meta.GetVariable(structName)
+			if !ok {
+				return token.Value{}, errors.New("Undefined variable reference: " + structName)
+			}
+
+			// Create a new scope with only the struct properties declared
+			p.meta.NewScopeFromVariable(variable)
+			// Ensure that we exit this scope afterwards
+			defer p.meta.ExitScope()
+			fmt.Println("reflecterooni4", reflect.ValueOf(variable.Value))
+			value := variable.Value.([]token.Value)
+			// if !ok {
+			// 	return token.Value{}, errors.New("Could not assert value of struct")
+			// }
+
+			// Shift away the accessor
+			p.Shift()
+			fmt.Println("currentVariable", p.meta.currentVariable)
+
+			// Would be cool if this would work, but the variable doesn't have a type rn
+
+			// Save the current variable and change re initilize it to a fresh variable
+			// with the type as SET and then run a GetStatment to ensure the rhs
+			currentVariable := *p.meta.currentVariable
+			p.meta.currentVariable = &Variable{
+				Type: SET,
+			}
+
+			fmt.Println("currentToken", p.CurrentToken)
+			expr, err := p.GetStatement()
+			if err != nil {
+				return token.Value{}, err
+			}
+
+			fmt.Println("expr", expr)
+
+			// Change the variable back
+			p.meta.currentVariable = &currentVariable
+
+			if !reflect.DeepEqual(expr, token.Value{}) {
+				found := false
+				for i, key := range value {
+					if key.Name == expr.Name {
+						fmt.Println("woah hey its me", key)
+
+						// Might need to do something here for dynamic types
+						// This is also where we would need to implement some sort of 'isAssignable'
+						// function that will allow us to utilize this logic elsewhere
+						if expr.Type != key.Type {
+							return token.Value{}, errors.Errorf("Struct property of %s is not the same type as right hand side", structName)
+						}
+
+						value[i] = expr
+						found = true
+						break
+					}
+				}
+
+				if found != true {
+					return token.Value{}, errors.Errorf("Struct %s of type %s does not contain property %s", structName, variable.Metadata["real"], expr.Name)
+				}
+			}
+
+			// We have to return something here due to the way that GetStatement works
+			return token.Value{}, nil
 
 		} else {
 			p.meta.currentVariable.Name = p.CurrentToken.Value.String
@@ -1382,6 +1473,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			//fmt.Printf("p.CurrentToken %+v\n", p.CurrentToken)
 			//fmt.Printf("else p.meta.currentVariable %+v\n", p.meta.currentVariable)
 			tv = mapVariableToTokenValue(p.meta.currentVariable)
+			fmt.Printf("tv %+v\n", tv)
 			err = p.meta.DeclareVariable()
 			if err != nil {
 				return tv, err
@@ -1469,13 +1561,13 @@ func (p *Parser) CheckBlock() (token.Value, error) {
 			}, nil
 		}
 
-		// This is by-passing the blank "{}" token that is
-		// produced from the comma somtimes; need to solve
-		// it more elegantly
-		if reflect.DeepEqual(stmt, token.Value{}) {
-			// FIXME: fix error
-			return token.Value{}, errors.New("Could not get statement")
-		}
+		// // This is by-passing the blank "{}" token that is
+		// // produced from the comma somtimes; need to solve
+		// // it more elegantly
+		// if reflect.DeepEqual(stmt, token.Value{}) {
+		// 	// FIXME: fix error
+		// 	return token.Value{}, errors.New("Could not get statement")
+		// }
 
 		blockTokens = append(blockTokens, stmt)
 	}

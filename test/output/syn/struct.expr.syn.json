@@ -51,7 +51,28 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
+						"String": "yeah"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
 						"String": "another"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": []
 					}
 				},
 				{
@@ -59,6 +80,34 @@
 					"Value": {
 						"Type": "private",
 						"String": "yeah"
+					}
+				},
+				{
+					"Type": "ACCESSOR",
+					"Value": {
+						"Type": "period",
+						"String": "."
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "woah"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 8
 					}
 				},
 				{
@@ -189,244 +238,87 @@
 					}
 				},
 				{
-					"ID": 1,
-					"Type": "FUNCTION",
+					"Type": "IDENT",
 					"Value": {
-						"Name": "Println",
-						"Type": "function",
-						"True": [
-							{
-								"ID": 1,
-								"Type": "GROUP",
-								"Value": {
-									"Type": "GROUP",
-									"True": [
-										{
-											"Type": "LITERAL",
-											"Value": {
-												"Type": "string",
-												"True": "something",
-												"String": "something"
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "private",
-												"String": "something"
-											}
-										}
-									]
-								}
-							}
-						],
-						"AccessType": "public",
-						"Metadata": {
-							"lambda": false,
-							"type": "call"
-						}
+						"Type": "private",
+						"String": "something"
+					}
+				},
+				{
+					"Type": "ACCESSOR",
+					"Value": {
+						"Type": "period",
+						"String": "."
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "something2"
+						"String": "fieldA"
 					}
 				},
 				{
 					"Type": "ASSIGN",
 					"Value": {
-						"Type": "init",
-						"String": ":="
+						"Type": "assign",
+						"String": "="
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "public",
-						"String": "Thing"
-					}
-				},
-				{
-					"Type": "BLOCK",
-					"Value": {
-						"Type": "BLOCK",
-						"True": [
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "fieldA"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "set",
-									"String": ":"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "int",
-									"True": 912559,
-									"String": "DECAF"
-								}
-							}
-						]
-					}
-				},
-				{
-					"ID": 1,
-					"Type": "FUNCTION",
-					"Value": {
-						"Name": "Println",
-						"Type": "function",
-						"True": [
-							{
-								"ID": 1,
-								"Type": "GROUP",
-								"Value": {
-									"Type": "GROUP",
-									"True": [
-										{
-											"Type": "LITERAL",
-											"Value": {
-												"Type": "string",
-												"True": "something2",
-												"String": "something2"
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "private",
-												"String": "something2"
-											}
-										}
-									]
-								}
-							}
-						],
-						"AccessType": "public",
-						"Metadata": {
-							"lambda": false,
-							"type": "call"
-						}
+						"Type": "int",
+						"True": 666
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "something3"
+						"String": "something"
 					}
 				},
 				{
-					"Type": "ASSIGN",
+					"Type": "ACCESSOR",
 					"Value": {
-						"Type": "init",
-						"String": ":="
+						"Type": "period",
+						"String": "."
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
-						"Type": "public",
-						"String": "Thing"
+						"Type": "private",
+						"String": "thing"
 					}
 				},
 				{
-					"Type": "BLOCK",
+					"Type": "ACCESSOR",
 					"Value": {
-						"Type": "BLOCK",
-						"True": [
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "stringField"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "set",
-									"String": ":"
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "chyah brah",
-									"String": "chyah brah"
-								}
-							},
-							{
-								"Type": "IDENT",
-								"Value": {
-									"Type": "private",
-									"String": "not_in_this_struct"
-								}
-							},
-							{
-								"Type": "ASSIGN",
-								"Value": {
-									"Type": "init",
-									"String": ":="
-								}
-							},
-							{
-								"Type": "LITERAL",
-								"Value": {
-									"Type": "string",
-									"True": "wtf dude",
-									"String": "wtf dude"
-								}
-							}
-						]
+						"Type": "period",
+						"String": "."
 					}
 				},
 				{
-					"ID": 1,
-					"Type": "FUNCTION",
+					"Type": "IDENT",
 					"Value": {
-						"Name": "Println",
-						"Type": "function",
-						"True": [
-							{
-								"ID": 1,
-								"Type": "GROUP",
-								"Value": {
-									"Type": "GROUP",
-									"True": [
-										{
-											"Type": "LITERAL",
-											"Value": {
-												"Type": "string",
-												"True": "something3",
-												"String": "something3"
-											}
-										},
-										{
-											"Type": "IDENT",
-											"Value": {
-												"Type": "private",
-												"String": "something3"
-											}
-										}
-									]
-								}
-							}
-						],
-						"AccessType": "public",
-						"Metadata": {
-							"lambda": false,
-							"type": "call"
-						}
+						"Type": "private",
+						"String": "woah"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 666
 					}
 				}
 			]

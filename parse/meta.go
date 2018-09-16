@@ -1,6 +1,8 @@
 package parse
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 	"github.com/scottshotgg/express/token"
 )
@@ -59,6 +61,18 @@ func (m *Meta) DeclareVariable() error {
 	}
 
 	return nil
+}
+
+func (m *Meta) VariableFromScope(scope Scope, variable *Variable) *Variable {
+	var values []token.Value
+	for _, v := range m.currentScope {
+		values = append(values, mapVariableToTokenValue(v))
+	}
+	variable.Value = values
+	fmt.Println("variable", variable)
+	// m.DeclareVariableFromTokenValue(mapVariableToTokenValue(variable))
+	// return nil
+	return variable
 }
 
 func (m *Meta) DeclareVariableFromTokenValue(tv token.Value) error {
@@ -142,6 +156,23 @@ func (m *Meta) NewScopeFromScope(scopeToInherit Scope) {
 	}
 }
 
+func (m *Meta) NewScopeFromVariable(variableToInherit *Variable) {
+	m.scopes.Push(m.currentScope)
+
+	// Copy all from variableToInherit to new scope
+	m.currentScope = Scope{}
+	// FIXME: I guess this function has to return an error
+	vTokens, ok := variableToInherit.Value.([]token.Value)
+	if !ok {
+		// TODO: ...
+	}
+
+	for _, v := range vTokens {
+		// m.currentScope[k] = v
+		m.DeclareVariableFromTokenValue(v)
+	}
+}
+
 func (m *Meta) NewInheritedScope() {
 	// Just push the current scope there, leave all the vars in the scope
 	// since Variable is a pointer, it should set it if we set it in a
@@ -158,6 +189,7 @@ func (m *Meta) NewInheritedScope() {
 }
 
 func (m *Meta) ExitScope() (Scope, error) {
+
 	scope, err := m.scopes.Pop()
 	if err != nil {
 		// TODO:

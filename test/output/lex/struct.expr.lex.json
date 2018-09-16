@@ -126,7 +126,28 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "another"
+			"String": "yeah"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
 		}
 	},
 	{
@@ -139,7 +160,69 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "yeah"
+			"String": "another"
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "yeah.woah"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 8
 		}
 	},
 	{
@@ -498,61 +581,6 @@
 		}
 	},
 	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Println"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "something",
-			"String": "something"
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "something"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -562,7 +590,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "something2"
+			"String": "something.fieldA"
 		}
 	},
 	{
@@ -570,13 +598,6 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
 		}
 	},
 	{
@@ -584,67 +605,6 @@
 		"Value": {
 			"Type": "assign",
 			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Thing"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "fieldA"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
 		}
 	},
 	{
@@ -658,22 +618,7 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 912559,
-			"String": "DECAF"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
+			"True": 666
 		}
 	},
 	{
@@ -686,29 +631,7 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "Println"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "something2",
-			"String": "something2"
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
+			"String": "something.thing.woah"
 		}
 	},
 	{
@@ -716,212 +639,6 @@
 		"Value": {
 			"Type": "space",
 			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "something2"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "something3"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Thing"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "stringField"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "chyah brah",
-			"String": "chyah brah"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "not_in_this_struct"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
 		}
 	},
 	{
@@ -941,9 +658,8 @@
 	{
 		"Type": "LITERAL",
 		"Value": {
-			"Type": "string",
-			"True": "wtf dude",
-			"String": "wtf dude"
+			"Type": "int",
+			"True": 666
 		}
 	},
 	{
@@ -954,13 +670,6 @@
 		}
 	},
 	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -968,51 +677,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "Println"
-		}
-	},
-	{
-		"Type": "L_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": "("
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "string",
-			"True": "something3",
-			"String": "something3"
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "something3"
-		}
-	},
-	{
-		"Type": "R_PAREN",
-		"Value": {
-			"Type": "op_3",
-			"String": ")"
+			"Type": "newline",
+			"String": "\n"
 		}
 	}
 ]

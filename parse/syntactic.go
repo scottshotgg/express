@@ -81,8 +81,9 @@ func (p *Parser) ParseGroup() token.Token {
 				p.Shift()
 				p.CurrentToken.Type = token.Ident
 				groupTokens = append(groupTokens, p.CurrentToken)
+
 			default:
-				os.Exit(7)
+				return token.Token{}
 			}
 
 		case token.Ident:
@@ -144,7 +145,7 @@ func (p *Parser) ParseGroup() token.Token {
 			}
 
 		default:
-			//fmt.Printf("ERROR: Unrecognized group token; current: %+v\n meta: %+v\n\n", current, p)
+			fmt.Printf("ERROR: Unrecognized group token; current: %+v\n meta: %+v\n\n", current, p)
 			//fmt.Println("p.LastToken", p.LastToken)
 			//fmt.Println(p.CurrentToken)
 			//fmt.Println(p.NextToken)
@@ -457,9 +458,9 @@ func (p *Parser) ParseBlock() token.Token {
 				if t, ok := token.TokenMap[current.Value.String+p.CurrentToken.Value.String]; ok {
 					blockTokens = append(blockTokens, t)
 				} else {
-					//fmt.Println("wtf happened here: ", current.Value.String+p.CurrentToken.Value.String)
-					// os.Exit(9)
-					return token.Token{}
+					fmt.Println("wtf happened here: ", current.Value.String+p.CurrentToken.Value.String)
+					os.Exit(9)
+					// return token.Token{}
 				}
 			} else {
 				blockTokens = append(blockTokens, current)
@@ -643,7 +644,7 @@ func (p *Parser) ParseBlock() token.Token {
 				// FIXME: fix this and make the ok check
 				arrayToken, ok := token.TokenMap[current.Value.String+peek.Value.String+p.NextToken.Value.String]
 				if !ok {
-					//fmt.Println("TokenMap check failed on", current.Value.String+peek.Value.String+p.NextToken.Value.String)
+					fmt.Println("TokenMap check failed on", current.Value.String+peek.Value.String+p.NextToken.Value.String)
 					os.Exit(9)
 				}
 
@@ -705,7 +706,7 @@ func (p *Parser) ParseBlock() token.Token {
 			default:
 				// blockTokens = append(blockTokens, current)
 				// continue
-				//fmt.Println("ERROR, how did we get in here without an assign type token", current)
+				fmt.Println("ERROR, how did we get in here without an assign type token", current)
 				os.Exit(9)
 			}
 
@@ -766,8 +767,11 @@ func (p *Parser) ParseBlock() token.Token {
 		case "":
 			//fmt.Println("got nothing")
 
+		case token.Accessor:
+			blockTokens = append(blockTokens, p.CurrentToken)
+
 		default:
-			// fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
+			fmt.Println("IDK WTF TO DO with this token", p.CurrentToken)
 			os.Exit(6)
 		}
 		//fmt.Println(current, p.NextToken)
