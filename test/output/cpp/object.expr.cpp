@@ -14,33 +14,33 @@ int main() {
 
   var obj = {};
   obj["something"] = "here";
-  var hey_SiuXGmICyr = {};
-  hey_SiuXGmICyr["me"] = true;
-  hey_SiuXGmICyr["anIntVariable"] = 69;
-  obj["hey"] = hey_SiuXGmICyr;
+  var hey_HbOdYZPuda = {};
+  hey_HbOdYZPuda["me"] = true;
+  hey_HbOdYZPuda["anIntVariable"] = 69;
+  obj["hey"] = hey_HbOdYZPuda;
 
   var objs[] = {};
   {
-    var _mXjCZUZYyf = {};
-    _mXjCZUZYyf["another"] = "object";
-    objs[0] = _mXjCZUZYyf;
+    var _wliELUSHTE = {};
+    _wliELUSHTE["another"] = "object";
+    objs[0] = _wliELUSHTE;
   }
   {
-    var obj_wrvYvTzXGZ = {};
-    obj_wrvYvTzXGZ["something"] = "here";
-    var hey_aclskXftVG = {};
-    hey_aclskXftVG["me"] = true;
-    hey_aclskXftVG["anIntVariable"] = 69;
-    obj_wrvYvTzXGZ["hey"] = hey_aclskXftVG;
-    objs[1] = obj_wrvYvTzXGZ;
+    var obj_hUtAFfhwjO = {};
+    obj_hUtAFfhwjO["something"] = "here";
+    var hey_MiLRTWbnsp = {};
+    hey_MiLRTWbnsp["me"] = true;
+    hey_MiLRTWbnsp["anIntVariable"] = 69;
+    obj_hUtAFfhwjO["hey"] = hey_MiLRTWbnsp;
+    objs[1] = obj_hUtAFfhwjO;
   }
   {
-    var obj_iTmSAFmXmr = {};
-    obj_iTmSAFmXmr["something"] = "here";
-    var hey_tYmimobctm = {};
-    hey_tYmimobctm["me"] = true;
-    hey_tYmimobctm["anIntVariable"] = 69;
-    obj_iTmSAFmXmr["hey"] = hey_tYmimobctm;
-    objs[2] = obj_iTmSAFmXmr;
+    var obj_AdncpFqHZT = {};
+    obj_AdncpFqHZT["something"] = "here";
+    var hey_LlooSNEfKS = {};
+    hey_LlooSNEfKS["me"] = true;
+    hey_LlooSNEfKS["anIntVariable"] = 69;
+    obj_AdncpFqHZT["hey"] = hey_LlooSNEfKS;
+    objs[2] = obj_AdncpFqHZT;
   }
 }

@@ -73,7 +73,6 @@ func NewFromFile(path string) (*Lexer, error) {
 }
 
 func (meta *Lexer) LexLiteral() (token.Token, error) {
-	// var err error
 
 	// Make a token and set the default value to bool; this is just because its the
 	// first case in the switch and everything below sets it, so it makes the code a bit
@@ -99,8 +98,8 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 	// Else move on and figure out what kind of number it is (or an ident)
 	default:
 		// Figure out from the two starting characters
+		base := 10
 		if len(meta.Accumulator) > 2 {
-			base := 10
 
 			switch meta.Accumulator[:2] {
 			// Binary
@@ -111,50 +110,49 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 			case "0o":
 				base = 8
 
-			// Hexadecimal
+			// Hex
 			case "0x":
 				base = 16
 			}
+		}
 
-			// If the base is not still 10, shave off the 0b, 0o, or 0x
-			if base != 10 {
-				meta.Accumulator = meta.Accumulator[2:]
-			}
+		// If the base not 10 anymore, shave off the 0b, 0o, or 0x
+		if base != 10 {
+			meta.Accumulator = meta.Accumulator[2:]
+		}
 
-			// Attempt to parse an int from the accumulator
-			value, err := strconv.ParseInt(meta.Accumulator, base, 0)
+		// Attempt to parse an int from the accumulator
+		tv, err := strconv.ParseInt(meta.Accumulator, base, 64)
+
+		// Convert the int64 to an int
+		// I'll switch this when I'm ready to deal with different bit sizes
+		t.Value.True = int(tv)
+		t.Value.Type = token.IntType
+
+		// TODO: need to make something for scientific notation with carrots and e
+		// If it errors, check to see if it is an int
+		if err != nil {
+			// Attempt to parse a float from the accumulator
+			t.Value.True, err = strconv.ParseFloat(meta.Accumulator, 64)
+			t.Value.Type = token.FloatType
 			if err != nil {
-				return token.Token{}, err
-			}
+				// leave this checking for the semantic
+				// 	identSplit := strings.Split(meta.Accumulator, ".")
+				// 	if len(identSplit) > 1 {
+				// 		for _, ident := range identSplit {
 
-			t.Value.True = int(value)
-			t.Value.Type = token.IntType
+				// 		}
+				// 	}
 
-			// TODO: need to make something for scientific notation with carrots and e
-			// If it errors, check to see if it is an int
-			if err != nil {
-				// Attempt to parse a float from the accumulator
-				t.Value.True, err = strconv.ParseFloat(meta.Accumulator, 0)
-				t.Value.Type = token.FloatType
-				if err != nil {
-					// leave this checking for the semantic
-					// 	identSplit := strings.Split(meta.Accumulator, ".")
-					// 	if len(identSplit) > 1 {
-					// 		for _, ident := range identSplit {
-
-					// 		}
-					// 	}
-
-					// need to check whether it is a type/keyword in the map
-					keyword, ok := token.TokenMap[meta.Accumulator]
-					if ok {
-						t = keyword
-					} else {
-						// If it errors, assume that it is an ident (for now)
-						t.Type = token.Ident
-						t.Value = token.Value{
-							String: meta.Accumulator,
-						}
+				// need to check whether it is a type/keyword in the map
+				keyword, ok := token.TokenMap[meta.Accumulator]
+				if ok {
+					t = keyword
+				} else {
+					// If it errors, assume that it is an ident (for now)
+					t.Type = token.Ident
+					t.Value = token.Value{
+						String: meta.Accumulator,
 					}
 				}
 			}
@@ -205,6 +203,7 @@ func (meta *Lexer) Lex() ([]token.Token, error) {
 					meta.Tokens = append(meta.Tokens, token.TokenMap[char])
 				}
 			}
+
 			continue
 
 		// Use the lexer to parse strings

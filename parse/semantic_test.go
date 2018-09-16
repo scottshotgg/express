@@ -277,6 +277,7 @@ func TestAll(t *testing.T) {
 			t.Run(filename, func(t *testing.T) {
 				err = compileExpressProgram(filename)
 				if err != nil {
+					t.Errorf(err.Error())
 					t.Fail()
 				}
 			})

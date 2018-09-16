@@ -5,10 +5,10 @@
 			"Type": "BLOCK",
 			"True": [
 				{
-					"Type": "LITERAL",
+					"Type": "IDENT",
 					"Value": {
-						"Type": "bool",
-						"True": false
+						"Type": "private",
+						"String": "i"
 					}
 				},
 				{
@@ -21,15 +21,15 @@
 				{
 					"Type": "LITERAL",
 					"Value": {
-						"Type": "bool",
-						"True": false
+						"Type": "int",
+						"True": 10
 					}
 				},
 				{
-					"Type": "LITERAL",
+					"Type": "IDENT",
 					"Value": {
-						"Type": "bool",
-						"True": false
+						"Type": "private",
+						"String": "f"
 					}
 				},
 				{

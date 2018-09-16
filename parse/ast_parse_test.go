@@ -35,7 +35,7 @@ func InitLoggerAST() error {
 	return nil
 }
 
-var singleFileAST string = "declare_int_ref.expr"
+var singleFileAST string = "arithmetic.expr"
 
 func TestRunSingleAST(t *testing.T) {
 	var err error
