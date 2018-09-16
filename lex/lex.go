@@ -116,6 +116,9 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 			}
 		}
 
+		// Set the string value
+		t.Value.String = meta.Accumulator
+
 		// If the base not 10 anymore, shave off the 0b, 0o, or 0x
 		if base != 10 {
 			meta.Accumulator = meta.Accumulator[2:]
