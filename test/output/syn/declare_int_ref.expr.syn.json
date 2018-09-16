@@ -40,10 +40,10 @@
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "private",
-						"String": "i"
+						"Type": "bool",
+						"True": false
 					}
 				}
 			]

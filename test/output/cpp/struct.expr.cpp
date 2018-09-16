@@ -23,26 +23,15 @@ int main() {
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-<<<<<<< HEAD
-  var thing_SZblKKEHly = {};
-  thing_SZblKKEHly["woah"] = 0;
-  Thing["thing"] = thing_SZblKKEHly;
-=======
   var thing_RHloxpOTHT = {};
   thing_RHloxpOTHT["woah"] = 0;
   Thing["thing"] = thing_RHloxpOTHT;
->>>>>>> 086fb60970b8075dfca436e77b57dff11d98f3d6
 
   var something = {};
   something["fieldA"] = 666;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-<<<<<<< HEAD
-  var thing_OovnTVYvuv = {};
-  thing_OovnTVYvuv["woah"] = 0;
-  something["thing"] = thing_OovnTVYvuv;
-=======
   var thing_APJoZWRcNb = {};
   thing_APJoZWRcNb["woah"] = 0;
   something["thing"] = thing_APJoZWRcNb;
@@ -70,5 +59,4 @@ int main() {
   something3["thing"] = thing_UIObATVeig;
 
   Println("something3", something3);
->>>>>>> 086fb60970b8075dfca436e77b57dff11d98f3d6
 }

@@ -21,7 +21,7 @@
 				{
 					"Name": "woah",
 					"Type": "int",
-					"True": 8,
+					"True": 0,
 					"AccessType": "private"
 				}
 			],
@@ -31,7 +31,6 @@
 				"refs": "another"
 			}
 		},
-		{},
 		{
 			"Name": "Thing",
 			"Type": "struct",
@@ -78,12 +77,7 @@
 					}
 				}
 			],
-			"AccessType": "public",
-			"Metadata": {
-				"assign": true,
-				"real": "another",
-				"refs": "another"
-			}
+			"AccessType": "public"
 		},
 		{
 			"Name": "something",
@@ -92,7 +86,7 @@
 				{
 					"Name": "fieldA",
 					"Type": "int",
-					"True": 666,
+					"True": 0,
 					"AccessType": "private"
 				},
 				{
@@ -118,10 +112,10 @@
 					"Type": "struct",
 					"True": [
 						{
+							"AccessType": "private",
 							"Name": "woah",
-							"Type": "int",
 							"True": 0,
-							"AccessType": "private"
+							"Type": "int"
 						}
 					],
 					"AccessType": "private",
@@ -133,7 +127,6 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
-				"assign": true,
 				"real": "Thing",
 				"refs": "Thing"
 			}

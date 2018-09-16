@@ -82,16 +82,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "i"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
+			"Type": "bool",
+			"True": false
 		}
 	}
 ]

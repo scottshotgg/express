@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -14,7 +14,7 @@ int main() {
 
   var thingy = 7;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -22,7 +22,7 @@ int main() {
 
   thingy = 69.69;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -30,7 +30,7 @@ int main() {
 
   thingy = "woah woah woah";
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -38,7 +38,7 @@ int main() {
 
   thingy = false;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -49,10 +49,10 @@ int main() {
 
   Println(thingyObject);
 
-  var _JNFEzgUGco = {};
-  _JNFEzgUGco["got_no"] = "BLOOD IN MY VEINS";
+  var _XCAxohcNky = {};
+  _XCAxohcNky["got_no"] = "BLOOD IN MY VEINS";
 
-  Println(_JNFEzgUGco);
+  Println(_XCAxohcNky);
 
   Println();
 }
