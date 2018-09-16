@@ -38,6 +38,8 @@ var (
 		">",
 		"@",
 		// "„",
+		" ",
+		"\n",
 	}
 
 	// LexemeMap is used for holding the lexemes that will be used to identify tokens in the lexer

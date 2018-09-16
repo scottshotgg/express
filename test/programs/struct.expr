@@ -7,7 +7,7 @@ struct another = {
 //another yeah
 yeah := another{}
 
-yeah.woah = 8
+//yeah.woah = 8
 
 // Define a struct
 struct Thing = {
@@ -20,9 +20,6 @@ struct Thing = {
 
 // Instantiate a struct variable
 something := Thing{}
-
-something.fieldA = 666
-something.thing.woah = 666
 
 //int somet = 7
 /*

@@ -148,8 +148,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "\\n",
-			"String": "\\n"
+			"True": "n",
+			"String": "n"
 		}
 	},
 	{
@@ -333,8 +333,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "\\n",
-			"String": "\\n"
+			"True": "n",
+			"String": "n"
 		}
 	},
 	{
@@ -519,8 +519,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "\\n",
-			"String": "\\n"
+			"True": "n",
+			"String": "n"
 		}
 	},
 	{
@@ -704,8 +704,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "string",
-			"True": "\\n",
-			"String": "\\n"
+			"True": "n",
+			"String": "n"
 		}
 	},
 	{
