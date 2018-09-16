@@ -55,13 +55,6 @@
 					}
 				},
 				{
-					"Type": "SEPARATOR",
-					"Value": {
-						"Type": "comma",
-						"String": ","
-					}
-				},
-				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
@@ -80,13 +73,6 @@
 					"Value": {
 						"Type": "int",
 						"True": 10
-					}
-				},
-				{
-					"Type": "SEPARATOR",
-					"Value": {
-						"Type": "comma",
-						"String": ","
 					}
 				},
 				{

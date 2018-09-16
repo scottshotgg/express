@@ -118,13 +118,6 @@
 		}
 	},
 	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
 			"Type": "space",
@@ -163,13 +156,6 @@
 		"Value": {
 			"Type": "int",
 			"True": 10
-		}
-	},
-	{
-		"Type": "SEPARATOR",
-		"Value": {
-			"Type": "comma",
-			"String": ","
 		}
 	},
 	{
