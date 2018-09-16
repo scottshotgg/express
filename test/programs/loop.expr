@@ -3,7 +3,7 @@
 f := 0
 
 // Standard for loop syntax
-for i := 1, i < 10, i++ {
+for i := 1 i < 10 i++ {
   f = i
   h := 1
 }

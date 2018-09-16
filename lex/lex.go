@@ -235,6 +235,7 @@ func (meta *Lexer) Lex() ([]token.Token, error) {
 				case "squote":
 					fmt.Println("found an squote")
 					fallthrough
+
 				case "dquote":
 					stringLiteral := ""
 

@@ -1,7 +1,7 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -49,10 +49,10 @@ int main() {
 
   Println(thingyObject);
 
-  var _MFWWPuwyqX = {};
-  _MFWWPuwyqX["got_no"] = "BLOOD IN MY VEINS";
+  var _JNFEzgUGco = {};
+  _JNFEzgUGco["got_no"] = "BLOOD IN MY VEINS";
 
-  Println(_MFWWPuwyqX);
+  Println(_JNFEzgUGco);
 
   Println();
 }

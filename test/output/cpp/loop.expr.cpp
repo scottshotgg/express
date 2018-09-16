@@ -1,7 +1,7 @@
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -29,20 +29,20 @@ int main() {
   }
 
   {
-    int arrayBoi_1535160062[] = {1, 2, 4};
+    int arrayBoi_1537069764[] = {1, 2, 4};
     int i = 0;
-    int i_1535160062 = 0;
-    while (i_1535160062 < 3) {
+    int i_1537069764 = 0;
+    while (i_1537069764 < 3) {
       {
         defer onLeaveFuncs;
 
-        i = i_1535160062;
+        i = i_1537069764;
 
         f = i;
 
         int h = 1;
       }
-      i_1535160062 += 1;
+      i_1537069764 += 1;
     }
   }
 
@@ -50,18 +50,18 @@ int main() {
 
   {
     int i = 0;
-    int i_1535160062 = 0;
-    while (i_1535160062 < 8) {
+    int i_1537069764 = 0;
+    while (i_1537069764 < 8) {
       {
         defer onLeaveFuncs;
 
-        i = countdown[i_1535160062];
+        i = countdown[i_1537069764];
 
         f = i;
 
         int h = 1;
       }
-      i_1535160062 += 1;
+      i_1537069764 += 1;
     }
   }
 }
