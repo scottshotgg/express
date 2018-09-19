@@ -73,7 +73,6 @@ func NewFromFile(path string) (*Lexer, error) {
 }
 
 func (meta *Lexer) LexLiteral() (token.Token, error) {
-
 	// Make a token and set the default value to bool; this is just because its the
 	// first case in the switch and everything below sets it, so it makes the code a bit
 	// cleaner
@@ -82,8 +81,9 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 		ID:   0,
 		Type: token.Literal,
 		Value: token.Value{
-			True: false,
-			Type: token.BoolType,
+			True:   false,
+			Type:   token.BoolType,
+			String: meta.Accumulator,
 		},
 	}
 
@@ -100,7 +100,6 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 		// Figure out from the two starting characters
 		base := 10
 		if len(meta.Accumulator) > 2 {
-
 			switch meta.Accumulator[:2] {
 			// Binary
 			case "0b":
@@ -116,43 +115,32 @@ func (meta *Lexer) LexLiteral() (token.Token, error) {
 			}
 		}
 
-		// Set the string value
-		t.Value.String = meta.Accumulator
-
 		// If the base not 10 anymore, shave off the 0b, 0o, or 0x
 		if base != 10 {
 			meta.Accumulator = meta.Accumulator[2:]
 		}
 
 		// Attempt to parse an int from the accumulator
-		tv, err := strconv.ParseInt(meta.Accumulator, base, 64)
+		value, err := strconv.ParseInt(meta.Accumulator, base, 64)
 
-		// Convert the int64 to an int
+		// Convert the int64 to an int for now
 		// I'll switch this when I'm ready to deal with different bit sizes
-		t.Value.True = int(tv)
+		t.Value.True = int(value)
 		t.Value.Type = token.IntType
 
 		// TODO: need to make something for scientific notation with carrots and e
-		// If it errors, check to see if it is an int
+		// If it errors, check to see if it is an float
 		if err != nil {
 			// Attempt to parse a float from the accumulator
 			t.Value.True, err = strconv.ParseFloat(meta.Accumulator, 64)
 			t.Value.Type = token.FloatType
 			if err != nil {
-				// leave this checking for the semantic
-				// 	identSplit := strings.Split(meta.Accumulator, ".")
-				// 	if len(identSplit) > 1 {
-				// 		for _, ident := range identSplit {
-
-				// 		}
-				// 	}
-
-				// need to check whether it is a type/keyword in the map
+				// If it's not a float, check whether it is a keyword
 				keyword, ok := token.TokenMap[meta.Accumulator]
 				if ok {
 					t = keyword
 				} else {
-					// If it errors, assume that it is an ident (for now)
+					// If it is not a keyword or a parse-able number, assume that it is an ident (for now)
 					t.Type = token.Ident
 					t.Value = token.Value{
 						String: meta.Accumulator,

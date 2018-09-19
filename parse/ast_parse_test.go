@@ -6,8 +6,19 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/scottshotgg/express/parse"
 	"go.uber.org/zap"
+)
+
+var (
+	c = &spew.ConfigState{
+		Indent:                "\t",
+		DisableMethods:        true,
+		DisablePointerMethods: true,
+		SortKeys:              true,
+		SpewKeys:              true,
+	}
 )
 
 func init() {
@@ -35,7 +46,7 @@ func InitLoggerAST() error {
 	return nil
 }
 
-var singleFileAST string = "arithmetic.expr"
+var singleFileAST string = "declare_int_ref.expr"
 
 func TestRunSingleAST(t *testing.T) {
 	var err error
@@ -73,6 +84,22 @@ func compileExpressProgramAST(filename string) error {
 	}
 
 	fmt.Println("lexTokens:", lexTokens)
+
+	compressedTokens, err := parse.CompressTokens(lexTokens)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("compressedTokens", compressedTokens)
+
+	p, err := parse.BuildAST(compressedTokens)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println()
+	fmt.Println("AST:")
+	c.Dump(p)
 
 	// syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 	// if err != nil {
