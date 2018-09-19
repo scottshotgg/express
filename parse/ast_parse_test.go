@@ -92,7 +92,11 @@ func compileExpressProgramAST(filename string) error {
 
 	fmt.Println("compressedTokens", compressedTokens)
 
-	p, err := parse.BuildAST(compressedTokens)
+	builder := parse.ASTBuilder{
+		Tokens: compressedTokens,
+	}
+
+	p, err := builder.BuildAST(compressedTokens)
 	if err != nil {
 		return err
 	}

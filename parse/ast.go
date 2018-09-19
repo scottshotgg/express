@@ -3,11 +3,17 @@ package parse
 import (
 	"fmt"
 
+	"github.com/pkg/errors"
 	"github.com/scottshotgg/express-ast"
 	"github.com/scottshotgg/express/token"
 )
 
-func GetStatement() (ast.Statement, error) {
+type ASTBuilder struct {
+	Tokens []token.Token
+	Index  int
+}
+
+func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	// An example assignment statement of:
 	// i := true
 	ident, err := ast.NewIdent(ast.Token{}, ast.NewBoolType(), "i")
@@ -20,6 +26,7 @@ func GetStatement() (ast.Statement, error) {
 		return nil, err
 	}
 
+	// NEED to switch and capture these
 	// Statements can be:
 	//	- assignment
 	//		- type
@@ -32,31 +39,63 @@ func GetStatement() (ast.Statement, error) {
 	//	- loop
 	//	- return
 
+	currentToken := a.Tokens[a.Index]
+	switch currentToken.Type {
+	case token.Type:
+		// Look for an ident as the next thing for now
+
+	case token.Ident:
+		// Here we will want to look at what is next and handle it
+		// If it is an assignment statment then we are looking for an expression afterwards
+
+	case token.Block:
+		// Here we will want to recursively call GetStatement()
+		// however, a block should be able to be parsed for an expression as well
+
+		// This one will have to be figured out when parsing the ident
+	// case token.Call:
+	case token.Function:
+		// Next things we look for after the Function token is:
+		//	[ ident ] [ group ] { group } [ block ]
+
+		// TODO: create this token
+	// case token.If:
+
+	// This needs to switch to token.Loop later on
+	case token.For:
+		// Look at how we did the for loop parsing in `semantic.go`
+
+	case token.Return:
+		// For now just look for a single expression afterwards
+
+	default:
+		return nil, errors.Errorf("Could not get statement from token: %+v", currentToken)
+	}
+
 	return as, nil
 }
 
 // BuildAST builds an AST from the tokens provided by the lexer
-func BuildAST(lexTokens []token.Token) (*ast.Program, error) {
+func (a *ASTBuilder) BuildAST(lexTokens []token.Token) (*ast.Program, error) {
 	p := ast.NewProgram()
 
 	// Spoof this name for now
 	file := ast.NewFile("main.expr")
 
-	i := 0
 	for {
 		// We know that the file can only consist of statements
-		stmt, err := GetStatement()
+		stmt, err := a.GetStatement()
 		if err != nil {
 			return nil, err
 		}
 
 		file.AddStatement(stmt)
 
-		if i > len(lexTokens)-1 {
+		if a.Index > len(lexTokens)-1 {
 			break
 		}
 
-		i++
+		a.Index++
 	}
 
 	p.AddFile(file)
