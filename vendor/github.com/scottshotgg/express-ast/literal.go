@@ -1,6 +1,6 @@
 package ast
 
-// Literal is an abstract types that represents a literal value, in constrast with a value-producer, such as an expression
+// Literal is an abstract type that represents a literal value, in constrast with a value-producer, such as an expression
 type Literal interface {
 	Type() LiteralType
 }
@@ -18,6 +18,18 @@ func (il *IntLiteral) expressionNode() {}
 
 // TokenLiteral returns the literal value of the token
 func (il *IntLiteral) TokenLiteral() string { return il.Token.Literal }
+
+// BoolLiteral represents a variable that is restricted to either a true or false value
+type BoolLiteral struct {
+	Token Token
+	Type  Type
+	Value bool
+}
+
+func (bl *BoolLiteral) expressionNode() {}
+
+// TokenLiteral returns the literal value of the token
+func (bl *BoolLiteral) TokenLiteral() string { return bl.Token.Literal }
 
 // FloatLiteral represents any floating point number
 type FloatLiteral struct {
@@ -57,18 +69,6 @@ func (sl *StringLiteral) expressionNode() {}
 
 // TokenLiteral returns the literal value of the token
 func (sl *StringLiteral) TokenLiteral() string { return sl.Token.Literal }
-
-// BoolLiteral represents a variable that is restricted to either a true or false value
-type BoolLiteral struct {
-	Token Token
-	Type  Type
-	Value bool
-}
-
-func (bl *BoolLiteral) expressionNode() {}
-
-// TokenLiteral returns the literal value of the token
-func (bl *BoolLiteral) TokenLiteral() string { return bl.Token.Literal }
 
 // VarLiteral represents a dynamically typed variable; it can hold anything
 type VarLiteral struct {

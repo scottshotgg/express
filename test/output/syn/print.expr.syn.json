@@ -29,7 +29,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 7
+						"True": 7,
+						"String": "7"
 					}
 				},
 				{
@@ -151,7 +152,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "float",
-						"True": 69.69
+						"True": 69.69,
+						"String": "69.69"
 					}
 				},
 				{
@@ -396,7 +398,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "bool",
-						"True": false
+						"True": false,
+						"String": "false"
 					}
 				},
 				{

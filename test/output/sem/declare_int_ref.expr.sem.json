@@ -9,9 +9,12 @@
 		},
 		{
 			"Name": "f",
-			"Type": "bool",
-			"True": false,
-			"AccessType": "private"
+			"Type": "int",
+			"True": 10,
+			"AccessType": "private",
+			"Metadata": {
+				"refs": "i"
+			}
 		}
 	]
 }

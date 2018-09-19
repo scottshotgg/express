@@ -29,6 +29,10 @@ github.com/scottshotgg/express-ast v0.0.0-20180918145813-ea242347c59c h1:y9H1bR8
 github.com/scottshotgg/express-ast v0.0.0-20180918145813-ea242347c59c/go.mod h1:DFIRMO7CPsky89Qscy+AfBja+eHwkPKplsFr6A80ntc=
 github.com/scottshotgg/express-ast v0.0.0-20180918151051-930575ac5921 h1:qSAY6uElJDRxtr/P4uLR9HAHAhLQFBF3D+DZicWxXLY=
 github.com/scottshotgg/express-ast v0.0.0-20180918151051-930575ac5921/go.mod h1:DFIRMO7CPsky89Qscy+AfBja+eHwkPKplsFr6A80ntc=
+github.com/scottshotgg/express-ast v0.0.0-20180919014056-bc223cddd7ef h1:Pc5SQXFXLRQW+U0wqSYkCFajMe4ifSo2UaDy0opN/HE=
+github.com/scottshotgg/express-ast v0.0.0-20180919014056-bc223cddd7ef/go.mod h1:DFIRMO7CPsky89Qscy+AfBja+eHwkPKplsFr6A80ntc=
+github.com/scottshotgg/express-ast v0.0.0-20180919015735-b5cf53341d1b h1:PCHG9bLph8a/V73CRjFti34pu/PGTAm0xT3u1OZ6W0M=
+github.com/scottshotgg/express-ast v0.0.0-20180919015735-b5cf53341d1b/go.mod h1:DFIRMO7CPsky89Qscy+AfBja+eHwkPKplsFr6A80ntc=
 github.com/spf13/afero v1.1.1 h1:Lt3ihYMlE+lreX1GS4Qw4ZsNpYQLxIXKBTEOXm3nt6I=
 github.com/spf13/afero v1.1.1/go.mod h1:j4pytiNVoe2o6bmDsKpLACNPDBIoEAkihy7loJ1B0CQ=
 github.com/spf13/cast v1.2.0 h1:HHl1DSRbEQN2i8tJmtS6ViPyHx35+p51amrdsiTCrkg=

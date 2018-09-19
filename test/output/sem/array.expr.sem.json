@@ -22,7 +22,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "bool",
-						"True": true
+						"True": true,
+						"String": "true"
 					}
 				},
 				{
@@ -53,7 +54,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "bool",
-						"True": false
+						"True": false,
+						"String": "false"
 					}
 				}
 			],
@@ -100,7 +102,8 @@
 									"Type": "LITERAL",
 									"Value": {
 										"Type": "bool",
-										"True": true
+										"True": true,
+										"String": "true"
 									}
 								},
 								{
@@ -131,7 +134,8 @@
 									"Type": "LITERAL",
 									"Value": {
 										"Type": "bool",
-										"True": false
+										"True": false,
+										"String": "false"
 									}
 								}
 							],

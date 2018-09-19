@@ -11,6 +11,9 @@ const (
 	// IntType denotes an integer literal type
 	IntType LiteralType = iota + 1
 
+	// BoolType denotes a bool literal type
+	BoolType
+
 	// FloatType denotes a float literal type
 	FloatType
 
@@ -20,20 +23,17 @@ const (
 	// StringType denotes a string literal type
 	StringType
 
-	// BoolType denotes a bool literal type
-	BoolType
-
-	// VarType denotes a var literal type
-	VarType
+	// StructType denotes a struct literal type
+	StructType
 
 	// ObjectType denotes an object literal type
 	ObjectType
 
-	// StructType denotes a struct literal type
-	StructType
-
 	// FunctionType denotes a function literal type
 	FunctionType
+
+	// VarType denotes a var literal type
+	VarType
 
 	// UserDefinedType denotes a type user defined type
 	UserDefinedType

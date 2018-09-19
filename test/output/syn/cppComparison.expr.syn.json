@@ -22,7 +22,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 0
+						"True": 0,
+						"String": "0"
 					}
 				},
 				{
@@ -51,7 +52,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 0
+						"True": 0,
+						"String": "0"
 					}
 				},
 				{
@@ -79,7 +81,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 1000000
+						"True": 1000000,
+						"String": "1000000"
 					}
 				},
 				{
@@ -126,7 +129,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 0
+									"True": 0,
+									"String": "0"
 								}
 							}
 						]

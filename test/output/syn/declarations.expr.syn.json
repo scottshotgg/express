@@ -29,7 +29,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 4
+						"True": 4,
+						"String": "4"
 					}
 				},
 				{

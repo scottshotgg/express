@@ -11,7 +11,7 @@ require (
 	github.com/mitchellh/mapstructure v0.0.0-20180715050151-f15292f7a699 // indirect
 	github.com/pelletier/go-toml v1.2.0 // indirect
 	github.com/pkg/errors v0.8.0
-	github.com/scottshotgg/express-ast v0.0.0-20180918151051-930575ac5921
+	github.com/scottshotgg/express-ast v0.0.0-20180919015735-b5cf53341d1b
 	github.com/spf13/afero v1.1.1 // indirect
 	github.com/spf13/cast v1.2.0 // indirect
 	github.com/spf13/cobra v0.0.3
