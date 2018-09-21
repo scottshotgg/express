@@ -15,13 +15,14 @@ type ASTBuilder struct {
 
 func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	// An example assignment statement of:
-	// i := true
-	ident, err := ast.NewIdent(ast.Token{}, ast.NewBoolType(), "i")
+	// bool i = true
+	ident, err := ast.NewBoolIdent(ast.Token{}, "i")
 	if err != nil {
 		return nil, err
 	}
 
-	as, err := ast.NewAssignment(ast.Token{}, ident, ast.Init, ast.NewBool(ast.Token{}, true))
+	// TODO: could make a new boolean assignment here?
+	as, err := ast.NewAssignment(ast.Token{}, ident, ast.Equals, ast.NewBool(ast.Token{}, true))
 	if err != nil {
 		return nil, err
 	}
@@ -39,14 +40,25 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	//	- loop
 	//	- return
 
+	typeOf := ""
+	nameOf := ""
 	currentToken := a.Tokens[a.Index]
 	switch currentToken.Type {
 	case token.Type:
 		// Look for an ident as the next thing for now
+		// fallthrough to the next block for now
+		typeOf = currentToken.Value.String
 
 	case token.Ident:
 		// Here we will want to look at what is next and handle it
 		// If it is an assignment statment then we are looking for an expression afterwards
+		nameOf = currentToken.Value.String
+		a.Index++
+		if a.Tokens[a.Index].Type == "ASSIGN" {
+
+		} else {
+			return errors.Eerrorf("Expected assignment token, got %+v", a.Tokens[a.Index])
+		}
 
 	case token.Block:
 		// Here we will want to recursively call GetStatement()
@@ -71,6 +83,8 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	default:
 		return nil, errors.Errorf("Could not get statement from token: %+v", currentToken)
 	}
+
+	fmt.Println("typeOf", typeOf)
 
 	return as, nil
 }
