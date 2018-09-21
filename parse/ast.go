@@ -13,6 +13,49 @@ type ASTBuilder struct {
 	Index  int
 }
 
+func (a *ASTBuilder) GetFactor() (ast.Expression, error) {
+	currentToken := a.Tokens[a.Index]
+
+	switch currentToken.Type {
+	case token.Ident:
+
+	case token.Literal:
+		switch currentToken.Value.Type {
+		case "int":
+			return ast.NewInt(ast.Token{}, currentToken.Value.True.(int)), nil
+		}
+
+	default:
+		return nil, errors.Errorf("Could not parse factor from token: %+v", currentToken)
+	}
+
+	return nil, nil
+}
+
+func (a *ASTBuilder) GetTerm() (ast.Expression, error) {
+	fmt.Println("a again", a.Tokens[a.Index])
+
+	factor, err := a.GetFactor()
+	if err != nil {
+		return nil, err
+	}
+
+	return factor, nil
+}
+
+func (a *ASTBuilder) GetExpression() (ast.Expression, error) {
+	fmt.Println("a", a.Tokens[a.Index])
+
+	term, err := a.GetTerm()
+	if err != nil {
+		return nil, err
+	}
+
+	// FIXME: should probably check for secondary operations right here
+
+	return term, nil
+}
+
 func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	// An example assignment statement of:
 	// bool i = true
@@ -55,10 +98,29 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 		nameOf = currentToken.Value.String
 		a.Index++
 		if a.Tokens[a.Index].Type == "ASSIGN" {
+			a.Index++
+			expr, err := a.GetExpression()
+			if err != nil {
+				return nil, err
+			}
+			fmt.Println("expr", expr)
 
-		} else {
-			return errors.Eerrorf("Expected assignment token, got %+v", a.Tokens[a.Index])
+			// FIXME: need to implement Type() so that we can get the var type
+			ident, err := ast.NewIdent(Token{}, expr.Type(), nameOf)
+
+			// TODO: could make a new boolean assignment here?
+			as, err := ast.NewAssignment(ast.Token{}, ident, ast.Init, expr)
+			if err != nil {
+				return nil, err
+			}
+
+			// TODO: add statement here later
+			return as, nil
+
 		}
+		return nil, errors.Errorf("Expected assignment token, got %+v", a.Tokens[a.Index])
+
+		fmt.Println("nameOf", nameOf)
 
 	case token.Block:
 		// Here we will want to recursively call GetStatement()
@@ -105,11 +167,11 @@ func (a *ASTBuilder) BuildAST(lexTokens []token.Token) (*ast.Program, error) {
 
 		file.AddStatement(stmt)
 
+		a.Index++
+
 		if a.Index > len(lexTokens)-1 {
 			break
 		}
-
-		a.Index++
 	}
 
 	p.AddFile(file)
