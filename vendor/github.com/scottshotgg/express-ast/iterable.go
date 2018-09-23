@@ -8,8 +8,8 @@ type Iterable interface {
 	// This is just something to force the interface
 	expressionNode()
 
-	NextIteration() *Literal
-	PrevIteration() *Literal
+	Next() *Literal
+	Prev() *Literal
 
 	Fields() []*Literal
 

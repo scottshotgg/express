@@ -16,20 +16,34 @@ type ASTBuilder struct {
 func (a *ASTBuilder) GetFactor() (ast.Expression, error) {
 	currentToken := a.Tokens[a.Index]
 
+	var lit ast.Expression
+
 	switch currentToken.Type {
-	case token.Ident:
 
 	case token.Literal:
 		switch currentToken.Value.Type {
-		case "int":
-			return ast.NewInt(ast.Token{}, currentToken.Value.True.(int)), nil
+
+		case token.IntType:
+			lit = ast.NewInt(ast.Token{}, currentToken.Value.True.(int))
+
+		case token.BoolType:
+			lit = ast.NewBool(ast.Token{}, currentToken.Value.True.(bool))
+
+		case token.CharType:
+			lit = ast.NewChar(ast.Token{}, currentToken.Value.True.(rune))
+
+		case token.StringType:
+			lit = ast.NewString(ast.Token{}, currentToken.Value.True.(string))
 		}
+
+		return lit, nil
+
+	case token.Ident:
+		return ast.NewIdent(ast.Token{}, currentToken.Value.String)
 
 	default:
 		return nil, errors.Errorf("Could not parse factor from token: %+v", currentToken)
 	}
-
-	return nil, nil
 }
 
 func (a *ASTBuilder) GetTerm() (ast.Expression, error) {
@@ -39,6 +53,33 @@ func (a *ASTBuilder) GetTerm() (ast.Expression, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	if a.Index+1 < len(a.Tokens)-1 {
+		for a.Tokens[a.Index+1].Type == token.PriOp {
+			a.Index++
+
+			operand := a.Tokens[a.Index].Value.String
+
+			a.Index++
+			factor2, err := a.GetFactor()
+			if err != nil {
+				return nil, err
+			}
+
+			fmt.Println("factor2", factor2, operand)
+
+			factor, err = ast.NewBinaryOperation(ast.Token{}, operand, factor, factor2)
+			if err != nil {
+				return nil, err
+			}
+
+			if a.Index > len(a.Tokens)-1 {
+				break
+			}
+		}
+	}
+
+	fmt.Println("returning")
 
 	return factor, nil
 }
@@ -51,6 +92,31 @@ func (a *ASTBuilder) GetExpression() (ast.Expression, error) {
 		return nil, err
 	}
 
+	if a.Index+1 < len(a.Tokens)-1 {
+		for a.Tokens[a.Index+1].Type == token.SecOp {
+			a.Index++
+
+			operand := a.Tokens[a.Index].Value.String
+
+			a.Index++
+			term2, err := a.GetTerm()
+			if err != nil {
+				return nil, err
+			}
+
+			fmt.Println("term2", term2, operand)
+
+			term, err = ast.NewBinaryOperation(ast.Token{}, operand, term, term2)
+			if err != nil {
+				return nil, err
+			}
+
+			if a.Index > len(a.Tokens)-1 {
+				break
+			}
+		}
+	}
+
 	// FIXME: should probably check for secondary operations right here
 
 	return term, nil
@@ -59,16 +125,16 @@ func (a *ASTBuilder) GetExpression() (ast.Expression, error) {
 func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	// An example assignment statement of:
 	// bool i = true
-	ident, err := ast.NewBoolIdent(ast.Token{}, "i")
-	if err != nil {
-		return nil, err
-	}
+	// ident, err := ast.NewBoolIdent(ast.Token{}, "i")
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	// TODO: could make a new boolean assignment here?
-	as, err := ast.NewAssignment(ast.Token{}, ident, ast.Equals, ast.NewBool(ast.Token{}, true))
-	if err != nil {
-		return nil, err
-	}
+	// // TODO: could make a new boolean assignment here?
+	// as, err := ast.NewAssignment(ast.Token{}, ident, ast.Equals, ast.NewBool(ast.Token{}, true))
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	// NEED to switch and capture these
 	// Statements can be:
@@ -82,6 +148,8 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 	//	- if/else
 	//	- loop
 	//	- return
+
+	var as ast.Statement
 
 	typeOf := ""
 	nameOf := ""
@@ -105,11 +173,18 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 			}
 			fmt.Println("expr", expr)
 
+			if expr == nil {
+				return nil, nil
+			}
+
 			// FIXME: need to implement Type() so that we can get the var type
-			ident, err := ast.NewIdent(Token{}, expr.Type(), nameOf)
+			ident, err := ast.NewIdent(ast.Token{}, nameOf)
+			if err != nil {
+				return nil, err
+			}
 
 			// TODO: could make a new boolean assignment here?
-			as, err := ast.NewAssignment(ast.Token{}, ident, ast.Init, expr)
+			as, err = ast.NewAssignment(ast.Token{}, ident, ast.Init, expr)
 			if err != nil {
 				return nil, err
 			}
@@ -122,25 +197,37 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 
 		fmt.Println("nameOf", nameOf)
 
-	case token.Block:
-		// Here we will want to recursively call GetStatement()
-		// however, a block should be able to be parsed for an expression as well
+	// case token.Block:
+	// 	// Here we will want to recursively call GetStatement()
+	// 	// however, a block should be able to be parsed for an expression as well
 
-		// This one will have to be figured out when parsing the ident
+	// 	// This one will have to be figured out when parsing the ident
 	// case token.Call:
+
+	// case token.Keyword:
+	// 	// switch
 	case token.Function:
 		// Next things we look for after the Function token is:
 		//	[ ident ] [ group ] { group } [ block ]
 
-		// TODO: create this token
+	// 	// TODO: create this token
 	// case token.If:
 
-	// This needs to switch to token.Loop later on
-	case token.For:
-		// Look at how we did the for loop parsing in `semantic.go`
+	// // FIXME: This needs to switch to token.Loop later on
+	// case token.For:
+	// 	// Look at how we did the for loop parsing in `semantic.go`
 
 	case token.Return:
 		// For now just look for a single expression afterwards
+		a.Index++
+		expr, err := a.GetExpression()
+		if err != nil {
+			return nil, err
+		}
+
+		fmt.Println("return return")
+
+		return ast.NewReturn(ast.Token{}, expr), nil
 
 	default:
 		return nil, errors.Errorf("Could not get statement from token: %+v", currentToken)
@@ -155,7 +242,7 @@ func (a *ASTBuilder) GetStatement() (ast.Statement, error) {
 func (a *ASTBuilder) BuildAST(lexTokens []token.Token) (*ast.Program, error) {
 	p := ast.NewProgram()
 
-	// Spoof this name for now
+	// FIXME: Spoof this name for now
 	file := ast.NewFile("main.expr")
 
 	for {

@@ -7,7 +7,4 @@ type Expression interface {
 
 	// This is just something to force the interface
 	expressionNode()
-
-	// TODO: this should have a Type function
-	// TODO: this should have a Length function
 }

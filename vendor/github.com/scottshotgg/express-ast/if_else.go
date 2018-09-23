@@ -17,3 +17,5 @@ func (ie *IfElse) elseStatementNode() {}
 
 // TokenLiteral returns the literal value of the token
 func (ie *IfElse) TokenLiteral() string { return ie.Token.Literal }
+
+func (ie *IfElse) Kind() NodeType { return IfElseNode }

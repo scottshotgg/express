@@ -6,6 +6,4 @@ type ElseStatement interface {
 
 	// This is just something to force the interface
 	elseStatementNode()
-
-	// TODO: this should have a Type function
 }

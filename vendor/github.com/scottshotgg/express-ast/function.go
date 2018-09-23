@@ -23,3 +23,5 @@ func (f *Function) TokenLiteral() string { return f.Token.Literal }
 
 // Type implements literal so that functions can be assigned to idents
 func (f *Function) Type() LiteralType { return FunctionType }
+
+func (f *Function) Kind() NodeType { return FunctionNode }

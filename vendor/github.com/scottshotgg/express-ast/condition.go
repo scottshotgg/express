@@ -58,3 +58,5 @@ func (c *Condition) expressionNode() {}
 
 // TokenLiteral returns the literal value of the token
 func (c *Condition) TokenLiteral() string { return c.Token.Literal }
+
+func (c *Condition) Kind() NodeType { return ConditionNode }

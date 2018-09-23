@@ -1,6 +1,7 @@
 package parse_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -104,6 +105,8 @@ func compileExpressProgramAST(filename string) error {
 	fmt.Println()
 	fmt.Println("AST:")
 	c.Dump(p)
+	pJSON, _ := json.Marshal(p)
+	fmt.Println("\n", string(pJSON))
 
 	// syntacticTokens, err := syntacticParseFile(filename, lexTokens)
 	// if err != nil {

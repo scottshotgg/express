@@ -1,2 +1,4 @@
 i := 10
 f := i
+return f
+something()

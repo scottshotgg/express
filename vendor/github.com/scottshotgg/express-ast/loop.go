@@ -47,3 +47,5 @@ type Loop struct {
 	Iter  *Iterable
 	Temps map[string]*Ident
 }
+
+func (l *Loop) Kind() NodeType { return LoopNode }

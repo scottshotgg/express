@@ -36,6 +36,8 @@ func (a *Assignment) statementNode() {}
 // TokenLiteral returns the literal value of the token
 func (a *Assignment) TokenLiteral() string { return a.Token.Literal }
 
+func (a *Assignment) Kind() NodeType { return AssignmentNode }
+
 // TODO: dont think I wanna do this yet
 // func NewAssignmentStatement() Assignment {
 // 	return &Assignment{
@@ -43,6 +45,7 @@ func (a *Assignment) TokenLiteral() string { return a.Token.Literal }
 // 	}
 // }
 
+// NewAssignment returns a new assignment statement and determines whether it is inferred
 func NewAssignment(t Token, i *Ident, at AssignmentType, e Expression) (*Assignment, error) {
 	if e == nil {
 		return nil, errors.New("Expression value cannot by nil")
@@ -62,10 +65,12 @@ func NewAssignment(t Token, i *Ident, at AssignmentType, e Expression) (*Assignm
 	return &as, nil
 }
 
+// SetDeclaration changes the assignment type to a declaration
 func (a *Assignment) SetDeclaration(declaration bool) {
 	a.Declaration = declaration
 }
 
+// SetInferred changes the assignment type to infer the lvalue type
 func (a *Assignment) SetInferred(inferred bool) {
 	a.Inferred = inferred
 }

@@ -51,6 +51,8 @@ type Type struct {
 	ShadowType *LiteralType
 }
 
+func (t *Type) Kind() NodeType { return TypeNode }
+
 var (
 	nameToUserDefinedTypeMap = map[string]*Type{}
 	idToUserDefinedTypeMap   = map[LiteralType]*Type{}

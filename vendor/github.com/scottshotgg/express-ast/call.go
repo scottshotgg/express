@@ -16,3 +16,5 @@ func (c *Call) statementNode()  {}
 
 // TokenLiteral returns the literal value of the token
 func (c *Call) TokenLiteral() string { return c.Token.Literal }
+
+func (c *Call) Kind() NodeType { return CallNode }

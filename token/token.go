@@ -63,6 +63,7 @@ const (
 	Hash         = "HASH"
 	Block        = "BLOCK"
 	Function     = "FUNCTION"
+	Call         = "CALL"
 	Return       = "RETURN"
 	OnExit       = "ONEXIT"
 	OnReturn     = "ONRETURN"
@@ -112,8 +113,9 @@ const (
 	PublicAccessType  = "public"
 	PrivateAccessType = "private"
 
-	For = "for"
-	If  = "if"
+	Loop = "LOOP"
+	For  = "for"
+	If   = "IF"
 )
 
 func init() {

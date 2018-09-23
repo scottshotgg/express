@@ -18,12 +18,16 @@ func (f *File) Length() int {
 	return -1
 }
 
+// NewFile retuns a new file and sets the filename
 func NewFile(filename string) *File {
 	return &File{
 		Name: filename,
 	}
 }
 
+// AddStatement appends a statement to the file
 func (f *File) AddStatement(stmt Statement) {
 	f.Statements = append(f.Statements, stmt)
 }
+
+func (f *File) Kind() NodeType { return FileNode }
