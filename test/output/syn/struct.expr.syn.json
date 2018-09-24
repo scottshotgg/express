@@ -76,41 +76,6 @@
 					}
 				},
 				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "yeah"
-					}
-				},
-				{
-					"Type": "ACCESSOR",
-					"Value": {
-						"Type": "period",
-						"String": "."
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "woah"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "int",
-						"True": 8
-					}
-				},
-				{
 					"Type": "TYPE",
 					"Value": {
 						"Type": "struct",
@@ -297,7 +262,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 66
+						"True": 66,
+						"String": "66"
 					}
 				},
 				{

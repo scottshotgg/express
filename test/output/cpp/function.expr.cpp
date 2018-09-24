@@ -15,15 +15,15 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _YyGXuLlYAA = {};
-    _YyGXuLlYAA["something"] = "else";
-    return _YyGXuLlYAA;
+    var _mfdeOrpvpO = {};
+    _mfdeOrpvpO["something"] = "else";
+    return _mfdeOrpvpO;
   }
 }
 int main() {
 
-  var _ABXCArYQLQ = {};
-  _ABXCArYQLQ["another"] = "object";
+  var _gnyboxDgFJ = {};
+  _gnyboxDgFJ["another"] = "object";
 
-  increment(_ABXCArYQLQ);
+  increment(_gnyboxDgFJ);
 }

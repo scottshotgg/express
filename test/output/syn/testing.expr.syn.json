@@ -95,28 +95,32 @@
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 2
+															"True": 2,
+															"String": "2"
 														}
 													},
 													{
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 4
+															"True": 4,
+															"String": "4"
 														}
 													},
 													{
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 5
+															"True": 5,
+															"String": "5"
 														}
 													},
 													{
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 9
+															"True": 9,
+															"String": "9"
 														}
 													}
 												]
@@ -329,7 +333,8 @@
 														"Type": "LITERAL",
 														"Value": {
 															"Type": "int",
-															"True": 0
+															"True": 0,
+															"String": "0"
 														}
 													}
 												]
@@ -364,7 +369,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 7
+						"True": 7,
+						"String": "7"
 					}
 				},
 				{
@@ -579,7 +585,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 2
+						"True": 2,
+						"String": "2"
 					}
 				},
 				{
@@ -704,7 +711,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "float",
-									"True": 2.4
+									"True": 2.4,
+									"String": "2.4"
 								}
 							},
 							{
@@ -761,7 +769,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 235
+									"True": 235,
+									"String": "235"
 								}
 							},
 							{
@@ -854,7 +863,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 0
+									"True": 0,
+									"String": "0"
 								}
 							}
 						]
@@ -1053,7 +1063,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 4
+									"True": 4,
+									"String": "4"
 								}
 							},
 							{
@@ -1100,7 +1111,8 @@
 											"Type": "LITERAL",
 											"Value": {
 												"Type": "int",
-												"True": 199
+												"True": 199,
+												"String": "199"
 											}
 										},
 										{
@@ -1208,7 +1220,8 @@
 											"Type": "LITERAL",
 											"Value": {
 												"Type": "int",
-												"True": 7
+												"True": 7,
+												"String": "7"
 											}
 										}
 									]
@@ -1391,7 +1404,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 4
+									"True": 4,
+									"String": "4"
 								}
 							},
 							{
@@ -1438,7 +1452,8 @@
 											"Type": "LITERAL",
 											"Value": {
 												"Type": "int",
-												"True": 160
+												"True": 160,
+												"String": "160"
 											}
 										},
 										{

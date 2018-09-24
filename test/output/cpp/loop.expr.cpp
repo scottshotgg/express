@@ -29,20 +29,20 @@ int main() {
   }
 
   {
-    int arrayBoi_1537818566[] = {1, 2, 4};
+    int arrayBoi_1537820720[] = {1, 2, 4};
     int i = 0;
-    int i_1537818566 = 0;
-    while (i_1537818566 < 3) {
+    int i_1537820720 = 0;
+    while (i_1537820720 < 3) {
       {
         defer onLeaveFuncs;
 
-        i = i_1537818566;
+        i = i_1537820720;
 
         f = i;
 
         int h = 1;
       }
-      i_1537818566 += 1;
+      i_1537820720 += 1;
     }
   }
 
@@ -50,18 +50,18 @@ int main() {
 
   {
     int i = 0;
-    int i_1537818566 = 0;
-    while (i_1537818566 < 8) {
+    int i_1537820720 = 0;
+    while (i_1537820720 < 8) {
       {
         defer onLeaveFuncs;
 
-        i = countdown[i_1537818566];
+        i = countdown[i_1537820720];
 
         f = i;
 
         int h = 1;
       }
-      i_1537818566 += 1;
+      i_1537820720 += 1;
     }
   }
 }

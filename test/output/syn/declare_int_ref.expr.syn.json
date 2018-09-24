@@ -22,7 +22,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 10
+						"True": 10,
+						"String": "10"
 					}
 				},
 				{
@@ -40,10 +41,10 @@
 					}
 				},
 				{
-					"Type": "IDENT",
+					"Type": "LITERAL",
 					"Value": {
-						"Type": "private",
-						"String": "i"
+						"Type": "bool",
+						"True": false
 					}
 				}
 			]

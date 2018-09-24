@@ -192,47 +192,6 @@
 		}
 	},
 	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "yeah.woah"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 8
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -714,7 +673,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 66
+			"True": 66,
+			"String": "66"
 		}
 	},
 	{

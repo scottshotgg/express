@@ -272,7 +272,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 69
+			"True": 69,
+			"String": "69"
 		}
 	},
 	{

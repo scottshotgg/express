@@ -37,7 +37,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 10
+			"True": 10,
+			"String": "10"
 		}
 	},
 	{
@@ -82,16 +83,10 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "LITERAL",
 		"Value": {
-			"String": "i"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
+			"Type": "bool",
+			"True": false
 		}
 	}
 ]

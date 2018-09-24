@@ -7,7 +7,7 @@ struct another = {
 //another yeah
 yeah := another{}
 
-yeah.woah = 8
+//yeah.woah = 8
 
 // Define a struct
 struct Thing = {

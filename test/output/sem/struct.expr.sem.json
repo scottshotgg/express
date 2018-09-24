@@ -31,7 +31,6 @@
 				"refs": "another"
 			}
 		},
-		{},
 		{
 			"Name": "Thing",
 			"Type": "struct",
@@ -78,12 +77,7 @@
 					}
 				}
 			],
-			"AccessType": "public",
-			"Metadata": {
-				"assign": true,
-				"real": "another",
-				"refs": "another"
-			}
+			"AccessType": "public"
 		},
 		{
 			"Name": "something",
@@ -133,7 +127,6 @@
 			],
 			"AccessType": "private",
 			"Metadata": {
-				"assign": true,
 				"real": "Thing",
 				"refs": "Thing"
 			}
@@ -145,7 +138,7 @@
 				{
 					"Name": "woah",
 					"Type": "int",
-					"True": 8,
+					"True": 0,
 					"AccessType": "private"
 				}
 			],
@@ -175,7 +168,7 @@
 				{
 					"Name": "woah",
 					"Type": "int",
-					"True": 8,
+					"True": 0,
 					"AccessType": "private"
 				}
 			],

@@ -14,7 +14,7 @@ int main() {
 
   var thingy = 7;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -22,7 +22,7 @@ int main() {
 
   thingy = 69.69;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -30,7 +30,7 @@ int main() {
 
   thingy = "woah woah woah";
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -38,7 +38,7 @@ int main() {
 
   thingy = false;
 
-  Print("thingy =", thingy, "\n");
+  Print("thingy =", thingy, "n");
 
   Println(thingy);
 
@@ -49,10 +49,10 @@ int main() {
 
   Println(thingyObject);
 
-  var _lmxnvYjDiv = {};
-  _lmxnvYjDiv["got_no"] = "BLOOD IN MY VEINS";
+  var _JCwCeGVnTh = {};
+  _JCwCeGVnTh["got_no"] = "BLOOD IN MY VEINS";
 
-  Println(_lmxnvYjDiv);
+  Println(_JCwCeGVnTh);
 
   Println();
 }

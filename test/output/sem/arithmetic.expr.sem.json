@@ -136,12 +136,13 @@
 				"left": {
 					"Type": "float",
 					"True": 6,
-					"String": "-",
+					"String": "8.1-2.1",
 					"Metadata": {
 						"eval": 6,
 						"left": {
 							"Type": "float",
-							"True": 8.1
+							"True": 8.1,
+							"String": "8.1"
 						},
 						"op": {
 							"Type": "sub",
@@ -149,7 +150,8 @@
 						},
 						"right": {
 							"Type": "float",
-							"True": 2.1
+							"True": 2.1,
+							"String": "2.1"
 						},
 						"type": "bool"
 					}
@@ -160,7 +162,8 @@
 				},
 				"right": {
 					"Type": "float",
-					"True": 3.1
+					"True": 3.1,
+					"String": "3.1"
 				},
 				"type": "bool"
 			}
@@ -174,7 +177,8 @@
 				"eval": 15.814285714285711,
 				"left": {
 					"Type": "float",
-					"True": 8.1
+					"True": 8.1,
+					"String": "8.1"
 				},
 				"op": {
 					"Type": "mult",
@@ -183,12 +187,13 @@
 				"right": {
 					"Type": "float",
 					"True": 1.952380952380952,
-					"String": "/",
+					"String": "4.1/2.1",
 					"Metadata": {
 						"eval": 1.952380952380952,
 						"left": {
 							"Type": "float",
-							"True": 4.1
+							"True": 4.1,
+							"String": "4.1"
 						},
 						"op": {
 							"Type": "div",
@@ -196,7 +201,8 @@
 						},
 						"right": {
 							"Type": "float",
-							"True": 2.1
+							"True": 2.1,
+							"String": "2.1"
 						},
 						"type": "bool"
 					}
@@ -213,7 +219,8 @@
 				"eval": -0.5099999999999998,
 				"left": {
 					"Type": "float",
-					"True": 8.1
+					"True": 8.1,
+					"String": "8.1"
 				},
 				"op": {
 					"Type": "sub",
@@ -222,12 +229,13 @@
 				"right": {
 					"Type": "float",
 					"True": 8.61,
-					"String": "*",
+					"String": "4.1*2.1",
 					"Metadata": {
 						"eval": 8.61,
 						"left": {
 							"Type": "float",
-							"True": 4.1
+							"True": 4.1,
+							"String": "4.1"
 						},
 						"op": {
 							"Type": "mult",
@@ -235,7 +243,8 @@
 						},
 						"right": {
 							"Type": "float",
-							"True": 2.1
+							"True": 2.1,
+							"String": "2.1"
 						},
 						"type": "bool"
 					}

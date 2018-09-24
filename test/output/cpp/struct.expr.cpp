@@ -23,24 +23,24 @@ int main() {
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_vqLFlSnmfB = {};
-  thing_vqLFlSnmfB["woah"] = 0;
-  Thing["thing"] = thing_vqLFlSnmfB;
+  var thing_ezuEZlmsAf = {};
+  thing_ezuEZlmsAf["woah"] = 0;
+  Thing["thing"] = thing_ezuEZlmsAf;
 
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_WZIfYsYMHq = {};
-  thing_WZIfYsYMHq["woah"] = 0;
-  something["thing"] = thing_WZIfYsYMHq;
+  var thing_njepArLMMd = {};
+  thing_njepArLMMd["woah"] = 0;
+  something["thing"] = thing_njepArLMMd;
 
   var yeah2 = {};
-  yeah2["woah"] = 8;
+  yeah2["woah"] = 0;
 
   var we = {};
 
   var yeah3 = {};
-  yeah3["woah"] = 8;
+  yeah3["woah"] = 0;
 }

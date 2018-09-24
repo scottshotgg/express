@@ -29,7 +29,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 8
+						"True": 8,
+						"String": "8"
 					}
 				},
 				{
@@ -58,7 +59,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 10
+						"True": 10,
+						"String": "10"
 					}
 				},
 				{
@@ -84,7 +86,8 @@
 								"Type": "LITERAL",
 								"Value": {
 									"Type": "int",
-									"True": 7
+									"True": 7,
+									"String": "7"
 								}
 							}
 						]
