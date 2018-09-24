@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -14,33 +14,33 @@ int main() {
 
   var obj = {};
   obj["something"] = "here";
-  var hey_lJhhNgSQRv = {};
-  hey_lJhhNgSQRv["me"] = true;
-  hey_lJhhNgSQRv["anIntVariable"] = 69;
-  obj["hey"] = hey_lJhhNgSQRv;
+  var hey_xLcFozYJMb = {};
+  hey_xLcFozYJMb["me"] = true;
+  hey_xLcFozYJMb["anIntVariable"] = 69;
+  obj["hey"] = hey_xLcFozYJMb;
 
   var objs[] = {};
   {
-    var _mqPpsepUyT = {};
-    _mqPpsepUyT["another"] = "object";
-    objs[0] = _mqPpsepUyT;
+    var _cQqtHRjCil = {};
+    _cQqtHRjCil["another"] = "object";
+    objs[0] = _cQqtHRjCil;
   }
   {
-    var obj_fpokmdBXTD = {};
-    obj_fpokmdBXTD["something"] = "here";
-    var hey_mxTvHfxcCC = {};
-    hey_mxTvHfxcCC["me"] = true;
-    hey_mxTvHfxcCC["anIntVariable"] = 69;
-    obj_fpokmdBXTD["hey"] = hey_mxTvHfxcCC;
-    objs[1] = obj_fpokmdBXTD;
+    var obj_ipbNvCKUbF = {};
+    obj_ipbNvCKUbF["something"] = "here";
+    var hey_FisqAFkcKk = {};
+    hey_FisqAFkcKk["me"] = true;
+    hey_FisqAFkcKk["anIntVariable"] = 69;
+    obj_ipbNvCKUbF["hey"] = hey_FisqAFkcKk;
+    objs[1] = obj_ipbNvCKUbF;
   }
   {
-    var obj_ggVHwgdoUI = {};
-    obj_ggVHwgdoUI["something"] = "here";
-    var hey_kSxEBcQrho = {};
-    hey_kSxEBcQrho["me"] = true;
-    hey_kSxEBcQrho["anIntVariable"] = 69;
-    obj_ggVHwgdoUI["hey"] = hey_kSxEBcQrho;
-    objs[2] = obj_ggVHwgdoUI;
+    var obj_ZZnqIMqttV = {};
+    obj_ZZnqIMqttV["something"] = "here";
+    var hey_mYzClBsIFN = {};
+    hey_mYzClBsIFN["me"] = true;
+    hey_mYzClBsIFN["anIntVariable"] = 69;
+    obj_ZZnqIMqttV["hey"] = hey_mYzClBsIFN;
+    objs[2] = obj_ZZnqIMqttV;
   }
 }

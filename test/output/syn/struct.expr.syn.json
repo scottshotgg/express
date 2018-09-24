@@ -241,56 +241,35 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "something"
-					}
-				},
-				{
-					"Type": "ACCESSOR",
-					"Value": {
-						"Type": "period",
-						"String": "."
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "fieldA"
+						"String": "yeah2"
 					}
 				},
 				{
 					"Type": "ASSIGN",
 					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "LITERAL",
-					"Value": {
-						"Type": "int",
-						"True": 666
+						"Type": "init",
+						"String": ":="
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "something"
+						"String": "another"
 					}
 				},
 				{
-					"Type": "ACCESSOR",
+					"Type": "BLOCK",
 					"Value": {
-						"Type": "period",
-						"String": "."
+						"Type": "BLOCK",
+						"True": []
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "thing"
+						"String": "yeah"
 					}
 				},
 				{
@@ -318,7 +297,63 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 666
+						"True": 66
+					}
+				},
+				{
+					"Type": "TYPE",
+					"Value": {
+						"Type": "struct",
+						"String": "struct"
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "we"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": []
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "yeah3"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "init",
+						"String": ":="
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "another"
+					}
+				},
+				{
+					"Type": "BLOCK",
+					"Value": {
+						"Type": "BLOCK",
+						"True": []
 					}
 				}
 			]

@@ -588,37 +588,24 @@
 		}
 	},
 	{
-		"Type": "IDENT",
+		"Type": "WS",
 		"Value": {
-			"String": "something.fieldA"
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
 		"Type": "WS",
 		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
 		"Type": "WS",
 		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "LITERAL",
-		"Value": {
-			"Type": "int",
-			"True": 666
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{
@@ -631,7 +618,75 @@
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "something.thing.woah"
+			"String": "yeah2"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "yeah.woah"
 		}
 	},
 	{
@@ -659,7 +714,151 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 666
+			"True": 66
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "TYPE",
+		"Value": {
+			"Type": "struct",
+			"String": "struct"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "we"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "yeah3"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "set",
+			"String": ":"
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "another"
+		}
+	},
+	{
+		"Type": "L_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "{"
+		}
+	},
+	{
+		"Type": "R_BRACE",
+		"Value": {
+			"Type": "op_3",
+			"String": "}"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
 		}
 	},
 	{

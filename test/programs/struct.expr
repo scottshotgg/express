@@ -21,20 +21,29 @@ struct Thing = {
 // Instantiate a struct variable
 something := Thing{}
 
-something.fieldA = 666
-something.thing.woah = 666
+//something.fieldA = 666
+//something.thing.woah = 667
 
 //int somet = 7
-/*
 
-Println("something", something)
+//Println("something", something)
 
 // Instantiate a struct variable with some initializers
-something2 := Thing {
-  fieldA: 0xDECAF
-}
-Println("something2", something2)
 
+// FIXME: this is copying the "8" value
+yeah2 := another{}
+
+yeah.woah = 66
+
+struct we = {}
+
+yeah3 := another{}
+
+// FIXME: right here we are getting "type specification with init is not valid"
+//something2 := Thing{}
+//Println("something2", something2)
+
+/*
 something3 := Thing {
   stringField: "chyah brah"
 

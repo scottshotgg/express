@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -308,13 +309,22 @@ func (p *Parser) TranslateObject(t token.Value, objName string) (string, error) 
 		return "var " + tName + " = " + funcCall[1:], nil
 	}
 
-	// Objects a the `var` type in the C++ runtime
+	// Object is just a the `var` type in the C++ runtime
 	objectString := "var " + tName + " = {};\n"
 
 	tTrues, ok := t.True.([]token.Value)
 	if !ok {
+
+		tFaces, _ := t.True.([]interface{})
+		fmt.Println("tfaces", tFaces)
+		for k, v := range tFaces {
+			fmt.Println("type thing", "K:", k, "V:", v, "something:", reflect.TypeOf(v))
+		}
+
+		fmt.Println("type", reflect.TypeOf(t))
 		return "", errors.New("Could not assert true value of object")
 	}
+	fmt.Println("tTrues for", t.Name, ":", tTrues)
 
 	// Range over the statements inside the object
 	for _, v := range tTrues {
@@ -351,6 +361,9 @@ func (p *Parser) TranslateObject(t token.Value, objName string) (string, error) 
 
 		// If it is an object or a struct inside the object, we need to make anonymize the name and p.Translate it
 		if v.Type == "object" || v.Type == "struct" {
+			fmt.Println("i am here", v)
+			fmt.Println("typeof", reflect.TypeOf(v.True))
+
 			vName := v.Name + "_" + RandStringBytesMaskImprSrc(10)
 			anotherObjectString, err := p.TranslateObject(v, vName)
 			if err != nil {

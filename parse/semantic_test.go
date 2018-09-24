@@ -213,12 +213,14 @@ func TestSingle(t *testing.T) {
 	var err error
 	parse.LibBase, err = filepath.Abs("../lib/")
 	if err != nil {
+		fmt.Printf("%+v\n", err)
 		t.Error(err)
 		t.FailNow()
 	}
 
 	err = compileExpressProgram(singleFile)
 	if err != nil {
+		fmt.Printf("%+v\n", err)
 		t.Error(err)
 		t.FailNow()
 	}

@@ -1,7 +1,7 @@
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
-#include "/home/scottshotgg/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/defer.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/file.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/std.cpp"
+#include "/Users/sgg7269/Development/go/src/github.com/scottshotgg/express/lib/var.cpp"
 #include <string>
 defer onExitFuncs;
 std::map<std::string, var> structMap;
@@ -15,15 +15,15 @@ var increment(var i) {
   {
     defer onLeaveFuncs;
 
-    var _aGxDptipWN = {};
-    _aGxDptipWN["something"] = "else";
-    return _aGxDptipWN;
+    var _YyGXuLlYAA = {};
+    _YyGXuLlYAA["something"] = "else";
+    return _YyGXuLlYAA;
   }
 }
 int main() {
 
-  var _IarNahrYJy = {};
-  _IarNahrYJy["another"] = "object";
+  var _ABXCArYQLQ = {};
+  _ABXCArYQLQ["another"] = "object";
 
-  increment(_IarNahrYJy);
+  increment(_ABXCArYQLQ);
 }

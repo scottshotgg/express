@@ -1,7 +1,8 @@
 package parse
 
 import (
-	"encoding/json"
+	"bytes"
+	"encoding/gob"
 	"fmt"
 	"os"
 	"reflect"
@@ -86,6 +87,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 
 			// This is a struct declaration
 		} else if variable.Type == STRUCT {
+			fmt.Println("i am here", variable)
+
 			// Here we need to get the default values from the type map
 			if p.NextToken.Type == token.Block {
 				inStruct = true
@@ -109,19 +112,28 @@ func (p *Parser) GetFactor() (token.Value, error) {
 					// variable.Value = valuers
 				*/
 
-				deepJSON, err := json.Marshal(variable.Value)
+				fmt.Println("p.meta.currentScope", p.meta.currentScope)
+				for k, v := range p.meta.currentScope {
+					fmt.Println("k, v", k, *v)
+				}
+				gob.Register([]token.Value{})
+
+				// FIXME: check the errors
+				vValue := []token.Value{}
+				var buf bytes.Buffer
+				enc := gob.NewEncoder(&buf)
+				err = enc.Encode(variable.Value)
 				if err != nil {
 					return token.Value{}, err
 				}
 
-				vValue := []token.Value{}
-				err = json.Unmarshal(deepJSON, &vValue)
+				dec := gob.NewDecoder(&buf)
+				err = dec.Decode(&vValue)
 				if err != nil {
 					return token.Value{}, err
 				}
 
 				fmt.Println("reflecterooni", reflect.TypeOf(variable.Value))
-				// os.Exit(9)
 
 				fmt.Println("variable.Value", variable.Value)
 				fmt.Println("vValue", vValue)
@@ -130,8 +142,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 				fmt.Println("reflecterooni3", reflect.TypeOf(variable.Value))
 
 				thing := variable.Value.([]token.Value)
-				// Deep copy did work, no surprising, but something is fucked
-				fmt.Println("thing", thing)
+				// Deep copy did work, not surprising, but something is fucked
+				fmt.Println("thing:", thing)
 				// os.Exit(9)
 
 				if len(p.NextToken.Value.True.([]token.Token)) > 0 {
@@ -178,6 +190,8 @@ func (p *Parser) GetFactor() (token.Value, error) {
 							}
 						}
 					}
+
+					fmt.Println("variable after", variable)
 
 					// For now just shift over the block
 					p.Shift()
@@ -561,6 +575,7 @@ func (p *Parser) GetExpression() (token.Value, error) {
 
 	// Assignment Expression
 	case token.Assign:
+		fmt.Println("currentVariable", p.meta.currentVariable)
 		//fmt.Printf("this is an assign %+v\n", p.meta.currentVariable)
 		// FIXME: I think this should go in the token.Ident case of GetStatement
 		// p.DeclaredName = p.CurrentToken.Value.String
@@ -1382,20 +1397,25 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			// Ensure that we exit this scope afterwards
 			defer p.meta.ExitScope()
 			fmt.Println("reflecterooni4", reflect.ValueOf(variable.Value))
+
+			// FIXME: this is changing for some fucky reason: fix it later
 			value := variable.Value.([]token.Value)
-			// if !ok {
-			// 	return token.Value{}, errors.New("Could not assert value of struct")
+
+			fmt.Println("value", value, variable.Value)
+			//  else {
+			// 	value = value2[0].(map[string]token.Value)
 			// }
 
 			// Shift away the accessor
 			p.Shift()
-			fmt.Println("currentVariable", p.meta.currentVariable)
+			fmt.Println("currentVariable", p.meta.currentVariable, p.CurrentToken)
 
 			// Would be cool if this would work, but the variable doesn't have a type rn
 
 			// Save the current variable and change re initilize it to a fresh variable
 			// with the type as SET and then run a GetStatment to ensure the rhs
 			currentVariable := *p.meta.currentVariable
+
 			p.meta.currentVariable = &Variable{
 				Type: SET,
 			}
@@ -1414,9 +1434,8 @@ func (p *Parser) GetStatement() (token.Value, error) {
 			if !reflect.DeepEqual(expr, token.Value{}) {
 				found := false
 				for i, key := range value {
+					fmt.Println("key", key)
 					if key.Name == expr.Name {
-						fmt.Println("woah hey its me", key)
-
 						// Might need to do something here for dynamic types
 						// This is also where we would need to implement some sort of 'isAssignable'
 						// function that will allow us to utilize this logic elsewhere
@@ -1458,26 +1477,36 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				p.meta.currentVariable.ActingType = OBJECT
 			}
 
+			p.meta.currentVariable.Value = baseValue
 			//fmt.Println("typemap", DefinedTypes)
-			//fmt.Println("baseValue", baseValue)
 			if p.meta.currentVariable.Type == STRUCT {
-				baseValue = baseValue.(token.Value).True
+				fmt.Println("i am here", p.meta.currentVariable)
+				fmt.Println("baseValue", baseValue)
+				something := baseValue.(token.Value)
+				fmt.Println("something", something)
+				fmt.Println("something type", reflect.TypeOf(something))
+				fmt.Println("baseValue type", reflect.TypeOf([]token.Value{baseValue.(token.Value)}))
+				p.meta.currentVariable.Value = baseValue.(token.Value).True
+				fmt.Println("baseValue2 type", reflect.TypeOf(p.meta.currentVariable.Value))
+				// fmt.Println("baseValue1", baseValue)
 				defer p.Shift()
 			}
-			p.meta.currentVariable.Value = baseValue
+
 			p.meta.currentVariable.AccessType = accessTypeFromString(p.CurrentToken.Value.AccessType)
 			// if it's still not set, just make it private because it's a literal or something
 			if p.meta.currentVariable.AccessType < 1 {
 				p.meta.currentVariable.AccessType = 1
 			}
-			//fmt.Printf("p.CurrentToken %+v\n", p.CurrentToken)
-			//fmt.Printf("else p.meta.currentVariable %+v\n", p.meta.currentVariable)
+
 			tv = mapVariableToTokenValue(p.meta.currentVariable)
 			fmt.Printf("tv %+v\n", tv)
+			fmt.Println("tv type", reflect.TypeOf(tv.True))
 			err = p.meta.DeclareVariable()
 			if err != nil {
 				return tv, err
 			}
+
+			fmt.Println("tv typeof", reflect.TypeOf(tv.True))
 		}
 
 		return tv, nil
