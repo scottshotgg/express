@@ -7,9 +7,10 @@ struct another = {
 //another yeah
 yeah := another{}
 
-//yeah.woah = 8
+yeah.woah = 8
 
 // Define a struct
+
 struct Thing = {
   int fieldA
   string stringField
@@ -21,9 +22,10 @@ struct Thing = {
 // Instantiate a struct variable
 something := Thing{}
 
-//something.fieldA = 666
-//something.thing.woah = 667
+something.fieldA = 666
+something.thing.woah = 667
 
+/*
 //int somet = 7
 
 //Println("something", something)
@@ -38,6 +40,7 @@ yeah.woah = 66
 struct we = {}
 
 yeah3 := another{}
+*/
 
 // FIXME: right here we are getting "type specification with init is not valid"
 //something2 := Thing{}

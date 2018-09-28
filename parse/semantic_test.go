@@ -162,6 +162,8 @@ func compileExpressProgram(filename string) error {
 		return err
 	}
 
+	fmt.Println("semanticTokens", semanticTokens)
+
 	err = cppTranspile(filename, semanticTokens)
 	if err != nil {
 		return err
@@ -183,7 +185,7 @@ func compileExpressProgram(filename string) error {
 	return nil
 }
 
-var singleFile string = "declare_int_ref.expr"
+var singleFile string = "struct.expr"
 
 func TestRunSingle(t *testing.T) {
 	var err error

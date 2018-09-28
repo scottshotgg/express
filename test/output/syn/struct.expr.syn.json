@@ -76,6 +76,42 @@
 					}
 				},
 				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "yeah"
+					}
+				},
+				{
+					"Type": "ACCESSOR",
+					"Value": {
+						"Type": "period",
+						"String": "."
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "woah"
+					}
+				},
+				{
+					"Type": "ASSIGN",
+					"Value": {
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 8,
+						"String": "8"
+					}
+				},
+				{
 					"Type": "TYPE",
 					"Value": {
 						"Type": "struct",
@@ -206,35 +242,57 @@
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "yeah2"
+						"String": "something"
+					}
+				},
+				{
+					"Type": "ACCESSOR",
+					"Value": {
+						"Type": "period",
+						"String": "."
+					}
+				},
+				{
+					"Type": "IDENT",
+					"Value": {
+						"Type": "private",
+						"String": "fieldA"
 					}
 				},
 				{
 					"Type": "ASSIGN",
 					"Value": {
-						"Type": "init",
-						"String": ":="
+						"Type": "assign",
+						"String": "="
+					}
+				},
+				{
+					"Type": "LITERAL",
+					"Value": {
+						"Type": "int",
+						"True": 666,
+						"String": "666"
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "another"
+						"String": "something"
 					}
 				},
 				{
-					"Type": "BLOCK",
+					"Type": "ACCESSOR",
 					"Value": {
-						"Type": "BLOCK",
-						"True": []
+						"Type": "period",
+						"String": "."
 					}
 				},
 				{
 					"Type": "IDENT",
 					"Value": {
 						"Type": "private",
-						"String": "yeah"
+						"String": "thing"
 					}
 				},
 				{
@@ -262,64 +320,8 @@
 					"Type": "LITERAL",
 					"Value": {
 						"Type": "int",
-						"True": 66,
-						"String": "66"
-					}
-				},
-				{
-					"Type": "TYPE",
-					"Value": {
-						"Type": "struct",
-						"String": "struct"
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "we"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "assign",
-						"String": "="
-					}
-				},
-				{
-					"Type": "BLOCK",
-					"Value": {
-						"Type": "BLOCK",
-						"True": []
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "yeah3"
-					}
-				},
-				{
-					"Type": "ASSIGN",
-					"Value": {
-						"Type": "init",
-						"String": ":="
-					}
-				},
-				{
-					"Type": "IDENT",
-					"Value": {
-						"Type": "private",
-						"String": "another"
-					}
-				},
-				{
-					"Type": "BLOCK",
-					"Value": {
-						"Type": "BLOCK",
-						"True": []
+						"True": 667,
+						"String": "667"
 					}
 				}
 			]

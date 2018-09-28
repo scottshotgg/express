@@ -192,6 +192,55 @@
 		}
 	},
 	{
+		"Type": "IDENT",
+		"Value": {
+			"String": "yeah.woah"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "ASSIGN",
+		"Value": {
+			"Type": "assign",
+			"String": "="
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "space",
+			"String": " "
+		}
+	},
+	{
+		"Type": "LITERAL",
+		"Value": {
+			"Type": "int",
+			"True": 8,
+			"String": "8"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
+		"Type": "WS",
+		"Value": {
+			"Type": "newline",
+			"String": "\n"
+		}
+	},
+	{
 		"Type": "WS",
 		"Value": {
 			"Type": "newline",
@@ -547,105 +596,9 @@
 		}
 	},
 	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "yeah2"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "another"
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "yeah.woah"
+			"String": "something.fieldA"
 		}
 	},
 	{
@@ -673,8 +626,8 @@
 		"Type": "LITERAL",
 		"Value": {
 			"Type": "int",
-			"True": 66,
-			"String": "66"
+			"True": 666,
+			"String": "666"
 		}
 	},
 	{
@@ -682,33 +635,12 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "newline",
-			"String": "\n"
-		}
-	},
-	{
-		"Type": "TYPE",
-		"Value": {
-			"Type": "struct",
-			"String": "struct"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
 		}
 	},
 	{
 		"Type": "IDENT",
 		"Value": {
-			"String": "we"
+			"String": "something.thing.woah"
 		}
 	},
 	{
@@ -733,17 +665,11 @@
 		}
 	},
 	{
-		"Type": "L_BRACE",
+		"Type": "LITERAL",
 		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
+			"Type": "int",
+			"True": 667,
+			"String": "667"
 		}
 	},
 	{
@@ -758,60 +684,6 @@
 		"Value": {
 			"Type": "newline",
 			"String": "\n"
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "yeah3"
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "set",
-			"String": ":"
-		}
-	},
-	{
-		"Type": "ASSIGN",
-		"Value": {
-			"Type": "assign",
-			"String": "="
-		}
-	},
-	{
-		"Type": "WS",
-		"Value": {
-			"Type": "space",
-			"String": " "
-		}
-	},
-	{
-		"Type": "IDENT",
-		"Value": {
-			"String": "another"
-		}
-	},
-	{
-		"Type": "L_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "{"
-		}
-	},
-	{
-		"Type": "R_BRACE",
-		"Value": {
-			"Type": "op_3",
-			"String": "}"
 		}
 	},
 	{

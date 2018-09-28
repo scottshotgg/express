@@ -16,31 +16,23 @@ int main() {
   another["woah"] = 0;
 
   var yeah = {};
-  yeah["woah"] = 66;
+  yeah["woah"] = 0;
 
   var Thing = {};
   Thing["fieldA"] = 0;
   Thing["stringField"] = "";
   Thing["false_field"] = false;
   Thing["anotherFielderino"] = 0.000000;
-  var thing_ezuEZlmsAf = {};
-  thing_ezuEZlmsAf["woah"] = 0;
-  Thing["thing"] = thing_ezuEZlmsAf;
+  var thing_BrTGAhjkBZ = {};
+  thing_BrTGAhjkBZ["woah"] = 0;
+  Thing["thing"] = thing_BrTGAhjkBZ;
 
   var something = {};
   something["fieldA"] = 0;
   something["stringField"] = "";
   something["false_field"] = false;
   something["anotherFielderino"] = 0.000000;
-  var thing_njepArLMMd = {};
-  thing_njepArLMMd["woah"] = 0;
-  something["thing"] = thing_njepArLMMd;
-
-  var yeah2 = {};
-  yeah2["woah"] = 0;
-
-  var we = {};
-
-  var yeah3 = {};
-  yeah3["woah"] = 0;
+  var thing_kuvbDfHmcL = {};
+  thing_kuvbDfHmcL["woah"] = 0;
+  something["thing"] = thing_kuvbDfHmcL;
 }

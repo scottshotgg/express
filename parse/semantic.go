@@ -1433,7 +1433,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 
 			if !reflect.DeepEqual(expr, token.Value{}) {
 				found := false
-				for i, key := range value {
+				for _, key := range value {
 					fmt.Println("key", key)
 					if key.Name == expr.Name {
 						// Might need to do something here for dynamic types
@@ -1443,7 +1443,7 @@ func (p *Parser) GetStatement() (token.Value, error) {
 							return token.Value{}, errors.Errorf("Struct property of %s is not the same type as right hand side", structName)
 						}
 
-						value[i] = expr
+						//value[i] = expr
 						found = true
 						break
 					}
@@ -1454,7 +1454,17 @@ func (p *Parser) GetStatement() (token.Value, error) {
 				}
 			}
 
+			fmt.Println("where tf am i")
+
 			// We have to return something here due to the way that GetStatement works
+			// return token.Value{
+			// 	Name: structName + "[\"" + expr.Name + "\"]",
+			// 	Type: expr.Type,
+			// 	True: expr.True,
+			// 	Metadata: map[string]interface{}{
+			// 		"assign": true,
+			// 	},
+			// }, nil
 			return token.Value{}, nil
 
 		} else {
